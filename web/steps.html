@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-resource.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.js"></script>
+
+    <link href="css/steps_style.css" rel="stylesheet">
+
+    <title>Create Profile</title>
+
+    <script type='text/javascript'>
+        //<![CDATA[
+        $(window).load(function () {
+            // hides the slickbox as soon as the DOM is ready (a little sooner that page load)
+            // $('#step1').hide();
+            $('#step2').hide();
+            $('#step3').hide();
+            $('#step4').hide();
+            $('#step5').hide();
+            var step = 1;
+            $('.next-button').click(function () {
+                if (step == 1) {
+                    $('#step1').hide('slide', 400);
+                    $('#step2').show('slide', {
+                        direction: 'right'
+                    }, 400);
+                } else if (step == 2) {
+                    $('#step2').hide('slide', 400);
+                    $('#step3').show('slide', {
+                        direction: 'right'
+                    }, 400);
+                } else if (step == 3) {
+                    $('#step3').hide('slide', 400);
+                    $('#step4').show('slide', {
+                        direction: 'right'
+                    }, 400);
+                } else if (step == 4) {
+                    $('#step4').hide('slide', 400);
+                    $('#step5').show('slide', {
+                        direction: 'right'
+                    }, 400);
+                } else {
+                    step -= 1;
+                }
+                step += 1;
+                return false;
+            });
+
+            $('.previous-button').click(function () {
+                if (step == 2) {
+                    $('#step1').show('slide', {
+                        direction: 'left'
+                    }, 400);
+
+                    $('#step2').hide('slide', {
+                        direction: 'right'
+                    }, 400);
+                } else if (step == 3) {
+                    $('#step2').show('slide', {
+                        direction: 'left'
+                    }, 400);
+
+                    $('#step3').hide('slide', {
+                        direction: 'right'
+                    }, 400);
+                } else if (step == 4) {
+                    $('#step3').show('slide', {
+                        direction: 'left'
+                    }, 400);
+
+                    $('#step4').hide('slide', {
+                        direction: 'right'
+                    }, 400);
+                } else if (step == 5) {
+                    $('#step4').show('slide', {
+                        direction: 'left'
+                    }, 400);
+
+                    $('#step5').hide('slide', {
+                        direction: 'right'
+                    }, 400);
+                }
+                step -= 1;
+                return false;
+            });
+
+        }); //]]>
+    </script>
+
+</head>
+
+<body bgcolor="#323232">
+    <div>
+        <div>
+            <a href="#" style="text-decoration: none;">
+                <div id="step1" class="step-div" ng-app="app1" ng-controller="ctrl1">
+
+                    <div class="stepheader">
+                        <p class="steptitle">Account Information</p>
+                    </div>
+                    <img src="images/step_1_bar.png" class="bar-image" alt="Mountain View">
+
+                    <div class="field-div" style="top: 130px;">
+                        <p class="field-label">{{firstName}}</p>
+                        <input type="text" class="field-text-area" placeholder="Your full name" rows="1" />
+                    </div>
+                    <div class="field-div" style="top: 180px;">
+                        <p class="field-label">Your Email</p>
+                        <input type="text" class="field-text-area" placeholder="you@email.com" rows="1" />
+                    </div>
+                    <div class="field-div" style="top: 230px;">
+                        <p class="field-label">Phone Number (optional)</p>
+                        <input type="text" class="field-text-area" placeholder="(123) 456-7890" rows="1" />
+                    </div>
+                    <div class="field-div" style="top: 280px;">
+                        <p class="field-label">Location</p>
+                        <input type="text" class="field-text-area" placeholder="e.g. London" rows="1" />
+                    </div>
+                    <div class="field-div" style="top: 330px;">
+                        <p class="field-label">Password</p>
+                        <input type="password" class="field-text-area" rows="1" />
+                    </div>
+                    <div class="field-div" style="top: 380px;">
+                        <p class="field-label">Confirm Password</p>
+                        <input type="password" class="field-text-area" rows="1" />
+                    </div>
+
+                    <a href="#" class="next-button green-button button-center">Next Step</a>
+                </div>
+
+
+
+                <script>
+                  // new dependency: ngResource is included just above
+                  var myapp = new angular.module("app1", ["ngResource"]);
+
+                  // inject the $resource dependency here
+                  myapp.controller("ctrl1", /*["$scope", "$resource",*/
+                    function($scope , $resource)
+                    {
+                      //var FirstName = $resource("/firstName/:id", {id: '@id'}, {})
+                      var FirstName = $resource("/firstName")
+                      FirstName.get(
+                        function(data){
+                          $scope.firstName = data.name
+                        }
+                      )
+                		}
+                  );
+                </script>
+
+
+
+                <div id="step2" class="step-div">
+
+                    <div class="stepheader">
+                        <p class="steptitle">Position</p>
+                    </div>
+                    <img src="images/step_2_bar.png" class="bar-image" alt="Mountain View">
+
+                    <div class="field-div" style="top: 130px;">
+                        <p class="green-label">What positions are you most interested in?</p>
+                        <input type="text" class="full-width-input" placeholder="e.g. Software Development" rows="1" />
+                        <p class="black-bold-label">What is the position's level?</p>
+                        <input type="radio" name="level" value="entry" style="float: left; ">
+                        <p class="radio-button-text">Entry Level</p>
+                        <input type="radio" name="level" value="intermediate" style="float: left; margin-left: 75px;">
+                        <p class="radio-button-text"> Intermediate</p>
+                        <input type="radio" name="level" value="advanced" style="float: left; margin-left: 75px;">
+                        <p class="radio-button-text"> Advanced</p>
+                        <p class="add-more-text">+ Add More</p>
+                    </div>
+
+                    <div class="field-div" style="top: 300px;">
+                        <p class="green-label">What positions are you open to?</p>
+                        <input type="text" class="full-width-input" placeholder="e.g. Interpreter" rows="1" />
+                        <p class="black-bold-label">What is the position's level?</p>
+                        <input type="radio" name="level2" value="entry" style="float: left; ">
+                        <p class="radio-button-text">Entry Level</p>
+                        <input type="radio" name="level2" value="intermediate" style="float: left; margin-left: 75px;">
+                        <p class="radio-button-text"> Intermediate</p>
+                        <input type="radio" name="level2" value="advanced" style="float: left; margin-left: 75px;">
+                        <p class="radio-button-text"> Advanced</p>
+                        <p class="add-more-text">+ Add More</p>
+                    </div>
+
+
+                    <a href="#" class="previous-button gray-button button-left">Previous</a>
+                    <a href="#" class="next-button green-button button-right">Next Step</a>
+                </div>
+
+                <div id="step3" class="step-div">
+
+                    <div class="stepheader">
+                        <p class="steptitle">Knowledge</p>
+                    </div>
+                    <img src="images/step_3_bar.png" class="bar-image" alt="Mountain View">
+
+                    <div class="field-div" style="top: 130px;">
+                        <p class="small-green-label">Languages</p>
+                        <input type="text" class="field-text-area" placeholder="e.g. English" rows="1" />
+                    </div>
+                    <div class="field-div" style="top: 180px;">
+                        <p class="field-label" style="margin-top: 2px;">Level of profeciency</p>
+                        <input type="radio" name="level3" value="entry" style="float: left; margin-left: 55px;">
+                        <p class="radio-button-text">Native</p>
+                        <input type="radio" name="level3" value="intermediate" style="float: left; margin-left: 5px;">
+                        <p class="radio-button-text">Fluent</p>
+                        <input type="radio" name="level3" value="advanced" style="float: left; margin-left: 5px;">
+                        <p class="radio-button-text">Intermediate</p>
+                        <input type="radio" name="level3" value="advanced" style="float: left; margin-left: 5px;">
+                        <p class="radio-button-text">Limited</p>
+                    </div>
+                    <div class="field-div" style="top: 220px;">
+                        <p class="field-label" style="margin-top: 2px;">Level of profeciency in writing</p>
+                        <input type="radio" name="level4" value="entry" style="float: left; margin-left: 12px;">
+                        <p class="radio-button-text">Native</p>
+                        <input type="radio" name="level4" value="intermediate" style="float: left; margin-left: 5px;">
+                        <p class="radio-button-text">Fluent</p>
+                        <input type="radio" name="level4" value="advanced" style="float: left; margin-left: 5px;">
+                        <p class="radio-button-text">Intermediate</p>
+                        <input type="radio" name="level4" value="advanced" style="float: left; margin-left: 5px;">
+                        <p class="radio-button-text">Limited</p>
+                    </div>
+
+
+                    <div class="field-div" style="top: 270px;">
+                        <p class="small-green-label">Education</p>
+                    </div>
+                    <div class="field-div" style="top: 300px;">
+                        <p class="field-label">What is your latest degree</p>
+                        <input type="text" class="field-text-area" placeholder="e.g. Master of Fine Art" rows="1" />
+                    </div>
+                    <div class="field-div" style="top: 340px;">
+                        <p class="field-label">Major and Minor</p>
+                        <input type="text" class="field-text-area" placeholder="e.g. MBA" rows="1" />
+                    </div>
+                    <div class="field-div" style="top: 380px;">
+                        <p class="field-label">University</p>
+                        <input type="text" class="field-text-area" placeholder="e.g. UCLA" rows="1" />
+                    </div>
+                    <div class="field-div" style="top: 420px;">
+                        <p class="field-label">Year attended</p>
+                        <input type="text" class="field-text-area" placeholder="e.g. 2007" rows="1" />
+                    </div>
+
+                    <a href="#" class="previous-button gray-button button-left">Previous</a>
+                    <a href="#" class="next-button green-button button-right">Next Step</a>
+                </div>
+
+                <div id="step4" class="step-div">
+
+                    <div class="stepheader">
+                        <p class="steptitle">Professional Experience</p>
+                    </div>
+                    <img src="images/step_4_bar.png" class="bar-image" alt="Mountain View">
+
+                    <div class="field-div" style="top: 100px;">
+                        <p class="green-label">What projects have you completed?</p>
+                        <input type="text" class="full-width-input-two-lines" placeholder="Describe..." rows="1" />
+                        <p class="add-more-text-2">+ Add More</p>
+                    </div>
+
+                    <div class="field-div" style="top: 240px;">
+                        <p class="field-label">What is your most recent or current position</p>
+                        <input type="text" class="field-text-area-2" placeholder="e.g. Marketing Manager" rows="1" />
+                    </div>
+
+                    <div class="field-div" style="top: 280px;">
+                        <p class="field-label">How much did you like this position<span class="hint-span" > (rank yourself from 0 to 10)</span></p>
+                        <input type="text" class="field-text-area-3" placeholder="10" rows="1" />
+                    </div>
+
+                    <div class="field-div" style="top: 320px;">
+                        <p class="field-label">How was your impact to the company<span class="hint-span" > (rank yourself from 0 to 10)</span></p>
+                        <input type="text" class="field-text-area-3" placeholder="10" rows="1" />
+                    </div>
+
+                    <div class="field-div" style="top: 360px;">
+                        <p class="field-label">How often did the position require you to commucicate in English? Was the communication verbal or in writing ot both?</p>
+                        <input type="text" class="field-text-area-4" placeholder="Explain..." rows="1" />
+                        <p class="add-more-text-4">+ Add More Position</p>
+                    </div>
+
+
+
+                    <a href="#" class="previous-button gray-button button-left">Previous</a>
+                    <a href="#" class="next-button green-button button-right">Next Step</a>
+                </div>
+
+
+
+                <div id="step5" class="step-div">
+
+                    <div class="stepheader">
+                        <p class="steptitle">Extracurricular Activities</p>
+                    </div>
+                    <img src="images/step_5_bar.png" class="bar-image" alt="Step 5 Bar">
+
+                    <div class="field-div" style="top: 90px;">
+                        <p class="green-label">Voluntary Activities?</p>
+                        <input type="text" class="full-width-input-2" placeholder="Describe..." rows="1" />
+                        <p class="add-more-text-3">+ Add More</p>
+                    </div>
+
+                    <div class="field-div" style="top: 180px;">
+                        <p class="green-label">Service Projects?</p>
+                        <input type="text" class="full-width-input-2" placeholder="Describe..." rows="1" />
+                        <p class="add-more-text-3">+ Add More</p>
+                    </div>
+
+                    <div class="field-div" style="top: 270px;">
+                        <p class="green-label">Art Activities?</p>
+                        <input type="text" class="full-width-input-2" placeholder="Describe..." rows="1" />
+                        <p class="add-more-text-3">+ Add More</p>
+                    </div>
+
+                     <div class="field-div" style="top: 360px;">
+                        <p class="green-label">Sports?</p>
+                        <input type="text" class="full-width-input-2" placeholder="Describe..." rows="1" />
+                        <p class="add-more-text-3">+ Add More</p>
+                    </div>
+
+                    <a href="#" class="previous-button gray-button button-left">Previous</a>
+                    <a href="#" class="next-button green-button button-right">Finish</a>
+                </div>
+
+            </a>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,301 @@
+.step-div {
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    width: 433px;
+    height: 555px;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    right: 0;
+    margin: auto
+}
+
+.stepheader {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 100%;
+    height: 48px;
+    background-color: rgb(238, 238, 238);
+    position: absolute;
+    top: 0px;
+}
+
+.steptitle {
+    text-align: center;
+    color: rgb(129, 129, 129);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+}
+
+.green-button {
+    background-color: rgb(3, 186, 109);
+    border-radius: 4px;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style: normal;
+    width: 180px;
+    padding-bottom: 9px;
+    padding-top: 9px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 42px;
+    
+}
+
+.bar-image {
+    width: 435px;
+    height: 28px;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    margin: auto
+}
+
+.field-div {
+    width: 374px;
+    height: 30px;
+    position: absolute;
+    padding-left: 33px;
+    padding-right: 26px;
+}
+
+.field-label {
+    float: left;
+    font-size: 10px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style: bold;
+    color: rgb(97, 97, 97);
+}
+
+.field-text-area {
+    float: right;
+    resize: none;
+    width: 218px;
+    height: 25px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+}
+
+.field-text-area-2 {
+    float: right;
+    resize: none;
+    width: 150px;
+    height: 25px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+}
+
+.hint-span {
+    font-size: 9px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style: normal;
+    font-weight: 200;
+    color: rgb(81, 81, 81);
+}
+
+.field-text-area-3 {
+    float: right;
+    resize: none;
+    width: 50px;
+    height: 25px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+}
+
+
+.field-text-area-4 {
+    float: right;
+    resize: none;
+    width: 360px;
+    height: 25px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+}
+
+::-webkit-input-placeholder {
+    color: rgb(205, 205, 205);
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+:-moz-placeholder {
+    color: rgb(205, 205, 205);
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+::-moz-placeholder {
+    color: rgb(205, 205, 205);
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+:-ms-input-placeholder {
+    color: rgb(205, 205, 205);
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+html {
+    background: url('../images/blurry_background.png') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.green-label {
+    font-size: 12px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style:normal;
+    font-weight: 450;
+    color: rgb(3, 186, 109);
+    text-align: center;
+}
+
+.full-width-input {
+    resize: none;
+    width: 360px;
+    height: 25px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+}
+
+.full-width-input-2 {
+    resize: none;
+    width: 360px;
+    height: 45px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+}
+
+.full-width-input-two-lines {
+    resize: none;
+    width: 360px;
+    height: 55px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+}
+
+.black-bold-label {
+    font-size: 11px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style:normal;
+    font-weight: 400;
+    color: rgb(97, 97, 97);
+}
+
+.radio-button-text {
+    float: left;
+    font-size: 10px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style:normal;
+    font-weight: 300;
+    color: rgb(97, 97, 97);
+    
+    margin-top: 4px;
+    margin-left: 4px;
+}
+
+.add-more-text {
+    width: 358px;
+    text-align: right;
+    font-size: 10px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style:normal;
+    font-weight: 300;
+    color: rgb(153, 153, 153);
+    margin-top: -10px;
+}
+
+.add-more-text-2 {
+    width: 358px;
+    text-align: right;
+    font-size: 10px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style:normal;
+    font-weight: 300;
+    color: rgb(153, 153, 153);
+    margin-top: 10px;
+}
+
+.add-more-text-3 {
+    width: 358px;
+    text-align: right;
+    font-size: 10px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style:normal;
+    font-weight: 300;
+    color: rgb(153, 153, 153);
+    margin-top: 1px;
+}
+
+.add-more-text-4 {
+    width: 358px;
+    text-align: right;
+    font-size: 10px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style:normal;
+    font-weight: 300;
+    color: rgb(153, 153, 153);
+    margin-top: 20px;
+}
+
+
+.gray-button {
+    background-color: rgb(255, 255, 255);
+    border-radius: 4px;
+    border: 1px solid rgb(204,204,204);
+    color: rgb(204, 204, 204);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style: normal;
+    width: 180px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+    cursor: pointer;
+    position: absolute;
+    bottom: 42px;
+    
+}
+
+.button-center{
+    left: 0;
+    right: 0;
+    margin: auto    
+}
+
+.button-left {
+    left: 30px;
+}
+
+.button-right {
+    left: 220px;
+}
+
+.small-green-label {
+    float: left;
+    font-size: 10px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style:normal;
+    font-weight: 450;
+    color: rgb(3, 186, 109);
+    text-align: center;
+}
