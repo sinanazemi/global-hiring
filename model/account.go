@@ -1,4 +1,4 @@
-package mapper
+package model
 
 type Account struct {
   Id     int    `json:"id"`

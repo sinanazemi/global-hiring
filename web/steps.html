@@ -108,7 +108,7 @@
                     <img src="images/step_1_bar.png" class="bar-image" alt="Mountain View">
 
                     <div class="field-div" style="top: 130px;">
-                        <p class="field-label">{{firstName}}</p>
+                        <p class="field-label">Name</p>
                         <input type="text" class="field-text-area" placeholder="Your full name" rows="1" />
                     </div>
                     <div class="field-div" style="top: 180px;">
@@ -134,29 +134,6 @@
 
                     <a href="#" class="next-button green-button button-center">Next Step</a>
                 </div>
-
-
-
-                <script>
-                  // new dependency: ngResource is included just above
-                  var myapp = new angular.module("app1", ["ngResource"]);
-
-                  // inject the $resource dependency here
-                  myapp.controller("ctrl1", /*["$scope", "$resource",*/
-                    function($scope , $resource)
-                    {
-                      //var FirstName = $resource("/firstName/:id", {id: '@id'}, {})
-                      var FirstName = $resource("/firstName")
-                      FirstName.get(
-                        function(data){
-                          $scope.firstName = data.name
-                        }
-                      )
-                		}
-                  );
-                </script>
-
-
 
                 <div id="step2" class="step-div">
 

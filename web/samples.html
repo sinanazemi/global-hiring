@@ -1,3 +1,54 @@
+<!DOCTYPE html>
 <html>
-samples
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-resource.min.js"></script>
+
+  <body>
+
+    <div ng-app="myApp" ng-controller="myCtrl">
+
+      <select ng-model="selectedService" ng-options="service.name for service in services" ng-change="getSkills()">
+      </select>
+
+      <br/>
+
+      <select ng-model="selectedSkill" ng-options="skill.name for skill in skills">
+      </select>
+
+    </div>
+
+    <script>
+      // new dependency: ngResource is included just above
+      var myapp = new angular.module("myApp", ["ngResource"]);
+
+      // inject the $resource dependency here
+      myapp.controller("myCtrl",
+        ["$scope", "$resource",
+          function($scope , $resource)
+          {
+            var service = $resource("/mainService")
+
+            service.query(
+              function(data){
+                $scope.services = data;
+              } // function(data)
+            ) // service.query
+
+            var skill = $resource("/skills")
+
+            $scope.getSkills = function(){
+
+        			skill.query({'id' : $scope.selectedService.id},
+                function(data){
+                  $scope.skills = data;
+        			  } // function(data)
+              ); // newSkill.$query
+
+        		}; // function(idx)
+
+          } // function($scope , $resource)
+        ] // ["$scope", "$resource",
+      ); // myapp.controller
+    </script>
+  </body>
 </html>
