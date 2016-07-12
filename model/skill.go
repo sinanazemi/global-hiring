@@ -1,28 +1,45 @@
 package model
 
 import (
-  "strconv"
+  "database/sql"
+  "github.com/sinanazemi/global-hiring/util"
 )
 
 type Skill struct {
   Id int `json:"id"`
   Name string `json:"name"`
-  Proficiency int `json:"profieciency"`
+  MainServiceID int `json:"mainserviceid"`
 }
 
 func getSkills(serviceID int) []Skill {
 
-  print("get skills " + strconv.Itoa(serviceID) + "\n")
+  // list of all of services
+	var result = make([]Skill, 0)
 
-	var skills = make([]Skill, 0)
+  skills, err := util.Select(readSkill, "select * from public.\"Skill\" where \"MainServiceID\" = $1" , serviceID)
 
-  // bootstrap some data
-  skills = append(skills, Skill{1, "Skill 1 for service " + strconv.Itoa(serviceID), 0})
-  skills = append(skills, Skill{1, "Skill 2 for service " + strconv.Itoa(serviceID), 0})
-  skills = append(skills, Skill{1, "Skill 3 for service " + strconv.Itoa(serviceID), 0})
-  skills = append(skills, Skill{1, "Skill 4 for service " + strconv.Itoa(serviceID), 0})
-  skills = append(skills, Skill{1, "Skill 5 for service " + strconv.Itoa(serviceID), 0})
+  if err != nil {
+    return result
+  }
 
-  return skills
+  for _, dummySkill := range skills {
 
+    skill, ok := dummySkill.(Skill)
+    if !ok {
+        // service was not of type MainService. The assertion failed
+        return make([]Skill, 0)
+    }
+    // service is of type MainService
+    result = append(result, skill)
+  }
+  return result
+
+}
+
+func readSkill(rows *sql.Rows) (interface{}, error) {
+
+  var skill Skill = Skill{-1, "", -1}
+  err := rows.Scan(&skill.Id, &skill.Name, &skill.MainServiceID)
+
+  return skill, err
 }

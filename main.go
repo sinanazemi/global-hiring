@@ -1,10 +1,8 @@
 package main
 
 import (
-  "encoding/json"
 	"flag"
 	"fmt"
-	"io/ioutil"
 	"log"
 
 	"net/http"
@@ -13,34 +11,6 @@ import (
   "github.com/sinanazemi/global-hiring/util"
 
 )
-
-// book model
-type user struct {
-  Id     int    `json:"id"`
-	Name  string `json:"name"`
-  Email string `json:"email"`
-  City string `json:"city"`
-  Phone string `json:"phone"`
-  Password string `json:"password"`
-}
-
-func parseUserRequest(r *http.Request) (user, *util.HandlerError) {
-	// the book payload is in the request body
-	log.Print("parseUserRequest")
-	data, e := ioutil.ReadAll(r.Body)
-	if e != nil {
-		return user{}, &util.HandlerError{e, "Could not read request", http.StatusBadRequest}
-	}
-
-	// turn the request body (JSON) into a book object
-	var payload user
-	e = json.Unmarshal(data, &payload)
-	if e != nil {
-		return user{}, &util.HandlerError{e, "Could not parse JSON", http.StatusBadRequest}
-	}
-
-	return payload, nil
-}
 
 func main() {
 

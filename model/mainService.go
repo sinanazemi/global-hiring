@@ -1,11 +1,12 @@
 package model
 
 import(
-  //"encoding/json"
+  "database/sql"
+  "github.com/sinanazemi/global-hiring/util"
 )
 
 type MainService struct{
-  Id     int    `json:"id"`
+  Id     int  `json:"id"`
   Name string `json:"name"`
   Skills []Skill `json:"skills"`
 }
@@ -13,14 +14,32 @@ type MainService struct{
 func getMainServices() []MainService {
 
   // list of all of services
-	var services = make([]MainService, 0)
+	var result = make([]MainService, 0)
 
-  // bootstrap some data
-  services = append(services, MainService{1, "Service 1", nil})
-  services = append(services, MainService{2, "Service 2", nil})
-  services = append(services, MainService{3, "Service 3", nil})
-  services = append(services, MainService{4, "Service 4", nil})
+  services, err := util.Select(readMainService, "select * from public.\"MainService\"")
 
-  return services
+  if err != nil {
+    return result
+  }
 
+  for _, dummyService := range services {
+
+    service, ok := dummyService.(MainService)
+    if !ok {
+        // service was not of type MainService. The assertion failed
+        return make([]MainService, 0)
+    }
+    // service is of type MainService
+    result = append(result, service)
+  }
+  return result
+
+}
+
+func readMainService(rows *sql.Rows) (interface{}, error) {
+
+  var service MainService = MainService{-1, "", nil}
+  err := rows.Scan(&service.Id, &service.Name)
+
+  return service, err
 }
