@@ -16,7 +16,7 @@ func getSkills(serviceID int) []Skill {
   // list of all of services
 	var result = make([]Skill, 0)
 
-  skills, err := util.Select(readSkill, "select * from public.\"Skill\" where \"MainServiceID\" = $1" , serviceID)
+  skills, err := util.Select(readSkill, "select * from Skill where MainServiceID = $1" , serviceID)
 
   if err != nil {
     return result

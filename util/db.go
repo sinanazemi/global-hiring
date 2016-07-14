@@ -8,9 +8,9 @@ import (
 )
 
 const (
-    DB_USER     = "globeAdmin"
+    DB_USER     = "globeadmin"
     DB_PASSWORD = "globePassword"
-    DB_NAME     = "GlobalHiring"
+    DB_NAME     = "globalhiring"
 )
 
 var dbinfo string = fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable",

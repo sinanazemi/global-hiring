@@ -16,7 +16,7 @@ func getMainServices() []MainService {
   // list of all of services
 	var result = make([]MainService, 0)
 
-  services, err := util.Select(readMainService, "select * from public.\"MainService\"")
+  services, err := util.Select(readMainService, "select * from MainService")
 
   if err != nil {
     return result
