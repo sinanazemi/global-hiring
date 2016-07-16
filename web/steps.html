@@ -15,304 +15,427 @@
 
     <title>Create Profile</title>
 
-    <script type='text/javascript'>
-        //<![CDATA[
-        $(window).load(function () {
-            // hides the slickbox as soon as the DOM is ready (a little sooner that page load)
-            // $('#step1').hide();
-            $('#step2').hide();
-            $('#step3').hide();
-            $('#step4').hide();
-            $('#step5').hide();
-            var step = 1;
-            $('.next-button').click(function () {
-                if (step == 1) {
-                    $('#step1').hide('slide', 400);
-                    $('#step2').show('slide', {
-                        direction: 'right'
-                    }, 400);
-                } else if (step == 2) {
-                    $('#step2').hide('slide', 400);
-                    $('#step3').show('slide', {
-                        direction: 'right'
-                    }, 400);
-                } else if (step == 3) {
-                    $('#step3').hide('slide', 400);
-                    $('#step4').show('slide', {
-                        direction: 'right'
-                    }, 400);
-                } else if (step == 4) {
-                    $('#step4').hide('slide', 400);
-                    $('#step5').show('slide', {
-                        direction: 'right'
-                    }, 400);
-                } else {
-                    step -= 1;
-                }
-                step += 1;
-                return false;
-            });
-
-            $('.previous-button').click(function () {
-                if (step == 2) {
-                    $('#step1').show('slide', {
-                        direction: 'left'
-                    }, 400);
-
-                    $('#step2').hide('slide', {
-                        direction: 'right'
-                    }, 400);
-                } else if (step == 3) {
-                    $('#step2').show('slide', {
-                        direction: 'left'
-                    }, 400);
-
-                    $('#step3').hide('slide', {
-                        direction: 'right'
-                    }, 400);
-                } else if (step == 4) {
-                    $('#step3').show('slide', {
-                        direction: 'left'
-                    }, 400);
-
-                    $('#step4').hide('slide', {
-                        direction: 'right'
-                    }, 400);
-                } else if (step == 5) {
-                    $('#step4').show('slide', {
-                        direction: 'left'
-                    }, 400);
-
-                    $('#step5').hide('slide', {
-                        direction: 'right'
-                    }, 400);
-                }
-                step -= 1;
-                return false;
-            });
-
-        }); //]]>
-    </script>
-
 </head>
 
 <body bgcolor="#323232">
     <div>
-        <div>
+        <div ng-app="steps" ng-controller="stepsCtrl">
             <a href="#" style="text-decoration: none;">
-                <div id="step1" class="step-div" ng-app="app1" ng-controller="ctrl1">
-
+                <div id="step1" class="step-div" ng-hide="step1Hide" >
                     <div class="stepheader">
                         <p class="steptitle">Account Information</p>
                     </div>
                     <img src="images/step_1_bar.png" class="bar-image" alt="Mountain View">
-
-                    <div class="field-div" style="top: 130px;">
-                        <p class="field-label">Name</p>
-                        <input type="text" class="field-text-area" placeholder="Your full name" rows="1" />
+                    <div class="field-div" style="top: 100px;">
+                         <p class="field-center-label" style="text-align:center;" >You can also sign up with facebook,linkedIn or Google.</p>
+                    </div>
+                   <div class="field-div" style="top: 130px;">
+                        <p class="field-label" >Fullname</p>
+                        <input type="text" class="field-text-area" placeholder="Your full name" rows="1" ng-model="fullname"/>
                     </div>
                     <div class="field-div" style="top: 180px;">
-                        <p class="field-label">Your Email</p>
-                        <input type="text" class="field-text-area" placeholder="you@email.com" rows="1" />
+                        <p class="field-label">Email</p>
+                        <input type="text" class="field-text-area" placeholder="you@email.com" rows="1"  ng-model="email" />
                     </div>
                     <div class="field-div" style="top: 230px;">
-                        <p class="field-label">Phone Number (optional)</p>
-                        <input type="text" class="field-text-area" placeholder="(123) 456-7890" rows="1" />
+                        <p class="field-label">Select City</p>
+                        <select class="select-area1" ng-model="selectedCity" ng-options="opt as opt for opt in cities" ng-init="selected='Tehran'"></select>
                     </div>
                     <div class="field-div" style="top: 280px;">
-                        <p class="field-label">Location</p>
-                        <input type="text" class="field-text-area" placeholder="e.g. London" rows="1" />
+                        <p class="field-label">Phone (optional)</p>
+                        <input type="text" class="field-text-area" placeholder="(123) 456-7890" rows="1" ng-model="phone" />
                     </div>
                     <div class="field-div" style="top: 330px;">
                         <p class="field-label">Password</p>
-                        <input type="password" class="field-text-area" rows="1" />
+                        <input type="password" class="field-text-area" rows="1" ng-model="password" />
                     </div>
                     <div class="field-div" style="top: 380px;">
-                        <p class="field-label">Confirm Password</p>
-                        <input type="password" class="field-text-area" rows="1" />
+                        <p class="field-label" row="1"  >Are you a student?</p>
+                        <input type="radio" name="isStudent" value="yes" ng-model="isStudent" style="float: left; margin-left: 60px; margin-top: 10px;"/>
+                        <p class="radio-button-text" style="float: left; margin-top: 10px;">Yes</p>
+                        <input type="radio" name="isStudent" value="no" ng-model="isStudent" style="float: left; margin-left: 50px; margin-top: 10px;"/>
+                        <p class="radio-button-text" style="float: left; margin-top: 10px;"> No </p>
                     </div>
-
-                    <a href="#" class="next-button green-button button-center">Next Step</a>
+                    <div class="field-div" style="top: 430px;">
+                      <label class="field-label">
+                        <input type="checkbox" ng-model="checkboxValue" />
+                        Yes, I understand and agree to the global hiring platform terms of service
+                      </label>
+                    </div>
+                    <a href="#" class="next-button green-button button-center" ng-click="step1NextClick()">Next Step</a>
                 </div>
 
-                <div id="step2" class="step-div">
+                <div id="stepLang" class="step-div" ng-hide="stepLangHide" ng-repeat="langToAdd in langsToAdd" >
 
                     <div class="stepheader">
-                        <p class="steptitle">Position</p>
+                        <p class="steptitle">Language</p>
                     </div>
-                    <img src="images/step_2_bar.png" class="bar-image" alt="Mountain View">
-
-                    <div class="field-div" style="top: 130px;">
-                        <p class="green-label">What positions are you most interested in?</p>
-                        <input type="text" class="full-width-input" placeholder="e.g. Software Development" rows="1" />
-                        <p class="black-bold-label">What is the position's level?</p>
-                        <input type="radio" name="level" value="entry" style="float: left; ">
-                        <p class="radio-button-text">Entry Level</p>
-                        <input type="radio" name="level" value="intermediate" style="float: left; margin-left: 75px;">
-                        <p class="radio-button-text"> Intermediate</p>
-                        <input type="radio" name="level" value="advanced" style="float: left; margin-left: 75px;">
-                        <p class="radio-button-text"> Advanced</p>
-                        <p class="add-more-text">+ Add More</p>
-                    </div>
-
-                    <div class="field-div" style="top: 300px;">
-                        <p class="green-label">What positions are you open to?</p>
-                        <input type="text" class="full-width-input" placeholder="e.g. Interpreter" rows="1" />
-                        <p class="black-bold-label">What is the position's level?</p>
-                        <input type="radio" name="level2" value="entry" style="float: left; ">
-                        <p class="radio-button-text">Entry Level</p>
-                        <input type="radio" name="level2" value="intermediate" style="float: left; margin-left: 75px;">
-                        <p class="radio-button-text"> Intermediate</p>
-                        <input type="radio" name="level2" value="advanced" style="float: left; margin-left: 75px;">
-                        <p class="radio-button-text"> Advanced</p>
-                        <p class="add-more-text">+ Add More</p>
-                    </div>
-
-
-                    <a href="#" class="previous-button gray-button button-left">Previous</a>
-                    <a href="#" class="next-button green-button button-right">Next Step</a>
-                </div>
-
-                <div id="step3" class="step-div">
-
-                    <div class="stepheader">
-                        <p class="steptitle">Knowledge</p>
-                    </div>
-                    <img src="images/step_3_bar.png" class="bar-image" alt="Mountain View">
-
-                    <div class="field-div" style="top: 130px;">
-                        <p class="small-green-label">Languages</p>
-                        <input type="text" class="field-text-area" placeholder="e.g. English" rows="1" />
-                    </div>
-                    <div class="field-div" style="top: 180px;">
-                        <p class="field-label" style="margin-top: 2px;">Level of profeciency</p>
-                        <input type="radio" name="level3" value="entry" style="float: left; margin-left: 55px;">
-                        <p class="radio-button-text">Native</p>
-                        <input type="radio" name="level3" value="intermediate" style="float: left; margin-left: 5px;">
-                        <p class="radio-button-text">Fluent</p>
-                        <input type="radio" name="level3" value="advanced" style="float: left; margin-left: 5px;">
-                        <p class="radio-button-text">Intermediate</p>
-                        <input type="radio" name="level3" value="advanced" style="float: left; margin-left: 5px;">
-                        <p class="radio-button-text">Limited</p>
-                    </div>
-                    <div class="field-div" style="top: 220px;">
-                        <p class="field-label" style="margin-top: 2px;">Level of profeciency in writing</p>
-                        <input type="radio" name="level4" value="entry" style="float: left; margin-left: 12px;">
-                        <p class="radio-button-text">Native</p>
-                        <input type="radio" name="level4" value="intermediate" style="float: left; margin-left: 5px;">
-                        <p class="radio-button-text">Fluent</p>
-                        <input type="radio" name="level4" value="advanced" style="float: left; margin-left: 5px;">
-                        <p class="radio-button-text">Intermediate</p>
-                        <input type="radio" name="level4" value="advanced" style="float: left; margin-left: 5px;">
-                        <p class="radio-button-text">Limited</p>
-                    </div>
-
-
-                    <div class="field-div" style="top: 270px;">
-                        <p class="small-green-label">Education</p>
-                    </div>
-                    <div class="field-div" style="top: 300px;">
-                        <p class="field-label">What is your latest degree</p>
-                        <input type="text" class="field-text-area" placeholder="e.g. Master of Fine Art" rows="1" />
-                    </div>
-                    <div class="field-div" style="top: 340px;">
-                        <p class="field-label">Major and Minor</p>
-                        <input type="text" class="field-text-area" placeholder="e.g. MBA" rows="1" />
-                    </div>
-                    <div class="field-div" style="top: 380px;">
-                        <p class="field-label">University</p>
-                        <input type="text" class="field-text-area" placeholder="e.g. UCLA" rows="1" />
-                    </div>
-                    <div class="field-div" style="top: 420px;">
-                        <p class="field-label">Year attended</p>
-                        <input type="text" class="field-text-area" placeholder="e.g. 2007" rows="1" />
-                    </div>
-
-                    <a href="#" class="previous-button gray-button button-left">Previous</a>
-                    <a href="#" class="next-button green-button button-right">Next Step</a>
-                </div>
-
-                <div id="step4" class="step-div">
-
-                    <div class="stepheader">
-                        <p class="steptitle">Professional Experience</p>
-                    </div>
-                    <img src="images/step_4_bar.png" class="bar-image" alt="Mountain View">
+                    <img ng-src="{{langBarImage}}" class="bar-image" alt="Mountain View">
 
                     <div class="field-div" style="top: 100px;">
-                        <p class="green-label">What projects have you completed?</p>
-                        <input type="text" class="full-width-input-two-lines" placeholder="Describe..." rows="1" />
-                        <p class="add-more-text-2">+ Add More</p>
+                        <p class="black-bold-label">Language</p>
+                    </div>
+                    <div class="field-div" style="top: 150px;">
+                        <input type="text" class="field-text-area-4" placeholder="English" rows="1" ng-model="langToAdd.language" required/>
+                    </div>
+                    <div class="field-div" style="top: 200px;">
+                        <p class="black-bold-label">Profeciency</p>
+                      </div>
+                      <div class="field-div" style="top: 240px;">
+                        <input type="radio" name="level" value="elementry" ng-model="langToAdd.langLevel" style="float: left; "/>
+                        <p class="radio-button-text">Elementry</p>
+                      </div>
+                      <div class="field-div" style="top: 250px;">
+                        <p class=" black-thin-label">I am only able to understand written text in it.</p>
+                      </div>
+                      <div class="field-div" style="top: 280px;">
+                        <input type="radio" name="level" value="basic" ng-model="langToAdd.langLevel" style="float: left; "/>
+                        <p class="radio-button-text"> Basic</p> </br>
+                      </div>
+                      <div class="field-div" style="top: 290px;">
+                        <p class=" black-thin-label">I am only able to communicate with it through written communication .</p>
+                      </div>
+                      <div class="field-div" style="top: 320px;">
+                        <input type="radio" name="level" value="conversational" ng-model="langToAdd.langLevel" style="float: left;"/>
+                        <p class="radio-button-text"> Conversational</p>
+                      </div><div class="field-div" style="top: 330px;">
+                        <p class=" black-thin-label">I know it well enough to verbally discuss project details with a client.</p>
+                      </div>
+                      <div class="field-div" style="top: 360px;">
+                        <input type="radio" name="level" value="fluent" ng-model="langToAdd.langLevel" style="float: left; "/>
+                        <p class="radio-button-text"> Fluent</p>
+                      </div>
+                      <div class="field-div" style="top: 370px;">
+                        <p class=" black-thin-label">I have complete command of it with perfect grammer.</p>
+                      </div>
+                      <div class="field-div" style="top: 400px;">
+                        <input type="radio" name="level" value="native" ng-model="langToAdd.langLevel" style="float: left; "/>
+                        <p class="radio-button-text"> Native or Bollingual</p>
+                      </div>
+                      <div class="field-div" style="top: 410px;">
+                        <p class=" black-thin-label">I have complete command of it, including breadth of vocabulary, idioms.</p>
+                      </div>
+                      <div class="field-div" style="top: 460px;">
+                        <p class="add-more-text" ng-click="addMoreLangClick(langToAdd)" style="text-align:center;" >+ Add More Language</p>
+                      </div>
+
+
+                    <a href="#" class="previous-button gray-button button-left" ng-click="langPreClick()">Previous</a>
+                    <a href="#" class="next-button green-button button-right" ng-click="langNextClick()"> Next Step </a>
+                </div>
+
+                <div id="stepEdu" class="step-div" ng-hide="stepEduHide" ng-repeat="educationToAdd in educationsToAdd">
+
+                   <div class="stepheader">
+                        <p class="steptitle">Education</p>
+                    </div>
+                    <img ng-src="{{eduBarImage}}" class="bar-image" alt="Mountain View">
+
+                    <div class="field-div" style="top: 130px;">
+                        <p class="black-bold-label">School</p>
+                    </div>
+                    <div class="field-div" style="top: 160px;">
+                        <input type="text" class="field-text-area-4" rows="1" ng-model="educationToAdd.school" />
                     </div>
 
-                    <div class="field-div" style="top: 240px;">
-                        <p class="field-label">What is your most recent or current position</p>
-                        <input type="text" class="field-text-area-2" placeholder="e.g. Marketing Manager" rows="1" />
+                    <div class="field-div" style="top: 190px;">
+                        <p class="black-bold-label">Date</p>
+                    </div>
+                    <div class="field-div" style="top: 220px;">
+                        <select class="select-area2" ng-model="educationToAdd.dateAttendedFrom" placeholder="From"   ng-options="opt as opt for opt in dates" ></select>
+                        <select class="select-area2" ng-model="educationToAdd.dateAttendedTo" placeholder="To(or expected graduation year)"   ng-options="opt as opt for opt in dates" style="margin-left: 10px;"  ></select>
                     </div>
 
+                    <div class="field-div" style="top: 250px;">
+                        <p class="black-bold-label">Degree</p>
+                    </div>
                     <div class="field-div" style="top: 280px;">
-                        <p class="field-label">How much did you like this position<span class="hint-span" > (rank yourself from 0 to 10)</span></p>
-                        <input type="text" class="field-text-area-3" placeholder="10" rows="1" />
+                        <select class="select-area3" ng-model="educationToAdd.degree"   ng-options="opt as opt for opt in degrees" ></select>
+                    </div>
+                    <div class="field-div" style="top: 310px;">
+                        <p class="black-bold-label">Field Of Study</p>
+                    </div>
+                    <div class="field-div" style="top: 340px;">
+                        <input type="text" class="field-text-area-4" rows="1" ng-model="educationToAdd.fieldOfStudy" />
+                    </div>
+                    <div class="field-div" style="top: 370px;">
+                        <p class="black-bold-label">Grade</p>
+                    </div>
+                    <div class="field-div" style="top: 400px;">
+                        <input type="text" class="field-text-area-4" rows="1" ng-model="educationToAdd.grade" />
                     </div>
 
-                    <div class="field-div" style="top: 320px;">
-                        <p class="field-label">How was your impact to the company<span class="hint-span" > (rank yourself from 0 to 10)</span></p>
-                        <input type="text" class="field-text-area-3" placeholder="10" rows="1" />
+                    <div class="field-div" style="top: 460px;">
+                      <p class="add-more-text" ng-click="addMoreEduClick(educationToAdd)" style="text-align:center;" >+ Add More Education</p>
                     </div>
 
-                    <div class="field-div" style="top: 360px;">
-                        <p class="field-label">How often did the position require you to commucicate in English? Was the communication verbal or in writing ot both?</p>
-                        <input type="text" class="field-text-area-4" placeholder="Explain..." rows="1" />
-                        <p class="add-more-text-4">+ Add More Position</p>
+                    <a href="#" class="previous-button gray-button button-left" ng-click="eduPreClick()">Previous</a>
+                    <a href="#" class="next-button green-button button-right" ng-click="eduNextClick()">Next Step</a>
+                </div>
+
+                  <div id="stepMainSRV" class="step-div" ng-hide="stepMainSRVHide">
+                    <div class="stepheader">
+                        <p class="steptitle">Main Service</p>
                     </div>
+                    <img ng-src={{mainSRVBarImage}} class="bar-image" alt="Mountain View">
 
+                    <div ng-repeat="service in mainServices">
+                      <div class="checkbox-area"  ng-style="{top: (service.x) +'px', left: (service.y) +'px'}">
+                             <input type="checkbox" ng-attr-id="{{'c' + service.id}}" ng-model="service.isChecked" />
+                             <label ng-attr-for="{{'c' +service.id}}">
+                               <img ng-src="{{getIcon(service)}}">
+                             </label>
+                       </div>
+                     </div>
 
-
-                    <a href="#" class="previous-button gray-button button-left">Previous</a>
-                    <a href="#" class="next-button green-button button-right">Next Step</a>
+                    <a href="#" class="previous-button gray-button button-left" ng-click="mainSRVPreClick()">Previous</a>
+                    <a href="#" class="next-button green-button button-right" ng-click="mainSRVNextClick()">Next Step</a>
                 </div>
 
 
 
-                <div id="step5" class="step-div">
+                <div id="stepSkills" class="step-div" ng-hide="stepSkillHide">
 
                     <div class="stepheader">
-                        <p class="steptitle">Extracurricular Activities</p>
+                        <p class="steptitle">Skills</p>
                     </div>
-                    <img src="images/step_5_bar.png" class="bar-image" alt="Step 5 Bar">
+                    <img ng-src={{skillBarImage}} class="bar-image" alt="Skill Bar">
 
-                    <div class="field-div" style="top: 90px;">
-                        <p class="green-label">Voluntary Activities?</p>
-                        <input type="text" class="full-width-input-2" placeholder="Describe..." rows="1" />
-                        <p class="add-more-text-3">+ Add More</p>
-                    </div>
-
-                    <div class="field-div" style="top: 180px;">
-                        <p class="green-label">Service Projects?</p>
-                        <input type="text" class="full-width-input-2" placeholder="Describe..." rows="1" />
-                        <p class="add-more-text-3">+ Add More</p>
+                    <div id="skilldList" class="field-div" style="top: 100px;">
+                      <ul ng-repeat="skill in skills" style="text-align:left; padding-left:2px;" >
+                          <p class="black-bold-label" style="text-align:left; padding-left:2px; font-size:12px">{{skill.question}}</p>
+                        <li ng-repeat="skillOfSRV in skill.skillsOfSRV" style="list-style-type:none;">
+                          <p class="black-border-label" ng-click="skillClick(skillOfSRV)" >{{skillOfSRV.name}}</p>
+                        </li>
+                      </ul>
                     </div>
 
-                    <div class="field-div" style="top: 270px;">
-                        <p class="green-label">Art Activities?</p>
-                        <input type="text" class="full-width-input-2" placeholder="Describe..." rows="1" />
-                        <p class="add-more-text-3">+ Add More</p>
-                    </div>
-
-                     <div class="field-div" style="top: 360px;">
-                        <p class="green-label">Sports?</p>
-                        <input type="text" class="full-width-input-2" placeholder="Describe..." rows="1" />
-                        <p class="add-more-text-3">+ Add More</p>
-                    </div>
-
-                    <a href="#" class="previous-button gray-button button-left">Previous</a>
-                    <a href="#" class="next-button green-button button-right">Finish</a>
+                    <a href="#" class="previous-button gray-button button-left" ng-click="skillPreClick()">Previous</a>
+                  <a href="/profile.html" class="next-button green-button button-right" ng-click="finishClick()" >Finish</a>
                 </div>
 
             </a>
         </div>
 
     </div>
+
+
+    <script>
+    var app = angular.module('steps', []);
+    app.controller('stepsCtrl', function($scope) {
+      $scope.step1Hide=false;
+      $scope.stepLangHide=true;
+      $scope.stepEduHide=true;
+      $scope.stepMainSRVHide=true;
+      $scope.stepSkillHide=true;
+      $scope.isStudent="yes";
+      // Next buttons click
+      $scope.step1NextClick = function(){
+        $scope.step1Hide=true;
+        if($scope.isStudent=="yes"){
+          $scope.stepLangHide=false;
+          $scope.langBarImage="images/step_2_bar.png";
+        }
+        else {
+            $scope.stepMainSRVHide=false;
+            $scope.eduBarImage="images/step_2_bar.png";
+        }
+      };
+      $scope.langNextClick = function(){
+
+        if ($scope.langsToAdd[index].language!="" && $scope.langs[index-1].language != $scope.langsToAdd[index].language )
+        {
+          $scope.langsToAdd.splice(index, 0);
+           $scope.langs.push(angular.copy($scope.langsToAdd[index]));
+        }
+        $scope.stepLangHide=true;
+        if($scope.isStudent=="yes"){
+          $scope.stepEduHide=false;
+          $scope.eduBarImage="images/step_3_bar.png";
+        }
+        else{
+          $scope.stepEduHide=false;
+          $scope.eduBarImage="images/step_5_bar.png";
+
+        }
+      };
+      $scope.eduNextClick = function(){
+        if ($scope.educationsToAdd[indexEdu].school!="" && $scope.educations[indexEdu-1].school != $scope.educationsToAdd[indexEdu].school )
+        {
+          $scope.educationsToAdd.splice(indexEdu, 0);
+           $scope.educations.push(angular.copy($scope.educationsToAdd[indexEdu]));
+        }
+          $scope.stepEduHide=true;
+        if($scope.isStudent=="yes"){
+          $scope.stepMainSRVHide=false;
+          $scope.mainSRVBarImage="images/step_4_bar.png";
+        }
+        else{
+          $scope.stepSkillHide=false;
+        }
+
+      };
+      $scope.mainSRVNextClick = function(){
+        $scope.getSkills($scope.mainServices);
+
+        $scope.stepMainSRVHide=true;
+        if($scope.isStudent=="yes"){
+          $scope.stepSkillHide=false;
+          $scope.skillBarImage="images/step_5_bar.png";
+        }
+        else{
+          $scope.stepSkillHide=false;
+          $scope.skillBarImage="images/step_3_bar.png";
+        }
+      };
+
+      // Previous buttons click
+      $scope.langPreClick=function(){
+        $scope.stepLangHide=true;
+        if($scope.isStudent=="yes"){
+          $scope.step1Hide=false;
+        }
+      }
+      $scope.eduPreClick=function(){
+        $scope.stepEduHide=true;
+        if($scope.isStudent=="yes"){
+          $scope.stepLangHide=false;
+          $scope.eduBarImage="images/step_2_bar.png";
+        }
+      }
+      $scope.mainSRVPreClick=function(){
+        $scope.stepMainSRVHide=true;
+        if($scope.isStudent=="yes"){
+          $scope.stepEduHide=false;
+          $scope.eduBarImage="images/step_3_bar.png";
+        }
+      }
+      $scope.skillPreClick=function(){
+
+        $scope.stepMainSRVHide=false;
+        $scope.stepSkillHide=true;
+      }
+
+      $scope.finishClick=function(){
+        //TODO: send the registration information to the server.
+        for (var i=0; i<$scope.skills.length; i++) {
+        //  $scope.selectedMainSRVIds.push(angular.copy($scope.skills[i].mainServiceId));
+        }
+      }
+
+      // set Cities
+      $scope.cities = ['Tehran','Shiraz','Esfahan','Mashhad','Tabriz','Sari','Gorgan','Rasht','Kerman','Yazd','Oromiye','Semnan'];
+      // set Dates
+      $scope.dates=['1980','1981','1982','1983','1984','1985','1986','1987','1988','1989','1990','1991','1992','1993','1994','1995','1996','1997','1998','1999','2000'];
+      //set Degrees
+      $scope.degrees=['Bachelor','Master','PHD']
+
+      //Add more Language
+      $scope.langs = [];
+      $scope.langsToAdd = [{
+        language: '',
+        langLevel: ''
+      }];
+      var index =0;
+      $scope.addMoreLangClick=function(langToAdd){
+        $scope.langsToAdd.splice(index, 0);
+
+        $scope.langs.push(angular.copy(langToAdd));
+        $scope.langsToAdd.push({
+            language: '',
+            langLevel: ''
+          });
+          index++
+
+      }
+
+      //Add Education
+      $scope.educations = [];
+      $scope.educationsToAdd = [{
+        school: '',
+        dateAttendedFrom: '',
+        dateAttendedTo: '',
+        degree:'',
+        fieldOfStudy:'',
+        grade:''
+      }];
+
+      var indexEdu =0;
+      $scope.addMoreEduClick=function(educationToAdd){
+        $scope.educationsToAdd.splice(indexEdu, 0);
+
+        $scope.educations.push(angular.copy(educationToAdd));
+        $scope.educationsToAdd.push({
+            language: '',
+            langLevel: ''
+          });
+          indexEdu++
+
+      }
+
+      // Main Services
+
+      $scope.mainServices=[
+        {
+          id: 1,
+          name: 'Custom Service',
+          icon: {
+            on: 'http://png.findicons.com/files/icons/1588/farm_fresh_web/32/lightbulb.png',
+            off: 'http://png.findicons.com/files/icons/1588/farm_fresh_web/32/lightbulb_off.png'
+          },
+          isChecked: false,
+          x:130,
+          y:10
+        },
+        {
+          id: 2,
+          name: 'Translation',
+          icon: {
+            on: 'http://png.findicons.com/files/icons/1588/farm_fresh_web/32/lightbulb.png',
+            off: 'http://png.findicons.com/files/icons/1588/farm_fresh_web/32/lightbulb_off.png'
+          },
+          isChecked: false,
+          x:130,
+          y:110
+        }
+
+      ];
+
+      $scope.skills= [
+        {
+          mainServiceId:1,
+          question: 'What type of custom service do you do?',
+          skillsOfSRV:[{ id:1, name: 'customSRV 1', isSelected:false },{ id:2, name:'customSRV 2', isSelected:false }]
+        },
+        {
+          mainServiceId:2,
+          question:'What type of translation do you do?',
+          skillsOfSRV:[{id:1, name: 'translation 1', isSelected:false },{id:2, name:'translation 2', isSelected:false }]
+        }
+      ];
+
+      $scope.getIcon = function(serviceSelect){
+        if (serviceSelect.icon) {
+          if (serviceSelect.isChecked) return serviceSelect.icon.on;
+          else return serviceSelect.icon.off;
+        }
+      }
+
+      //skills for the selected serviceSelect
+      $scope.selectedMainSRVIds=[];
+      $scope.getSkills = function(selectedServices){
+        //TODO: Get skills for the selected service from server;
+        //for (var i=0; i<$scope.skills.length; i++) {
+        //  $scope.selectedMainSRVIds.push(angular.copy($scope.skills[i].mainServiceId));
+      //  }
+      }
+
+      $scope.skillClick=function(selectedSkill){
+        selectedSkill.isSelected=true;
+      }
+
+    });
+    </script>
 
 
 </body>
