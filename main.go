@@ -24,14 +24,12 @@ func main() {
 	fileHandler := http.FileServer(fs)
 	http.Handle("/", fileHandler)
 
-  http.Handle("/mainService", util.Handler(model.GetMainServices))
-  //http.HandleFunc("/mainService", model.GetMainServices)
-  //http.Handle("/skills/{id}", util.Handler(model.GetSkills))
-  http.Handle("/skills", util.Handler(model.GetSkills))
-
+	http.Handle("/cities", util.Handler(model.GetCities))
+	http.Handle("/mainServices", util.Handler(model.GetMainServices))
+	http.Handle("/skills", util.Handler(model.GetSkills))
+	http.Handle("/saveAccount", util.Handler(model.SaveAccount))
 
 	log.Printf("Running on port %d\n", *port)
-
 
 	addr := fmt.Sprintf("127.0.0.1:%d", *port)
 	// this call blocks -- the progam runs here forever

@@ -7,12 +7,34 @@
 
     <div ng-app="myApp" ng-controller="myCtrl">
 
-      <select ng-model="selectedService" ng-options="service.name for service in services" ng-change="getSkills()">
+      <label for="FullName">Full Name</label>
+      <input id="FullName" ng-model="Name"><br/>
+
+      <label for="Email">Email</label>
+      <input id="Email" ng-model="Email"><br/>
+
+      <label for="cities">Select City</label>
+      <select id = "cities" ng-model="SelectedCity" ng-options="city.name for city in cities">
+      </select><br/>
+
+      <label for="Phone">Phone</label>
+      <input id="Phone" ng-model="Phone"><br/>
+
+      <label for="Password">Password</label>
+      <input id="Password" ng-model="Password"><br/>
+
+      <label for="IsStudent">Are you a student? </label>
+      <input type='checkbox' id="IsStudent" ng-model = "isStudent">
+      {{isStudent}}<br/>
+
+      <button ng-click="saveAccount()">save</button><br/>
+
+      <select ng-show="false" ng-model="selectedService" ng-options="service.name for service in services" ng-change="getSkills()">
       </select>
 
       <br/>
 
-      <select ng-model="selectedSkill" ng-options="skill.name for skill in skills">
+      <select ng-show="false" ng-model="selectedSkill" ng-options="skill.name for skill in skills">
       </select>
 
     </div>
@@ -26,7 +48,15 @@
         ["$scope", "$resource",
           function($scope , $resource)
           {
-            var service = $resource("/mainService")
+            var cities = $resource("/cities")
+
+            cities.query(
+              function(data){
+                $scope.cities = data;
+              } // function(data)
+            ) // service.query
+
+            var service = $resource("/mainServices")
 
             service.query(
               function(data){
@@ -45,6 +75,31 @@
               ); // newSkill.$query
 
         		}; // function(idx)
+
+            var saveAccount = $resource("/saveAccount")
+
+            $scope.saveAccount = function() {
+
+              var newAccount = new saveAccount();
+              newAccount.name = $scope.Name
+              newAccount.email = $scope.Email
+              newAccount.city = $scope.SelectedCity
+              newAccount.phone = $scope.Phone
+              newAccount.password = $scope.Password
+              newAccount.isstudent = $scope.isStudent
+
+              newAccount.$save(
+                function(data){
+                  $scope.Name = "";
+                  $scope.Email = "";
+                  $scope.Phone = "";
+                  $scope.Password = "";
+                  $scope.City = "";
+                } // function(data)
+            ) // saveAccount.$save
+            }
+
+
 
           } // function($scope , $resource)
         ] // ["$scope", "$resource",

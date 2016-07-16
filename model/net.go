@@ -1,6 +1,7 @@
 package model
 
 import (
+  "errors"
   "strconv"
   "encoding/json"
 	"io/ioutil"
@@ -29,6 +30,32 @@ func parseIdRequest(r *http.Request) int {
 	return idJson.Id
 }
 
+type JsonParser func(map[string]interface{}) (interface{}, error)
+
+func parseJsonRequest(r *http.Request, parse JsonParser) (interface{}, error) {
+
+	data, e := ioutil.ReadAll(r.Body)
+	if e != nil {
+    print("Could not read request")
+		return nil, errors.New("Could not read request")
+	}
+
+	// turn the request body (JSON) into a book object
+	var dataMap map[string]interface{}
+	e = json.Unmarshal(data, &dataMap)
+	if e != nil {
+    print("Could not parse JSON")
+		return nil, errors.New("Could not parse JSON")
+	}
+
+  return parse(dataMap)
+}
+
+func GetCities(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
+
+  return getCities(), nil
+}
+
 func GetMainServices(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
 
   return getMainServices(), nil
@@ -36,7 +63,6 @@ func GetMainServices(w http.ResponseWriter, r *http.Request) (interface{}, *util
 
 func GetSkills(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
 
-  //param := mux.Vars(r)["id"]
   param := r.URL.Query().Get("id")
   print(param + "\n")
 
@@ -45,28 +71,21 @@ func GetSkills(w http.ResponseWriter, r *http.Request) (interface{}, *util.Handl
     return nil, &util.HandlerError{e, "Id should be an integer", http.StatusBadRequest}
   }
 
-//  id := parseIdRequest(r)
-
-
   return getSkills(id), nil
 }
 
-/*func parseMainServiceRequest(r *http.Request) (MainService, *util.HandlerError) {
+func SaveAccount(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
+  accountJ, err := parseJsonRequest(r, parseAccount)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Invalid JSON Account", http.StatusBadRequest}
+  }
 
-	data, e := ioutil.ReadAll(r.Body)
-	if e != nil {
-    print("Could not read request")
-		return MainService{}, &util.HandlerError{e, "Could not read request", http.StatusBadRequest}
-	}
+  account := accountJ.(Account)
 
-	// turn the request body (JSON) into a book object
-	var service MainService
-	e = json.Unmarshal(data, &service)
-	if e != nil {
-    print("Could not parse JSON")
-		return MainService{}, &util.HandlerError{e, "Could not parse JSON", http.StatusBadRequest}
-	}
+  err = account.save()
+  if err != nil {
+    return nil, &util.HandlerError{err, "Problem while saving account", http.StatusBadRequest}
+  }
 
-  print(service.Id)
-  return service, nil
-}*/
+  return account, nil
+}

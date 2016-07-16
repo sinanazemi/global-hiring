@@ -60,10 +60,6 @@ func Select(mapper MapperFunc, query string, args ...interface{}) ([]interface{}
     return nil, err
   }
 
-  print(query + "\n")
-  print(args)
-  print("\n")
-
   rows, err := db.Query(query, args...)
   checkErr(err)
   if err != nil {
@@ -80,6 +76,25 @@ func Select(mapper MapperFunc, query string, args ...interface{}) ([]interface{}
       result = append(result, data)
   }
   return result, nil
+}
+
+func Insert(query string, args ...interface{}) (int, error) {
+
+  err := checkConnection()
+  checkErr(err)
+  if err != nil {
+    return -1, err
+  }
+
+  var InsertedId int
+  // "INSERT INTO MyTable(MyTableID, name) VALUES($1,$2) returning MyTableID;"
+  err = db.QueryRow(query, args...).Scan(&InsertedId)
+  checkErr(err)
+  if err != nil {
+    return -1, err
+  }
+
+  return InsertedId, nil
 }
 
 /*func main() {
