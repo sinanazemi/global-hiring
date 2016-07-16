@@ -10,6 +10,31 @@
     margin: auto
 }
 
+.container {
+  display: block;
+  margin-top: 130px;
+  padding: 0 0 10px 10px;
+  width: 400px;
+}
+
+.item {
+  background: #ddd;
+  float:left;
+  display: inline-block;
+  margin: 10px 10px 0 0;
+  height: 90px;
+  width: 90px;
+}
+
+.item.selected {
+  border-color: green;
+  border: 5px;
+}
+.black-border-label.selected {
+  background-color: rgb(3, 186, 109);
+}
+
+
 .stepheader {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;

@@ -179,14 +179,15 @@
                     </div>
                     <img ng-src={{mainSRVBarImage}} class="bar-image" alt="Mountain View">
 
-                    <div ng-repeat="service in mainServices">
-                      <div class="checkbox-area"  ng-style="{top: (service.x) +'px', left: (service.y) +'px'}">
-                             <input type="checkbox" ng-attr-id="{{'c' + service.id}}" ng-model="service.isChecked" />
-                             <label ng-attr-for="{{'c' +service.id}}">
-                               <img ng-src="{{getIcon(service)}}">
-                             </label>
-                       </div>
-                     </div>
+                      <div class="container"  >
+                      <div class="item" ng-repeat='service in mainServices' ng-click='toggleSelected(service)' ng-class="{ selected: service.isChecked }">
+                        <input type="checkbox" ng-attr-id="{{'c' + service.id}}" ng-model="service.isChecked" />
+                        <label ng-attr-for="{{'c' +service.id}}">
+                          <img ng-src="{{getIcon(service)}}">
+                        </label>
+                      </div>
+                      </div>
+
 
                     <a href="#" class="previous-button gray-button button-left" ng-click="mainSRVPreClick()">Previous</a>
                     <a href="#" class="next-button green-button button-right" ng-click="mainSRVNextClick()">Next Step</a>
@@ -205,7 +206,7 @@
                       <ul ng-repeat="skill in skills" style="text-align:left; padding-left:2px;" >
                           <p class="black-bold-label" style="text-align:left; padding-left:2px; font-size:12px">{{skill.question}}</p>
                         <li ng-repeat="skillOfSRV in skill.skillsOfSRV" style="list-style-type:none;">
-                          <p class="black-border-label" ng-click="skillClick(skillOfSRV)" >{{skillOfSRV.name}}</p>
+                          <p class="black-border-label" ng-click="skillClick(skillOfSRV)" ng-class="{ selected: skillOfSRV.isSelected }" >{{skillOfSRV.name}}</p>
                         </li>
                       </ul>
                     </div>
@@ -238,7 +239,8 @@
         }
         else {
             $scope.stepMainSRVHide=false;
-            $scope.eduBarImage="images/step_2_bar.png";
+            $scope.mainSRVBarImage="images/step_2_bar.png";
+            $scope.getMainServices();
         }
       };
       $scope.langNextClick = function(){
@@ -269,6 +271,7 @@
         if($scope.isStudent=="yes"){
           $scope.stepMainSRVHide=false;
           $scope.mainSRVBarImage="images/step_4_bar.png";
+          $scope.getMainServices();
         }
         else{
           $scope.stepSkillHide=false;
@@ -383,9 +386,7 @@
             on: 'http://png.findicons.com/files/icons/1588/farm_fresh_web/32/lightbulb.png',
             off: 'http://png.findicons.com/files/icons/1588/farm_fresh_web/32/lightbulb_off.png'
           },
-          isChecked: false,
-          x:130,
-          y:10
+          isChecked: false
         },
         {
           id: 2,
@@ -394,12 +395,18 @@
             on: 'http://png.findicons.com/files/icons/1588/farm_fresh_web/32/lightbulb.png',
             off: 'http://png.findicons.com/files/icons/1588/farm_fresh_web/32/lightbulb_off.png'
           },
-          isChecked: false,
-          x:130,
-          y:110
+          isChecked: false
         }
 
       ];
+
+      $scope.toggleSelected = function(service) {
+  	     service.isChecked = !service.isChecked;
+      };
+
+      $scope.getMainServices = function(){
+        //TODO: Read mainServices from Server
+      };
 
       $scope.skills= [
         {
@@ -431,7 +438,7 @@
       }
 
       $scope.skillClick=function(selectedSkill){
-        selectedSkill.isSelected=true;
+        selectedSkill.isSelected=!selectedSkill.isSelected;
       }
 
     });
