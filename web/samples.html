@@ -23,18 +23,42 @@
       <label for="Password">Password</label>
       <input id="Password" ng-model="Password"><br/>
 
-      <label for="IsStudent">Are you a student? </label>
-      <input type='checkbox' id="IsStudent" ng-model = "isStudent">
-      {{isStudent}}<br/>
+      <input type='checkbox' ng-model="isStudent">student?</input><br/>
+
+
+      <table>
+        <tr>
+          <td style="border:1px solid black">
+            <label for="LanguageName">Language</label>
+            <input id="LanguageName" ng-model="LanguageName"><br/>
+
+            <div ng-repeat="profeciency in LanguageProfeciencies">
+
+                <input type="radio" name="LanguageProfeciencyRadio" ng-model="LanguageProfeciency" value="{{profeciency.value}}">
+                  {{profeciency.text}}
+                </input>
+                <br>
+            </div>{{LanguageProfeciency}}
+          </td>
+          <td style="border:1px solid black">
+            <button ng-click="addLanguage()">add --></button><br/>
+          </td>
+          <td style="border:1px solid black">
+            <div ng-repeat="language in languages">
+              {{language.name + "(" + language.profeciency + ")"}}<br>
+            </div>
+          </td>
+        </tr>
+      </table>
 
       <button ng-click="saveAccount()">save</button><br/>
 
-      <select ng-show="false" ng-model="selectedService" ng-options="service.name for service in services" ng-change="getSkills()">
+      <select ng-model="selectedService" ng-options="service.name for service in services" ng-change="getSkills()">
       </select>
 
       <br/>
 
-      <select ng-show="false" ng-model="selectedSkill" ng-options="skill.name for skill in skills">
+      <select ng-model="selectedSkill" ng-options="skill.name for skill in skills">
       </select>
 
     </div>
@@ -48,6 +72,9 @@
         ["$scope", "$resource",
           function($scope , $resource)
           {
+            $scope.isStudent = true
+            $scope.LanguageProfeciency = "E"
+            
             var cities = $resource("/cities")
 
             cities.query(
@@ -64,17 +91,38 @@
               } // function(data)
             ) // service.query
 
+            /*
             var skill = $resource("/skills")
-
             $scope.getSkills = function(){
-
         			skill.query({'id' : $scope.selectedService.id},
                 function(data){
                   $scope.skills = data;
         			  } // function(data)
               ); // newSkill.$query
+        		}; // function()
+            */
 
-        		}; // function(idx)
+            $scope.getSkills = function(){
+              $scope.skills = $scope.selectedService.skills;
+            }; // function()
+
+            $scope.languages = [];
+
+          $scope.addLanguage = function() {
+                var lang = {
+                name: $scope.LanguageName,
+                profeciency: $scope.LanguageProfeciency
+              };
+              $scope.languages.push(lang);
+            } // $scope.addLanguage = function()
+
+            $scope.LanguageProfeciencies = [
+              {text: "Elementary", value: "E"},
+              {text: "Basic", value: "B"},
+              {text: "Conversational", value: "C"},
+              {text: "Fluent", value: "F"},
+              {text: "Native", value: "N"}
+            ]
 
             var saveAccount = $resource("/saveAccount")
 
@@ -87,6 +135,8 @@
               newAccount.phone = $scope.Phone
               newAccount.password = $scope.Password
               newAccount.isstudent = $scope.isStudent
+
+              newAccount.languages = $scope.languages
 
               newAccount.$save(
                 function(data){

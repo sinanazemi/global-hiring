@@ -8,6 +8,8 @@ import(
 type MainService struct{
   Id     int  `json:"id"`
   Name string `json:"name"`
+  Question string `json:"question"`
+  IsSelected bool `json:"isselected"`
   Skills []Skill `json:"skills"`
 }
 
@@ -30,6 +32,7 @@ func getMainServices() []MainService {
         return make([]MainService, 0)
     }
     // service is of type MainService
+    service.Skills = getSkills(service.Id)
     result = append(result, service)
   }
   return result
@@ -38,8 +41,9 @@ func getMainServices() []MainService {
 
 func readMainService(rows *sql.Rows) (interface{}, error) {
 
-  var service MainService = MainService{-1, "", nil}
-  err := rows.Scan(&service.Id, &service.Name)
+  var service MainService = MainService{}
+  err := rows.Scan(&service.Id, &service.Name, &service.Question)
+  service.IsSelected = false
 
   return service, err
 }

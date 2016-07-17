@@ -9,6 +9,7 @@ type Skill struct {
   Id int `json:"id"`
   Name string `json:"name"`
   MainServiceID int `json:"mainserviceid"`
+  IsSelected bool `json:"isselected"`
 }
 
 func getSkills(serviceID int) []Skill {
@@ -38,8 +39,9 @@ func getSkills(serviceID int) []Skill {
 
 func readSkill(rows *sql.Rows) (interface{}, error) {
 
-  var skill Skill = Skill{-1, "", -1}
+  var skill Skill = Skill{}
   err := rows.Scan(&skill.Id, &skill.Name, &skill.MainServiceID)
+  skill.IsSelected = false
 
   return skill, err
 }

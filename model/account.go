@@ -13,6 +13,8 @@ type Account struct {
   Phone string `json:"phone"`
   Password string `json:"password"`
   IsStudent bool `json:isstudent`
+
+  Languages []Language `json:languages`
 }
 
 func (acc Account) save() error {
@@ -38,18 +40,23 @@ func (acc Account) saveNew() error {
   if err != nil {
     return err
   }
-
   acc.Id = id
+
+  for lang := range(acc.Languages) {
+    acc.Languages[lang].save(acc)
+  }
+
   return nil
 }
 
 func parseAccount(dataMap map[string]interface{}) (interface{}, error) {
 
-  idStr := dataMap["id"]
-  if idStr == nil || idStr == "" {
-    idStr = 0
+  print(dataMap)
+
+  id := 0
+  if dataMap["id"] != nil {
+    id = int(dataMap["id"].(float64))
   }
-  id:= idStr.(int)
 
   result := Account{Id: id}
 
@@ -63,6 +70,15 @@ func parseAccount(dataMap map[string]interface{}) (interface{}, error) {
   cityParsed, _ := parseCity(cityMap)
   city := cityParsed.(City)
   result.City = city
+
+  result.Languages = make([]Language, 0)
+
+  langsArr := dataMap["languages"].([]interface{})
+  for lang := range langsArr {
+    lmap := langsArr[lang].(map[string]interface{})
+    l, _ := parseLanguage(lmap)
+    result.Languages = append(result.Languages, l.(Language))
+  }
 
   return result, nil
 }

@@ -28,7 +28,8 @@ CREATE DATABASE GlobalHiring
 CREATE TABLE MainService
 (
  ID serial,
- Name character varying(100),
+ Name character varying(100) not null,
+ Question character varying(300),
  CONSTRAINT MainService_PK PRIMARY KEY (ID),
  CONSTRAINT MainService_Name_UK UNIQUE (Name)
 )
@@ -39,18 +40,18 @@ ALTER TABLE MainService
  OWNER TO globeAdmin;
 
 
- INSERT INTO MainService(Name) VALUES ('Customer Service');
- INSERT INTO MainService(Name) VALUES ('Admin Support');
- INSERT INTO MainService(Name) VALUES ('Sales & Marketing');
- INSERT INTO MainService(Name) VALUES ('Accounting & Consulting');
- INSERT INTO MainService(Name) VALUES ('Legal');
- INSERT INTO MainService(Name) VALUES ('Translation');
- INSERT INTO MainService(Name) VALUES ('Writing');
- INSERT INTO MainService(Name) VALUES ('Design & Creative');
- INSERT INTO MainService(Name) VALUES ('Engineering & Architecture');
- INSERT INTO MainService(Name) VALUES ('Data Science & Analytics');
- INSERT INTO MainService(Name) VALUES ('IT & Networking');
- INSERT INTO MainService(Name) VALUES ('Web, Mobile & Software Dev');
+ INSERT INTO MainService(Name, Question) VALUES ('Customer Service', 'What type of Customer Service do you do?');
+ INSERT INTO MainService(Name, Question) VALUES ('Admin Support', 'What type of Admin Support do you do?');
+ INSERT INTO MainService(Name, Question) VALUES ('Sales & Marketing', 'What type of Sales & Marketing do you do?');
+ INSERT INTO MainService(Name, Question) VALUES ('Accounting & Consulting', 'What type of Accounting & Consulting do you do?');
+ INSERT INTO MainService(Name, Question) VALUES ('Legal', 'What type of Legal do you do?');
+ INSERT INTO MainService(Name, Question) VALUES ('Translation', 'What type of Translation do you do?');
+ INSERT INTO MainService(Name, Question) VALUES ('Writing', 'What type of Writing do you do?');
+ INSERT INTO MainService(Name, Question) VALUES ('Design & Creative', 'What type of Design & Creative do you do?');
+ INSERT INTO MainService(Name, Question) VALUES ('Engineering & Architecture', 'What type of Engineering & Architecture do you do?');
+ INSERT INTO MainService(Name, Question) VALUES ('Data Science & Analytics', 'What type of Data Science & Analytics do you do?');
+ INSERT INTO MainService(Name, Question) VALUES ('IT & Networking', 'What type of IT & Networking do you do?');
+ INSERT INTO MainService(Name, Question) VALUES ('Web, Mobile & Software Dev', 'What type of Web, Mobile & Software Dev do you do?');
 
 
  -- Table: public."Skill"
@@ -467,7 +468,11 @@ ALTER TABLE city
   INSERT INTO city(Name) VALUES ('Zarrinshahr');
 
 
-CREATE TABLE account
+-- Table: Account
+
+-- DROP TABLE Account;
+
+CREATE TABLE Account
 (
   id serial,
   name character varying(100) NOT NULL,
@@ -486,3 +491,25 @@ WITH (
 );
 ALTER TABLE account
   OWNER TO globeadmin;
+
+
+-- Table: AccountLanguage
+
+-- DROP TABLE AccountLanguage;
+
+CREATE TABLE AccountLanguage
+(
+ ID serial,
+ Name character varying(100) not null,
+ Profeciency character (1) not null,
+ accountID integer NOT NULL,
+ CONSTRAINT AccountLanguage_PK PRIMARY KEY (ID),
+ CONSTRAINT AccountLanguage_Account_FK FOREIGN KEY (accountID)
+     REFERENCES account (id) MATCH SIMPLE
+     ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+ OIDS=FALSE
+);
+ALTER TABLE AccountLanguage
+ OWNER TO globeAdmin;
