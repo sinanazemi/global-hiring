@@ -1,5 +1,1041 @@
-<html>
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>My Profile</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link href="Styles/CustomStyle.css" rel="stylesheet" />
+    <link href="Styles/Profile.css" rel="stylesheet" />
+</head>
 <body>
-  profile
+    <!-- navigation bar -->
+    <nav class="navbar navbar-fixed-top">
+        <div class="container nav-container-c">
+            <div class="navbar-header">
+                <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>-->
+                <a class="navbar-brand" href="#myPage">
+                    <img class="brand-img-c" src="images/logo.png" />
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <img class="small-profile-img-c" src="images/Chrysanthemum.jpg" /></li>
+                    <li><a href="#name" class="login-link-c">Sami Ebadi <span class="glyphicon glyphicon-chevron-down pf_icon-c"></span></a></li>
+                    
+                </ul>
+            </div>
+            <div class="menu-mo-c">
+                <a href="#login" class="login-link-c">LOGIN</a>
+                <a href="#hiring" class="btn btn-hire-c" role="button">
+                    <div class="txt-hire-c">HIring Manager?</div>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- My Profile -->
+    <div class="container-fluid myProfile-cn-c">
+        <h2>My Profile</h2>        
+        <div class="row">
+            <div class="col-sm-9 panels-c">
+
+                <!-- Overview -->
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <img src="images/Chrysanthemum.jpg" class="prf-img-c" />
+                            </div>
+                            <div class="col-sm-10 prf-info-c">
+                                <h4>Sami Ebadi</h4>
+                                <h5>Experienced Web and Mobile Developer</h5>
+                                <p><span class="glyphicon glyphicon-map-marker"></span>  Tehran, Iran</p>
+                                <p>
+                                    <span class="prf-edu-c">Education</span>
+                                    &nbsp; B.S., Computer Science BIHE
+                                </p>
+                                <a href="#">Add Skills</a>
+                            </div>
+                        </div>
+                        <h5 class="overview-c">Overview &nbsp;<span class="glyphicon glyphicon-plus-sign add-overview-c"></span></h5>
+                        <p>
+                            Over 6 years of experience in designing and developing Mobile applications
+                            Have multiple Android applicaitons available on Google Play.
+                        </p>
+                    </div>
+                </div>
+                               
+                <!-- Work History -->
+                <div class="panel panel-default">
+                    <div class="panel-body panel-history-c">
+                        <h4>Work History 
+                            &nbsp;<a class="btn-add-c add-history-c" data-toggle="modal" data-target="#addHistory"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                        </h4>                            
+                        <h5><span class="history-txt-c"> Software Engineer | Meltwater</span>
+                            &nbsp;<a href="#" class="a-btn-c btn-edit-c edit-history-c" data-toggle="modal" data-target="#addHistory">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                            &nbsp;<a href="#" class=" a-btn-c btn-delete-c delete-history-c">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </h5>
+                        <p><span class="history-txt-c">February 2015 - March 2016</span></p>
+                    </div>
+                </div>
+                <!-- Modal Add History -->
+                <div id="addHistory" class="modal fade modal-c" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header modal-h-c">
+                                <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                <h4 class="modal-title m-title-c">Add Work History</h4>
+                            </div>
+                            <div class="modal-body modal-b-c">
+                                <form role="form">
+                                    <div class="form-group form-g-c">
+                                        <label class="control-label" for="company">Company</label>
+                                        <input class="form-control" id="company" name="company" type="text" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="city">Location</label>
+                                        <input class="form-control" id="location" name="location" type="text" list="locations" />
+                                        <datalist id="locations">
+                                            <option>location 1</option>
+                                            <option>location 2</option>
+                                            <option>location 3</option>
+                                        </datalist>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <label class="control-label" for="title">Title</label>
+                                                <input class="form-control" id="title" name="title" type="text" required>
+                                            </div>
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-5">
+                                                <label class="control-label" for="role">Role</label>
+                                                <input class="form-control" id="role" name="role" type="text" list="roles" placeholder="Please Select..." />
+                                                <datalist id="roles">
+                                                    <option>Intern</option>
+                                                    <option>Individual Contributor</option>
+                                                    <option>Lead</option>
+                                                    <option>Manager</option>
+                                                    <option>Executive</option>
+                                                    <option>Owner</option>
+                                                </datalist>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="role">Role</label>
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <input class="form-control" id="fMonth" name="fMonth" type="text" list="months" placeholder="Month" />
+                                                <datalist id="months">
+                                                    <option>January</option>
+                                                    <option>February</option>
+                                                    <option>March</option>
+                                                    <option>April</option>
+                                                    <option>May</option>
+                                                    <option>June</option>
+                                                    <option>July</option>
+                                                    <option>August</option>
+                                                    <option>September</option>
+                                                    <option>September</option>
+                                                    <option>November</option>
+                                                    <option>December</option>
+                                                </datalist>
+                                            </div>
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-5">
+                                                <input class="form-control" id="fYear" name="fYear" type="text" list="years" placeholder="Year" />
+                                                <datalist id="years">
+                                                    <option>2005</option>
+                                                    <option>2006</option>
+                                                    <option>2007</option>
+                                                    <option>2008</option>
+                                                    <option>2009</option>
+                                                    <option>2010</option>
+                                                    <option>2012</option>
+                                                    <option>2013</option>
+                                                    <option>2014</option>
+                                                    <option>2015</option>
+                                                    <option>2016</option>
+                                                    <option>2017</option>
+                                                </datalist>
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-5"></div>
+                                            <div class="col-sm-2 through-txt-c">through</div>
+                                            <div class="col-sm-5"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <input class="form-control" id="tMonth" name="tMonth" type="text" list="months" placeholder="Month" />
+                                                <datalist id="months">
+                                                    <option>January</option>
+                                                    <option>February</option>
+                                                    <option>March</option>
+                                                    <option>April</option>
+                                                    <option>May</option>
+                                                    <option>June</option>
+                                                    <option>July</option>
+                                                    <option>August</option>
+                                                    <option>September</option>
+                                                    <option>September</option>
+                                                    <option>November</option>
+                                                    <option>December</option>
+                                                </datalist>
+                                            </div>
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-5">
+                                                <input class="form-control" id="tYear" name="tYear" type="text" list="years" placeholder="Year" />
+                                                <datalist id="years">
+                                                    <option>2005</option>
+                                                    <option>2006</option>
+                                                    <option>2007</option>
+                                                    <option>2008</option>
+                                                    <option>2009</option>
+                                                    <option>2010</option>
+                                                    <option>2012</option>
+                                                    <option>2013</option>
+                                                    <option>2014</option>
+                                                    <option>2015</option>
+                                                    <option>2016</option>
+                                                    <option>2017</option>
+                                                </datalist>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <label class="control-label chk-lbl-c"><input type="checkbox"><span class="custom-check"></span>&nbsp; I currently work here </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="description">Description (optional)</label>
+                                        <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer m-footer-c">
+                                <button type="button" class="btn btn-save-c">Save</button>
+                                <button type="button" class="btn btn-save-more-c">Save And Add More</button>
+                                <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                             
+                <!-- Education -->
+                <div class="panel panel-default panel-education-c">
+                    <div class="panel-body">
+                        <h4>
+                            Education
+                            &nbsp;<a class="btn-add-c add-education-c" data-toggle="modal" data-target="#addEducation"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                        </h4>
+                        <h5>
+                            <span class="education-txt-c">
+                                Bachelor of Science (B.S.), Computer science | BIHE
+                            </span>
+                                &nbsp;<a href="#" class="a-btn-c btn-edit-c edit-education-c" data-toggle="modal" data-target="#addHistory">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </a>
+                                &nbsp;<a href="#" class=" a-btn-c btn-delete-c delete-education-c">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+</h5>
+                        <p><span class="education-txt-c">2007 - 2012</span></p>
+                    </div>
+                </div>
+                <!-- Modal Education -->
+                <div id="addEducation" class="modal fade modal-c" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header modal-h-c">
+                                <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                <h4 class="modal-title m-title-c">Add Education</h4>
+                            </div>
+                            <div class="modal-body modal-b-c">
+                                <form role="form">
+                                    <div class="form-group form-g-c">
+                                        <label class="control-label" for="school">School</label>
+                                        <input class="form-control" id="school" name="school" type="text" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="dates_attended">Dates Attended</label>
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <input class="form-control" id="fDate" name="fDate" type="text" list="years" placeholder="From" />
+                                                <datalist id="years">
+                                                    <option>2005</option>
+                                                    <option>2006</option>
+                                                    <option>2007</option>
+                                                    <option>2008</option>
+                                                    <option>2009</option>
+                                                    <option>2010</option>
+                                                    <option>2012</option>
+                                                    <option>2013</option>
+                                                    <option>2014</option>
+                                                    <option>2015</option>
+                                                    <option>2016</option>
+                                                    <option>2017</option>
+                                                </datalist>
+                                            </div>
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-5">
+                                                <input class="form-control" id="tDate" name="tDate" type="text" list="years" placeholder="To (or expected graducation year)" />
+                                                <datalist id="years">
+                                                    <option>2005</option>
+                                                    <option>2006</option>
+                                                    <option>2007</option>
+                                                    <option>2008</option>
+                                                    <option>2009</option>
+                                                    <option>2010</option>
+                                                    <option>2012</option>
+                                                    <option>2013</option>
+                                                    <option>2014</option>
+                                                    <option>2015</option>
+                                                    <option>2016</option>
+                                                    <option>2017</option>
+                                                </datalist>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="degree">Degree</label>
+                                        <input class="form-control" id="degree" name="degree" type="text" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="area">Area of Study (optional)</label>
+                                        <input class="form-control" id="area" name="area" type="text" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="description">Description (optional)</label>
+                                        <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer m-footer-c">
+                                <button type="button" class="btn btn-save-c">Save</button>
+                                <button type="button" class="btn btn-save-more-c">Save And Add More</button>
+                                <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Volunteering Experience -->
+                <div class="panel panel-default panel-volunteering-c">
+                    <div class="panel-body">
+                        <h4>
+                            Volunteering Experience
+                            &nbsp;<a class="btn-add-c add-volunteering-c" data-toggle="modal" data-target="#addVolunteering"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                        </h4>
+                        <h5>
+                            <span class="volunteering-txt-c"></span>
+                            &nbsp;<a href="#" class="a-btn-c btn-edit-c edit-volunteering-c" data-toggle="modal" data-target="#addHistory">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                            &nbsp;<a href="#" class=" a-btn-c btn-delete-c delete-volunteering-c">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </h5>
+                        <p>
+                            <span class="volunteering-txt-c">
+                                No items to display. 1 in 5 managers hired someone because of their
+                                volunteer experiences
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <!-- Modal Volunteering Experience -->
+                <div id="addVolunteering" class="modal fade modal-c" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header modal-h-c">
+                                <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                <h4 class="modal-title m-title-c">Volunteering Experience</h4>
+                            </div>
+                            <div class="modal-body modal-b-c">
+                                <form role="form">
+                                    <div class="form-group form-g-c">
+                                        <label class="control-label" for="org">Organization</label>
+                                        <input class="form-control" id="org" name="org" type="text" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="role">Role</label>
+                                        <input class="form-control" id="role" name="role" type="text" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <label class="control-label" for="cause">Cause</label>
+                                                <input class="form-control" id="cause" name="cause" type="text" list="causes" placeholder="Choose..." />
+                                                <datalist id="causes">
+                                                    <option>Animal Welfare</option>
+                                                    <option>Arts and Culture</option>
+                                                    <option>Children</option>
+                                                    <option>Civil Rights and Social Action</option>
+                                                    <option>Disaster and Humanitarian Relief</option>
+                                                    <option>Economic Empowerment</option>
+                                                    <option>Education</option>
+                                                    <option>Environment</option>
+                                                    <option>Health</option>
+                                                    <option>Human Rights</option>
+                                                    <option>Politics</option>
+                                                    <option>Poverty Alleviation</option>
+                                                    <option>Science and Technology</option>
+                                                    <option>Social Services</option>
+                                                </datalist>
+                                            </div>
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-5"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="date">Date</label>
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <input class="form-control" id="fMonth" name="fMonth" type="text" list="months" placeholder="Month" />
+                                                <datalist id="months">
+                                                    <option>January</option>
+                                                    <option>February</option>
+                                                    <option>March</option>
+                                                    <option>April</option>
+                                                    <option>May</option>
+                                                    <option>June</option>
+                                                    <option>July</option>
+                                                    <option>August</option>
+                                                    <option>September</option>
+                                                    <option>September</option>
+                                                    <option>November</option>
+                                                    <option>December</option>
+                                                </datalist>
+                                            </div>
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-5">
+                                                <input class="form-control" id="fYear" name="fYear" type="text" list="years" placeholder="Year" />
+                                                <datalist id="years">
+                                                    <option>2005</option>
+                                                    <option>2006</option>
+                                                    <option>2007</option>
+                                                    <option>2008</option>
+                                                    <option>2009</option>
+                                                    <option>2010</option>
+                                                    <option>2012</option>
+                                                    <option>2013</option>
+                                                    <option>2014</option>
+                                                    <option>2015</option>
+                                                    <option>2016</option>
+                                                    <option>2017</option>
+                                                </datalist>
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-5"></div>
+                                            <div class="col-sm-2 through-txt-c">through</div>
+                                            <div class="col-sm-5"></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <input class="form-control" id="tMonth" name="tMonth" type="text" list="months" placeholder="Month" />
+                                                <datalist id="months">
+                                                    <option>January</option>
+                                                    <option>February</option>
+                                                    <option>March</option>
+                                                    <option>April</option>
+                                                    <option>May</option>
+                                                    <option>June</option>
+                                                    <option>July</option>
+                                                    <option>August</option>
+                                                    <option>September</option>
+                                                    <option>September</option>
+                                                    <option>November</option>
+                                                    <option>December</option>
+                                                </datalist>
+                                            </div>
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-5">
+                                                <input class="form-control" id="tYear" name="tYear" type="text" list="years" placeholder="Year" />
+                                                <datalist id="years">
+                                                    <option>2005</option>
+                                                    <option>2006</option>
+                                                    <option>2007</option>
+                                                    <option>2008</option>
+                                                    <option>2009</option>
+                                                    <option>2010</option>
+                                                    <option>2012</option>
+                                                    <option>2013</option>
+                                                    <option>2014</option>
+                                                    <option>2015</option>
+                                                    <option>2016</option>
+                                                    <option>2017</option>
+                                                </datalist>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label" for="description">Description (optional)</label>
+                                        <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="modal-footer m-footer-c">
+                                <button type="button" class="btn btn-save-c">Save</button>
+                                <button type="button" class="btn btn-save-more-c">Save And Add More</button>
+                                <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Certifications -->
+                <div class="panel panel-default panel-certifications-c">
+                    <div class="panel-body">
+                        <h4>Certifications
+                            &nbsp;<a class="btn-add-c add-certifications-c" data-toggle="modal" data-target="#addCertifications"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                        </h4>
+                        <h5>
+                            <span class="certifications-txt-c"></span>
+                            &nbsp;<a href="#" class="a-btn-c btn-edit-c edit-certifications-c" data-toggle="modal" data-target="#addHistory">
+    <span class="glyphicon glyphicon-pencil"></span>
+</a>
+                            &nbsp;<a href="#" class=" a-btn-c btn-delete-c delete-certifications-c">
+    <span class="glyphicon glyphicon-trash"></span>
+</a>
+                        </h5>
+                        <p><span class="certifications-txt-c">No items to display.</span> </p>
+                    </div>
+                </div>
+                <!-- Modal Certifications -->
+                <div id="addCertifications" class="modal fade modal-c" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Test Scores -->
+                <div class="panel panel-default panel-scores-c">
+                    <div class="panel-body">
+                        <h4>
+                            Test Scores
+                            &nbsp;<a class="btn-add-c add-scores-c" data-toggle="modal" data-target="#addScores"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                        </h4>
+                        <h5>
+                            <span class="scores-txt-c"></span>
+                            &nbsp;<a href="#" class="a-btn-c btn-edit-c edit-scores-c" data-toggle="modal" data-target="#addHistory">
+    <span class="glyphicon glyphicon-pencil"></span>
+</a>
+                            &nbsp;<a href="#" class=" a-btn-c btn-delete-c delete-scores-c">
+    <span class="glyphicon glyphicon-trash"></span>
+</a>
+                        </h5>
+                        <p><span class="scores-txt-c">No items to display. Here’s another way to show your accomplishments</span> </p>
+                    </div>
+                </div>
+                <!-- Modal Test Scores -->
+                <div id="addScores" class="modal fade modal-c" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header modal-h-c">
+                                <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                <h4 class="modal-title m-title-c">Test Scores</h4>
+                            </div>
+                            <div class="modal-body modal-b-c">
+                                <form role="form">
+                                    <div class="form-group form-g-c">
+                                        <label class="control-label" for="name">Name</label>
+                                        <input class="form-control" id="name" name="name" type="text" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <label class="control-label" for="occupation">Occupation</label>
+                                                <input class="form-control" id="occupation" name="occupation" type="text" list="occupations" placeholder="choose..." />
+                                                <datalist id="occupations">
+                                                    <option>occupation 1</option>
+                                                    <option>occupation 2</option>
+                                                    <option>occupation 3</option>
+                                                </datalist>
+                                            </div>
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-5"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="dates_completion">Date</label>
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <input class="form-control" id="fMonth" name="fMonth" type="text" list="months" placeholder="Month" />
+                                                <datalist id="months">
+                                                    <option>January</option>
+                                                    <option>February</option>
+                                                    <option>March</option>
+                                                    <option>April</option>
+                                                    <option>May</option>
+                                                    <option>June</option>
+                                                    <option>July</option>
+                                                    <option>August</option>
+                                                    <option>September</option>
+                                                    <option>September</option>
+                                                    <option>November</option>
+                                                    <option>December</option>
+                                                </datalist>
+                                            </div>
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-5">
+                                                <input class="form-control" id="fYear" name="fYear" type="text" list="years" placeholder="Year" />
+                                                <datalist id="years">
+                                                    <option>2005</option>
+                                                    <option>2006</option>
+                                                    <option>2007</option>
+                                                    <option>2008</option>
+                                                    <option>2009</option>
+                                                    <option>2010</option>
+                                                    <option>2012</option>
+                                                    <option>2013</option>
+                                                    <option>2014</option>
+                                                    <option>2015</option>
+                                                    <option>2016</option>
+                                                    <option>2017</option>
+                                                </datalist>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="score">Score</label>
+                                        <input class="form-control" id="score" name="score" type="text" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="description">Description (optional)</label>
+                                        <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="modal-footer m-footer-c">
+                                <button type="button" class="btn btn-save-c">Save</button>
+                                <button type="button" class="btn btn-save-more-c">Save And Add More</button>
+                                <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Projects -->
+                <div class="panel panel-default panel-projects-c">
+                    <div class="panel-body">
+                        <h4>
+                            Projects
+                            &nbsp;<a class="btn-add-c add-projects-c" data-toggle="modal" data-target="#addProjects"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                        </h4>
+                        <h5>
+                            <span class="projects-txt-c"></span>
+                            &nbsp;<a href="#" class="a-btn-c btn-edit-c edit-projects-c" data-toggle="modal" data-target="#addHistory">
+    <span class="glyphicon glyphicon-pencil"></span>
+</a>
+                            &nbsp;<a href="#" class=" a-btn-c btn-delete-c delete-projects-c">
+    <span class="glyphicon glyphicon-trash"></span>
+</a>
+                        </h5>
+                        <p>
+                            <span class="projects-txt-c">
+                                No items to display. This helps show your skills, experience, and people
+                                you’ve worked with
+                            </span>
+</p>
+                    </div>
+                </div>
+                <!-- Modal Projects -->
+                <div id="addProjects" class="modal fade" role="dialog">
+                    <div class="modal-dialog modal-c">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header modal-h-c">
+                                <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                <h4 class="modal-title m-title-c">My Project</h4>
+                            </div>
+                            <div class="modal-body modal-b-c">
+                                <form role="form">
+                                    <div class="form-group form-g-c">
+                                        <label class="control-label" for="name">Name</label>
+                                        <input class="form-control" id="name" name="name" type="text" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="occupation">Occupation</label>
+                                        <input class="form-control" id="occupation" name="occupation" type="text" list="occupations" placeholder="choose..." />
+                                        <datalist id="occupations">
+                                            <option>occupation 1</option>
+                                            <option>occupation 2</option>
+                                            <option>occupation 3</option>
+                                        </datalist>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="dates_completion">Completion Date (optional)</label>
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <input class="form-control" id="fMonth" name="fMonth" type="text" list="months" placeholder="Month" />
+                                                <datalist id="months">
+                                                    <option>January</option>
+                                                    <option>February</option>
+                                                    <option>March</option>
+                                                    <option>April</option>
+                                                    <option>May</option>
+                                                    <option>June</option>
+                                                    <option>July</option>
+                                                    <option>August</option>
+                                                    <option>September</option>
+                                                    <option>September</option>
+                                                    <option>November</option>
+                                                    <option>December</option>
+                                                </datalist>
+                                            </div>
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-5">
+                                                <input class="form-control" id="fYear" name="fYear" type="text" list="years" placeholder="Year" />
+                                                <datalist id="years">
+                                                    <option>2005</option>
+                                                    <option>2006</option>
+                                                    <option>2007</option>
+                                                    <option>2008</option>
+                                                    <option>2009</option>
+                                                    <option>2010</option>
+                                                    <option>2012</option>
+                                                    <option>2013</option>
+                                                    <option>2014</option>
+                                                    <option>2015</option>
+                                                    <option>2016</option>
+                                                    <option>2017</option>
+                                                </datalist>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="url">Project URL</label>
+                                        <input class="form-control" id="url" name="url" type="text" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label" for="description">Description (optional)</label>
+                                        <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <label class="control-label" for="thumbnail">Thumbnail Image</label>
+                                                <div class="form-control prj-tmb-txt-c"><a>drag or <span>upload</span> project thumbnail</a></div>
+                                            </div>
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-5">
+                                                <label class="control-label" for="file">Project Files</label>
+                                                <div class="form-control prj-tmb-txt-c">
+                                                    <a>drag or <span>upload</span> project files</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="modal-footer m-footer-c">
+                                <button type="button" class="btn btn-save-c">Save</button>
+                                <button type="button" class="btn btn-save-more-c">Save And Add More</button>
+                                <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Honors & Awards -->
+                <div class="panel panel-default panel-awards-c">
+                    <div class="panel-body">
+                        <h4>
+                            Honors & Awards
+                            &nbsp;<a class="btn-add-c add-awards-c" data-toggle="modal" data-target="#addAwards"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                        </h4>
+                        <h5>
+                            <span class="awards-txt-c"></span>
+                            &nbsp;<a href="#" class="a-btn-c btn-edit-c edit-awards-c" data-toggle="modal" data-target="#addHistory">
+    <span class="glyphicon glyphicon-pencil"></span>
+</a>
+                            &nbsp;<a href="#" class=" a-btn-c btn-delete-c delete-awards-c">
+    <span class="glyphicon glyphicon-trash"></span>
+</a>
+                        </h5>
+                        <p><span class="awards-txt-c">No items to display. Show the recognition you’ve earned.</span></p>
+                    </div>
+                </div>
+                <!-- Modal Honors & Awards -->
+                <div id="addAwards" class="modal fade modal-c" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header modal-h-c">
+                                <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                <h4 class="modal-title m-title-c">Honors & Awards</h4>
+                            </div>
+                            <div class="modal-body modal-b-c">
+                                <form role="form">
+                                    <div class="form-group form-g-c">
+                                        <label class="control-label" for="title">Title</label>
+                                        <input class="form-control" id="title" name="title" type="text" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <label class="control-label" for="occupation">Occupation</label>
+                                                <input class="form-control" id="occupation" name="occupation" type="text" list="occupations" placeholder="choose..." />
+                                                <datalist id="occupations">
+                                                    <option>occupation 1</option>
+                                                    <option>occupation 2</option>
+                                                    <option>occupation 3</option>
+                                                </datalist>
+                                            </div>
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-5"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label" for="dates_completion">Date</label>
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <input class="form-control" id="fMonth" name="fMonth" type="text" list="months" placeholder="Month" />
+                                                <datalist id="months">
+                                                    <option>January</option>
+                                                    <option>February</option>
+                                                    <option>March</option>
+                                                    <option>April</option>
+                                                    <option>May</option>
+                                                    <option>June</option>
+                                                    <option>July</option>
+                                                    <option>August</option>
+                                                    <option>September</option>
+                                                    <option>September</option>
+                                                    <option>November</option>
+                                                    <option>December</option>
+                                                </datalist>
+                                            </div>
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-5">
+                                                <input class="form-control" id="fYear" name="fYear" type="text" list="years" placeholder="Year" />
+                                                <datalist id="years">
+                                                    <option>2005</option>
+                                                    <option>2006</option>
+                                                    <option>2007</option>
+                                                    <option>2008</option>
+                                                    <option>2009</option>
+                                                    <option>2010</option>
+                                                    <option>2012</option>
+                                                    <option>2013</option>
+                                                    <option>2014</option>
+                                                    <option>2015</option>
+                                                    <option>2016</option>
+                                                    <option>2017</option>
+                                                </datalist>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label" for="description">Description (optional)</label>
+                                        <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="modal-footer m-footer-c">
+                                <button type="button" class="btn btn-save-c">Save</button>
+                                <button type="button" class="btn btn-save-more-c">Save And Add More</button>
+                                <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Courses -->
+                <div class="panel panel-default panel-courses-c">
+                    <div class="panel-body">
+                        <h4>
+                            Courses
+                            &nbsp;<a class="btn-add-c add-courses-c" data-toggle="modal" data-target="#addCourses"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                        </h4>
+                        <h5>
+                            <span class="courses-txt-c"></span>
+                            &nbsp;<a href="#" class="a-btn-c btn-edit-c edit-courses-c" data-toggle="modal" data-target="#addHistory">
+    <span class="glyphicon glyphicon-pencil"></span>
+</a>
+                            &nbsp;<a href="#" class=" a-btn-c btn-delete-c delete-courses-c">
+    <span class="glyphicon glyphicon-trash"></span>
+</a>
+                        </h5>
+                        <p>
+                            <span class="courses-txt-c">
+                                No items to display. Showing more information about your background will
+                                help you get found for more opportunities.
+                            </span>
+</p>
+                    </div>
+                </div>
+                <!-- Modal Add Courses -->
+                <div id="addCourses" class="modal fade modal-c" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header modal-h-c">
+                                <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                <h4 class="modal-title m-title-c">Courses</h4>
+                            </div>
+                            <div class="modal-body modal-b-c">
+                                <form role="form">
+                                    <div class="form-group form-g-c">
+                                        <label class="control-label" for="name">Course Name</label>
+                                        <input class="form-control" id="name" name="name" type="text" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <label class="control-label" for="occupation">Occupation</label>
+                                                <input class="form-control" id="occupation" name="occupation" type="text" list="occupations" placeholder="choose..." />
+                                                <datalist id="occupations">
+                                                    <option>occupation 1</option>
+                                                    <option>occupation 2</option>
+                                                    <option>occupation 3</option>
+                                                </datalist>
+                                            </div>
+                                            <div class="col-sm-2"></div>
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <label class="control-label" for="number">Number</label>
+                                                    <input class="form-control" id="number" name="number" type="text" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="control-label" for="description">Description (optional)</label>
+                                        <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="modal-footer m-footer-c">
+                                <button type="button" class="btn btn-save-c">Save</button>
+                                <button type="button" class="btn btn-save-more-c">Save And Add More</button>
+                                <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- right info -->
+            <div class="col-sm-3 strength-cnt-c">
+                <h3>Profile Strength</h3>
+                <img src="images/profileStrength.png" />
+                <br />
+                <br />
+                <br />
+                <a href="#">View my profile as others see it</a>
+                <br />
+                <br />
+                <hr />
+                <br />
+                <h3>Languages</h3>
+                <p>English: <span>Fluent</span></p>
+                <p>Persian: <span>Native or Bilingual</span></p>
+                <p>Turkish: <span>Basic</span></p>
+            </div>
+
+        </div>
+
+                </div>
+
+    <!-- Footer -->
+    <div class="container-fluid container-footer-c">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <!-- Candidates -->
+                            <h4>CANDIDATES</h4>
+                            <div class="f-section-c">
+                                <p>
+                                    <br>HOW IT WORKS
+                                </p>
+                                <p>INVITE A FRIEND</p>
+                                <p>FAQ</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <!-- Employers -->
+                            <h4>EMPLOYERS</h4>
+                            <div class="f-section-c">
+                                <p>
+                                    <br>FOR EMPLOYERS
+                                </p>
+                                <p>FAQ</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <!-- Global Hiring -->
+                            <h4>GLOBAL HIRING</h4>
+                            <div class="f-section-c">
+                                <p>
+                                    <br>ABOUT
+                                </p>
+                                <p>BLOG</p>
+                                <p>CONTACT US</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Copyright etc -->
+                    <div class="f-copyright-c">
+                        <div class="container">
+                            <p>Copyright &copy; Hiring.global 2016</p>
+                        </div>
+                    </div>
+                    <!--</footer>-->
+                </div>
 </body>
 </html>
