@@ -89,3 +89,8 @@ func SaveAccount(w http.ResponseWriter, r *http.Request) (interface{}, *util.Han
 
   return account, nil
 }
+
+func GetDegrees(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
+
+  return getDegrees(), nil
+}

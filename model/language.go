@@ -25,6 +25,23 @@ func parseLanguage(dataMap map[string]interface{}) (interface{}, error) {
   return result, nil
 }
 
+func parseLanguageReturn(lmap map[string]interface{}) Language {
+  l, _ := parseLanguage(lmap)
+  result := l.(Language)
+  return result
+}
+
+func parseLanguagesReturn(langsArr []interface{}) []Language {
+  result := make([]Language, 0)
+
+  for _ , lang := range langsArr {
+    lmap := lang.(map[string]interface{})
+    lang := parseLanguageReturn(lmap)
+    result = append(result, lang)
+  }
+  return result
+}
+
 func (lang Language) save(account Account) error {
   query :=
     "INSERT INTO AccountLanguage" +

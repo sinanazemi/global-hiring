@@ -8,29 +8,29 @@
     <div ng-app="myApp" ng-controller="myCtrl">
 
       <label for="FullName">Full Name</label>
-      <input id="FullName" ng-model="Name"><br/>
+      <input type="text" id="FullName" ng-model="Name"><br/>
 
       <label for="Email">Email</label>
-      <input id="Email" ng-model="Email"><br/>
+      <input type="text" id="Email" ng-model="Email"><br/>
 
       <label for="cities">Select City</label>
       <select id = "cities" ng-model="SelectedCity" ng-options="city.name for city in cities">
       </select><br/>
 
       <label for="Phone">Phone</label>
-      <input id="Phone" ng-model="Phone"><br/>
+      <input type="text" id="Phone" ng-model="Phone"><br/>
 
       <label for="Password">Password</label>
-      <input id="Password" ng-model="Password"><br/>
+      <input type="pasword" id="Password" ng-model="Password"><br/>
 
       <input type='checkbox' ng-model="isStudent">student?</input><br/>
 
-
+      <h2>Languages</h2><br/>
       <table>
         <tr>
           <td style="border:1px solid black">
             <label for="LanguageName">Language</label>
-            <input id="LanguageName" ng-model="LanguageName"><br/>
+            <input type="text" id="LanguageName" ng-model="LanguageName"><br/>
 
             <div ng-repeat="profeciency in LanguageProfeciencies">
 
@@ -46,6 +46,38 @@
           <td style="border:1px solid black">
             <div ng-repeat="language in languages">
               {{language.name + "(" + language.profeciency + ")"}}<br>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+      <h2>Educations</h2><br/>
+      <table>
+        <tr>
+          <td style="border:1px solid black">
+            <label for="School">School</label>
+            <input type="text" id="School" ng-model="School"><br/>
+
+            From<select ng-model="FromDate" ng-options="opt as opt for opt in dates" ></select><br/>
+            To<select ng-model="ToDate" ng-options="opt as opt for opt in dates"></select><br/>
+
+            <label for="degrees">Degree</label>
+            <select id = "degrees" ng-model="SelectedDegree" ng-options="degree.name for degree in degrees">
+            </select><br/>
+
+            <label for="StudyField">Field of Study</label>
+            <input type="text" id="StudyField" ng-model="Field"><br/>
+
+            <label for="Grade">Grade</label>
+            <input type="number" id="Grade" ng-model="Grade"><br/>
+
+          </td>
+          <td style="border:1px solid black">
+            <button ng-click="addEducation()">add --></button><br/>
+          </td>
+          <td style="border:1px solid black">
+            <div ng-repeat="education in educations">
+              {{education.school + "(" + education.fromdate + " - " + education.todate + ")"}}<br>
             </div>
           </td>
         </tr>
@@ -72,9 +104,14 @@
         ["$scope", "$resource",
           function($scope , $resource)
           {
+            $scope.dates=[];
+            for(var i=1970;i<=2020;i++) {
+              $scope.dates.push(i);
+            }
+
             $scope.isStudent = true
             $scope.LanguageProfeciency = "E"
-            
+
             var cities = $resource("/cities")
 
             cities.query(
@@ -108,7 +145,7 @@
 
             $scope.languages = [];
 
-          $scope.addLanguage = function() {
+            $scope.addLanguage = function() {
                 var lang = {
                 name: $scope.LanguageName,
                 profeciency: $scope.LanguageProfeciency
@@ -124,6 +161,28 @@
               {text: "Native", value: "N"}
             ]
 
+            var degrees = $resource("/degrees")
+
+            degrees.query(
+              function(data){
+                $scope.degrees = data;
+              } // function(data)
+            ) // service.query
+
+            $scope.educations = [];
+
+            $scope.addEducation = function() {
+                var edu = {
+                school: $scope.School,
+                fromdate: $scope.FromDate,
+                todate: $scope.ToDate,
+                degree: $scope.SelectedDegree,
+                field: $scope.Field,
+                grade: $scope.Grade
+              };
+              $scope.educations.push(edu);
+            } // $scope.addLanguage = function()
+
             var saveAccount = $resource("/saveAccount")
 
             $scope.saveAccount = function() {
@@ -138,6 +197,8 @@
 
               newAccount.languages = $scope.languages
 
+              newAccount.educations = $scope.educations
+
               newAccount.$save(
                 function(data){
                   $scope.Name = "";
@@ -145,10 +206,21 @@
                   $scope.Phone = "";
                   $scope.Password = "";
                   $scope.City = "";
-                } // function(data)
-            ) // saveAccount.$save
-            }
 
+                  $scope.languages = []
+                  $scope.LanguageName = ""
+
+                  $scope.educations = []
+                  $scope.School = ""
+                  $scope.FromDate = ""
+                  $scope.ToDate = ""
+                  $scope.SelectedDegree = ""
+                  $scope.Field = ""
+                  $scope.Grade = ""
+
+                } // function(data)
+              ) // saveAccount.$save
+            }
 
 
           } // function($scope , $resource)

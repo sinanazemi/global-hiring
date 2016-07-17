@@ -37,7 +37,7 @@ func getCities() []City {
 
 func readCity(rows *sql.Rows) (interface{}, error) {
 
-  var city City = City{-1, ""}
+  var city City = City{}
   err := rows.Scan(&city.Id, &city.Name)
 
   return city, err
@@ -51,4 +51,11 @@ func parseCity(dataMap map[string]interface{}) (interface{}, error) {
   result.Name = dataMap["name"].(string)
 
   return result, nil
+}
+
+func parseCityReturn(cityMap map[string]interface{}) City {
+
+  cityParsed, _ := parseCity(cityMap)
+  city := cityParsed.(City)
+  return city
 }
