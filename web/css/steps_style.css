@@ -26,9 +26,8 @@
   width: 90px;
 }
 
-.item.selected {
-  border:  rgb(3, 186, 109);
-  border: 5px;
+.selected {
+  background-color: rgb(3, 186, 109);
 }
 .black-border-label.selected {
   background-color: rgb(3, 186, 109);
@@ -91,6 +90,13 @@
     padding-right: 26px;
 }
 
+.skill-div {
+    width: 374px;
+    height: 350px;
+    position: absolute;
+    padding-left: 33px;
+    padding-right: 26px;
+}
 
 
 .field-label {

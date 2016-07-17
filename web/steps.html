@@ -29,7 +29,7 @@
                     <div class="field-div" style="top: 100px;">
                          <p class="field-center-label" style="text-align:center;" >You can also sign up with facebook,linkedIn or Google.</p>
                     </div>
-                   <div class="field-div" style="top: 130px;">
+                    <div class="field-div" style="top: 130px;">
                         <p class="field-label" >Fullname</p>
                         <input type="text" class="field-text-area" placeholder="Your full name" rows="1" ng-model="fullname"/>
                     </div>
@@ -39,7 +39,12 @@
                     </div>
                     <div class="field-div" style="top: 230px;">
                         <p class="field-label">Select City</p>
-                        <select class="select-area1" ng-model="selectedCity" ng-options="opt as opt for opt in cities" ng-init="selected='Tehran'"></select>
+                        <!--  <select class="select-area1" ng-model="selectedCity" ng-options="opt as opt for opt in cities" ng-init="selected='Tehran'"></select>
+  -->
+                        <select class="select-area1">
+                          <option ng-repeat="city in cities" ng-selected="city.selected" ng-model="city.id">{{city.name}}</option>
+                        </select>
+
                     </div>
                     <div class="field-div" style="top: 280px;">
                         <p class="field-label">Phone (optional)</p>
@@ -58,9 +63,10 @@
                     </div>
                     <div class="field-div" style="top: 430px;">
                       <label class="field-label">
-                        <input type="checkbox" ng-model="checkboxValue" />
-                        Yes, I understand and agree to the global hiring platform terms of service
+                        <input type="checkbox" ng-model="checkboxValue" >
+                          Yes, I understand and agree to the global hiring platform terms of service
                       </label>
+
                     </div>
                     <a href="#" class="next-button green-button button-center" ng-click="step1NextClick()">Next Step</a>
                 </div>
@@ -180,9 +186,9 @@
                     <img ng-src={{mainSRVBarImage}} class="bar-image" alt="Mountain View">
 
                       <div class="container"  >
-                      <div class="item" ng-repeat='service in mainServices' ng-click='toggleSelected(service)' ng-class="{ selected: service.isChecked }">
-                        <input type="checkbox" ng-attr-id="{{'c' + service.id}}" ng-model="service.isChecked" />
-                        <label ng-attr-for="{{'c' +service.id}}"> {{service.name}}
+                      <div class="item" ng-repeat='service in mainServices' ng-click='toggleSelectedSRV(service)' ng-class="{ selected: service.isselected  }">
+                        <input type="checkbox" ng-attr-id="{{'c' + service.id}}" ng-model="service.isselected" />
+                        <label ng-attr-for="{{'c' +service.id}}" ng-class="{ selected: service.isselected  }"> {{service.name}}
                         <!--  <img ng-src="{{getIcon(service)}}">
                         -->
                         </label>
@@ -203,11 +209,11 @@
                     </div>
                     <img ng-src={{skillBarImage}} class="bar-image" alt="Skill Bar">
 
-                    <div id="skilldList" class="field-div" style="top: 100px;">
-                      <ul ng-repeat="skill in skills" style="text-align:left; padding-left:2px;" >
-                          <p class="black-bold-label" style="text-align:left; padding-left:2px; font-size:12px">{{skill.question}}</p>
-                        <li ng-repeat="skillOfSRV in skill.skillsOfSRV" style="list-style-type:none;">
-                          <p class="black-border-label" ng-click="skillClick(skillOfSRV)" ng-class="{ selected: skillOfSRV.isSelected }" >{{skillOfSRV.name}}</p>
+                    <div id="skilldList" class="skill-div" style="top: 100px; overflow:auto">
+                      <ul ng-repeat="service in mainServices | filter: {isselected: true } " style="text-align:left; padding-left:2px;" >
+                          <p class="black-bold-label" style="text-align:left; padding-left:2px; font-size:12px">{{service.question}}</p>
+                        <li ng-repeat="skillOfSRV in service.skills " style="list-style-type:none;">
+                          <p class="black-border-label" ng-click="skillClick(skillOfSRV)" ng-class="{ selected: skillOfSRV.isselected }" >{{skillOfSRV.name}}</p>
                         </li>
                       </ul>
                     </div>
@@ -328,11 +334,18 @@
       }
 
       // set Cities
-      $scope.cities = ['Tehran','Shiraz','Esfahan','Mashhad','Tabriz','Sari','Gorgan','Rasht','Kerman','Yazd','Oromiye','Semnan'];
+      //$scope.cities = ['Tehran','Shiraz','Esfahan','Mashhad','Tabriz','Sari','Gorgan','Rasht','Kerman','Yazd','Oromiye','Semnan'];
       // set Dates
       $scope.dates=['1980','1981','1982','1983','1984','1985','1986','1987','1988','1989','1990','1991','1992','1993','1994','1995','1996','1997','1998','1999','2000'];
       //set Degrees
       $scope.degrees=['Bachelor','Master','PHD']
+
+      var cities = $resource("/cities")
+        cities.query(
+          function(data){
+            $scope.cities = data;
+          } // function(data)
+        ) // service.query
 
       //Add more Language
       $scope.langs = [];
@@ -401,24 +414,21 @@
 
       ];
 */
-      var service = $resource("/mainService")
 
-      service.query(
-        function(data){
-          $scope.mainServices = data;
-        } // function(data)
-      ) // service.query
-
-
-      $scope.toggleSelected = function(service) {
-  	     service.isChecked = !service.isChecked;
+      $scope.toggleSelectedSRV = function(service) {
+  	     service.isselected = !service.isselected;
       };
 
+      var service = $resource("/mainServices")
       $scope.getMainServices = function(){
-        //TODO: Read mainServices from Server
+        service.query(
+          function(data){
+            $scope.mainServices = data;
+          } // function(data)
+        ) // service.query
       };
 
-      $scope.skills= [
+/*      $scope.skills= [
         {
           mainServiceId:1,
           question: 'What type of custom service do you do?',
@@ -430,7 +440,7 @@
           skillsOfSRV:[{id:1, name: 'translation 1', isSelected:false },{id:2, name:'translation 2', isSelected:false }]
         }
       ];
-
+*/
       $scope.getIcon = function(serviceSelect){
         if (serviceSelect.icon) {
           if (serviceSelect.isChecked) return serviceSelect.icon.on;
@@ -442,13 +452,13 @@
       $scope.selectedMainSRVIds=[];
       $scope.getSkills = function(selectedServices){
         //TODO: Get skills for the selected service from server;
-        //for (var i=0; i<$scope.skills.length; i++) {
-        //  $scope.selectedMainSRVIds.push(angular.copy($scope.skills[i].mainServiceId));
+      //  for (var i=0; i<$scope.mainServices.length; i++) {
+          //$scope.selectedMainSRVIds.push(angular.copy($scope.skills[i].mainServiceId));
       //  }
       }
 
       $scope.skillClick=function(selectedSkill){
-        selectedSkill.isSelected=!selectedSkill.isSelected;
+        selectedSkill.isselected=!selectedSkill.isselected;
       }
 
     }
