@@ -1,0 +1,499 @@
+﻿body{
+    font-family:helvetica;
+}
+.container-fluid{
+    padding-left:87px;
+    padding-right:87px;
+}
+
+/*-----------------------
+    navbar
+-----------------------*/
+.nav-container-c{
+    width:100%;
+    background-color: rgba(255,255,255,0.88);
+    /*opacity: 0.88;*/
+}
+.brand-img-c{
+    margin-top:-5px;
+    height:33.6px;
+    width:96.8px;
+}
+.menu-mo-c{
+    display:none;
+}
+.login-link-c{
+    margin-top: 10px;
+    color:#616161;
+    font-weight: bold;
+    font-size:16px;
+    letter-spacing:0.8px;    
+}
+.btn-hire-c{
+    border: 2px solid #818181;
+    margin-top:15px; 
+    margin-bottom : 10px;
+    margin-right:60px;
+    border-radius : 1px;
+    height:42px;
+    width:164PX;    
+}
+.txt-hire-c{
+    font-size:16px;
+    letter-spacing:0.8px;
+    margin-top:-5px; 
+    color:#4A4A4A;
+    font-weight: bold;
+    width:139px;
+    height:19px;
+    margin-bottom:8.3px;
+}
+
+/*-----------------------
+    second skill work
+-----------------------*/
+.skill-2{
+    display:none;
+}
+.row-c{
+    position:relative;
+}
+.skill-container-c {
+    position:relative;
+    background-color: #F5EEE8;         
+    height: 900px;     
+    width:100%; 
+    margin-left:0px; 
+    /*padding-left:87px;*/
+}
+.txt-skill-c{    
+    color: #4A4A4A;
+    padding-left:80px;
+}
+.txt-skill-c h2 {
+    position:relative;
+    padding-top:110px;        
+    font-size:42px;
+    font-weight:normal;
+}
+.txt-skill-c p{
+    position:relative;
+    font-size:22px;
+    font-weight:normal;
+}
+.btn-skill-c{
+    position:absolute;
+    background-color: #03BA6D; 
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    border:solid 1px #42CF94;
+    color: white; 
+    height:72px; 
+    width:480px; 
+    border-radius:1px; 
+    font-size: 34px;
+    font-weight:bold;
+    text-align:center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.24);
+    z-index:7;
+}
+.div-skill-img-c{    
+    top:60px; 
+}
+.skill-img-c{ 
+    position:absolute; 
+    right:0px;
+    top:0px;
+   height:auto;
+   /*height:462px;*/
+   /*width:100%;*/
+    width:477px;
+    /*width:auto;*/
+    z-index:6;
+}
+
+/*-----------------------
+    third How it work
+    -----------------------*/
+.container-hiw-c{
+    width:auto;
+    height: 500px;
+    color: #818181;
+}
+.container-hiw-c h2 {
+    padding-top: 50px;
+    padding-right:87px;
+    font-size: 28px;
+    font-weight: normal;
+    text-align: center;
+    color: #03ba6d;
+}
+.hiw-row-c{
+    margin-top:28px;
+}
+.img-first-c {
+    width: 107.5px;
+    height: 125.6px;
+    /*margin-left:83px;*/
+}
+.img-then-c {
+    width: 151.2px;
+    height: 134.4px;
+    /*margin-left:83px;*/
+}
+.img-finally-c {
+    width: 106.1px;
+    height: 132.8px;
+    /*margin-left:83px;*/
+}
+.container-hiw-c h4 {
+    margin-top:47px;
+    text-align:left;
+    /*padding-left:79px;*/
+    font-size: 20px;
+    font-weight: bold;
+}
+.container-hiw-c p {    
+    /*padding-left:79px;*/
+    text-align:left;
+    font-size: 20px;
+    font-weight: normal;
+}
+
+/*-----------------------
+    forth footer
+    -----------------------*/
+.container-footer-c{
+    position:relative;
+    width: auto;
+    height: 305px;
+    background-color: #d8d8d8;
+    border: solid 0.7px #979797;
+    text-align: left;
+    color: #818181;
+}
+.container-footer-c h4{
+    /*padding-left:79px;*/
+    margin-top:77px;
+    font-weight: bold;
+    font-size:18px;
+}
+.f-section-c{
+    margin-top:-35px;
+}
+.f-section-c p{
+    margin-top: -8px;
+    font-size: 14px;
+    /*padding-left: 79px;*/
+    line-height: 2.1;
+    color: #818181;
+}
+
+.f-copyright-c{
+    position: absolute;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    width: auto;
+    height: 41.3px;
+    background-color: #9b9b9b;
+}
+    .f-copyright-c p{
+        position: absolute;
+        font-size: 12px;
+        color: #4a4a4a;
+        font-weight: 300;
+        line-height: 1.33;
+        padding-top: 14.3px;
+        /*left: 0px;*/
+        text-align:left;    
+        margin-left: 50px;   
+    }
+    
+@media screen and (max-width: 992px) {
+        /*-----------------------
+    navbar
+    -----------------------*/
+        .brand-img-c {
+            width: 90.4px;
+            height: 31.8px;
+        }
+        .login-link-c {
+            width: 41px;
+            height: 14px;
+            font-size: 12px;
+            letter-spacing: 0.6px;
+            margin-right: 31.4px;
+        }
+        .btn-hire-c {
+            position:relative;
+            width: 122.8px;
+            height: 31.4px;
+            border: solid 1.5px #818181;
+            margin-right:22.5px;
+        }
+        .txt-hire-c {
+            position:absolute;
+            width: 104px;
+            height: 14px;
+            font-size: 12px;
+            letter-spacing: 0.6px;
+            right:8.3px;
+            top:10px;
+            
+        }
+
+        /*-----------------------
+        second skill work
+        -----------------------*/
+        .skill-container-c{
+            /*height:440px;*/
+            height:500px;
+        }
+        .txt-skill-c h2 {
+            font-size: 31.4px;
+        }
+        .txt-skill-c p{
+            margin-left:0px;
+            font-size:20px;
+        }
+        .btn-skill-c {
+            font-size: 25.5px;
+            width: 359.3px;
+            height: 53.9px;
+            border: solid 0.7px #42cf94;
+        }
+        .skill-img-c {
+            width:358.5px;
+            height:auto;
+            /*top:0px;*/  
+            /*left:40px;*/          
+        }
+
+        /*-----------------------
+        third How it work
+        -----------------------*/
+        .container-hiw-c {
+            height: 394px;
+        }
+            .container-hiw-c h2 {
+                font-size: 24px;
+                /*margin-top: 50px;*/
+            }
+        .img-first-c{
+            width: 89.8px;
+            height: 99.4px;            
+        }
+        .img-then-c{
+            width: 122.2px;
+            height: 104.4px;
+        }
+        .img-finally-c{
+            width: 78.6px;
+            height: 99.4px;
+        }
+        .container-hiw-c h4 {
+            margin-top: 26px;
+            font-size: 15px;
+            /*margin-left:0px;*/
+            text-align:left;
+        }
+        .container-hiw-c p{
+            font-size: 15px;
+            /*margin-left:59.1px;*/
+            text-align:left;
+        }
+
+        /*-----------------------
+    forth footer
+    -----------------------*/
+        .container_footer-c{
+            height:185px;
+        }
+        .container_footer-c p{
+            font-size: 10.5px;
+        }
+        .container_footer-c h4{
+            margin-top: 50.4px;
+            /*padding-right: 59.1px;*/
+            font-size: 13.5px;
+            font-weight: bold;
+        }
+        .f-copyright-c p{
+            font-size: 9px;
+            /*padding-right: 59px;*/
+            /*margin-top: 15.3px;*/
+        }
+    }
+
+@media screen and (max-width: 767px) {
+   .container-fluid{
+        /*padding: inherit;*/
+        padding-left:0px;
+        padding-right:0px;
+        text-align: center;
+        /*margin-left: -50px;*/
+        /*background-color:orange;*/
+        
+    }
+        /*-----------------------
+        navbar
+        -----------------------*/
+        .nav-container-c{
+            /*background-color:lightblue;*/
+           /*position:relative;*/
+           height:40px;
+           width:auto;
+           /*margin-right:50px;*/
+           /*align-content:center;*/
+       }
+        .brand-img-c {
+            position:absolute;
+            width: 60.9px;
+            height: 21.7px;
+            /*margin:auto;*/
+            /*margin-left:50%;
+            margin-right:50%;*/
+            right:50%;
+            left:50%;
+            margin-left:-20px;
+
+        }
+        #myNavbar{
+            display:none;
+        }
+        .menu-mo-c{
+            display:block;
+        }
+        .login-link-c{
+            position:absolute;
+            top:8px;
+            right:-8px;
+            font-size: 10px;
+            letter-spacing: 0.5px;
+        }
+        .btn-hire-c {
+        position: absolute;
+        left: 16px;
+        bottom: 6px;
+        width: 82px;
+        height: 21px;
+        border: solid 1px #818181;
+    }
+        .txt-hire-c {
+            position: absolute;
+            left:-10px;
+            font-size: 8px;
+            letter-spacing: 0.4px;            
+        }
+        
+        /*-----------------------
+        second skill work
+        -----------------------*/
+        .skill-1{
+            background-color:cyan;
+            position:absolute;
+            display:none;
+        }
+        .skill-2{
+            display:block;
+        }
+        
+        .skill-container-c{            
+            /*position:relative;*/            
+            height:460px;
+        }
+        .txt-skill-c{
+            position:relative;
+            
+            text-align:left;
+            margin:auto;
+            z-index:5;
+        }
+        .txt-skill-c h2 {
+            font-size: 22px; 
+            padding-top:200px;           
+        }
+        .txt-skill-c p{
+            font-size:16px;
+        }
+        .btn-skill-c {
+            font-size: 18px;
+            width: 263px;
+            height: 43px;
+            border: solid 0.6px #42cf94;
+        }
+        .div-skill-img-c{
+            /*position:relative;*/
+        }
+        .skill-img-c {
+            position:absolute;
+            width: 194.2px;  
+            height:auto;
+            top:-20px;  
+            right:0px;
+            /*left:40px;*/
+            z-index:3; 
+                     
+        }
+
+        /*-----------------------
+        third How it work
+        -----------------------*/
+        .container-hiw-c {      
+            height:auto;      
+            /*height: 394px;*/
+            /*position:relative;*/
+        }
+        .container-hiw-c h2 {
+                font-size: 24px;
+                /*margin-top: 50px;*/
+            }
+        .img-first-c{
+            width: 89.8px;
+            height: 99.4px;            
+        }
+        .img-then-c{
+            width: 122.2px;
+            height: 104.4px;
+        }
+        .img-finally-c{
+            width: 78.6px;
+            height: 99.4px;
+        }
+        .container-hiw-c h4 {
+            margin-top: 26px;
+            font-size: 15px;
+            /*margin-left:0px;*/
+            text-align:center;
+        }
+        .container-hiw-c p{
+            font-size: 15px;
+            /*margin-left:59.1px;*/
+            text-align:center;
+        }
+
+        /*-----------------------
+        forth footer
+        -----------------------*/
+        .container-footer-c{    
+            position:relative;        
+            height:auto;
+            /*display:none;*/ 
+            text-align:center;           
+        }
+        .container_footer-c p{
+            font-size: 10.5px;
+        }
+        .container_footer-c h4{
+            /*margin-top: 50.4px;
+            padding-right: 59.1px;*/
+            font-size: 13.5px;
+            font-weight: bold;
+        }
+        .f-copyright-c p{
+            font-size: 9px;
+            text-align:center;
+            padding-right: 89px;
+            /*margin-top: 15.3px;*/
+        }
+}

@@ -1,0 +1,392 @@
+﻿body {
+    font-family: Helvetica;
+}
+.small-profile-img-c {
+    width: 64px;
+    height: 63px;
+    /*height:auto;
+    margin-top:10px;*/
+}
+
+.pf_icon-c {
+    /*width: 5.3px;
+    height: 9.7px;*/
+    font-size:small;
+    color: #03ba6d;
+}
+
+.myProfile-cn-c{
+    margin-top:65px;
+  background-color:#f3f3f3;
+  border-top: solid 0.5px #979797;
+}
+
+.myProfile-cn-c h2{
+    padding-left:15px;
+    padding-right:87px;
+    font-size: 28px;
+    font-weight: normal;
+}
+.prf-img-c {
+    margin-top:30px;
+    padding-right:20px;
+    margin-left:20px;
+    width: 91px;
+    height: auto;
+}
+
+.prf-info-c{
+    padding-left:50px;
+}
+    .prf-info-c h4 {
+        font-size: 18px;
+        font-weight: bold;
+        letter-spacing: 0.9px;
+        color: #616161;
+    }
+    .prf-info-c h5 {
+        font-size: 16px;
+        font-weight: bold;
+        letter-spacing: 0.8px;
+        color: #616161;
+    }
+    .prf-info-c p {
+        font-size: 14px;
+        font-weight: normal;
+        letter-spacing: 0.7px;
+        color: #616161;
+    }
+    .prf-info-c a {
+        text-decoration:none;
+        font-size: 14px;
+        font-weight: normal;
+        letter-spacing: 0.7px;
+        color: #03ba6d;
+    }
+
+.add-overview-c{
+    display:none;
+}
+.overview-c:hover .add-overview-c{
+    color:#b8e986;
+    display:inline-block;
+}
+
+.prf-edu-c {
+    font-size: 10px;
+    font-weight: normal;
+    letter-spacing: 0.5px;
+    color: #8d8b8b;
+}
+
+.panels-c h4 {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 0.9px;
+    color: #616161;
+}
+.panels-c h5 {
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+    color: #616161;
+}
+.panels-c p{
+    font-size: 14px;
+  font-weight: normal;
+  letter-spacing: 0.7px;
+  color: #616161;
+}
+
+.a-btn-c{
+    text-decoration:none;
+}
+.btn-add-c, .btn-edit-c, .btn-delete-c{
+    display:none;
+}
+/*-------------------------------
+    History
+    ------------------------------*/
+
+.panel-history-c h4:hover .add-history-c{
+    color:#b8e986;
+    display:inline;
+}
+.panel-history-c h5:hover .history-txt-c{
+    background-color:#b8e986;
+}
+.panel-history-c h5:hover .edit-history-c,.panel-history-c h5:hover .delete-history-c{
+    background-color:#b8e986;
+    color: black;
+    display:inline;
+}
+
+.history-txt-c:hover{
+    background-color:#b8e986;
+}
+
+/*-------------------------------
+    Education
+    ------------------------------*/
+
+.panel-education-c h4:hover .add-education-c{
+    color:#b8e986;
+    display:inline;
+}
+.panel-education-c h5:hover .edit-education-c,.panel-education-c h5:hover .delete-education-c{
+    background-color:#b8e986;
+    color: black;
+    display:inline;
+}
+.education-txt-c:hover{
+    background-color:#b8e986;
+}
+
+/*-------------------------------
+    Volunteering
+    ------------------------------*/
+.panel-volunteering-c h4:hover .add-volunteering-c{
+    color:#b8e986;
+    display:inline;
+}
+.panel-volunteering-c h5:hover .edit-volunteering-c,.panel-volunteering-c h5:hover .delete-volunteering-c{
+    background-color:#b8e986;
+    color: black;
+    display:inline;
+}
+.volunteering-txt-c:hover{
+    background-color:#b8e986;
+}
+
+/*-------------------------------
+    Certifications
+    ------------------------------*/
+.panel-certifications-c h4:hover .add-certifications-c{
+    color:#b8e986;
+    display:inline;
+}
+.panel-certifications-c h5:hover .edit-certifications-c,.panel-certifications-c h5:hover .delete-certifications-c{
+    background-color:#b8e986;
+    color: black;
+    display:inline;
+}
+.certifications-txt-c:hover{
+    background-color:#b8e986;
+}
+
+/*-------------------------------
+    Test Scores
+    ------------------------------*/
+.panel-scores-c h4:hover .add-scores-c{
+    color:#b8e986;
+    display:inline;
+}
+.panel-scores-c h5:hover .edit-scores-c,.panel-scores-c h5:hover .delete-scores-c{
+    background-color:#b8e986;
+    color: black;
+    display:inline;
+}
+.scores-txt-c:hover{
+    background-color:#b8e986;
+}
+
+/*-------------------------------
+    Projects
+    ------------------------------*/
+.panel-projects-c h4:hover .add-projects-c{
+    color:#b8e986;
+    display:inline;
+}
+.panel-projects-c h5:hover .edit-projects-c,.panel-projects-c h5:hover .delete-projects-c{
+    background-color:#b8e986;
+    color: black;
+    display:inline;
+}
+.projects-txt-c:hover{
+    background-color:#b8e986;
+}
+/*---------- modal ------------*/
+.prj-tmb-txt-c {
+    /*width: 291px;*/
+    width: auto;
+    height: 42px;
+    border: solid 1px #e0e0e0;
+    text-align: center;
+    padding-top: 10px;
+}
+    .prj-tmb-txt-c a {
+        text-decoration:none;
+        font-size: 12px;
+        font-weight: normal;
+        text-align: center;
+        color: #494949;
+    }
+        .prj-tmb-txt-c a span {
+            color: #03ba6d;
+        }
+/*-------------------------------
+    Honors & Awards
+    ------------------------------*/
+.panel-awards-c h4:hover .add-awards-c{
+    color:#b8e986;
+    display:inline;
+}
+.panel-awards-c h5:hover .edit-awards-c,.panel-awards-c h5:hover .delete-awards-c{
+    background-color:#b8e986;
+    color: black;
+    display:inline;
+}
+.awards-txt-c:hover{
+    background-color:#b8e986;
+}
+
+/*-------------------------------
+    Courses
+    ------------------------------*/
+.panel-courses-c h4:hover .add-courses-c{
+    color:#b8e986;
+    display:inline;
+}
+.panel-courses-c h5:hover .edit-courses-c,.panel-courses-c h5:hover .delete-courses-c{
+    background-color:#b8e986;
+    color: black;
+    display:inline;
+}
+.courses-txt-c:hover{
+    background-color:#b8e986;
+}
+
+
+/*---------------
+    History Modal
+    --------------*/
+.modal-c{
+    width:750px;
+    margin-left:auto;
+    margin-right:auto;
+}
+.modal-h-c{
+    background-color: #f9f9f9;
+    height:70px;
+}
+.modal-b-c{
+    margin-left:30px;
+    margin-right:30px;
+}
+.m-title-c {
+    font-size: 20px;
+    font-weight: 100;
+    padding-top:12px;
+    padding-left:32px;
+    color: #494949;
+}
+.form-g-c{
+    padding-top:50px;
+}
+.through-txt-c {
+    font-size: 12px;
+    font-weight: 300;
+    text-align: center;
+    color: #494949;
+}
+input[type="checkbox"] {
+  display: none;
+}
+
+.custom-check {
+		display: inline-block;
+		width: 15px; height: 15px;
+		background: white;
+		border: 1px solid #03ba6d;
+        font-family: 'Glyphicons Halflings';
+		font-size: 14px;
+		line-height: 1;
+	}
+.custom-check::before {
+  content: "\e013";
+  color: #424242;
+  display: none;
+}
+
+input[type=checkbox]:checked+.custom-check::before {
+  display: block;
+}
+.chk-lbl-c {
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    color: #494949;
+}
+
+/*------
+    modal footer
+    -----*/
+.m-footer-c{
+    border:none;
+    text-align:left;
+}
+.btn-save-c {
+    width: 80px;
+    height: 25px;
+    color: white;
+    border-radius: 2px;
+    background-color: #03ba6d;
+    font-size:10px;
+    /*margin-left: 32px;*/    
+}
+.btn-save-more-c {    
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    color: #03ba6d;
+    width: 120px;
+  height: 25px;
+  border-radius: 2px;
+  border: solid 1px #cccccc;
+  background-color:white;
+}
+.btn-cancel-c {
+    padding-left:50px;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: normal;
+    text-align: center;
+    color: #03ba6d;
+    background-color:white;
+}
+
+
+
+/*-------------------*/
+.strength-cnt-c h3 {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.7px;
+    color: #616161;
+}
+
+.strength-cnt-c a {
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 0.7px;
+    color: #03ba6d;
+    text-decoration:none;
+}
+
+.strength-cnt-c hr{
+    border: solid 0.5px #979797;
+    
+}
+
+.strength-cnt-c p {
+    font-size: 12px;
+    font-weight: normal;
+    letter-spacing: 0.6px;
+    color: #616161;
+}
+    .strength-cnt-c p span {
+        font-size: 12px;
+        font-weight: normal;
+        letter-spacing: 0.6px;
+        color: #a1a1a7;
+    }

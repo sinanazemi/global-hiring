@@ -1,0 +1,80 @@
+﻿body {
+}
+
+.jumbotron { 
+    background-color: #03ba6d; 
+    color: #ffffff;
+    margin-top:65px;
+}
+/*-----------------
+    about header
+    ----------------*/
+.about-h1-c {
+    font-size: 48px;
+    font-weight: bold;
+    letter-spacing: 2.4px;
+}
+.about-h-p-c {
+    font-size: 24px;
+    font-weight: 300;
+    letter-spacing: 1.2px;
+}
+
+/*-----------------
+    say hello
+    ----------------*/
+.about-h2-c {
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 1.8px;
+}
+.c-sayhello-c h4 {
+    font-size: 30px;
+    font-weight: normal;
+    letter-spacing: 1.5px;
+}
+
+.c-sayhello-c p {
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.5;
+    color: #696767;
+}
+/*-----------------
+    FAQ
+    ----------------*/
+.c-faq-c{
+     margin-top:65px;
+}
+.faq-h2-c {
+    font-size: 30px;
+    font-weight: normal;
+    letter-spacing: 1.5px;
+    color: #3f3f3f;
+}
+.c-faq-c h4 {
+    font-size: 20px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    color: #3f3f3f;
+}
+
+.c-faq-c p {
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.5;
+    color: #696767;
+}
+
+
+@media screen and (max-width: 767px) {
+
+    .jumbotron{
+        margin-top:40px;
+    }
+    .c-sayhello-c p {
+    text-align:left;
+    padding-left:20px;
+}
+}
