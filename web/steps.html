@@ -182,8 +182,9 @@
                       <div class="container"  >
                       <div class="item" ng-repeat='service in mainServices' ng-click='toggleSelected(service)' ng-class="{ selected: service.isChecked }">
                         <input type="checkbox" ng-attr-id="{{'c' + service.id}}" ng-model="service.isChecked" />
-                        <label ng-attr-for="{{'c' +service.id}}">
-                          <img ng-src="{{getIcon(service)}}">
+                        <label ng-attr-for="{{'c' +service.id}}"> {{service.name}}
+                        <!--  <img ng-src="{{getIcon(service)}}">
+                        -->
                         </label>
                       </div>
                       </div>
@@ -222,8 +223,8 @@
 
 
     <script>
-    var app = angular.module('steps', []);
-    app.controller('stepsCtrl', function($scope) {
+    var app = angular.module('steps',["ngResource"]);
+    app.controller('stepsCtrl',["$scope", "$resource", function($scope,$resource) {
       $scope.step1Hide=false;
       $scope.stepLangHide=true;
       $scope.stepEduHide=true;
@@ -378,7 +379,7 @@
 
       // Main Services
 
-      $scope.mainServices=[
+/*      $scope.mainServices=[
         {
           id: 1,
           name: 'Custom Service',
@@ -399,6 +400,15 @@
         }
 
       ];
+*/
+      var service = $resource("/mainService")
+
+      service.query(
+        function(data){
+          $scope.mainServices = data;
+        } // function(data)
+      ) // service.query
+
 
       $scope.toggleSelected = function(service) {
   	     service.isChecked = !service.isChecked;
@@ -441,7 +451,9 @@
         selectedSkill.isSelected=!selectedSkill.isSelected;
       }
 
-    });
+    }
+    ]// scope, resource
+  );
     </script>
 
 

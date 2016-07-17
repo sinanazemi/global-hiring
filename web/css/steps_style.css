@@ -27,7 +27,7 @@
 }
 
 .item.selected {
-  border-color: green;
+  border:  rgb(3, 186, 109);
   border: 5px;
 }
 .black-border-label.selected {
