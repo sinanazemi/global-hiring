@@ -61,7 +61,7 @@ func (acc Account) saveNew() error {
   return nil
 }
 
-func parseAccount(dataMap map[string]interface{}) (interface{}, error) {
+func parseAccount(dataMap map[string]interface{}) (Account, error) {
 
   print(dataMap)
 
@@ -79,17 +79,17 @@ func parseAccount(dataMap map[string]interface{}) (interface{}, error) {
   result.IsStudent = dataMap["isstudent"].(bool)
 
   cityMap := dataMap["city"].(map[string]interface{})
-  city := parseCityReturn(cityMap)
+  city, _ := parseCity(cityMap)
   result.City = city
 
   langsArr := dataMap["languages"].([]interface{})
-  result.Languages = parseLanguagesReturn(langsArr)
+  result.Languages = parseLanguages(langsArr)
 
   eduArr := dataMap["educations"].([]interface{})
-  result.Educations = parseEducationsReturn(eduArr)
+  result.Educations = parseEducations(eduArr)
 
   skillArr := dataMap["skills"].([]interface{})
-  result.Skills = parseSkillsReturn(skillArr)
+  result.Skills = parseSkills(skillArr)
 
   return result, nil
 }

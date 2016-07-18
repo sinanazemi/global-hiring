@@ -15,7 +15,7 @@ type Education struct {
   Degree Degree `json:"degree"`
 }
 
-func parseEducation(dataMap map[string]interface{}) (interface{}, error) {
+func parseEducation(dataMap map[string]interface{}) (Education, error) {
   result := Education{}
 
   result.School = dataMap["school"].(string)
@@ -27,25 +27,20 @@ func parseEducation(dataMap map[string]interface{}) (interface{}, error) {
   }
 
   degreeMap := dataMap["degree"].(map[string]interface{})
-  degree := parseDegreeReturn(degreeMap)
+  degree, _ := parseDegree(degreeMap)
   result.Degree = degree
-
   return result, nil
 }
 
-func parseEducationReturn(eduMap map[string]interface{}) Education {
-  edu, _ := parseEducation(eduMap)
-  result := edu.(Education)
-  return result
-}
-
-func parseEducationsReturn(edusArr []interface{}) []Education {
+func parseEducations(edusArr []interface{}) []Education {
   result := make([]Education, 0)
 
   for _ , edu := range edusArr {
     emap := edu.(map[string]interface{})
-    education := parseEducationReturn(emap)
-    result = append(result, education)
+    education, err := parseEducation(emap)
+    if (err == nil) {
+      result = append(result, education)
+    }
   }
   return result
 }

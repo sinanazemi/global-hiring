@@ -4,6 +4,7 @@ import (
   "encoding/json"
 	"fmt"
 	"log"
+  "strconv"
 
 	"net/http"
 )
@@ -49,4 +50,24 @@ func (fn Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(bytes)
 	log.Printf("finished %s %s %s %d", r.RemoteAddr, r.Method, r.URL, 200)
+}
+
+type idStruct struct {
+  Id int `json:"id"`
+}
+
+func GetID(r *http.Request, paramNames ...string) int {
+
+  query := r.URL.Query();
+
+  paramNames = append(paramNames, "id")
+
+  for _ , paramName := range paramNames {
+    param := query.Get(paramName)
+    id, e := strconv.Atoi(param)
+    if e == nil {
+      return id
+    }
+  }
+  return -1
 }

@@ -16,7 +16,7 @@ type Language struct{
   Profeciency string `json:"profeciency"`
 }
 
-func parseLanguage(dataMap map[string]interface{}) (interface{}, error) {
+func parseLanguage(dataMap map[string]interface{}) (Language, error) {
   result := Language{}
 
   result.Name = dataMap["name"].(string)
@@ -25,19 +25,15 @@ func parseLanguage(dataMap map[string]interface{}) (interface{}, error) {
   return result, nil
 }
 
-func parseLanguageReturn(lmap map[string]interface{}) Language {
-  l, _ := parseLanguage(lmap)
-  result := l.(Language)
-  return result
-}
-
-func parseLanguagesReturn(langsArr []interface{}) []Language {
+func parseLanguages(langsArr []interface{}) []Language {
   result := make([]Language, 0)
 
   for _ , lang := range langsArr {
     lmap := lang.(map[string]interface{})
-    lang := parseLanguageReturn(lmap)
-    result = append(result, lang)
+    lang, err := parseLanguage(lmap)
+    if err == nil {
+      result = append(result, lang)
+    }
   }
   return result
 }

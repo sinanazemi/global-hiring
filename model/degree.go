@@ -22,17 +22,11 @@ func getDegrees() []Degree {
   }
 
   for _, dummyDegree := range degrees {
-
-    degree, ok := dummyDegree.(Degree)
-    if !ok {
-        // service was not of type MainService. The assertion failed
-        return make([]Degree, 0)
-    }
-    // service is of type MainService
+    degree, _ := dummyDegree.(Degree)
     result = append(result, degree)
   }
-  return result
 
+  return result
 }
 
 func readDegree(rows *sql.Rows) (interface{}, error) {
@@ -43,7 +37,7 @@ func readDegree(rows *sql.Rows) (interface{}, error) {
   return degree, err
 }
 
-func parseDegree(dataMap map[string]interface{}) (interface{}, error) {
+func parseDegree(dataMap map[string]interface{}) (Degree, error) {
 
   result := Degree{}
 
@@ -51,11 +45,4 @@ func parseDegree(dataMap map[string]interface{}) (interface{}, error) {
   result.Name = dataMap["name"].(string)
 
   return result, nil
-}
-
-func parseDegreeReturn(degreeMap map[string]interface{}) Degree {
-
-  degreeParsed, _ := parseDegree(degreeMap)
-  degree := degreeParsed.(Degree)
-  return degree
 }

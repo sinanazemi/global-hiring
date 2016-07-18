@@ -48,7 +48,7 @@ func readSkill(rows *sql.Rows) (interface{}, error) {
   return skill, err
 }
 
-func parseSkill(dataMap map[string]interface{}) (interface{}, error) {
+func parseSkill(dataMap map[string]interface{}) (Skill, error) {
   result := Skill{}
 
   result.Id = int(dataMap["id"].(float64))
@@ -60,19 +60,15 @@ func parseSkill(dataMap map[string]interface{}) (interface{}, error) {
   return result, nil
 }
 
-func parseSkillReturn(lmap map[string]interface{}) Skill {
-  s, _ := parseSkill(lmap)
-  result := s.(Skill)
-  return result
-}
-
-func parseSkillsReturn(skillsArr []interface{}) []Skill {
+func parseSkills(skillsArr []interface{}) []Skill {
   result := make([]Skill, 0)
 
   for _ , s := range skillsArr {
     smap := s.(map[string]interface{})
-    skill := parseSkillReturn(smap)
-    result = append(result, skill)
+    skill, err := parseSkill(smap)
+    if err == nil {
+      result = append(result, skill)
+    }
   }
   return result
 }
