@@ -17,6 +17,7 @@
   width: 400px;
 }
 
+
 .item {
   background: #ddd;
   float:left;
@@ -94,6 +95,20 @@
     position: absolute;
     padding-left: 33px;
     padding-right: 26px;
+}
+
+.profeciencyRadio-button-text {
+    float: left;
+    font-size: 10px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style:normal;
+    font-weight: 300;
+    color: rgb(97, 97, 97);
+
+    width: 374px;
+    height: 30px;
+  
+
 }
 
 .skill-div {
