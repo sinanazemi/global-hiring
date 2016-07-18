@@ -543,7 +543,7 @@
 
           newAccount.educations = $scope.educations;
 
-          newAccount.skills = [];
+          newAccount.skills = $scope.mainServices;
 
           newAccount.$save(
             function(data){});
