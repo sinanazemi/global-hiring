@@ -25,10 +25,10 @@ func main() {
 	http.Handle("/", fileHandler)
 
 	http.Handle("/cities", util.Handler(model.GetCities))
+	http.Handle("/degrees", util.Handler(model.GetDegrees))
 	http.Handle("/mainServices", util.Handler(model.GetMainServices))
 	http.Handle("/skills", util.Handler(model.GetSkills))
 	http.Handle("/saveAccount", util.Handler(model.SaveAccount))
-	http.Handle("/degrees", util.Handler(model.GetDegrees))
 
 	log.Printf("Running on port %d\n", *port)
 

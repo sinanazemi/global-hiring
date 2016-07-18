@@ -17,6 +17,8 @@ type Account struct {
   Languages []Language `json:languages`
 
   Educations []Education `json:educations`
+
+  Skills []Skill `json:skills`
 }
 
 func (acc Account) save() error {
@@ -52,6 +54,10 @@ func (acc Account) saveNew() error {
     education.save(acc)
   }
 
+  for _ , skill := range acc.Skills {
+    skill.save(acc)
+  }
+
   return nil
 }
 
@@ -81,6 +87,9 @@ func parseAccount(dataMap map[string]interface{}) (interface{}, error) {
 
   eduArr := dataMap["educations"].([]interface{})
   result.Educations = parseEducationsReturn(eduArr)
+
+  skillArr := dataMap["skills"].([]interface{})
+  result.Skills = parseSkillsReturn(skillArr)
 
   return result, nil
 }

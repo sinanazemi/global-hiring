@@ -7,6 +7,8 @@
 
     <div ng-app="myApp" ng-controller="myCtrl">
 
+      <h2>Account Info</h2><br/>
+
       <label for="FullName">Full Name</label>
       <input type="text" id="FullName" ng-model="Name"><br/>
 
@@ -32,13 +34,16 @@
             <label for="LanguageName">Language</label>
             <input type="text" id="LanguageName" ng-model="LanguageName"><br/>
 
-            <div ng-repeat="profeciency in LanguageProfeciencies">
+            <!--div ng-repeat="profeciency in LanguageProfeciencies">
 
                 <input type="radio" name="LanguageProfeciencyRadio" ng-model="LanguageProfeciency" value="{{profeciency.value}}">
                   {{profeciency.text}}
                 </input>
                 <br>
-            </div>{{LanguageProfeciency}}
+            </div-->
+            <label for="LanguageProfeciency">Profeciency</label>
+            <select id = "LanguageProfeciency" ng-model = "LanguageProfeciency" ng-options="profeciency.text for profeciency in LanguageProfeciencies"></select><br/>
+
           </td>
           <td style="border:1px solid black">
             <button ng-click="addLanguage()">add --></button><br/>
@@ -83,15 +88,27 @@
         </tr>
       </table>
 
+      <h2>Skills</h2><br/>
+      <table>
+        <tr>
+          <td style="border:1px solid black">
+            <select ng-model="selectedService" ng-options="service.name for service in services" ng-change="getSkills()"></select><br/>
+            <select ng-model="selectedSkill" ng-options="skill.name for skill in skills"></select><br/>
+            <select ng-model="SkillProfeciency" ng-options="profeciency.text for profeciency in SkillProfeciencies"></select><br/>
+          </td>
+          <td style="border:1px solid black">
+            <button ng-click="addSkill()">add --></button><br/>
+          </td>
+          <td style="border:1px solid black">
+            <div ng-repeat="skill in AccountSkills">
+              {{skill.name+"("+skill.profeciency+")"}}<br>
+            </div>
+          </td>
+        </tr>
+      </table>
+
       <button ng-click="saveAccount()">save</button><br/>
 
-      <select ng-model="selectedService" ng-options="service.name for service in services" ng-change="getSkills()">
-      </select>
-
-      <br/>
-
-      <select ng-model="selectedSkill" ng-options="skill.name for skill in skills">
-      </select>
 
     </div>
 
@@ -110,7 +127,6 @@
             }
 
             $scope.isStudent = true
-            $scope.LanguageProfeciency = "E"
 
             var cities = $resource("/cities")
 
@@ -148,7 +164,7 @@
             $scope.addLanguage = function() {
                 var lang = {
                 name: $scope.LanguageName,
-                profeciency: $scope.LanguageProfeciency
+                profeciency: $scope.LanguageProfeciency.value
               };
               $scope.languages.push(lang);
             } // $scope.addLanguage = function()
@@ -183,6 +199,25 @@
               $scope.educations.push(edu);
             } // $scope.addLanguage = function()
 
+            $scope.SkillProfeciencies = [
+              {text: "Student/Fresh Graduate", value: "S"},
+              {text: "Junior Professional", value: "J"},
+              {text: "Experienced Professional", value: "E"},
+              {text: "Manager", value: "M"}
+            ]
+
+            $scope.AccountSkills = []
+            $scope.addSkill = function() {
+                var skill = {
+                  id: $scope.selectedSkill.id,
+                  name: $scope.selectedSkill.name,
+                  mainserviceid: $scope.selectedSkill.mainserviceid,
+                  profeciency: $scope.SkillProfeciency.value,
+                  isselected: true
+                };
+                $scope.AccountSkills.push(skill);
+            } // $scope.addLanguage = function()
+
             var saveAccount = $resource("/saveAccount")
 
             $scope.saveAccount = function() {
@@ -198,6 +233,8 @@
               newAccount.languages = $scope.languages
 
               newAccount.educations = $scope.educations
+
+              newAccount.skills = $scope.AccountSkills
 
               newAccount.$save(
                 function(data){
@@ -217,6 +254,10 @@
                   $scope.SelectedDegree = ""
                   $scope.Field = ""
                   $scope.Grade = ""
+
+                  $scope.AccountSkills = []
+                  $scope.selectedSkill = ""
+                  $scope.SkillProfeciency = ""
 
                 } // function(data)
               ) // saveAccount.$save

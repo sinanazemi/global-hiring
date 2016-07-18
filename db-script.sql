@@ -570,3 +570,29 @@ WITH (
 );
 ALTER TABLE AccountEducation
  OWNER TO globeAdmin;
+
+
+
+-- Table: AccountSkill
+
+-- DROP TABLE AccountSkill;
+
+create TABLE AccountSkill
+(
+ID serial,
+accountID integer NOT NULL,
+skillID integer NOT NULL,
+Profeciency character (1) not null,
+CONSTRAINT AccountSkill_PK PRIMARY KEY (ID),
+CONSTRAINT AccountSkill_Account_FK FOREIGN KEY (accountID)
+    REFERENCES account (id) MATCH SIMPLE
+    ON UPDATE NO ACTION ON DELETE NO ACTION,
+CONSTRAINT AccountSkill_Skill_FK FOREIGN KEY (skillID)
+    REFERENCES skill (id) MATCH SIMPLE
+    ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE AccountSkill
+OWNER TO globeAdmin;
