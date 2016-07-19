@@ -3,6 +3,7 @@ package util
 import (
     "database/sql"
     "fmt"
+    "errors"
     _ "github.com/lib/pq"
     //"time"
 )
@@ -97,6 +98,39 @@ func Insert(query string, args ...interface{}) (int, error) {
   return InsertedId, nil
 }
 
+func Update(query string, args ...interface{}) error {
+
+  err := checkConnection()
+  checkErr(err)
+  if err != nil {
+    return err
+  }
+
+  stmt, err := db.Prepare(query)
+  checkErr(err)
+  if err != nil {
+    return err
+  }
+
+  res, err := stmt.Exec(args...)
+  checkErr(err)
+  if err != nil {
+    return err
+  }
+
+  affect, err := res.RowsAffected()
+  checkErr(err)
+  if err != nil {
+    return err
+  }
+
+  if (affect <= 0) {
+    return errors.New("No rows updated!")
+  }
+
+  return nil
+}
+
 /*func main() {
 
     var lastInsertId int
@@ -143,3 +177,28 @@ func Insert(query string, args ...interface{}) (int, error) {
 
     fmt.Println(affect, "rows changed")
 }*/
+
+
+func CheckDBAccountValidation(session *Session, tableName string, accountColumnName string, recordID int) error {
+
+  err := checkConnection()
+  checkErr(err)
+  if err != nil {
+    return err
+  }
+
+  query := "select count(*) from " + tableName + " where " + accountColumnName + " = $1 and id = $2";
+
+  rows, err := db.Query(query, session.GetAccountID(), recordID)
+  checkErr(err)
+
+  for rows.Next() {
+    var count int
+    err = rows.Scan(&count)
+    checkErr(err)
+    if (count > 0) {
+      return nil
+    }
+  }
+  return errors.New("Authorization Faild for updating/removing a record in AccountSkill")
+}

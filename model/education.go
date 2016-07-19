@@ -44,14 +44,14 @@ func parseEducations(edusArr []interface{}) []Education {
   return result
 }
 
-func (edu Education) save(account Account) error {
+func (edu Education) save(session *util.Session) error {
   query :=
     "INSERT INTO AccountEducation" +
     "(School, FromDate, ToDate, Field, Grade, DegreeID, accountID) " +
     "VALUES($1, $2, $3, $4, $5, $6, $7) " +
     "returning ID"
 
-  id, err := util.Insert(query, edu.School, edu.FromDate, edu.ToDate, edu.Field, edu.Grade, edu.Degree.Id, account.Id)
+  id, err := util.Insert(query, edu.School, edu.FromDate, edu.ToDate, edu.Field, edu.Grade, edu.Degree.Id, session.GetAccountID())
 
   if err != nil {
     return err

@@ -144,17 +144,6 @@
               } // function(data)
             ) // service.query
 
-            /*
-            var skill = $resource("/skills")
-            $scope.getSkills = function(){
-        			skill.query({'id' : $scope.selectedService.id},
-                function(data){
-                  $scope.skills = data;
-        			  } // function(data)
-              ); // newSkill.$query
-        		}; // function()
-            */
-
             $scope.getSkills = function(){
               $scope.skills = $scope.selectedService.skills;
             }; // function()
@@ -263,6 +252,30 @@
               ) // saveAccount.$save
             }
 
+            /* //Sample code for updating a skill
+            var updateSkill = $resource("/updateSkill")
+            var newupdate = new updateSkill();
+            newupdate.accountskillid = 6 //6,7
+            newupdate.id = 68
+            newupdate.profeciency = "J"
+
+            newupdate.$save(
+              function(data) {
+              } // function data
+            ) // $save()
+            */
+
+            /* //Sample code for removing a skill
+            var removeSkill = $resource("/deleteSkill")
+            var newRemove = new removeSkill();
+            newRemove.id = 36
+            newRemove.accountskillid = 7 //6,7
+
+            newRemove.$save(
+              function(data) {
+              } // function data
+            ) // $save()
+            */
 
           } // function($scope , $resource)
         ] // ["$scope", "$resource",

@@ -30,12 +30,14 @@ func main() {
 	http.Handle("/skills", util.Handler(model.GetSkills))
 	http.Handle("/saveAccount", util.Handler(model.SaveAccount))
 
+	// Editting Skills
+	http.Handle("/updateSkill", util.Handler(model.SaveSkill))
+	http.Handle("/deleteSkill", util.Handler(model.DeleteSkill))
+
 	log.Printf("Running on port %d\n", *port)
 
 	addr := fmt.Sprintf("127.0.0.1:%d", *port)
 	// this call blocks -- the progam runs here forever
 	err := http.ListenAndServe(addr, nil)
 	fmt.Println(err.Error())
-
-
 }

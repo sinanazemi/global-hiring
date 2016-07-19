@@ -38,14 +38,14 @@ func parseLanguages(langsArr []interface{}) []Language {
   return result
 }
 
-func (lang Language) save(account Account) error {
+func (lang Language) save(session *util.Session) error {
   query :=
     "INSERT INTO AccountLanguage" +
     "(Name, Profeciency, AccountID) " +
     "VALUES($1, $2, $3) " +
     "returning ID"
 
-  id, err := util.Insert(query, lang.Name, lang.Profeciency, account.Id)
+  id, err := util.Insert(query, lang.Name, lang.Profeciency, session.GetAccountID())
 
   if err != nil {
     return err

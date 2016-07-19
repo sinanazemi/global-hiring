@@ -18,21 +18,21 @@ type Account struct {
 
   Educations []Education `json:educations`
 
-  Skills []Skill `json:skills`
+  Skills []AccountSkill `json:skills`
 }
 
-func (acc Account) save() error {
+func (acc Account) save(session *util.Session) error {
   if acc.Id > 0 {
-    return acc.saveUpdate()
+    return acc.saveUpdate(session)
   }
-  return acc.saveNew()
+  return acc.saveNew(session)
 }
 
-func (acc Account) saveUpdate() error {
+func (acc Account) saveUpdate(session *util.Session) error {
   return errors.New("account.saveUpdate is not implemented")
 }
 
-func (acc Account) saveNew() error {
+func (acc Account) saveNew(session *util.Session) error {
   query :=
     "INSERT INTO Account" +
     "(Name, Email, cityID, Phone, Password, isStudent) " +
@@ -45,17 +45,18 @@ func (acc Account) saveNew() error {
     return err
   }
   acc.Id = id
+  session.PutAccountID(id)
 
   for _ , language := range acc.Languages {
-    language.save(acc)
+    language.save(session)
   }
 
   for _ , education := range acc.Educations {
-    education.save(acc)
+    education.save(session)
   }
 
   for _ , skill := range acc.Skills {
-    skill.save(acc)
+    skill.save(session)
   }
 
   return nil
@@ -87,7 +88,7 @@ func parseAccount(dataMap map[string]interface{}) (Account, error) {
   result.Educations = parseEducations(eduArr)
 
   skillArr := dataMap["skills"].([]interface{})
-  result.Skills = parseSkills(skillArr)
+  result.Skills = parseAccountSkills(skillArr)
 
   return result, nil
 }
