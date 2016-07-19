@@ -1,6 +1,8 @@
 package model
 
 import (
+  "errors"
+  "strings"
   "github.com/sinanazemi/global-hiring/util"
 )
 
@@ -38,7 +40,65 @@ func parseAccountLanguages(langsArr []interface{}) []AccountLanguage {
   return result
 }
 
+func (lang AccountLanguage) accountValidation(session *util.Session) error {
+  return util.CheckDBAccountValidation(session, "AccountLanguage", "AccountID", lang.Id)
+}
+
+func (lang AccountLanguage) dataValidation(session *util.Session) error {
+  errStr := ""
+
+  if len(strings.TrimSpace(lang.Name)) <= 0 {
+    errStr = errStr + "AccountLanguage.Name is Empty\n"
+  }
+
+  profeciencyCheck := false
+  profeciencyCheck = profeciencyCheck || (lang.Profeciency == LANGUAGE_PROFECIENCY_ELEMENTARY)
+  profeciencyCheck = profeciencyCheck || (lang.Profeciency == LANGUAGE_PROFECIENCY_BASIC)
+  profeciencyCheck = profeciencyCheck || (lang.Profeciency == LANGUAGE_PROFECIENCY_CONVERSATIONAL)
+  profeciencyCheck = profeciencyCheck || (lang.Profeciency == LANGUAGE_PROFECIENCY_FLUENT)
+  profeciencyCheck = profeciencyCheck || (lang.Profeciency == LANGUAGE_PROFECIENCY_NATIVE)
+
+  if (!profeciencyCheck) {
+    errStr = errStr + "AccountLanguage.Profeciency is not valid\n"
+  }
+
+  if (len(errStr) > 0) {
+    return errors.New(errStr)
+  }
+
+  return nil
+}
+
+func (lang AccountLanguage) insertValidation(session *util.Session) error {
+  return lang.dataValidation(session)
+}
+
+func (lang AccountLanguage) updateValidation(session *util.Session) error {
+  err := lang.accountValidation(session)
+  if err != nil{
+    return err
+  }
+  return lang.dataValidation(session)
+}
+
+func (lang AccountLanguage) deleteValidation(session *util.Session) error {
+  return lang.accountValidation(session)
+}
+
 func (lang AccountLanguage) save(session *util.Session) error {
+  if lang.Id <= 0 {
+    return lang.saveNew(session)
+  }
+  return lang.saveUpdate(session)
+}
+
+func (lang AccountLanguage) saveNew(session *util.Session) error {
+
+  err := lang.insertValidation(session)
+  if err != nil {
+    return err
+  }
+
   query :=
     "INSERT INTO AccountLanguage" +
     "(Name, Profeciency, AccountID) " +
@@ -53,4 +113,38 @@ func (lang AccountLanguage) save(session *util.Session) error {
 
   lang.Id = id
   return nil
+}
+
+func (lang AccountLanguage) saveUpdate(session *util.Session) error {
+  err := lang.updateValidation(session)
+  if err != nil {
+    return err
+  }
+
+  query :=
+    "UPDATE AccountLanguage " +
+    "SET " +
+    "Name = $1, " +
+    "Profeciency = $2 " +
+    "WHERE ID = $3 "
+
+  err = util.Update(query, lang.Name, lang.Profeciency, lang.Id)
+
+  return err
+
+}
+
+func (lang AccountLanguage) delete(session *util.Session) error {
+  err := lang.deleteValidation(session)
+  if err != nil {
+    return err
+  }
+
+  query :=
+    "DELETE FROM AccountLanguage " +
+    "WHERE ID = $1 "
+
+  err = util.Update(query, lang.Id)
+
+  return err
 }
