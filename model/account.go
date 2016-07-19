@@ -63,8 +63,6 @@ func (acc Account) saveNew() error {
 
 func parseAccount(dataMap map[string]interface{}) (Account, error) {
 
-  print(dataMap)
-
   id := 0
   if dataMap["id"] != nil {
     id = int(dataMap["id"].(float64))
@@ -72,11 +70,11 @@ func parseAccount(dataMap map[string]interface{}) (Account, error) {
 
   result := Account{Id: id}
 
-  result.Name = dataMap["name"].(string)
-  result.Email = dataMap["email"].(string)
-  result.Phone = dataMap["phone"].(string)
-  result.Password = dataMap["password"].(string)
-  result.IsStudent = dataMap["isstudent"].(bool)
+  result.Name = util.ParseString(dataMap, "name")
+  result.Email = util.ParseString(dataMap, "email")
+  result.Phone = util.ParseString(dataMap, "phone")
+  result.Password = util.ParseString(dataMap, "password")
+  result.IsStudent = util.ParseBool(dataMap, "isstudent")
 
   cityMap := dataMap["city"].(map[string]interface{})
   city, _ := parseCity(cityMap)

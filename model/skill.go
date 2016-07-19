@@ -51,11 +51,11 @@ func readSkill(rows *sql.Rows) (interface{}, error) {
 func parseSkill(dataMap map[string]interface{}) (Skill, error) {
   result := Skill{}
 
-  result.Id = int(dataMap["id"].(float64))
-  result.Name = dataMap["name"].(string)
-  result.MainServiceID = int(dataMap["mainserviceid"].(float64))
-  result.IsSelected = dataMap["isselected"].(bool)
-  result.Profeciency = dataMap["profeciency"].(string)
+  result.Id = util.ParseInteger(dataMap, "id")
+  result.Name = util.ParseString(dataMap, "name")
+  result.MainServiceID = util.ParseInteger(dataMap, "mainserviceid")
+  result.IsSelected = util.ParseBool(dataMap, "isselected")
+  result.Profeciency = util.ParseString(dataMap, "profeciency")
 
   return result, nil
 }

@@ -41,8 +41,8 @@ func parseDegree(dataMap map[string]interface{}) (Degree, error) {
 
   result := Degree{}
 
-  result.Id = int(dataMap["id"].(float64))
-  result.Name = dataMap["name"].(string)
+  result.Id = util.ParseInteger(dataMap, "id")
+  result.Name = util.ParseString(dataMap, "name")
 
   return result, nil
 }

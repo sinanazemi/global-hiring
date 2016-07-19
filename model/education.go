@@ -18,13 +18,12 @@ type Education struct {
 func parseEducation(dataMap map[string]interface{}) (Education, error) {
   result := Education{}
 
-  result.School = dataMap["school"].(string)
-  result.FromDate = int(dataMap["fromdate"].(float64))
-  result.ToDate = int(dataMap["todate"].(float64))
-  result.Field = dataMap["field"].(string)
-  if (dataMap["fromdate"] != nil) {
-    result.Grade = dataMap["grade"].(float64)
-  }
+  result.School = util.ParseString(dataMap, "school")
+  result.FromDate = util.ParseInteger(dataMap, "fromdate")
+  result.ToDate = util.ParseInteger(dataMap, "todate")
+  result.Field = util.ParseString(dataMap, "field")
+
+  result.Grade = util.ParseFloat(dataMap, "grade")
 
   degreeMap := dataMap["degree"].(map[string]interface{})
   degree, _ := parseDegree(degreeMap)

@@ -41,8 +41,8 @@ func parseCity(dataMap map[string]interface{}) (City, error) {
 
   result := City{}
 
-  result.Id = int(dataMap["id"].(float64))
-  result.Name = dataMap["name"].(string)
+  result.Id = util.ParseInteger(dataMap, "id")
+  result.Name = util.ParseString(dataMap, "name")
 
   return result, nil
 }

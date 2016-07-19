@@ -19,8 +19,8 @@ type Language struct{
 func parseLanguage(dataMap map[string]interface{}) (Language, error) {
   result := Language{}
 
-  result.Name = dataMap["name"].(string)
-  result.Profeciency = dataMap["profeciency"].(string)
+  result.Name = util.ParseString(dataMap, "name")
+  result.Profeciency = util.ParseString(dataMap, "profeciency", " ")
 
   return result, nil
 }
