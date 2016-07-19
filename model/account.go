@@ -14,9 +14,9 @@ type Account struct {
   Password string `json:"password"`
   IsStudent bool `json:isstudent`
 
-  Languages []Language `json:languages`
+  Languages []AccountLanguage `json:languages`
 
-  Educations []Education `json:educations`
+  Educations []AccountEducation `json:educations`
 
   Skills []AccountSkill `json:skills`
 }
@@ -82,10 +82,10 @@ func parseAccount(dataMap map[string]interface{}) (Account, error) {
   result.City = city
 
   langsArr := dataMap["languages"].([]interface{})
-  result.Languages = parseLanguages(langsArr)
+  result.Languages = parseAccountLanguages(langsArr)
 
   eduArr := dataMap["educations"].([]interface{})
-  result.Educations = parseEducations(eduArr)
+  result.Educations = parseAccountEducations(eduArr)
 
   skillArr := dataMap["skills"].([]interface{})
   result.Skills = parseAccountSkills(skillArr)

@@ -4,7 +4,7 @@ import (
   "github.com/sinanazemi/global-hiring/util"
 )
 
-type Education struct {
+type AccountEducation struct {
   Id     int  `json:"id"`
   School string `json:"school"`
   FromDate int `json:"fromdate"`
@@ -15,8 +15,8 @@ type Education struct {
   Degree Degree `json:"degree"`
 }
 
-func parseEducation(dataMap map[string]interface{}) (Education, error) {
-  result := Education{}
+func parseAccountEducation(dataMap map[string]interface{}) (AccountEducation, error) {
+  result := AccountEducation{}
 
   result.School = util.ParseString(dataMap, "school")
   result.FromDate = util.ParseInteger(dataMap, "fromdate")
@@ -31,12 +31,12 @@ func parseEducation(dataMap map[string]interface{}) (Education, error) {
   return result, nil
 }
 
-func parseEducations(edusArr []interface{}) []Education {
-  result := make([]Education, 0)
+func parseAccountEducations(edusArr []interface{}) []AccountEducation {
+  result := make([]AccountEducation, 0)
 
   for _ , edu := range edusArr {
     emap := edu.(map[string]interface{})
-    education, err := parseEducation(emap)
+    education, err := parseAccountEducation(emap)
     if (err == nil) {
       result = append(result, education)
     }
@@ -44,7 +44,7 @@ func parseEducations(edusArr []interface{}) []Education {
   return result
 }
 
-func (edu Education) save(session *util.Session) error {
+func (edu AccountEducation) save(session *util.Session) error {
   query :=
     "INSERT INTO AccountEducation" +
     "(School, FromDate, ToDate, Field, Grade, DegreeID, accountID) " +

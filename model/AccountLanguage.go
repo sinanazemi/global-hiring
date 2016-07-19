@@ -10,14 +10,14 @@ const LANGUAGE_PROFECIENCY_CONVERSATIONAL string = "C"
 const LANGUAGE_PROFECIENCY_FLUENT string = "F"
 const LANGUAGE_PROFECIENCY_NATIVE string = "N"
 
-type Language struct{
+type AccountLanguage struct{
   Id     int    `json:"id"`
   Name string `json:"name"`
   Profeciency string `json:"profeciency"`
 }
 
-func parseLanguage(dataMap map[string]interface{}) (Language, error) {
-  result := Language{}
+func parseAccountLanguage(dataMap map[string]interface{}) (AccountLanguage, error) {
+  result := AccountLanguage{}
 
   result.Name = util.ParseString(dataMap, "name")
   result.Profeciency = util.ParseString(dataMap, "profeciency", " ")
@@ -25,12 +25,12 @@ func parseLanguage(dataMap map[string]interface{}) (Language, error) {
   return result, nil
 }
 
-func parseLanguages(langsArr []interface{}) []Language {
-  result := make([]Language, 0)
+func parseAccountLanguages(langsArr []interface{}) []AccountLanguage {
+  result := make([]AccountLanguage, 0)
 
   for _ , lang := range langsArr {
     lmap := lang.(map[string]interface{})
-    lang, err := parseLanguage(lmap)
+    lang, err := parseAccountLanguage(lmap)
     if err == nil {
       result = append(result, lang)
     }
@@ -38,7 +38,7 @@ func parseLanguages(langsArr []interface{}) []Language {
   return result
 }
 
-func (lang Language) save(session *util.Session) error {
+func (lang AccountLanguage) save(session *util.Session) error {
   query :=
     "INSERT INTO AccountLanguage" +
     "(Name, Profeciency, AccountID) " +
