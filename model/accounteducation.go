@@ -3,6 +3,8 @@ package model
 import (
   "strings"
   "errors"
+  "database/sql"
+  "net/http"
   "github.com/sinanazemi/global-hiring/util"
 )
 
@@ -20,6 +22,7 @@ type AccountEducation struct {
 func parseAccountEducation(dataMap map[string]interface{}) (AccountEducation, error) {
   result := AccountEducation{}
 
+  result.Id = util.ParseInteger(dataMap, "id")
   result.School = util.ParseString(dataMap, "school")
   result.FromDate = util.ParseInteger(dataMap, "fromdate")
   result.ToDate = util.ParseInteger(dataMap, "todate")
@@ -88,6 +91,38 @@ func (ace AccountEducation) deleteValidation(session *util.Session) error {
   return ace.accountValidation(session)
 }
 
+func LoadAccountEducations(session *util.Session) ([]AccountEducation, error) {
+
+  query :=
+    "SELECT ID, School, FromDate, ToDate, Field, Grade, degreeID " +
+    "FROM AccountEducation " +
+    " WHERE AccountID = $1";
+
+    var result = make([]AccountEducation, 0)
+
+    educations, err := util.Select(readAccountEducation, query, session.GetAccountID())
+
+    if err != nil {
+      return result, err
+    }
+
+    for _, dummyEdu := range educations {
+      education, _ := dummyEdu.(AccountEducation)
+      education.Degree = LoadDegree(education.Degree.Id)
+      result = append(result, education)
+    }
+
+    return result, nil
+}
+
+func readAccountEducation(rows *sql.Rows) (interface{}, error) {
+
+    var edu AccountEducation = AccountEducation{}
+    err := rows.Scan(&edu.Id, &edu.School, &edu.FromDate, &edu.ToDate, &edu.Field, &edu.Grade, &edu.Degree.Id)
+
+    return edu, err
+}
+
 func (ace AccountEducation) save(session *util.Session) error {
   if ace.Id <= 0 {
     return ace.saveNew(session)
@@ -154,4 +189,50 @@ func (edu AccountEducation) delete(session *util.Session) error {
   err = util.Update(query, edu.Id)
 
   return err
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+func SaveEducation(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
+
+  session, err := util.GetSession(w, r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Problems in session", http.StatusBadRequest}
+  }
+
+  eduMap, err := util.ParseJsonRequest(r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Invalid JSON Education", http.StatusBadRequest}
+  }
+
+  edu, _ := parseAccountEducation(eduMap)
+
+  err = edu.save(session)
+  if err != nil {
+    return nil, &util.HandlerError{err, "Problem while saving Education", http.StatusBadRequest}
+  }
+
+  return edu, nil
+}
+
+func DeleteEducation(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
+
+  session, err := util.GetSession(w, r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Problems in session", http.StatusBadRequest}
+  }
+
+  eduMap, err := util.ParseJsonRequest(r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Invalid JSON Education", http.StatusBadRequest}
+  }
+
+  edu, _ := parseAccountEducation(eduMap)
+
+  err = edu.delete(session)
+  if err != nil {
+    return nil, &util.HandlerError{err, "Problem while deleting Education", http.StatusBadRequest}
+  }
+
+  return edu, nil
 }

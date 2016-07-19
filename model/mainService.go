@@ -2,6 +2,7 @@ package model
 
 import(
   "database/sql"
+  "net/http"
   "github.com/sinanazemi/global-hiring/util"
 )
 
@@ -46,4 +47,11 @@ func readMainService(rows *sql.Rows) (interface{}, error) {
   service.IsSelected = false
 
   return service, err
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+func GetMainServices(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
+
+  return getMainServices(), nil
 }

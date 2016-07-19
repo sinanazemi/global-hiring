@@ -31,8 +31,20 @@ func main() {
 	http.Handle("/saveAccount", util.Handler(model.SaveAccount))
 
 	// Editting Skills
-	http.Handle("/updateSkill", util.Handler(model.SaveSkill))
+	http.Handle("/saveSkill", util.Handler(model.SaveSkill))
 	http.Handle("/deleteSkill", util.Handler(model.DeleteSkill))
+
+	// Editting Certificates
+	http.Handle("/saveCertificate", util.Handler(model.SaveCertificate))
+	http.Handle("/deleteCertificate", util.Handler(model.DeleteCertificate))
+
+	// Editting Educations
+	http.Handle("/saveEducation", util.Handler(model.SaveEducation))
+	http.Handle("/deleteEducation", util.Handler(model.DeleteEducation))
+
+	// Editting Languages
+	http.Handle("/saveLanguage", util.Handler(model.SaveLanguage))
+	http.Handle("/deleteLanguage", util.Handler(model.DeleteLanguage))
 
 	log.Printf("Running on port %d\n", *port)
 

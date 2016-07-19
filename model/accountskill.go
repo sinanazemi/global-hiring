@@ -2,6 +2,8 @@ package model
 
 import(
   "errors"
+  "database/sql"
+  "net/http"
   "github.com/sinanazemi/global-hiring/util"
 )
 
@@ -89,6 +91,37 @@ func (acs AccountSkill) deleteValidation(session *util.Session) error {
   return acs.accountValidation(session)
 }
 
+func LoadAccountSkills(session *util.Session) ([]AccountSkill, error) {
+  query :=
+    " SELECT a.ID, a.SkillID, s.Name, s.MainServiceID, a.Profeciency " +
+    " FROM accountskill a " +
+    " inner join skill s on a.skillID = s.id " +
+    " WHERE a.AccountID = $1";
+
+    var result = make([]AccountSkill, 0)
+
+    skills, err := util.Select(readAccountSkill, query, session.GetAccountID())
+
+    if err != nil {
+      return result, err
+    }
+
+    for _, dummySkill := range skills {
+      skill, _ := dummySkill.(AccountSkill)
+      result = append(result, skill)
+    }
+
+    return result, nil
+}
+
+func readAccountSkill(rows *sql.Rows) (interface{}, error) {
+
+  var skill AccountSkill = AccountSkill{}
+  err := rows.Scan(&skill.Id, &skill.SkillID, &skill.Name, &skill.MainServiceID, &skill.Profeciency)
+
+  return skill, err
+}
+
 func (acs AccountSkill) save(session *util.Session) error {
   if acs.Id <= 0 {
     return acs.saveNew(session)
@@ -151,4 +184,50 @@ func (acs AccountSkill) delete(session *util.Session) error {
   err = util.Update(query, acs.Id)
 
   return err
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+func SaveSkill(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
+
+  session, err := util.GetSession(w, r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Problems in session", http.StatusBadRequest}
+  }
+
+  skillMap, err := util.ParseJsonRequest(r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Invalid JSON Skill", http.StatusBadRequest}
+  }
+
+  acs, _ := parseAccountSkill(skillMap)
+
+  err = acs.save(session)
+  if err != nil {
+    return nil, &util.HandlerError{err, "Problem while saving skill", http.StatusBadRequest}
+  }
+
+  return acs, nil
+}
+
+func DeleteSkill(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
+
+  session, err := util.GetSession(w, r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Problems in session", http.StatusBadRequest}
+  }
+
+  skillMap, err := util.ParseJsonRequest(r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Invalid JSON Skill", http.StatusBadRequest}
+  }
+
+  acs, _ := parseAccountSkill(skillMap)
+
+  err = acs.delete(session)
+  if err != nil {
+    return nil, &util.HandlerError{err, "Problem while deleting skill", http.StatusBadRequest}
+  }
+
+  return acs, nil
 }

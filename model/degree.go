@@ -2,6 +2,7 @@ package model
 
 import(
   "database/sql"
+  "net/http"
   "github.com/sinanazemi/global-hiring/util"
 )
 
@@ -10,12 +11,22 @@ type Degree struct{
   Name string `json:"name"`
 }
 
-func getDegrees() []Degree {
+func parseDegree(dataMap map[string]interface{}) (Degree, error) {
+
+  result := Degree{}
+
+  result.Id = util.ParseInteger(dataMap, "id")
+  result.Name = util.ParseString(dataMap, "name")
+
+  return result, nil
+}
+
+func LoadDegrees(where string, args ...interface{}) []Degree {
 
   // list of all of services
 	var result = make([]Degree, 0)
 
-  degrees, err := util.Select(readDegree, "select * from Degree")
+  degrees, err := util.Select(readDegree, "select * from Degree where " + where, args...)
 
   if err != nil {
     return result
@@ -29,6 +40,16 @@ func getDegrees() []Degree {
   return result
 }
 
+func LoadDegree(degreeID int) Degree {
+
+  return LoadDegrees("ID = $1", degreeID)[0]
+}
+
+func getDegrees() []Degree {
+
+  return LoadDegrees("1=1")
+}
+
 func readDegree(rows *sql.Rows) (interface{}, error) {
 
   var degree Degree = Degree{}
@@ -37,12 +58,9 @@ func readDegree(rows *sql.Rows) (interface{}, error) {
   return degree, err
 }
 
-func parseDegree(dataMap map[string]interface{}) (Degree, error) {
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  result := Degree{}
+func GetDegrees(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
 
-  result.Id = util.ParseInteger(dataMap, "id")
-  result.Name = util.ParseString(dataMap, "name")
-
-  return result, nil
+  return getDegrees(), nil
 }

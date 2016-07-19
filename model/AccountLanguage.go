@@ -3,6 +3,8 @@ package model
 import (
   "errors"
   "strings"
+  "database/sql"
+  "net/http"
   "github.com/sinanazemi/global-hiring/util"
 )
 
@@ -21,6 +23,7 @@ type AccountLanguage struct{
 func parseAccountLanguage(dataMap map[string]interface{}) (AccountLanguage, error) {
   result := AccountLanguage{}
 
+  result.Id = util.ParseInteger(dataMap, "id")
   result.Name = util.ParseString(dataMap, "name")
   result.Profeciency = util.ParseString(dataMap, "profeciency", " ")
 
@@ -85,6 +88,36 @@ func (lang AccountLanguage) deleteValidation(session *util.Session) error {
   return lang.accountValidation(session)
 }
 
+func LoadAccountLanguages(session *util.Session) ([]AccountLanguage, error) {
+  query :=
+    "SELECT ID, Name, Profeciency " +
+    "FROM AccountLanguage " +
+    " WHERE AccountID = $1";
+
+    var result = make([]AccountLanguage, 0)
+
+    languages, err := util.Select(readAccountLanguage, query, session.GetAccountID())
+
+    if err != nil {
+      return result, err
+    }
+
+    for _, dummyLang := range languages {
+      language, _ := dummyLang.(AccountLanguage)
+      result = append(result, language)
+    }
+
+    return result, nil
+}
+
+func readAccountLanguage(rows *sql.Rows) (interface{}, error) {
+
+    var lang AccountLanguage = AccountLanguage{}
+    err := rows.Scan(&lang.Id, &lang.Name, &lang.Profeciency)
+
+    return lang, err
+}
+
 func (lang AccountLanguage) save(session *util.Session) error {
   if lang.Id <= 0 {
     return lang.saveNew(session)
@@ -147,4 +180,50 @@ func (lang AccountLanguage) delete(session *util.Session) error {
   err = util.Update(query, lang.Id)
 
   return err
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+func SaveLanguage(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
+
+  session, err := util.GetSession(w, r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Problems in session", http.StatusBadRequest}
+  }
+
+  langMap, err := util.ParseJsonRequest(r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Invalid JSON Language", http.StatusBadRequest}
+  }
+
+  lang, _ := parseAccountLanguage(langMap)
+
+  err = lang.save(session)
+  if err != nil {
+    return nil, &util.HandlerError{err, "Problem while saving Language", http.StatusBadRequest}
+  }
+
+  return lang, nil
+}
+
+func DeleteLanguage(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
+
+  session, err := util.GetSession(w, r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Problems in session", http.StatusBadRequest}
+  }
+
+  langMap, err := util.ParseJsonRequest(r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Invalid JSON Language", http.StatusBadRequest}
+  }
+
+  lang, _ := parseAccountLanguage(langMap)
+
+  err = lang.delete(session)
+  if err != nil {
+    return nil, &util.HandlerError{err, "Problem while deleting Language", http.StatusBadRequest}
+  }
+
+  return lang, nil
 }

@@ -572,7 +572,6 @@ ALTER TABLE AccountEducation
  OWNER TO globeAdmin;
 
 
-
 -- Table: AccountSkill
 
 -- DROP TABLE AccountSkill;
@@ -589,6 +588,30 @@ CONSTRAINT AccountSkill_Account_FK FOREIGN KEY (accountID)
     ON UPDATE NO ACTION ON DELETE NO ACTION,
 CONSTRAINT AccountSkill_Skill_FK FOREIGN KEY (skillID)
     REFERENCES skill (id) MATCH SIMPLE
+    ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE AccountSkill
+OWNER TO globeAdmin;
+
+-- Table: AccountCertificate
+
+-- DROP TABLE AccountCertificate;
+
+create TABLE AccountCertificate
+(
+ID serial,
+accountID integer NOT NULL,
+School character varying(200) not null,
+Authority character varying(200) not null,
+License character varying(200) not null,
+Url character varying(300) not null,
+Description character varying(2000),
+CONSTRAINT AccountCertificate_PK PRIMARY KEY (ID),
+CONSTRAINT AccountCertificate_Account_FK FOREIGN KEY (accountID)
+    REFERENCES account (id) MATCH SIMPLE
     ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (

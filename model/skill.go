@@ -2,6 +2,7 @@ package model
 
 import (
   "database/sql"
+  "net/http"
   "github.com/sinanazemi/global-hiring/util"
 )
 
@@ -42,4 +43,12 @@ func readSkill(rows *sql.Rows) (interface{}, error) {
   err := rows.Scan(&skill.Id, &skill.Name, &skill.MainServiceID)
 
   return skill, err
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+func GetSkills(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
+
+  id := util.GetID(r)
+  return getSkills(id), nil
 }
