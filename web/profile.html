@@ -2,13 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>My Profile</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-resource.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link href="Styles/CustomStyle.css" rel="stylesheet" />
     <link href="Styles/Profile.css" rel="stylesheet" />
 </head>
-<body>
+<body> <div ng-app="app" ng-controller="controller">
     <!-- navigation bar -->
     <nav class="navbar navbar-fixed-top">
         <div class="container nav-container-c">
@@ -27,8 +29,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <img class="small-profile-img-c" src="images/Chrysanthemum.jpg" /></li>
-                    <li><a href="#name" class="login-link-c">Sami Ebadi <span class="glyphicon glyphicon-chevron-down pf_icon-c"></span></a></li>
-                    
+                    <li><a href="#name" class="login-link-c">{{account.name}}<span class="glyphicon glyphicon-chevron-down pf_icon-c"></span></a></li>
+
                 </ul>
             </div>
             <div class="menu-mo-c">
@@ -42,7 +44,7 @@
 
     <!-- My Profile -->
     <div class="container-fluid myProfile-cn-c">
-        <h2>My Profile</h2>        
+        <h2>My Profile</h2>
         <div class="row">
             <div class="col-sm-9 panels-c">
 
@@ -71,13 +73,13 @@
                         </p>
                     </div>
                 </div>
-                               
+
                 <!-- Work History -->
                 <div class="panel panel-default">
                     <div class="panel-body panel-history-c">
-                        <h4>Work History 
+                        <h4>Work History
                             &nbsp;<a class="btn-add-c add-history-c" data-toggle="modal" data-target="#addHistory"><span class="glyphicon glyphicon-plus-sign"></span></a>
-                        </h4>                            
+                        </h4>
                         <h5><span class="history-txt-c"> Software Engineer | Meltwater</span>
                             &nbsp;<a href="#" class="a-btn-c btn-edit-c edit-history-c" data-toggle="modal" data-target="#addHistory">
                                 <span class="glyphicon glyphicon-pencil"></span>
@@ -239,7 +241,7 @@
 
                     </div>
                 </div>
-                             
+
                 <!-- Education -->
                 <div class="panel panel-default panel-education-c">
                     <div class="panel-body">
@@ -1037,5 +1039,25 @@
                     </div>
                     <!--</footer>-->
                 </div>
+</div>
+<script>
+  // new dependency: ngResource is included just above
+  var myapp = new angular.module("app", ["ngResource"]);
+
+  // inject the $resource dependency here
+  myapp.controller("controller",
+    ["$scope", "$window", "$resource",
+      function($scope , $window , $resource)
+      {
+        var accountRes = $resource("/account")
+        accountRes.get(
+          function(data){
+            $scope.account = data
+          }
+        );
+      }
+    ]
+  )
+</script>
 </body>
 </html>

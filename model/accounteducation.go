@@ -91,7 +91,7 @@ func (ace AccountEducation) deleteValidation(session *util.Session) error {
   return ace.accountValidation(session)
 }
 
-func LoadAccountEducations(session *util.Session) ([]AccountEducation, error) {
+func loadAccountEducations(session *util.Session) ([]AccountEducation, error) {
 
   query :=
     "SELECT ID, School, FromDate, ToDate, Field, Grade, degreeID " +
@@ -108,7 +108,7 @@ func LoadAccountEducations(session *util.Session) ([]AccountEducation, error) {
 
     for _, dummyEdu := range educations {
       education, _ := dummyEdu.(AccountEducation)
-      education.Degree = LoadDegree(education.Degree.Id)
+      education.Degree = loadDegree(education.Degree.Id)
       result = append(result, education)
     }
 

@@ -21,7 +21,7 @@ func parseCity(dataMap map[string]interface{}) (City, error) {
   return result, nil
 }
 
-func LoadCities(where string, args ...interface{}) []City {
+func loadCities(where string, args ...interface{}) []City {
 
 	var result = make([]City, 0)
 
@@ -39,14 +39,14 @@ func LoadCities(where string, args ...interface{}) []City {
   return result
 }
 
-func LoadCity(cityID int) City {
+func loadCity(cityID int) City {
 
-	return LoadCities("ID = $1", cityID)[0]
+	return loadCities("ID = $1", cityID)[0]
 }
 
 func getCities() []City {
 
-	return LoadCities("1=1")
+	return loadCities("1=1")
 }
 
 func readCity(rows *sql.Rows) (interface{}, error) {

@@ -28,6 +28,10 @@ func main() {
 	http.Handle("/degrees", util.Handler(model.GetDegrees))
 	http.Handle("/mainServices", util.Handler(model.GetMainServices))
 	http.Handle("/skills", util.Handler(model.GetSkills))
+
+
+	// Editting Skills
+	http.Handle("/account", util.Handler(model.GetAccount))
 	http.Handle("/saveAccount", util.Handler(model.SaveAccount))
 
 	// Editting Skills

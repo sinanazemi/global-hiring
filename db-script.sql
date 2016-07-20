@@ -604,7 +604,7 @@ create TABLE AccountCertificate
 (
 ID serial,
 accountID integer NOT NULL,
-School character varying(200) not null,
+Name character varying(200) not null,
 Authority character varying(200) not null,
 License character varying(200) not null,
 Url character varying(300) not null,
@@ -617,5 +617,5 @@ CONSTRAINT AccountCertificate_Account_FK FOREIGN KEY (accountID)
 WITH (
 OIDS=FALSE
 );
-ALTER TABLE AccountSkill
+ALTER TABLE AccountCertificate
 OWNER TO globeAdmin;

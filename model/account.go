@@ -61,22 +61,22 @@ func parseAccount(dataMap map[string]interface{}) (Account, error) {
   return result, nil
 }
 
-func LoadAccount(session *util.Session) (Account, error) {
+func loadAccount(session *util.Session) (Account, error) {
   query := "select ID, Name, Email, Phone, Password, IsStudent, cityID from Account Where ID = $1"
-  accArr, _ := util.Select(ReadAccount, query, session.GetAccountID())
+  accArr, _ := util.Select(readAccount, query, session.GetAccountID())
   account := accArr[0].(Account)
 
-  account.City = LoadCity(account.City.Id)
+  account.City = loadCity(account.City.Id)
 
-  account.Languages, _ = LoadAccountLanguages(session)
-  account.Educations, _ = LoadAccountEducations(session)
-  account.Skills, _ = LoadAccountSkills(session)
-  account.Certificates, _ = LoadAccountCertificates(session)
+  account.Languages, _ = loadAccountLanguages(session)
+  account.Educations, _ = loadAccountEducations(session)
+  account.Skills, _ = loadAccountSkills(session)
+  account.Certificates, _ = loadAccountCertificates(session)
 
   return account, nil
 }
 
-func ReadAccount(rows *sql.Rows) (interface{}, error) {
+func readAccount(rows *sql.Rows) (interface{}, error) {
   var acc Account = Account{}
   err := rows.Scan(&acc.Id, &acc.Name, &acc.Email, &acc.Phone, &acc.Password, &acc.IsStudent, &acc.City.Id)
 
@@ -129,6 +129,21 @@ func (acc Account) saveUpdate(session *util.Session) error {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+func GetAccount(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
+
+  session, err := util.GetSession(w, r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Problems in session", http.StatusBadRequest}
+  }
+
+  account, err := loadAccount(session)
+  if err != nil {
+    return nil, &util.HandlerError{err, "Problem while loading account", http.StatusBadRequest}
+  }
+  account.Password = "" // :D
+  return account, nil
+}
 
 func SaveAccount(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
 

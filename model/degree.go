@@ -21,7 +21,7 @@ func parseDegree(dataMap map[string]interface{}) (Degree, error) {
   return result, nil
 }
 
-func LoadDegrees(where string, args ...interface{}) []Degree {
+func loadDegrees(where string, args ...interface{}) []Degree {
 
   // list of all of services
 	var result = make([]Degree, 0)
@@ -40,14 +40,14 @@ func LoadDegrees(where string, args ...interface{}) []Degree {
   return result
 }
 
-func LoadDegree(degreeID int) Degree {
+func loadDegree(degreeID int) Degree {
 
-  return LoadDegrees("ID = $1", degreeID)[0]
+  return loadDegrees("ID = $1", degreeID)[0]
 }
 
 func getDegrees() []Degree {
 
-  return LoadDegrees("1=1")
+  return loadDegrees("1=1")
 }
 
 func readDegree(rows *sql.Rows) (interface{}, error) {

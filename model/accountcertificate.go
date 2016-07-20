@@ -89,7 +89,7 @@ func (cer AccountCertificate) deleteValidation(session *util.Session) error {
   return cer.accountValidation(session)
 }
 
-func LoadAccountCertificates(session *util.Session) ([]AccountCertificate, error) {
+func loadAccountCertificates(session *util.Session) ([]AccountCertificate, error) {
   query :=
     "SELECT ID, Name, Authority, License, Url, Description " +
     "FROM AccountCertificate " +

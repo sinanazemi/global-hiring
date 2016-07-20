@@ -88,7 +88,7 @@ func (lang AccountLanguage) deleteValidation(session *util.Session) error {
   return lang.accountValidation(session)
 }
 
-func LoadAccountLanguages(session *util.Session) ([]AccountLanguage, error) {
+func loadAccountLanguages(session *util.Session) ([]AccountLanguage, error) {
   query :=
     "SELECT ID, Name, Profeciency " +
     "FROM AccountLanguage " +

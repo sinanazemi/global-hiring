@@ -91,7 +91,7 @@ func (acs AccountSkill) deleteValidation(session *util.Session) error {
   return acs.accountValidation(session)
 }
 
-func LoadAccountSkills(session *util.Session) ([]AccountSkill, error) {
+func loadAccountSkills(session *util.Session) ([]AccountSkill, error) {
   query :=
     " SELECT a.ID, a.SkillID, s.Name, s.MainServiceID, a.Profeciency " +
     " FROM accountskill a " +
