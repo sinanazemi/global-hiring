@@ -56,12 +56,15 @@
                                 <img src="images/Chrysanthemum.jpg" class="prf-img-c" />
                             </div>
                             <div class="col-sm-10 prf-info-c">
-                                <h4>Sami Ebadi</h4>
+                                <h4>{{account.name}}</h4>
                                 <h5>Experienced Web and Mobile Developer</h5>
-                                <p><span class="glyphicon glyphicon-map-marker"></span>  Tehran, Iran</p>
+                                <p><span class="glyphicon glyphicon-map-marker"></span>  {{account.city.name}}, Iran</p>
                                 <p>
                                     <span class="prf-edu-c">Education</span>
-                                    &nbsp; B.S., Computer Science BIHE
+                                    <!--&nbsp;B.S., Computer Science BIHE-->
+                                    <span ng-repeat="x in account.educations">
+                                        {{x.degree.name}}, {{x.field}} | {{x.school}}<br/>
+                                    </span>
                                 </p>
                                 <a href="#">Add Skills</a>
                             </div>
@@ -249,18 +252,23 @@
                             Education
                             &nbsp;<a class="btn-add-c add-education-c" data-toggle="modal" data-target="#addEducation"><span class="glyphicon glyphicon-plus-sign"></span></a>
                         </h4>
-                        <h5>
-                            <span class="education-txt-c">
-                                Bachelor of Science (B.S.), Computer science | BIHE
-                            </span>
+                        <div ng-repeat="x in account.educations">
+                            <h5>
+                                <span class="education-txt-c">
+                                    <!--Bachelor of Science (B.S.), Computer science | BIHE-->
+                                    {{x.degree.name}}, {{x.field}} | {{x.school}}
+                                </span>
                                 &nbsp;<a href="#" class="a-btn-c btn-edit-c edit-education-c" data-toggle="modal" data-target="#addHistory">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </a>
                                 &nbsp;<a href="#" class=" a-btn-c btn-delete-c delete-education-c">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </a>
-</h5>
-                        <p><span class="education-txt-c">2007 - 2012</span></p>
+                            </h5>
+
+                            <!--<p><span class="education-txt-c">2007 - 2012</span></p>-->
+                            <p><span class="education-txt-c">{{x.fromdate}} - {{x.todate}}</span></p>
+                        </div>
                     </div>
                 </div>
                 <!-- Modal Education -->
@@ -986,9 +994,7 @@
                 <hr />
                 <br />
                 <h3>Languages</h3>
-                <p>English: <span>Fluent</span></p>
-                <p>Persian: <span>Native or Bilingual</span></p>
-                <p>Turkish: <span>Basic</span></p>
+                <p ng-repeat="x in account.languages">{{x.name}}: <span>{{x.profeciency}}</span></p>                
             </div>
 
         </div>
@@ -1055,6 +1061,17 @@
             $scope.account = data
           }
         );
+
+        //var cityRes = $resource("/city")
+        //cityRes.get(
+        //  function (data) {
+        //      $scope.city = data[$scope.cityid];
+        //  }
+        //);
+
+        $scope.getCity = function(){
+            $scope.skills = $scope.selectedService.skills;
+        }; 
       }
     ]
   )
