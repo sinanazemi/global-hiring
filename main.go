@@ -50,6 +50,10 @@ func main() {
 	http.Handle("/saveLanguage", util.Handler(model.SaveLanguage))
 	http.Handle("/deleteLanguage", util.Handler(model.DeleteLanguage))
 
+	// Editting Work Histories
+	http.Handle("/saveWork", util.Handler(model.SaveWork))
+	http.Handle("/deleteWork", util.Handler(model.DeleteWork))
+
 	log.Printf("Running on port %d\n", *port)
 
 	addr := fmt.Sprintf("127.0.0.1:%d", *port)

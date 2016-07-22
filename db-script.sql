@@ -619,3 +619,33 @@ OIDS=FALSE
 );
 ALTER TABLE AccountCertificate
 OWNER TO globeAdmin;
+
+
+-- Table: AccountWork
+
+-- DROP TABLE AccountWork;
+
+create TABLE AccountWork
+(
+ID serial,
+Company character varying(200) not null,
+Location character varying(600) not null,
+Title character varying(200) not null,
+Role character(1) not null,
+FromMonth integer NOT NULL,
+FromYear integer NOT NULL,
+ToMonth integer,
+ToYear integer,
+currently boolean not null,
+Description character varying(2000),
+accountID integer NOT NULL,
+CONSTRAINT AccountWork_PK PRIMARY KEY (ID),
+CONSTRAINT AccountWork_Account_FK FOREIGN KEY (accountID)
+    REFERENCES account (id) MATCH SIMPLE
+    ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE AccountWork
+OWNER TO globeAdmin;
