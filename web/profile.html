@@ -9,6 +9,7 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link href="Styles/CustomStyle.css" rel="stylesheet" />
     <link href="Styles/Profile.css" rel="stylesheet" />
+    <script src="Scripts/ProfileScript.js"></script>
 </head>
 <body> <div ng-app="app" ng-controller="controller">
     <!-- navigation bar -->
@@ -285,64 +286,36 @@
                                 <form role="form">
                                     <div class="form-group form-g-c">
                                         <label class="control-label" for="school">School</label>
-                                        <input class="form-control" id="school" name="school" type="text" required>
+                                        <input class="form-control" id="school" name="school" type="text" ng-model="School" required>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label" for="dates_attended">Dates Attended</label>
                                         <div class="row">
-                                            <div class="col-sm-5">
-                                                <input class="form-control" id="fDate" name="fDate" type="text" list="years" placeholder="From" />
-                                                <datalist id="years">
-                                                    <option>2005</option>
-                                                    <option>2006</option>
-                                                    <option>2007</option>
-                                                    <option>2008</option>
-                                                    <option>2009</option>
-                                                    <option>2010</option>
-                                                    <option>2012</option>
-                                                    <option>2013</option>
-                                                    <option>2014</option>
-                                                    <option>2015</option>
-                                                    <option>2016</option>
-                                                    <option>2017</option>
-                                                </datalist>
+                                            <div class="col-sm-6">
+                                                <select class="form-control" id="fDate" ng-model="FromDate" ng-options="opt as opt for opt in dates"><option value="" disabled selected>From</option></select>                                               
                                             </div>
-                                            <div class="col-sm-2"></div>
-                                            <div class="col-sm-5">
-                                                <input class="form-control" id="tDate" name="tDate" type="text" list="years" placeholder="To (or expected graducation year)" />
-                                                <datalist id="years">
-                                                    <option>2005</option>
-                                                    <option>2006</option>
-                                                    <option>2007</option>
-                                                    <option>2008</option>
-                                                    <option>2009</option>
-                                                    <option>2010</option>
-                                                    <option>2012</option>
-                                                    <option>2013</option>
-                                                    <option>2014</option>
-                                                    <option>2015</option>
-                                                    <option>2016</option>
-                                                    <option>2017</option>
-                                                </datalist>
+                                            <div class="col-sm-6">
+                                                <select class="form-control" id="tDate" ng-model="ToDate" ng-options="opt as opt for opt in dates"><option value="" disabled selected>To (or expected graducation year)</option></select>  
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label" for="degree">Degree</label>
-                                        <input class="form-control" id="degree" name="degree" type="text" required>
+                                        <label class="control-label" for="degree" ng-model="SelectedDegree">Degree</label>
+                                        <!--<input class="form-control" id="degree" name="degree" type="text" required>-->
+                                        <select class="form-control" id="degrees" ng-model="SelectedDegree" ng-options="degree.name for degree in degrees"></select>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label" for="area">Area of Study (optional)</label>
-                                        <input class="form-control" id="area" name="area" type="text" required>
+                                        <input class="form-control" id="area" name="area" type="text" ng-model="Field" required>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label" for="description">Description (optional)</label>
-                                        <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+                                        <textarea class="form-control" rows="5" id="description" name="description" ng-model="Grade"></textarea>
                                     </div>
                                 </form>
                             </div>
                             <div class="modal-footer m-footer-c">
-                                <button type="button" class="btn btn-save-c">Save</button>
+                                <button type="button" class="btn btn-save-c" ng-click="addEducation()" data-dismiss="modal">Save</button>
                                 <button type="button" class="btn btn-save-more-c">Save And Add More</button>
                                 <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
                             </div>
@@ -1046,35 +1019,6 @@
                     <!--</footer>-->
                 </div>
 </div>
-<script>
-  // new dependency: ngResource is included just above
-  var myapp = new angular.module("app", ["ngResource"]);
 
-  // inject the $resource dependency here
-  myapp.controller("controller",
-    ["$scope", "$window", "$resource",
-      function($scope , $window , $resource)
-      {
-        var accountRes = $resource("/account")
-        accountRes.get(
-          function(data){
-            $scope.account = data
-          }
-        );
-
-        //var cityRes = $resource("/city")
-        //cityRes.get(
-        //  function (data) {
-        //      $scope.city = data[$scope.cityid];
-        //  }
-        //);
-
-        $scope.getCity = function(){
-            $scope.skills = $scope.selectedService.skills;
-        }; 
-      }
-    ]
-  )
-</script>
 </body>
 </html>
