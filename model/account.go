@@ -25,6 +25,8 @@ type Account struct {
   Certificates []AccountCertificate `json:"certificates"`
 
   Works []AccountWork `json:"works"`
+
+  Volunteerings []AccountVolunteering `json:"volunteerings"`
 }
 
 func parseAccount(dataMap map[string]interface{}) (Account, error) {
@@ -62,6 +64,8 @@ func parseAccount(dataMap map[string]interface{}) (Account, error) {
 
   result.Works = parseAccountWorks(dataMap["works"])
 
+  result.Volunteerings = parseAccountVolunteerings(dataMap["volunteering"])
+
   return result, nil
 }
 
@@ -77,6 +81,8 @@ func loadAccount(session *util.Session) (Account, error) {
   account.Skills, _ = loadAccountSkills(session)
   account.Certificates, _ = loadAccountCertificates(session)
   account.Works, _ = loadAccountWorks(session)
+  account.Volunteerings, _ = loadAccountVolunteerings(session)
+
 
   return account, nil
 }
@@ -128,6 +134,10 @@ func (acc Account) saveNew(session *util.Session) error {
 
   for _ , work := range acc.Works {
     work.save(session)
+  }
+
+  for _ , vol := range acc.Volunteerings {
+    vol.save(session)
   }
 
   return nil

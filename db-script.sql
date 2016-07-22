@@ -649,3 +649,30 @@ OIDS=FALSE
 );
 ALTER TABLE AccountWork
 OWNER TO globeAdmin;
+
+-- Table: AccountVolunteering
+
+-- DROP TABLE AccountVolunteering;
+
+create TABLE AccountVolunteering
+(
+ID serial,
+Organization character varying(200) not null,
+Role character varying(200) not null,
+Cause character(2) not null,
+FromMonth integer NOT NULL,
+FromYear integer NOT NULL,
+ToMonth integer,
+ToYear integer,
+Description character varying(2000),
+accountID integer NOT NULL,
+CONSTRAINT AccountVolunteering_PK PRIMARY KEY (ID),
+CONSTRAINT AccountVolunteering_Account_FK FOREIGN KEY (accountID)
+    REFERENCES account (id) MATCH SIMPLE
+    ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE AccountVolunteering
+OWNER TO globeAdmin;
