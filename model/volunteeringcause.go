@@ -38,7 +38,7 @@ func loadVolunteeringCauses(where string, args ...interface{}) []VolunteeringCau
   // list of all of services
 	var result = make([]VolunteeringCause, 0)
 
-  causes, err := util.Select(readDegree, "select * from VolunteeringCause where " + where, args...)
+  causes, err := util.Select(readVolunteeringCause, "select * from VolunteeringCause where " + where, args...)
 
   if err != nil {
     return result

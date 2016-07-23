@@ -711,3 +711,14 @@ OIDS=FALSE
 );
 ALTER TABLE AccountVolunteering
 OWNER TO globeAdmin;
+
+-- View: Occupation
+
+-- DROP VIEW Occupation;
+
+create or replace view Occupation as
+select (1 + 10*ID) as ID, accountID, school as name from accounteducation
+union
+select (2 + 10*ID) as ID, accountID, company as name from accountwork;
+ALTER VIEW Occupation
+OWNER TO globeAdmin;
