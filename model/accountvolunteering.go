@@ -268,7 +268,7 @@ func DeleteVolunteering(w http.ResponseWriter, r *http.Request) (interface{}, *u
 
   err = vol.delete(session)
   if err != nil {
-    return nil, &util.HandlerError{err, "Problem while deleting Work", http.StatusBadRequest}
+    return nil, &util.HandlerError{err, "Problem while deleting Volunteering", http.StatusBadRequest}
   }
 
   return vol, nil

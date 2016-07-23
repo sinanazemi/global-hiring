@@ -717,8 +717,33 @@ OWNER TO globeAdmin;
 -- DROP VIEW Occupation;
 
 create or replace view Occupation as
+select 0 as ID, -1 as accountID, 'Other' as Name
+union
 select (1 + 10*ID) as ID, accountID, school as name from accounteducation
 union
 select (2 + 10*ID) as ID, accountID, company as name from accountwork;
 ALTER VIEW Occupation
+OWNER TO globeAdmin;
+
+-- Table: AccountCourse
+
+-- DROP TABLE AccountCourse;
+
+create TABLE AccountCourse
+(
+ID serial,
+Name character varying(100) not null,
+Number character varying(100) not null,
+OccupationID integer not null,
+Description character varying(2000),
+accountID integer NOT NULL,
+CONSTRAINT AccountCourse_PK PRIMARY KEY (ID),
+CONSTRAINT AccountCourse_Account_FK FOREIGN KEY (accountID)
+    REFERENCES account (id) MATCH SIMPLE
+    ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE AccountCourse
 OWNER TO globeAdmin;
