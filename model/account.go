@@ -8,6 +8,7 @@ import (
 )
 
 type Account struct {
+
   Id     int    `json:"id"`
 	Name  string `json:"name"`
   Email string `json:"email"`
@@ -29,6 +30,8 @@ type Account struct {
   Volunteerings []AccountVolunteering `json:"volunteerings"`
 
   Courses []AccountCourse `json:"courses"`
+
+  Honors []AccountHonor `json:"honors"`
 }
 
 func parseAccount(dataMap map[string]interface{}) (Account, error) {
@@ -70,6 +73,8 @@ func parseAccount(dataMap map[string]interface{}) (Account, error) {
 
   result.Courses = parseAccountCourses(dataMap["courses"])
 
+  result.Honors = parseAccountHonors(dataMap["honors"])
+
   return result, nil
 }
 
@@ -87,7 +92,7 @@ func loadAccount(session *util.Session) (Account, error) {
   account.Works, _ = loadAccountWorks(session)
   account.Volunteerings, _ = loadAccountVolunteerings(session)
   account.Courses, _ = loadAccountCourses(session)
-
+  account.Honors, _ = loadAccountHonors(session)
 
   return account, nil
 }
@@ -147,6 +152,10 @@ func (acc Account) saveNew(session *util.Session) error {
 
   for _ , course := range acc.Courses {
     course.save(session)
+  }
+
+  for _ , honor := range acc.Honors {
+    honor.save(session)
   }
 
   return nil

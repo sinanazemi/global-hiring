@@ -747,3 +747,27 @@ OIDS=FALSE
 );
 ALTER TABLE AccountCourse
 OWNER TO globeAdmin;
+
+-- Table: AccountHonor
+
+-- DROP TABLE AccountHonor;
+
+create TABLE AccountHonor
+(
+ID serial,
+Title character varying(100) not null,
+OccupationID integer not null,
+Month integer NOT NULL,
+Year integer NOT NULL,
+Description character varying(2000),
+accountID integer NOT NULL,
+CONSTRAINT AccountHonor_PK PRIMARY KEY (ID),
+CONSTRAINT AccountHonor_Account_FK FOREIGN KEY (accountID)
+    REFERENCES account (id) MATCH SIMPLE
+    ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE AccountHonor
+OWNER TO globeAdmin;

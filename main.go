@@ -60,6 +60,10 @@ func main() {
 	http.Handle("/saveVolunteering", util.Handler(model.SaveVolunteering))
 	http.Handle("/deleteVolunteering", util.Handler(model.DeleteVolunteering))
 
+	// Editting Honors
+	http.Handle("/saveHonor", util.Handler(model.SaveHonor))
+	http.Handle("/deleteHonor", util.Handler(model.DeleteHonor))
+
 	// Editting Courses
 	http.Handle("/saveCourse", util.Handler(model.SaveCourse))
 	http.Handle("/deleteCourse", util.Handler(model.DeleteCourse))

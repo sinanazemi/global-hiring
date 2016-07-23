@@ -13,7 +13,6 @@ type AccountCourse struct {
   Name string `json:"name"`
   Number string `json:"number"`
   Occupation Occupation `json:"occupation"`
-  Url string `json:"url"`
   Description string `json:"description"`
 }
 
