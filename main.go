@@ -72,6 +72,10 @@ func main() {
 	http.Handle("/saveTest", util.Handler(model.SaveTest))
 	http.Handle("/deleteTest", util.Handler(model.DeleteTest))
 
+	// Editting Projects
+	http.Handle("/saveProject", util.Handler(model.SaveProject))
+	http.Handle("/deleteProject", util.Handler(model.DeleteProject))
+
 	log.Printf("Running on port %d\n", *port)
 
 	addr := fmt.Sprintf("127.0.0.1:%d", *port)

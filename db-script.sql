@@ -797,3 +797,28 @@ OIDS=FALSE
 );
 ALTER TABLE AccountTest
 OWNER TO globeAdmin;
+
+-- Table: AccountProject
+
+-- DROP TABLE AccountProject;
+
+create TABLE AccountProject
+(
+ID serial,
+Name character varying(100) not null,
+OccupationID integer not null,
+Month integer NOT NULL,
+Year integer NOT NULL,
+URL character varying(500),
+Description character varying(2000),
+accountID integer NOT NULL,
+CONSTRAINT AccountProject_PK PRIMARY KEY (ID),
+CONSTRAINT AccountProject_Account_FK FOREIGN KEY (accountID)
+    REFERENCES account (id) MATCH SIMPLE
+    ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE AccountProject
+OWNER TO globeAdmin;
