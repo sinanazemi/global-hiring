@@ -79,7 +79,7 @@ func (avl AccountVolunteering) dataValidation(session *util.Session) error {
     errStr = errStr + "AccountVolunteering.Role is Empty\n"
   }
 
-  if (avl.Cause.isEmpty()) {
+  if (avl.Cause.Id <= 0) {
     errStr = errStr + "Invalid Cause in AccountVolunteering\n"
   }
 
@@ -140,7 +140,7 @@ func loadAccountVolunteerings(session *util.Session) ([]AccountVolunteering, err
 
       vol, _ := dummyVol.(AccountVolunteering)
 
-      vol.Cause = loadVolunteeringCause(vol.Cause.Value)
+      vol.Cause = loadVolunteeringCause(vol.Cause.Id)
       vol.FromMonth = loadMonth(vol.FromMonth.Value)
       vol.ToMonth = loadMonth(vol.ToMonth.Value)
 
@@ -153,7 +153,7 @@ func loadAccountVolunteerings(session *util.Session) ([]AccountVolunteering, err
 func readAccountVolunteering(rows *sql.Rows) (interface{}, error) {
 
     var vol AccountVolunteering = AccountVolunteering{}
-    err := rows.Scan(&vol.Id, &vol.Organization, &vol.Role, &vol.Cause.Value, &vol.FromMonth.Value, &vol.FromYear, &vol.ToMonth.Value, &vol.ToYear, &vol.Description)
+    err := rows.Scan(&vol.Id, &vol.Organization, &vol.Role, &vol.Cause.Id, &vol.FromMonth.Value, &vol.FromYear, &vol.ToMonth.Value, &vol.ToYear, &vol.Description)
 
     return vol, err
 }
@@ -178,7 +178,7 @@ func (vol AccountVolunteering) saveNew(session *util.Session) error {
     "VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) " +
     "returning ID"
 
-  id, err := util.Insert(query, vol.Organization, vol.Role, vol.Cause.Value, vol.FromMonth.Value, vol.FromYear, vol.ToMonth.Value, vol.ToYear, vol.Description, session.GetAccountID())
+  id, err := util.Insert(query, vol.Organization, vol.Role, vol.Cause.Id, vol.FromMonth.Value, vol.FromYear, vol.ToMonth.Value, vol.ToYear, vol.Description, session.GetAccountID())
 
   if err != nil {
     return err
@@ -207,7 +207,7 @@ func (vol AccountVolunteering) saveUpdate(session *util.Session) error {
     "Description = $8 " +
     "WHERE ID = $9 "
 
-  err = util.Update(query, vol.Organization, vol.Role, vol.Cause.Value, vol.FromMonth.Value, vol.FromYear, vol.ToMonth.Value, vol.ToYear, vol.Description, vol.Id)
+  err = util.Update(query, vol.Organization, vol.Role, vol.Cause.Id, vol.FromMonth.Value, vol.FromYear, vol.ToMonth.Value, vol.ToYear, vol.Description, vol.Id)
 
   return err
 

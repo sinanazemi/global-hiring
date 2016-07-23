@@ -28,6 +28,7 @@ func main() {
 	http.Handle("/degrees", util.Handler(model.GetDegrees))
 	http.Handle("/mainServices", util.Handler(model.GetMainServices))
 	http.Handle("/skills", util.Handler(model.GetSkills))
+	http.Handle("/volunteeringCauses", util.Handler(model.GetVolunteeringCauses))
 
 
 	// Editting Skills

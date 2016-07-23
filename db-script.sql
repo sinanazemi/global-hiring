@@ -650,6 +650,38 @@ OIDS=FALSE
 ALTER TABLE AccountWork
 OWNER TO globeAdmin;
 
+-- Table: VolunteeringCause
+
+-- DROP TABLE VolunteeringCause;
+
+CREATE TABLE VolunteeringCause
+(
+  ID serial,
+  Name character varying(200) not null,
+  CONSTRAINT VolunteeringCause_PK PRIMARY KEY (ID),
+  CONSTRAINT VolunteeringCause_Name_UK UNIQUE (Name)
+)
+WITH (
+OIDS=FALSE
+);
+ALTER TABLE VolunteeringCause
+OWNER TO globeAdmin;
+
+insert into VolunteeringCause (Name) values ('Animal Welfare');
+insert into VolunteeringCause (Name) values ('Arts and Culture');
+insert into VolunteeringCause (Name) values ('Children');
+insert into VolunteeringCause (Name) values ('Civil Rights and Social Action');
+insert into VolunteeringCause (Name) values ('Disaster and Humanitarian Releif');
+insert into VolunteeringCause (Name) values ('Economic Empowerment');
+insert into VolunteeringCause (Name) values ('Education');
+insert into VolunteeringCause (Name) values ('Environment');
+insert into VolunteeringCause (Name) values ('Health');
+insert into VolunteeringCause (Name) values ('Human Rights');
+insert into VolunteeringCause (Name) values ('Politics');
+insert into VolunteeringCause (Name) values ('Poverty Alleviation');
+insert into VolunteeringCause (Name) values ('Science and technology');
+insert into VolunteeringCause (Name) values ('Social Services');
+
 -- Table: AccountVolunteering
 
 -- DROP TABLE AccountVolunteering;
@@ -659,7 +691,7 @@ create TABLE AccountVolunteering
 ID serial,
 Organization character varying(200) not null,
 Role character varying(200) not null,
-Cause character(2) not null,
+Cause integer not null,
 FromMonth integer NOT NULL,
 FromYear integer NOT NULL,
 ToMonth integer,
@@ -669,6 +701,9 @@ accountID integer NOT NULL,
 CONSTRAINT AccountVolunteering_PK PRIMARY KEY (ID),
 CONSTRAINT AccountVolunteering_Account_FK FOREIGN KEY (accountID)
     REFERENCES account (id) MATCH SIMPLE
+    ON UPDATE NO ACTION ON DELETE NO ACTION,
+CONSTRAINT AccountVolunteering_Cause_FK FOREIGN KEY (Cause)
+    REFERENCES VolunteeringCause (id) MATCH SIMPLE
     ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
