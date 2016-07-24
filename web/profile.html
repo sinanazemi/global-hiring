@@ -81,18 +81,22 @@
                 <!-- Work History -->
                 <div class="panel panel-default">
                     <div class="panel-body panel-history-c">
-                        <h4>Work History
+                        <h4>
+                            Work History
                             &nbsp;<a class="btn-add-c add-history-c" data-toggle="modal" data-target="#addHistory"><span class="glyphicon glyphicon-plus-sign"></span></a>
                         </h4>
-                        <h5><span class="history-txt-c"> Software Engineer | Meltwater</span>
-                            &nbsp;<a href="#" class="a-btn-c btn-edit-c edit-history-c" data-toggle="modal" data-target="#addHistory">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                            </a>
-                            &nbsp;<a href="#" class=" a-btn-c btn-delete-c delete-history-c">
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </a>
-                        </h5>
-                        <p><span class="history-txt-c">February 2015 - March 2016</span></p>
+                        <div ng-repeat="x in account.works">
+                            <h5>
+                                <span class="history-txt-c">{{x.title}} | {{x.location}} <!--Software Engineer | Meltwater--></span>
+                                &nbsp;<a href="#" class="a-btn-c btn-edit-c edit-history-c" data-toggle="modal" data-target="#addHistory" ng-click="editWorkHistory(x)">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </a>
+                                &nbsp;<a href="#" class=" a-btn-c btn-delete-c delete-history-c" ng-click="deleteWorkHistory(x)">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                            </h5>
+                            <p><span class="history-txt-c">{{x.frommonth.name}} {{x.fromyear}} - {{x.tomonth.name}} {{x.toyear}}<!--February 2015 - March 2016--></span></p>
+                        </div>
                     </div>
                 </div>
                 <!-- Modal Add History -->
@@ -107,78 +111,37 @@
                             </div>
                             <div class="modal-body modal-b-c">
                                 <form role="form">
+                                    <input class="form-control" type="text" ng-model="whId" ng-hide="true">
                                     <div class="form-group form-g-c">
                                         <label class="control-label" for="company">Company</label>
-                                        <input class="form-control" id="company" name="company" type="text" required>
+                                        <input class="form-control" id="company" name="company" type="text" ng-model="whCompany" required>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label" for="city">Location</label>
-                                        <input class="form-control" id="location" name="location" type="text" list="locations" />
-                                        <datalist id="locations">
-                                            <option>location 1</option>
-                                            <option>location 2</option>
-                                            <option>location 3</option>
-                                        </datalist>
+                                        <select class="form-control" id="location" ng-model="whLocation" ng-options="opt as opt for opt in locations"></select>                                        
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
                                             <div class="col-sm-5">
                                                 <label class="control-label" for="title">Title</label>
-                                                <input class="form-control" id="title" name="title" type="text" required>
+                                                <input class="form-control" id="title" name="title" type="text" ng-model="whTitle" required>
                                             </div>
                                             <div class="col-sm-2"></div>
                                             <div class="col-sm-5">
                                                 <label class="control-label" for="role">Role</label>
-                                                <input class="form-control" id="role" name="role" type="text" list="roles" placeholder="Please Select..." />
-                                                <datalist id="roles">
-                                                    <option>Intern</option>
-                                                    <option>Individual Contributor</option>
-                                                    <option>Lead</option>
-                                                    <option>Manager</option>
-                                                    <option>Executive</option>
-                                                    <option>Owner</option>
-                                                </datalist>
+                                                <select class="form-control" id="role" ng-model="whRole" ng-options="item.value as item.name for item in roles"><option value="" disabled selected>Please Select...</option></select>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label" for="role">Role</label>
                                         <div class="row">
-                                            <div class="col-sm-5">
-                                                <input class="form-control" id="fMonth" name="fMonth" type="text" list="months" placeholder="Month" />
-                                                <datalist id="months">
-                                                    <option>January</option>
-                                                    <option>February</option>
-                                                    <option>March</option>
-                                                    <option>April</option>
-                                                    <option>May</option>
-                                                    <option>June</option>
-                                                    <option>July</option>
-                                                    <option>August</option>
-                                                    <option>September</option>
-                                                    <option>September</option>
-                                                    <option>November</option>
-                                                    <option>December</option>
-                                                </datalist>
+                                            <div class="col-sm-5">                                                
+                                                <select class="form-control" id="fMonth" ng-model="whFromMonth" ng-options="month as month for month in months"><option value="" disabled selected>Month</option></select>
                                             </div>
                                             <div class="col-sm-2"></div>
                                             <div class="col-sm-5">
-                                                <input class="form-control" id="fYear" name="fYear" type="text" list="years" placeholder="Year" />
-                                                <datalist id="years">
-                                                    <option>2005</option>
-                                                    <option>2006</option>
-                                                    <option>2007</option>
-                                                    <option>2008</option>
-                                                    <option>2009</option>
-                                                    <option>2010</option>
-                                                    <option>2012</option>
-                                                    <option>2013</option>
-                                                    <option>2014</option>
-                                                    <option>2015</option>
-                                                    <option>2016</option>
-                                                    <option>2017</option>
-                                                </datalist>
-
+                                                    <select class="form-control" id="fDate" ng-model="whFromYear" ng-options="opt as opt for opt in dates"><option value="" disabled selected>Year</option></select>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -188,57 +151,29 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-5">
-                                                <input class="form-control" id="tMonth" name="tMonth" type="text" list="months" placeholder="Month" />
-                                                <datalist id="months">
-                                                    <option>January</option>
-                                                    <option>February</option>
-                                                    <option>March</option>
-                                                    <option>April</option>
-                                                    <option>May</option>
-                                                    <option>June</option>
-                                                    <option>July</option>
-                                                    <option>August</option>
-                                                    <option>September</option>
-                                                    <option>September</option>
-                                                    <option>November</option>
-                                                    <option>December</option>
-                                                </datalist>
+                                                <select class="form-control" id="tMonth" ng-model="whToMonth" ng-options="month as month for month in months"><option value="" disabled selected>Month</option></select>
                                             </div>
                                             <div class="col-sm-2"></div>
                                             <div class="col-sm-5">
-                                                <input class="form-control" id="tYear" name="tYear" type="text" list="years" placeholder="Year" />
-                                                <datalist id="years">
-                                                    <option>2005</option>
-                                                    <option>2006</option>
-                                                    <option>2007</option>
-                                                    <option>2008</option>
-                                                    <option>2009</option>
-                                                    <option>2010</option>
-                                                    <option>2012</option>
-                                                    <option>2013</option>
-                                                    <option>2014</option>
-                                                    <option>2015</option>
-                                                    <option>2016</option>
-                                                    <option>2017</option>
-                                                </datalist>
+                                                <select class="form-control" id="tDate" ng-model="whToYear" ng-options="opt as opt for opt in dates"><option value="" disabled selected>Year</option></select>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <div class="checkbox">
-                                            <label class="control-label chk-lbl-c"><input type="checkbox"><span class="custom-check"></span>&nbsp; I currently work here </label>
+                                            <label class="control-label chk-lbl-c"><input type="checkbox" ng-model="whCurrently"><span class="custom-check"></span>&nbsp; I currently work here </label>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label" for="description">Description (optional)</label>
-                                        <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+                                        <textarea class="form-control" rows="5" id="description" name="description" ng-model="whDesc"></textarea>
                                     </div>
                                 </form>
                             </div>
                             <div class="modal-footer m-footer-c">
-                                <button type="button" class="btn btn-save-c">Save</button>
-                                <button type="button" class="btn btn-save-more-c">Save And Add More</button>
+                                <button type="button" class="btn btn-save-c" ng-click="addWorkHistory()" data-dismiss="modal">Save</button>
+                                <button type="button" class="btn btn-save-more-c" ng-click="addWorkHistory()">Save And Add More</button>
                                 <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
                             </div>
                         </div>
