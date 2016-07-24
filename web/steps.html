@@ -17,10 +17,33 @@
 
 </head>
 
-<body bgcolor="#323232">
+<body bgcolor="#323232" >
+
+
+
     <div>
-        <div ng-app="steps" ng-controller="stepsCtrl">
+        <div ng-app="globalHiring" ng-controller="stepsCtrl">
             <a href="#" style="text-decoration: none;">
+
+              <div id="authenticate" class="step-div" ng-hide="authenticateHide" >
+                <div class="stepheader">
+                    <p class="steptitle">Login</p>
+                </div>
+                <form ng-submit="submit()">
+                  <div class="field-div" style="top: 130px;">
+                  <input class="field-text-area-4"  ng-model="user.username" type="text" name="user" placeholder="Email" />
+                </div>
+                <div class="field-div" style="top: 180px;">
+                  <input class="field-text-area-4"  ng-model="user.password" type="password" name="pass" placeholder="Password" />
+                    </div>
+                    <div>
+                  <input type="submit" value="Login" class="next-button green-button button-center"/>
+                  </div>
+                </form>
+              </div>
+
+
+
                 <div id="step1" class="step-div" ng-hide="step1Hide" >
                     <div class="stepheader">
                         <p class="steptitle">Account Information</p>
@@ -238,9 +261,100 @@
 
 
     <script>
-    var app = angular.module('steps',["ngResource"]);
-    app.controller('stepsCtrl',["$scope", "$resource", function($scope,$resource) {
-      $scope.step1Hide=false;
+    var globalHiring = angular.module('globalHiring',["ngResource"]);
+    /*
+    globalHiring.factory('authInterceptor', function ($rootScope, $q, $window) {
+      return {
+        request: function (config) {
+          config.headers = config.headers || {};
+          if ($window.sessionStorage.token) {
+            config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+          }
+          return config;
+        },
+        responseError: function (rejection) {
+          if (rejection.status === 401) {
+            // handle the case where the user is not authenticated
+          }
+          return $q.reject(rejection);
+        }
+      };
+    });
+
+    globalHiring.config(function ($httpProvider) {
+      $httpProvider.interceptors.push('authInterceptor');
+    });
+
+    //this is used to parse the profile
+    function url_base64_decode(str) {
+      var output = str.replace('-', '+').replace('_', '/');
+      switch (output.length % 4) {
+        case 0:
+          break;
+        case 2:
+          output += '==';
+          break;
+        case 3:
+          output += '=';
+          break;
+        default:
+          throw 'Illegal base64url string!';
+      }
+      return window.atob(output); //polifyll https://github.com/davidchambers/Base64.js
+    }
+*/
+    globalHiring.controller('stepsCtrl',["$scope", "$resource", function($scope,$resource, $http, $window) {
+
+      // User Authentication
+       $scope.user = {username: '', password: ''};
+       $scope.isAuthenticated = false;
+       $scope.welcome = '';
+       $scope.message = '';
+
+       //TODO: Should be Deleted
+        $scope.submit = function () {
+          $scope.isAuthenticated=true;
+          $scope.email=$scope.user.username;
+          $scope.password= $scope.user.password;
+          $scope.authenticateHide=true;
+          $scope.step1Hide=false;
+
+        }
+
+
+       //Should be Deleted
+
+
+/*
+       $scope.submit = function () {
+         $http.post('/authenticate', $scope.user).success(function (data, status, headers, config) {
+             $window.sessionStorage.token = data.token;
+             $scope.isAuthenticated = true;
+             var encodedProfile = data.token.split('.')[1];
+             var profile = JSON.parse(url_base64_decode(encodedProfile));
+             $scope.welcome = 'Welcome ' + profile.first_name + ' ' + profile.last_name;
+           })
+           .error(function (data, status, headers, config) {
+             // Erase the token if the user fails to log in
+             delete $window.sessionStorage.token;
+             $scope.isAuthenticated = false;
+
+             // Handle login errors here
+             $scope.error = 'Error: Invalid user or password';
+             $scope.welcome = '';
+           });
+       };
+
+       $scope.logout = function () {
+         $scope.welcome = '';
+         $scope.message = '';
+         $scope.isAuthenticated = false;
+         delete $window.sessionStorage.token;
+       };
+*/
+      // Steps controller
+      $scope.authenticateHide=false;
+      $scope.step1Hide=true;
       $scope.stepLangHide=true;
       $scope.stepEduHide=true;
       $scope.stepMainSRVHide=true;
@@ -256,7 +370,6 @@
       $scope.fullnamePlaceholder="Your full name";
       $scope.emailPlaceholder="you@email.com";
       $scope.passwordPlaceholder="";
-      //$scope.requiedStyle='';
       $scope.requiedStyleFullname='';
       $scope.requiedStylePassword='';
       $scope.requiedStyleEmail='';
@@ -425,7 +538,6 @@
 
       $scope.selectedCity='';
 
-
       $scope.dates=[];
       for(var i=1970;i<=2020;i++) {
         $scope.dates.push(i);
@@ -519,7 +631,6 @@
         }
       }
 
-      //skills for the selected serviceSelect
       $scope.skillClick=function(selectedSkill){
         selectedSkill.isselected=!selectedSkill.isselected;
       }
