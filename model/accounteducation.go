@@ -27,12 +27,9 @@ func parseAccountEducation(dataMap map[string]interface{}) (AccountEducation, er
   result.FromDate = util.ParseInteger(dataMap, "fromdate")
   result.ToDate = util.ParseInteger(dataMap, "todate")
   result.Field = util.ParseString(dataMap, "field")
-
   result.Grade = util.ParseFloat(dataMap, "grade")
+  result.Degree, _ = parseDegree(dataMap["degree"])
 
-  degreeMap := dataMap["degree"].(map[string]interface{})
-  degree, _ := parseDegree(degreeMap)
-  result.Degree = degree
   return result, nil
 }
 

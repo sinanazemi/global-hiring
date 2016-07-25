@@ -1,6 +1,7 @@
 package model
 
 import(
+  "errors"
   "database/sql"
   "net/http"
   "github.com/sinanazemi/global-hiring/util"
@@ -11,9 +12,19 @@ type Degree struct{
   Name string `json:"name"`
 }
 
-func parseDegree(dataMap map[string]interface{}) (Degree, error) {
+func parseDegree(data interface{}) (Degree, error) {
+
+  id, ok := data.(float64)
+  if (ok) {
+    return loadDegree(int(id)), nil
+  }
 
   result := Degree{}
+
+  dataMap, ok := data.(map[string]interface{})
+  if (!ok) {
+    return result, errors.New("looking for a 'map[string]interface{}' to parse a 'Degree', but not found.\n")
+  }
 
   result.Id = util.ParseInteger(dataMap, "id")
   result.Name = util.ParseString(dataMap, "name")
