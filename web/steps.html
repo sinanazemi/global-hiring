@@ -11,6 +11,8 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.js"></script>
 
+    <script src="Scripts/steps.js"></script>
+
     <link href="css/steps_style.css" rel="stylesheet">
 
     <title>Create Profile</title>
@@ -19,32 +21,10 @@
 
 <body bgcolor="#323232" >
 
-
-
     <div>
-        <div ng-app="globalHiring" ng-controller="stepsCtrl">
+        <div ng-app="globalHiring" ng-controller="stepsController">
             <a href="#" style="text-decoration: none;">
-
-              <div id="authenticate" class="step-div" ng-hide="authenticateHide" >
-                <div class="stepheader">
-                    <p class="steptitle">Login</p>
-                </div>
-                <form ng-submit="submit()">
-                  <div class="field-div" style="top: 130px;">
-                  <input class="field-text-area-4"  ng-model="user.username" type="text" name="user" placeholder="Email" />
-                </div>
-                <div class="field-div" style="top: 180px;">
-                  <input class="field-text-area-4"  ng-model="user.password" type="password" name="pass" placeholder="Password" />
-                    </div>
-                    <div>
-                  <input type="submit" value="Login" class="next-button green-button button-center"/>
-                  </div>
-                </form>
-              </div>
-
-
-
-                <div id="step1" class="step-div" ng-hide="step1Hide" >
+              <div id="step1" class="step-div" ng-hide="step1Hide" >
                     <div class="stepheader">
                         <p class="steptitle">Account Information</p>
                     </div>
@@ -259,411 +239,329 @@
 
     </div>
 
+<script>
 
-    <script>
-    var globalHiring = angular.module('globalHiring',["ngResource"]);
-    /*
-    globalHiring.factory('authInterceptor', function ($rootScope, $q, $window) {
-      return {
-        request: function (config) {
-          config.headers = config.headers || {};
-          if ($window.sessionStorage.token) {
-            config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
-          }
-          return config;
-        },
-        responseError: function (rejection) {
-          if (rejection.status === 401) {
-            // handle the case where the user is not authenticated
-          }
-          return $q.reject(rejection);
+
+var globalHiring = angular.module('globalHiring',["ngResource"]);
+globalHiring.controller('stepsController',["$scope", "$resource", function($scope,$resource, $http, $window) {
+
+  // Steps controller
+  //$scope.authenticateHide=false;
+  $scope.step1Hide=false;
+  $scope.stepLangHide=true;
+  $scope.stepEduHide=true;
+  $scope.stepMainSRVHide=true;
+  $scope.stepSkillHide=true;
+  $scope.isStudent=true;
+
+  $scope.fullname='';
+  $scope.termsOfServiceShow= false;
+  $scope.checkboxValue=false;
+  $scope.password='';
+  $scope.email='';
+
+  $scope.fullnamePlaceholder="Your full name";
+  $scope.emailPlaceholder="you@email.com";
+  $scope.passwordPlaceholder="";
+  $scope.requiedStyleFullname='';
+  $scope.requiedStylePassword='';
+  $scope.requiedStyleEmail='';
+  // Next buttons click
+  $scope.step1NextClick = function(){
+    $scope.requiedStyleFullname='';
+    $scope.requiedStylePassword='';
+    $scope.requiedStyleEmail='';
+
+    if($scope.fullname=='' || $scope.email=='' || !$scope.checkboxValue || $scope.password==''  )
+    {
+      if($scope.fullname=='' )
+      {
+        $scope.requiedStyleFullname={
+          "border-color": "red",
+          "border-style": "solid",
+          "border-width" : "1px"
         }
-      };
-    });
-
-    globalHiring.config(function ($httpProvider) {
-      $httpProvider.interceptors.push('authInterceptor');
-    });
-
-    //this is used to parse the profile
-    function url_base64_decode(str) {
-      var output = str.replace('-', '+').replace('_', '/');
-      switch (output.length % 4) {
-        case 0:
-          break;
-        case 2:
-          output += '==';
-          break;
-        case 3:
-          output += '=';
-          break;
-        default:
-          throw 'Illegal base64url string!';
+        $scope.fullnamePlaceholder="Fullname is required";
       }
-      return window.atob(output); //polifyll https://github.com/davidchambers/Base64.js
-    }
-*/
-    globalHiring.controller('stepsCtrl',["$scope", "$resource", function($scope,$resource, $http, $window) {
-
-      // User Authentication
-       $scope.user = {username: '', password: ''};
-       $scope.isAuthenticated = false;
-       $scope.welcome = '';
-       $scope.message = '';
-
-       //TODO: Should be Deleted
-        $scope.submit = function () {
-          $scope.isAuthenticated=true;
-          $scope.email=$scope.user.username;
-          $scope.password= $scope.user.password;
-          $scope.authenticateHide=true;
-          $scope.step1Hide=false;
-
-        }
-
-
-       //Should be Deleted
-
-
-/*
-       $scope.submit = function () {
-         $http.post('/authenticate', $scope.user).success(function (data, status, headers, config) {
-             $window.sessionStorage.token = data.token;
-             $scope.isAuthenticated = true;
-             var encodedProfile = data.token.split('.')[1];
-             var profile = JSON.parse(url_base64_decode(encodedProfile));
-             $scope.welcome = 'Welcome ' + profile.first_name + ' ' + profile.last_name;
-           })
-           .error(function (data, status, headers, config) {
-             // Erase the token if the user fails to log in
-             delete $window.sessionStorage.token;
-             $scope.isAuthenticated = false;
-
-             // Handle login errors here
-             $scope.error = 'Error: Invalid user or password';
-             $scope.welcome = '';
-           });
-       };
-
-       $scope.logout = function () {
-         $scope.welcome = '';
-         $scope.message = '';
-         $scope.isAuthenticated = false;
-         delete $window.sessionStorage.token;
-       };
-*/
-      // Steps controller
-      $scope.authenticateHide=false;
-      $scope.step1Hide=true;
-      $scope.stepLangHide=true;
-      $scope.stepEduHide=true;
-      $scope.stepMainSRVHide=true;
-      $scope.stepSkillHide=true;
-      $scope.isStudent=true;
-
-      $scope.fullname='';
-      $scope.termsOfServiceShow= false;
-      $scope.checkboxValue=false;
-      $scope.password='';
-      $scope.email='';
-
-      $scope.fullnamePlaceholder="Your full name";
-      $scope.emailPlaceholder="you@email.com";
-      $scope.passwordPlaceholder="";
-      $scope.requiedStyleFullname='';
-      $scope.requiedStylePassword='';
-      $scope.requiedStyleEmail='';
-      // Next buttons click
-      $scope.step1NextClick = function(){
+      else {
         $scope.requiedStyleFullname='';
-        $scope.requiedStylePassword='';
+        $scope.fullnamePlaceholder="Your full name";
+      }
+
+      if($scope.email=='' )
+      {
+        $scope.requiedStyleEmail={
+          "border-color": "red",
+          "border-style": "solid",
+          "border-width" : "1px"
+        }
+        $scope.emailPlaceholder="Email is required";
+      }
+      else {
         $scope.requiedStyleEmail='';
-
-        if($scope.fullname=='' || $scope.email=='' || !$scope.checkboxValue || $scope.password==''  )
-        {
-          if($scope.fullname=='' )
-          {
-            $scope.requiedStyleFullname={
-              "border-color": "red",
-              "border-style": "solid",
-              "border-width" : "1px"
-            }
-            $scope.fullnamePlaceholder="Fullname is required";
-          }
-          else {
-            $scope.requiedStyleFullname='';
-            $scope.fullnamePlaceholder="Your full name";
-          }
-
-          if($scope.email=='' )
-          {
-            $scope.requiedStyleEmail={
-              "border-color": "red",
-              "border-style": "solid",
-              "border-width" : "1px"
-            }
-            $scope.emailPlaceholder="Email is required";
-          }
-          else {
-            $scope.requiedStyleEmail='';
-            $scope.emailPlaceholder="you@email.com";
-          }
-
-          if($scope.password=='' )
-          {
-            $scope.requiedStylePassword={
-              "border-color": "red",
-              "border-style": "solid",
-              "border-width" : "1px"
-            }
-            $scope.passwordPlaceholder="Password is required";
-          }
-          else {
-            $scope.requiedStylePassword='';
-            $scope.passwordPlaceholder="";
-          }
-
-          if(!$scope.checkboxValue){
-            $scope.termsOfServiceShow= true;
-          }
-          else{
-            $scope.termsOfServiceShow= false;
-          }
-
-        }
-        else {
-          $scope.step1Hide=true;
-          if($scope.isStudent){
-            $scope.stepLangHide=false;
-            $scope.langBarImage="images/step_2_bar.png";
-          }
-          else {
-            $scope.stepMainSRVHide=false;
-            $scope.mainSRVBarImage="images/step_2_bar.png";
-            $scope.getMainServices();
-        }
+        $scope.emailPlaceholder="you@email.com";
       }
-      };
 
-      $scope.langNextClick = function(){
-
-        if ((index==0 && $scope.langsToAdd[index].name!="" )|| ( $scope.langsToAdd[index].name!="" && $scope.langs[index-1].name != $scope.langsToAdd[index].name ))
-        {
-          $scope.langsToAdd.splice(index, 0);
-           $scope.langs.push(angular.copy($scope.langsToAdd[index]));
+      if($scope.password=='' )
+      {
+        $scope.requiedStylePassword={
+          "border-color": "red",
+          "border-style": "solid",
+          "border-width" : "1px"
         }
-        $scope.stepLangHide=true;
-        if($scope.isStudent){
-          $scope.stepEduHide=false;
-          $scope.eduBarImage="images/step_3_bar.png";
-        }
-        else{
-          $scope.stepEduHide=false;
-          $scope.eduBarImage="images/step_5_bar.png";
-
-        }
-      };
-      $scope.eduNextClick = function(){
-        if ((indexEdu==0 && $scope.educationsToAdd[indexEdu].school!=""  )|| ($scope.educationsToAdd[indexEdu].school!="" && $scope.educations[indexEdu-1].school != $scope.educationsToAdd[indexEdu].school) )
-        {
-          $scope.educationsToAdd.splice(indexEdu, 0);
-           $scope.educations.push(angular.copy($scope.educationsToAdd[indexEdu]));
-        }
-          $scope.stepEduHide=true;
-        if($scope.isStudent){
-          $scope.stepMainSRVHide=false;
-          $scope.mainSRVBarImage="images/step_4_bar.png";
-          $scope.getMainServices();
-        }
-        else{
-          //$scope.stepSkillHide=false;
-          $scope.finishClick();
-        }
-
-      };
-      $scope.mainSRVNextClick = function(){
-
-        $scope.stepMainSRVHide=true;
-        if($scope.isStudent){
-          $scope.stepSkillHide=false;
-          $scope.skillBarImage="images/step_5_bar.png";
-        }
-        else{
-          $scope.stepSkillHide=false;
-          $scope.skillBarImage="images/step_3_bar.png";
-        }
-      };
-
-      // Previous buttons click
-      $scope.langPreClick=function(){
-        $scope.stepLangHide=true;
-        if($scope.isStudent){
-          $scope.step1Hide=false;
-        }
-        else {
-          $scope.stepSkillHide=false;
-          $scope.skillBarImage="images/step_3_bar.png";
-        }
+        $scope.passwordPlaceholder="Password is required";
       }
-      $scope.eduPreClick=function(){
-        $scope.stepEduHide=true;
+      else {
+        $scope.requiedStylePassword='';
+        $scope.passwordPlaceholder="";
+      }
+
+      if(!$scope.checkboxValue){
+        $scope.termsOfServiceShow= true;
+      }
+      else{
+        $scope.termsOfServiceShow= false;
+      }
+
+    }
+    else {
+      $scope.step1Hide=true;
+      if($scope.isStudent){
         $scope.stepLangHide=false;
-        if($scope.isStudent){
-          $scope.langBarImage="images/step_2_bar.png";
-        }
-        else {
-          $scope.langBarImage="images/step_4_bar.png";
-        }
+        $scope.langBarImage="images/step_2_bar.png";
       }
-      $scope.mainSRVPreClick=function(){
-        $scope.stepMainSRVHide=true;
-        if($scope.isStudent){
-          $scope.stepEduHide=false;
-          $scope.eduBarImage="images/step_3_bar.png";
-        }
-        else {
-          $scope.step1Hide=false;
-        }
-      }
-      $scope.skillPreClick=function(){
+      else {
         $scope.stepMainSRVHide=false;
-        $scope.stepSkillHide=true;
-        if($scope.isStudent){
-          $scope.skillBarImage="images/step_5_bar.png";
-        }
-        else {
-          $scope.skillBarImage="images/step_3_bar.png";
-        }
-      }
+        $scope.mainSRVBarImage="images/step_2_bar.png";
+        $scope.getMainServices();
+    }
+  }
+  };
 
-      $scope.selectedCity='';
+  $scope.langNextClick = function(){
 
-      $scope.dates=[];
-      for(var i=1970;i<=2020;i++) {
-        $scope.dates.push(i);
-      }
+    if ((index==0 && $scope.langsToAdd[index].name!="" )|| ( $scope.langsToAdd[index].name!="" && $scope.langs[index-1].name != $scope.langsToAdd[index].name ))
+    {
+      $scope.langsToAdd.splice(index, 0);
+       $scope.langs.push(angular.copy($scope.langsToAdd[index]));
+    }
+    $scope.stepLangHide=true;
+    if($scope.isStudent){
+      $scope.stepEduHide=false;
+      $scope.eduBarImage="images/step_3_bar.png";
+    }
+    else{
+      $scope.stepEduHide=false;
+      $scope.eduBarImage="images/step_5_bar.png";
 
-      var cities = $resource("/cities")
-        cities.query(
-          function(data){
-            $scope.cities = data;
-          } // function(data)
-        ) // service.query
+    }
+  };
+  $scope.eduNextClick = function(){
+    if ((indexEdu==0 && $scope.educationsToAdd[indexEdu].school!=""  )|| ($scope.educationsToAdd[indexEdu].school!="" && $scope.educations[indexEdu-1].school != $scope.educationsToAdd[indexEdu].school) )
+    {
+      $scope.educationsToAdd.splice(indexEdu, 0);
+       $scope.educations.push(angular.copy($scope.educationsToAdd[indexEdu]));
+    }
+      $scope.stepEduHide=true;
+    if($scope.isStudent){
+      $scope.stepMainSRVHide=false;
+      $scope.mainSRVBarImage="images/step_4_bar.png";
+      $scope.getMainServices();
+    }
+    else{
+      //$scope.stepSkillHide=false;
+      $scope.finishClick();
+    }
 
-        var degrees = $resource("/degrees")
-        degrees.query(
-          function(data){
-            $scope.degrees = data;
-          } // function(data)
-        ) // service.query
+  };
+  $scope.mainSRVNextClick = function(){
+
+    $scope.stepMainSRVHide=true;
+    if($scope.isStudent){
+      $scope.stepSkillHide=false;
+      $scope.skillBarImage="images/step_5_bar.png";
+    }
+    else{
+      $scope.stepSkillHide=false;
+      $scope.skillBarImage="images/step_3_bar.png";
+    }
+  };
+
+  // Previous buttons click
+  $scope.langPreClick=function(){
+    $scope.stepLangHide=true;
+    if($scope.isStudent){
+      $scope.step1Hide=false;
+    }
+    else {
+      $scope.stepSkillHide=false;
+      $scope.skillBarImage="images/step_3_bar.png";
+    }
+  }
+  $scope.eduPreClick=function(){
+    $scope.stepEduHide=true;
+    $scope.stepLangHide=false;
+    if($scope.isStudent){
+      $scope.langBarImage="images/step_2_bar.png";
+    }
+    else {
+      $scope.langBarImage="images/step_4_bar.png";
+    }
+  }
+  $scope.mainSRVPreClick=function(){
+    $scope.stepMainSRVHide=true;
+    if($scope.isStudent){
+      $scope.stepEduHide=false;
+      $scope.eduBarImage="images/step_3_bar.png";
+    }
+    else {
+      $scope.step1Hide=false;
+    }
+  }
+  $scope.skillPreClick=function(){
+    $scope.stepMainSRVHide=false;
+    $scope.stepSkillHide=true;
+    if($scope.isStudent){
+      $scope.skillBarImage="images/step_5_bar.png";
+    }
+    else {
+      $scope.skillBarImage="images/step_3_bar.png";
+    }
+  }
+
+  $scope.selectedCity='';
+
+  $scope.dates=[];
+  for(var i=1970;i<=2020;i++) {
+    $scope.dates.push(i);
+  }
+
+  var cities = $resource("/cities")
+    cities.query(
+      function(data){
+        $scope.cities = data;
+      } // function(data)
+    ) // service.query
+
+    var degrees = $resource("/degrees")
+    degrees.query(
+      function(data){
+        $scope.degrees = data;
+      } // function(data)
+    ) // service.query
 
 
-      //Add more Language
-      $scope.LanguageProfeciencies = [
-        {text: "Elementary", value: "E", desc: "Discription"},
-        {text: "Basic", value: "B", desc: "Discription"},
-        {text: "Conversational", value: "C", desc: "Discription"},
-        {text: "Fluent", value: "F", desc: "Discription"},
-        {text: "Native", value: "N", desc: "Discription"}
-      ]
-      $scope.langs = [];
-      $scope.langsToAdd = [{
+  //Add more Language
+  $scope.LanguageProfeciencies = [
+    {text: "Elementary", value: "E", desc: "Discription"},
+    {text: "Basic", value: "B", desc: "Discription"},
+    {text: "Conversational", value: "C", desc: "Discription"},
+    {text: "Fluent", value: "F", desc: "Discription"},
+    {text: "Native", value: "N", desc: "Discription"}
+  ]
+  $scope.langs = [];
+  $scope.langsToAdd = [{
+    name: '',
+    profeciency: ''
+  }];
+  var index =0;
+  $scope.addMoreLangClick=function(langToAdd){
+    $scope.langsToAdd.splice(index, 0);
+    $scope.langs.push(angular.copy(langToAdd));
+    $scope.langsToAdd.push({
         name: '',
         profeciency: ''
-      }];
-      var index =0;
-      $scope.addMoreLangClick=function(langToAdd){
-        $scope.langsToAdd.splice(index, 0);
-        $scope.langs.push(angular.copy(langToAdd));
-        $scope.langsToAdd.push({
-            name: '',
-            profeciency: ''
-          });
-          index++
+      });
+      index++
 
-      }
+  }
 
-      //Add Education
-      $scope.educations = [];
-      $scope.educationsToAdd = [{
-        school: '',
-        fromdate: '',
-        todate: '',
-        degree:'',
-        field:'',
-        grade:''
-      }];
+  //Add Education
+  $scope.educations = [];
+  $scope.educationsToAdd = [{
+    school: '',
+    fromdate: '',
+    todate: '',
+    degree:'',
+    field:'',
+    grade:''
+  }];
 
-      var indexEdu =0;
-      $scope.addMoreEduClick=function(educationToAdd){
-        $scope.educationsToAdd.splice(indexEdu, 0);
-        $scope.educations.push(angular.copy(educationToAdd));
-        $scope.educationsToAdd.push({
-          school: '',
-          fromdate: '',
-          todate: '',
-          degree:'',
-          field:'',
-          grade:''
-        });
-          indexEdu++
+  var indexEdu =0;
+  $scope.addMoreEduClick=function(educationToAdd){
+    $scope.educationsToAdd.splice(indexEdu, 0);
+    $scope.educations.push(angular.copy(educationToAdd));
+    $scope.educationsToAdd.push({
+      school: '',
+      fromdate: '',
+      todate: '',
+      degree:'',
+      field:'',
+      grade:''
+    });
+      indexEdu++
 
-      }
+  }
 
-      // Main Services
-      $scope.toggleSelectedSRV = function(service) {
-  	     service.isselected = !service.isselected;
-      };
+  // Main Services
+  $scope.toggleSelectedSRV = function(service) {
+     service.isselected = !service.isselected;
+  };
 
-      var service = $resource("/mainServices")
-      $scope.getMainServices = function(){
-        service.query(
-          function(data){
-            $scope.mainServices = data;
-          } // function(data)
-        ) // service.query
-      };
+  var service = $resource("/mainServices")
+  $scope.getMainServices = function(){
+    service.query(
+      function(data){
+        $scope.mainServices = data;
+      } // function(data)
+    ) // service.query
+  };
 
-      $scope.getIcon = function(serviceSelect){
-        if (serviceSelect.icon) {
-          if (serviceSelect.isChecked) return serviceSelect.icon.on;
-          else return serviceSelect.icon.off;
-        }
-      }
-
-      $scope.skillClick=function(selectedSkill){
-        selectedSkill.isselected=!selectedSkill.isselected;
-      }
-
-      var saveAccount = $resource("/saveAccount")
-      $scope.finishClick=function(){
-          var newAccount = new saveAccount();
-          newAccount.name = $scope.fullname;
-          newAccount.email = $scope.email;
-          newAccount.city = $scope.selectedCity;
-          newAccount.phone = $scope.phone;
-          newAccount.password = $scope.password;
-          if($scope.isStudent){
-            newAccount.isstudent = true;
-          }
-          else {
-            newAccount.isstudent = false;
-          }
-
-          newAccount.languages = $scope.langs;
-
-          newAccount.educations = $scope.educations;
-
-          newAccount.skills = $scope.mainServices;
-
-          newAccount.$save(
-            function(data){});
-      }// finish click
-
+  $scope.getIcon = function(serviceSelect){
+    if (serviceSelect.icon) {
+      if (serviceSelect.isChecked) return serviceSelect.icon.on;
+      else return serviceSelect.icon.off;
     }
-    ]// scope, resource
-  );
-    </script>
+  }
+
+  $scope.skillClick=function(selectedSkill){
+    selectedSkill.isselected=!selectedSkill.isselected;
+  }
+
+// Save an account
+  var saveAccount = $resource("/saveAccount")
+  $scope.finishClick=function(){
+      var newAccount = new saveAccount();
+      newAccount.name = $scope.fullname;
+      newAccount.email = $scope.email;
+      newAccount.city = $scope.selectedCity;
+      newAccount.phone = $scope.phone;
+      newAccount.password = $scope.password;
+      if($scope.isStudent){
+        newAccount.isstudent = true;
+      }
+      else {
+        newAccount.isstudent = false;
+      }
+
+      newAccount.languages = $scope.langs;
+
+      newAccount.educations = $scope.educations;
+
+      newAccount.skills = $scope.mainServices;
+
+      newAccount.$save(
+        function(data){});
+  }// finish click
+
+}
+]// scope, resource
+);
+
+</script>
+
+</script>>
+
 
 
 </body>
