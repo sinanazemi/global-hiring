@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-resource.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.js"></script>
+
+    <link href="css/steps_style.css" rel="stylesheet">
+
+    <title>Login</title>
+
+</head>
+
+<body bgcolor="#323232" >
+    <div>
+        <div ng-app="authApp" ng-controller="authCtrl">
+            <a href="#" style="text-decoration: none;">
+
+              <div id="authenticate" class="step-div" ng-hide="authenticateHide" >
+                <div class="stepheader">
+                    <p class="steptitle">Login</p>
+                </div>
+                <form ng-submit="submit()">
+                  <div class="field-div" style="top: 130px;">
+                  <input class="field-text-area-4"  ng-model="user.username" type="text" name="user" placeholder="Email" />
+                </div>
+                <div class="field-div" style="top: 180px;">
+                  <input class="field-text-area-4"  ng-model="user.password" type="password" name="pass" placeholder="Password" />
+                    </div>
+                    <div style="top: 230px;">
+                        <p class="field-center-label" ng-model="resultMSG"> {{resultMSG}} </p>
+                    </div>
+                    <div>
+                      <input type="submit" value="Login" class="next-button green-button button-center"/>
+
+                  </div>
+                </form>
+              </div>
+
+            </div>
+          </div>
+
+<script>
+
+var authApp = angular.module('authApp',["ngResource"]);
+
+authApp.factory('authInterceptor', function ($rootScope, $q, $window) {
+  return {
+    request: function (config) {
+      config.headers = config.headers || {};
+      if ($window.sessionStorage.token) {
+        config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+      }
+      return config;
+    },
+    responseError: function (rejection) {
+      if (rejection.status === 401) {
+        // handle the case where the user is not authenticated
+        $location.path('/home.html');
+      }
+      return $q.reject(rejection);
+    }
+  };
+});
+
+authApp.config(function ($httpProvider) {
+  $httpProvider.interceptors.push('authInterceptor');
+});
+
+//this is used to parse the profile
+function url_base64_decode(str) {
+  var output = str.replace('-', '+').replace('_', '/');
+  switch (output.length % 4) {
+    case 0:
+      break;
+    case 2:
+      output += '==';
+      break;
+    case 3:
+      output += '=';
+      break;
+    default:
+      throw 'Illegal base64url string!';
+  }
+  return window.atob(output); //polifyll https://github.com/davidchambers/Base64.js
+}
+
+authApp.controller('authCtrl',["$scope", "$resource", "$http", "$window", function($scope,$resource, $http, $window) {
+/*
+  var cities = $resource("/cities")
+  $scope.Service = function() {
+      cities.query(
+        function(data){
+          $scope.cities = data;
+        } // function(data)
+      ) // service.query
+
+  }
+*/
+  // User Authentication
+   $scope.user = {username: '', password: ''};
+   $scope.isAuthenticated = false;
+   $scope.resultMSG = '';
+
+   //TODO: Should be Deleted
+  //  $scope.submit = function () {
+  //      $scope.isAuthenticated=true;
+  //    }
+  //Should be Deleted
+
+   $scope.submit = function () {
+     $http.post('/authenticate', $scope.user).success(function (data, status, headers, config) {
+         $window.sessionStorage.token = data.token;
+         $scope.isAuthenticated = true;
+         alert(data.token);
+         var encodedProfile = data.token.split('.')[1];
+         var profile = JSON.parse(url_base64_decode(encodedProfile));
+         $scope.resultMSG = 'Welcome ' + profile.Issuer;
+       })
+       .error(function (data, status, headers, config) {
+         // Erase the token if the user fails to log in
+         delete $window.sessionStorage.token;
+         $scope.isAuthenticated = false;
+
+         // Handle login errors here
+         $scope.error = 'Error: Invalid user or password';
+         $scope.resultMSG = '';
+       });
+   };
+
+   $scope.logout = function () {
+     $scope.resultMSG = '';
+     $scope.isAuthenticated = false;
+     delete $window.sessionStorage.token;
+   }
+}
+]
+);
+</script>
+
+</body>
+</html>
