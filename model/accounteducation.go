@@ -9,7 +9,7 @@ import (
 )
 
 type AccountEducation struct {
-  Id     int  `json:"id"`
+  Id int `json:"id"`
   School string `json:"school"`
   FromDate int `json:"fromdate"`
   ToDate int `json:"todate"`
@@ -46,11 +46,11 @@ func parseAccountEducations(edusArr []interface{}) []AccountEducation {
   return result
 }
 
-func (ace AccountEducation) accountValidation(session *util.Session) error {
+func (ace *AccountEducation) accountValidation(session *util.Session) error {
   return util.CheckDBAccountValidation(session, "AccountEducation", "AccountID", ace.Id)
 }
 
-func (ace AccountEducation) dataValidation(session *util.Session) error {
+func (ace *AccountEducation) dataValidation(session *util.Session) error {
   errStr := ""
 
   if len(strings.TrimSpace(ace.School)) <= 0 {
@@ -72,11 +72,11 @@ func (ace AccountEducation) dataValidation(session *util.Session) error {
   return nil
 }
 
-func (ace AccountEducation) insertValidation(session *util.Session) error {
+func (ace *AccountEducation) insertValidation(session *util.Session) error {
   return ace.dataValidation(session)
 }
 
-func (ace AccountEducation) updateValidation(session *util.Session) error {
+func (ace *AccountEducation) updateValidation(session *util.Session) error {
   err := ace.accountValidation(session)
   if err != nil{
     return err
@@ -84,7 +84,7 @@ func (ace AccountEducation) updateValidation(session *util.Session) error {
   return ace.dataValidation(session)
 }
 
-func (ace AccountEducation) deleteValidation(session *util.Session) error {
+func (ace *AccountEducation) deleteValidation(session *util.Session) error {
   return ace.accountValidation(session)
 }
 
@@ -120,14 +120,14 @@ func readAccountEducation(rows *sql.Rows) (interface{}, error) {
     return edu, err
 }
 
-func (ace AccountEducation) save(session *util.Session) error {
-  if ace.Id <= 0 {
-    return ace.saveNew(session)
+func (edu *AccountEducation) save(session *util.Session) error {
+  if edu.Id <= 0 {
+    return edu.saveNew(session)
   }
-  return ace.saveUpdate(session)
+  return edu.saveUpdate(session)
 }
 
-func (edu AccountEducation) saveNew(session *util.Session) error {
+func (edu *AccountEducation) saveNew(session *util.Session) error {
 
   err := edu.insertValidation(session)
   if err != nil {
@@ -138,19 +138,26 @@ func (edu AccountEducation) saveNew(session *util.Session) error {
     "INSERT INTO AccountEducation" +
     "(School, FromDate, ToDate, Field, Grade, DegreeID, accountID) " +
     "VALUES($1, $2, $3, $4, $5, $6, $7) " +
-    "returning ID"
+    "returning AccountEducation.ID"
 
   id, err := util.Insert(query, edu.School, edu.FromDate, edu.ToDate, edu.Field, edu.Grade, edu.Degree.Id, session.GetAccountID())
+
+  print("inserted id for accountEducation is:")
+  print(id)
+  print("\n")
 
   if err != nil {
     return err
   }
 
+  print("edu.Id = ")
+  print(id)
+  print("\n")
   edu.Id = id
   return nil
 }
 
-func (edu AccountEducation) saveUpdate(session *util.Session) error {
+func (edu *AccountEducation) saveUpdate(session *util.Session) error {
   err := edu.updateValidation(session)
   if err != nil {
     return err
@@ -173,7 +180,7 @@ func (edu AccountEducation) saveUpdate(session *util.Session) error {
 
 }
 
-func (edu AccountEducation) delete(session *util.Session) error {
+func (edu *AccountEducation) delete(session *util.Session) error {
   err := edu.deleteValidation(session)
   if err != nil {
     return err
@@ -208,6 +215,11 @@ func SaveEducation(w http.ResponseWriter, r *http.Request) (interface{}, *util.H
   if err != nil {
     return nil, &util.HandlerError{err, "Problem while saving Education", http.StatusBadRequest}
   }
+
+
+  print("sending accountEducation - id is:")
+  print(edu.Id)
+  print("\n")
 
   return edu, nil
 }

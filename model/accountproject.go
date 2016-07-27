@@ -55,11 +55,11 @@ func parseAccountProjects(data interface{}) []AccountProject {
   return result
 }
 
-func (project AccountProject) accountValidation(session *util.Session) error {
+func (project *AccountProject) accountValidation(session *util.Session) error {
   return util.CheckDBAccountValidation(session, "AccountProject", "AccountID", project.Id)
 }
 
-func (project AccountProject) dataValidation(session *util.Session) error {
+func (project *AccountProject) dataValidation(session *util.Session) error {
 
   errStr := ""
 
@@ -82,11 +82,11 @@ func (project AccountProject) dataValidation(session *util.Session) error {
   return nil
 }
 
-func (project AccountProject) insertValidation(session *util.Session) error {
+func (project *AccountProject) insertValidation(session *util.Session) error {
   return project.dataValidation(session)
 }
 
-func (project AccountProject) updateValidation(session *util.Session) error {
+func (project *AccountProject) updateValidation(session *util.Session) error {
   err := project.accountValidation(session)
   if err != nil{
     return err
@@ -94,7 +94,7 @@ func (project AccountProject) updateValidation(session *util.Session) error {
   return project.dataValidation(session)
 }
 
-func (project AccountProject) deleteValidation(session *util.Session) error {
+func (project *AccountProject) deleteValidation(session *util.Session) error {
   return project.accountValidation(session)
 }
 
@@ -132,14 +132,14 @@ func readAccountProject(rows *sql.Rows) (interface{}, error) {
     return project, err
 }
 
-func (project AccountProject) save(session *util.Session) error {
+func (project *AccountProject) save(session *util.Session) error {
   if project.Id <= 0 {
     return project.saveNew(session)
   }
   return project.saveUpdate(session)
 }
 
-func (project AccountProject) saveNew(session *util.Session) error {
+func (project *AccountProject) saveNew(session *util.Session) error {
 
   err := project.insertValidation(session)
   if err != nil {
@@ -162,7 +162,7 @@ func (project AccountProject) saveNew(session *util.Session) error {
   return nil
 }
 
-func (project AccountProject) saveUpdate(session *util.Session) error {
+func (project *AccountProject) saveUpdate(session *util.Session) error {
   err := project.updateValidation(session)
   if err != nil {
     return err
@@ -185,7 +185,7 @@ func (project AccountProject) saveUpdate(session *util.Session) error {
 
 }
 
-func (project AccountProject) delete(session *util.Session) error {
+func (project *AccountProject) delete(session *util.Session) error {
   err := project.deleteValidation(session)
   if err != nil {
     return err

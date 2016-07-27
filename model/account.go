@@ -114,14 +114,14 @@ func readAccount(rows *sql.Rows) (interface{}, error) {
   return acc, err
 }
 
-func (acc Account) save(session *util.Session) error {
+func (acc *Account) save(session *util.Session) error {
   if acc.Id <= 0 {
     return acc.saveNew(session)
   }
   return acc.saveUpdate(session)
 }
 
-func (acc Account) saveNew(session *util.Session) error {
+func (acc *Account) saveNew(session *util.Session) error {
   query :=
     "INSERT INTO Account" +
     "(Name, Email, cityID, Phone, Password, isStudent) " +
@@ -179,7 +179,7 @@ func (acc Account) saveNew(session *util.Session) error {
   return nil
 }
 
-func (acc Account) saveUpdate(session *util.Session) error {
+func (acc *Account) saveUpdate(session *util.Session) error {
   return errors.New("account.saveUpdate is not implemented")
 }
 

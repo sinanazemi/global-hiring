@@ -43,11 +43,11 @@ func parseAccountCertificates(cerArr []interface{}) []AccountCertificate {
   return result
 }
 
-func (cer AccountCertificate) accountValidation(session *util.Session) error {
+func (cer *AccountCertificate) accountValidation(session *util.Session) error {
   return util.CheckDBAccountValidation(session, "AccountCertificate", "AccountID", cer.Id)
 }
 
-func (cer AccountCertificate) dataValidation(session *util.Session) error {
+func (cer *AccountCertificate) dataValidation(session *util.Session) error {
   errStr := ""
 
   if len(strings.TrimSpace(cer.Name)) <= 0 {
@@ -73,11 +73,11 @@ func (cer AccountCertificate) dataValidation(session *util.Session) error {
   return nil
 }
 
-func (cer AccountCertificate) insertValidation(session *util.Session) error {
+func (cer *AccountCertificate) insertValidation(session *util.Session) error {
   return cer.dataValidation(session)
 }
 
-func (cer AccountCertificate) updateValidation(session *util.Session) error {
+func (cer *AccountCertificate) updateValidation(session *util.Session) error {
   err := cer.accountValidation(session)
   if err != nil{
     return err
@@ -85,7 +85,7 @@ func (cer AccountCertificate) updateValidation(session *util.Session) error {
   return cer.dataValidation(session)
 }
 
-func (cer AccountCertificate) deleteValidation(session *util.Session) error {
+func (cer *AccountCertificate) deleteValidation(session *util.Session) error {
   return cer.accountValidation(session)
 }
 
@@ -119,14 +119,14 @@ func readAccountCertificate(rows *sql.Rows) (interface{}, error) {
     return cer, err
 }
 
-func (cer AccountCertificate) save(session *util.Session) error {
+func (cer *AccountCertificate) save(session *util.Session) error {
   if cer.Id <= 0 {
     return cer.saveNew(session)
   }
   return cer.saveUpdate(session)
 }
 
-func (cer AccountCertificate) saveNew(session *util.Session) error {
+func (cer *AccountCertificate) saveNew(session *util.Session) error {
 
   err := cer.insertValidation(session)
   if err != nil {
@@ -149,7 +149,7 @@ func (cer AccountCertificate) saveNew(session *util.Session) error {
   return nil
 }
 
-func (cer AccountCertificate) saveUpdate(session *util.Session) error {
+func (cer *AccountCertificate) saveUpdate(session *util.Session) error {
   err := cer.updateValidation(session)
   if err != nil {
     return err
@@ -171,7 +171,7 @@ func (cer AccountCertificate) saveUpdate(session *util.Session) error {
 
 }
 
-func (cer AccountCertificate) delete(session *util.Session) error {
+func (cer *AccountCertificate) delete(session *util.Session) error {
   err := cer.deleteValidation(session)
   if err != nil {
     return err

@@ -53,11 +53,11 @@ func parseAccountHonors(data interface{}) []AccountHonor {
   return result
 }
 
-func (honor AccountHonor) accountValidation(session *util.Session) error {
+func (honor *AccountHonor) accountValidation(session *util.Session) error {
   return util.CheckDBAccountValidation(session, "AccountHonor", "AccountID", honor.Id)
 }
 
-func (honor AccountHonor) dataValidation(session *util.Session) error {
+func (honor *AccountHonor) dataValidation(session *util.Session) error {
 
   errStr := ""
 
@@ -80,11 +80,11 @@ func (honor AccountHonor) dataValidation(session *util.Session) error {
   return nil
 }
 
-func (honor AccountHonor) insertValidation(session *util.Session) error {
+func (honor *AccountHonor) insertValidation(session *util.Session) error {
   return honor.dataValidation(session)
 }
 
-func (honor AccountHonor) updateValidation(session *util.Session) error {
+func (honor *AccountHonor) updateValidation(session *util.Session) error {
   err := honor.accountValidation(session)
   if err != nil{
     return err
@@ -92,7 +92,7 @@ func (honor AccountHonor) updateValidation(session *util.Session) error {
   return honor.dataValidation(session)
 }
 
-func (honor AccountHonor) deleteValidation(session *util.Session) error {
+func (honor *AccountHonor) deleteValidation(session *util.Session) error {
   return honor.accountValidation(session)
 }
 
@@ -130,14 +130,14 @@ func readAccountHonor(rows *sql.Rows) (interface{}, error) {
     return honor, err
 }
 
-func (honor AccountHonor) save(session *util.Session) error {
+func (honor *AccountHonor) save(session *util.Session) error {
   if honor.Id <= 0 {
     return honor.saveNew(session)
   }
   return honor.saveUpdate(session)
 }
 
-func (honor AccountHonor) saveNew(session *util.Session) error {
+func (honor *AccountHonor) saveNew(session *util.Session) error {
 
   err := honor.insertValidation(session)
   if err != nil {
@@ -160,7 +160,7 @@ func (honor AccountHonor) saveNew(session *util.Session) error {
   return nil
 }
 
-func (honor AccountHonor) saveUpdate(session *util.Session) error {
+func (honor *AccountHonor) saveUpdate(session *util.Session) error {
   err := honor.updateValidation(session)
   if err != nil {
     return err
@@ -182,7 +182,7 @@ func (honor AccountHonor) saveUpdate(session *util.Session) error {
 
 }
 
-func (honor AccountHonor) delete(session *util.Session) error {
+func (honor *AccountHonor) delete(session *util.Session) error {
   err := honor.deleteValidation(session)
   if err != nil {
     return err

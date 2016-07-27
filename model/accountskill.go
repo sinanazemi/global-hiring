@@ -47,11 +47,11 @@ func parseAccountSkills(skillsArr []interface{}) []AccountSkill {
   return result
 }
 
-func (acs AccountSkill) accountValidation(session *util.Session) error {
+func (acs *AccountSkill) accountValidation(session *util.Session) error {
   return util.CheckDBAccountValidation(session, "AccountSkill", "AccountID", acs.Id)
 }
 
-func (acs AccountSkill) dataValidation(session *util.Session) error {
+func (acs *AccountSkill) dataValidation(session *util.Session) error {
   errStr := ""
 
   if (acs.SkillID <= 0) {
@@ -75,7 +75,7 @@ func (acs AccountSkill) dataValidation(session *util.Session) error {
   return nil
 }
 
-func (acs AccountSkill) insertValidation(session *util.Session) error {
+func (acs *AccountSkill) insertValidation(session *util.Session) error {
   return acs.dataValidation(session)
 }
 
@@ -87,7 +87,7 @@ func (acs AccountSkill) updateValidation(session *util.Session) error {
   return acs.dataValidation(session)
 }
 
-func (acs AccountSkill) deleteValidation(session *util.Session) error {
+func (acs *AccountSkill) deleteValidation(session *util.Session) error {
   return acs.accountValidation(session)
 }
 
@@ -122,14 +122,14 @@ func readAccountSkill(rows *sql.Rows) (interface{}, error) {
   return skill, err
 }
 
-func (acs AccountSkill) save(session *util.Session) error {
+func (acs *AccountSkill) save(session *util.Session) error {
   if acs.Id <= 0 {
     return acs.saveNew(session)
   }
   return acs.saveUpdate(session)
 }
 
-func (acs AccountSkill) saveNew(session *util.Session) error {
+func (acs *AccountSkill) saveNew(session *util.Session) error {
 
   err := acs.insertValidation(session)
   if err != nil {
@@ -152,7 +152,7 @@ func (acs AccountSkill) saveNew(session *util.Session) error {
   return nil
 }
 
-func (acs AccountSkill) saveUpdate(session *util.Session) error {
+func (acs *AccountSkill) saveUpdate(session *util.Session) error {
   err := acs.updateValidation(session)
   if err != nil {
     return err
@@ -171,7 +171,7 @@ func (acs AccountSkill) saveUpdate(session *util.Session) error {
 
 }
 
-func (acs AccountSkill) delete(session *util.Session) error {
+func (acs *AccountSkill) delete(session *util.Session) error {
   err := acs.deleteValidation(session)
   if err != nil {
     return err

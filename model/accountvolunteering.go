@@ -63,11 +63,11 @@ func parseAccountVolunteerings(data interface{}) []AccountVolunteering {
   return result
 }
 
-func (avl AccountVolunteering) accountValidation(session *util.Session) error {
+func (avl *AccountVolunteering) accountValidation(session *util.Session) error {
   return util.CheckDBAccountValidation(session, "AccountVolunteering", "AccountID", avl.Id)
 }
 
-func (avl AccountVolunteering) dataValidation(session *util.Session) error {
+func (avl *AccountVolunteering) dataValidation(session *util.Session) error {
 
   errStr := ""
 
@@ -105,11 +105,11 @@ func (avl AccountVolunteering) dataValidation(session *util.Session) error {
   return nil
 }
 
-func (avl AccountVolunteering) insertValidation(session *util.Session) error {
+func (avl *AccountVolunteering) insertValidation(session *util.Session) error {
   return avl.dataValidation(session)
 }
 
-func (avl AccountVolunteering) updateValidation(session *util.Session) error {
+func (avl *AccountVolunteering) updateValidation(session *util.Session) error {
   err := avl.accountValidation(session)
   if err != nil{
     return err
@@ -117,7 +117,7 @@ func (avl AccountVolunteering) updateValidation(session *util.Session) error {
   return avl.dataValidation(session)
 }
 
-func (avl AccountVolunteering) deleteValidation(session *util.Session) error {
+func (avl *AccountVolunteering) deleteValidation(session *util.Session) error {
   return avl.accountValidation(session)
 }
 
@@ -158,14 +158,14 @@ func readAccountVolunteering(rows *sql.Rows) (interface{}, error) {
     return vol, err
 }
 
-func (avl AccountVolunteering) save(session *util.Session) error {
+func (avl *AccountVolunteering) save(session *util.Session) error {
   if avl.Id <= 0 {
     return avl.saveNew(session)
   }
   return avl.saveUpdate(session)
 }
 
-func (vol AccountVolunteering) saveNew(session *util.Session) error {
+func (vol *AccountVolunteering) saveNew(session *util.Session) error {
 
   err := vol.insertValidation(session)
   if err != nil {
@@ -188,7 +188,7 @@ func (vol AccountVolunteering) saveNew(session *util.Session) error {
   return nil
 }
 
-func (vol AccountVolunteering) saveUpdate(session *util.Session) error {
+func (vol *AccountVolunteering) saveUpdate(session *util.Session) error {
   err := vol.updateValidation(session)
   if err != nil {
     return err
@@ -213,7 +213,7 @@ func (vol AccountVolunteering) saveUpdate(session *util.Session) error {
 
 }
 
-func (avl AccountVolunteering) delete(session *util.Session) error {
+func (avl *AccountVolunteering) delete(session *util.Session) error {
   err := avl.deleteValidation(session)
   if err != nil {
     return err

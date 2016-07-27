@@ -51,11 +51,11 @@ func parseAccountCourses(data interface{}) []AccountCourse {
   return result
 }
 
-func (course AccountCourse) accountValidation(session *util.Session) error {
+func (course *AccountCourse) accountValidation(session *util.Session) error {
   return util.CheckDBAccountValidation(session, "AccountCourse", "AccountID", course.Id)
 }
 
-func (course AccountCourse) dataValidation(session *util.Session) error {
+func (course *AccountCourse) dataValidation(session *util.Session) error {
 
   errStr := ""
 
@@ -78,11 +78,11 @@ func (course AccountCourse) dataValidation(session *util.Session) error {
   return nil
 }
 
-func (course AccountCourse) insertValidation(session *util.Session) error {
+func (course *AccountCourse) insertValidation(session *util.Session) error {
   return course.dataValidation(session)
 }
 
-func (course AccountCourse) updateValidation(session *util.Session) error {
+func (course *AccountCourse) updateValidation(session *util.Session) error {
   err := course.accountValidation(session)
   if err != nil{
     return err
@@ -90,7 +90,7 @@ func (course AccountCourse) updateValidation(session *util.Session) error {
   return course.dataValidation(session)
 }
 
-func (course AccountCourse) deleteValidation(session *util.Session) error {
+func (course *AccountCourse) deleteValidation(session *util.Session) error {
   return course.accountValidation(session)
 }
 
@@ -127,14 +127,14 @@ func readAccountCourse(rows *sql.Rows) (interface{}, error) {
     return course, err
 }
 
-func (course AccountCourse) save(session *util.Session) error {
+func (course *AccountCourse) save(session *util.Session) error {
   if course.Id <= 0 {
     return course.saveNew(session)
   }
   return course.saveUpdate(session)
 }
 
-func (course AccountCourse) saveNew(session *util.Session) error {
+func (course *AccountCourse) saveNew(session *util.Session) error {
 
   err := course.insertValidation(session)
   if err != nil {
@@ -157,7 +157,7 @@ func (course AccountCourse) saveNew(session *util.Session) error {
   return nil
 }
 
-func (course AccountCourse) saveUpdate(session *util.Session) error {
+func (course *AccountCourse) saveUpdate(session *util.Session) error {
   err := course.updateValidation(session)
   if err != nil {
     return err
@@ -178,7 +178,7 @@ func (course AccountCourse) saveUpdate(session *util.Session) error {
 
 }
 
-func (course AccountCourse) delete(session *util.Session) error {
+func (course *AccountCourse) delete(session *util.Session) error {
   err := course.deleteValidation(session)
   if err != nil {
     return err

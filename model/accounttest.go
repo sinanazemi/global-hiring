@@ -55,11 +55,11 @@ func parseAccountTests(data interface{}) []AccountTest {
   return result
 }
 
-func (test AccountTest) accountValidation(session *util.Session) error {
+func (test *AccountTest) accountValidation(session *util.Session) error {
   return util.CheckDBAccountValidation(session, "AccountTest", "AccountID", test.Id)
 }
 
-func (test AccountTest) dataValidation(session *util.Session) error {
+func (test *AccountTest) dataValidation(session *util.Session) error {
 
   errStr := ""
 
@@ -86,11 +86,11 @@ func (test AccountTest) dataValidation(session *util.Session) error {
   return nil
 }
 
-func (test AccountTest) insertValidation(session *util.Session) error {
+func (test *AccountTest) insertValidation(session *util.Session) error {
   return test.dataValidation(session)
 }
 
-func (test AccountTest) updateValidation(session *util.Session) error {
+func (test *AccountTest) updateValidation(session *util.Session) error {
   err := test.accountValidation(session)
   if err != nil{
     return err
@@ -98,7 +98,7 @@ func (test AccountTest) updateValidation(session *util.Session) error {
   return test.dataValidation(session)
 }
 
-func (test AccountTest) deleteValidation(session *util.Session) error {
+func (test *AccountTest) deleteValidation(session *util.Session) error {
   return test.accountValidation(session)
 }
 
@@ -136,14 +136,14 @@ func readAccountTest(rows *sql.Rows) (interface{}, error) {
     return test, err
 }
 
-func (test AccountTest) save(session *util.Session) error {
+func (test *AccountTest) save(session *util.Session) error {
   if test.Id <= 0 {
     return test.saveNew(session)
   }
   return test.saveUpdate(session)
 }
 
-func (test AccountTest) saveNew(session *util.Session) error {
+func (test *AccountTest) saveNew(session *util.Session) error {
 
   err := test.insertValidation(session)
   if err != nil {
@@ -166,7 +166,7 @@ func (test AccountTest) saveNew(session *util.Session) error {
   return nil
 }
 
-func (test AccountTest) saveUpdate(session *util.Session) error {
+func (test *AccountTest) saveUpdate(session *util.Session) error {
   err := test.updateValidation(session)
   if err != nil {
     return err
@@ -189,7 +189,7 @@ func (test AccountTest) saveUpdate(session *util.Session) error {
 
 }
 
-func (test AccountTest) delete(session *util.Session) error {
+func (test *AccountTest) delete(session *util.Session) error {
   err := test.deleteValidation(session)
   if err != nil {
     return err

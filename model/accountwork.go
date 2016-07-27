@@ -67,11 +67,11 @@ func parseAccountWorks(data interface{}) []AccountWork {
   return result
 }
 
-func (work AccountWork) accountValidation(session *util.Session) error {
+func (work *AccountWork) accountValidation(session *util.Session) error {
   return util.CheckDBAccountValidation(session, "AccountWork", "AccountID", work.Id)
 }
 
-func (work AccountWork) dataValidation(session *util.Session) error {
+func (work *AccountWork) dataValidation(session *util.Session) error {
 
   errStr := ""
 
@@ -114,11 +114,11 @@ func (work AccountWork) dataValidation(session *util.Session) error {
   return nil
 }
 
-func (work AccountWork) insertValidation(session *util.Session) error {
+func (work *AccountWork) insertValidation(session *util.Session) error {
   return work.dataValidation(session)
 }
 
-func (work AccountWork) updateValidation(session *util.Session) error {
+func (work *AccountWork) updateValidation(session *util.Session) error {
   err := work.accountValidation(session)
   if err != nil{
     return err
@@ -126,7 +126,7 @@ func (work AccountWork) updateValidation(session *util.Session) error {
   return work.dataValidation(session)
 }
 
-func (work AccountWork) deleteValidation(session *util.Session) error {
+func (work *AccountWork) deleteValidation(session *util.Session) error {
   return work.accountValidation(session)
 }
 
@@ -167,14 +167,14 @@ func readAccountWork(rows *sql.Rows) (interface{}, error) {
     return work, err
 }
 
-func (work AccountWork) save(session *util.Session) error {
+func (work *AccountWork) save(session *util.Session) error {
   if work.Id <= 0 {
     return work.saveNew(session)
   }
   return work.saveUpdate(session)
 }
 
-func (work AccountWork) saveNew(session *util.Session) error {
+func (work *AccountWork) saveNew(session *util.Session) error {
 
   err := work.insertValidation(session)
   if err != nil {
@@ -197,7 +197,7 @@ func (work AccountWork) saveNew(session *util.Session) error {
   return nil
 }
 
-func (work AccountWork) saveUpdate(session *util.Session) error {
+func (work *AccountWork) saveUpdate(session *util.Session) error {
   err := work.updateValidation(session)
   if err != nil {
     return err
@@ -224,7 +224,7 @@ func (work AccountWork) saveUpdate(session *util.Session) error {
 
 }
 
-func (work AccountWork) delete(session *util.Session) error {
+func (work *AccountWork) delete(session *util.Session) error {
   err := work.deleteValidation(session)
   if err != nil {
     return err

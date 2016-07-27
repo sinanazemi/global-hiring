@@ -43,11 +43,11 @@ func parseAccountLanguages(langsArr []interface{}) []AccountLanguage {
   return result
 }
 
-func (lang AccountLanguage) accountValidation(session *util.Session) error {
+func (lang *AccountLanguage) accountValidation(session *util.Session) error {
   return util.CheckDBAccountValidation(session, "AccountLanguage", "AccountID", lang.Id)
 }
 
-func (lang AccountLanguage) dataValidation(session *util.Session) error {
+func (lang *AccountLanguage) dataValidation(session *util.Session) error {
   errStr := ""
 
   if len(strings.TrimSpace(lang.Name)) <= 0 {
@@ -72,11 +72,11 @@ func (lang AccountLanguage) dataValidation(session *util.Session) error {
   return nil
 }
 
-func (lang AccountLanguage) insertValidation(session *util.Session) error {
+func (lang *AccountLanguage) insertValidation(session *util.Session) error {
   return lang.dataValidation(session)
 }
 
-func (lang AccountLanguage) updateValidation(session *util.Session) error {
+func (lang *AccountLanguage) updateValidation(session *util.Session) error {
   err := lang.accountValidation(session)
   if err != nil{
     return err
@@ -84,7 +84,7 @@ func (lang AccountLanguage) updateValidation(session *util.Session) error {
   return lang.dataValidation(session)
 }
 
-func (lang AccountLanguage) deleteValidation(session *util.Session) error {
+func (lang *AccountLanguage) deleteValidation(session *util.Session) error {
   return lang.accountValidation(session)
 }
 
@@ -118,14 +118,14 @@ func readAccountLanguage(rows *sql.Rows) (interface{}, error) {
     return lang, err
 }
 
-func (lang AccountLanguage) save(session *util.Session) error {
+func (lang *AccountLanguage) save(session *util.Session) error {
   if lang.Id <= 0 {
     return lang.saveNew(session)
   }
   return lang.saveUpdate(session)
 }
 
-func (lang AccountLanguage) saveNew(session *util.Session) error {
+func (lang *AccountLanguage) saveNew(session *util.Session) error {
 
   err := lang.insertValidation(session)
   if err != nil {
@@ -148,7 +148,7 @@ func (lang AccountLanguage) saveNew(session *util.Session) error {
   return nil
 }
 
-func (lang AccountLanguage) saveUpdate(session *util.Session) error {
+func (lang *AccountLanguage) saveUpdate(session *util.Session) error {
   err := lang.updateValidation(session)
   if err != nil {
     return err
@@ -167,7 +167,7 @@ func (lang AccountLanguage) saveUpdate(session *util.Session) error {
 
 }
 
-func (lang AccountLanguage) delete(session *util.Session) error {
+func (lang *AccountLanguage) delete(session *util.Session) error {
   err := lang.deleteValidation(session)
   if err != nil {
     return err
