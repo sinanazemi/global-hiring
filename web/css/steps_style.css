@@ -89,6 +89,14 @@
     margin: auto
 }
 
+.location-image {
+    width: 15px;
+    height: 15px;
+    padding-left: 5px;
+    padding-top: 8px;
+
+}
+
 .field-div {
     width: 374px;
     height: 30px;
