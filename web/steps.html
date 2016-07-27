@@ -20,8 +20,6 @@
 </head>
 
 <body bgcolor="#323232" >
-
-    <div>
         <div ng-app="globalHiring" ng-controller="stepsController">
             <a href="#" style="text-decoration: none;">
               <div id="step1" class="step-div" ng-hide="step1Hide" >
@@ -30,7 +28,7 @@
                     </div>
                     <img src="images/step_1_bar.png" class="bar-image" alt="Mountain View">
                     <div class="field-div" style="top: 100px;">
-                         <p class="field-center-label" style="text-align:center;" >You can also sign up with facebook,linkedIn or Google.</p>
+                         <p class="field-center-label " style="text-align:center;" >You can also sign up with <span style="color: rgb(3, 186, 109)"> facebook </span>, <span style="color: rgb(3, 186, 109)"> LinkedIn </span> or <span style="color: rgb(3, 186, 109)"> Google </span>.</p>
                     </div>
                     <div class="field-div" style="top: 130px;">
                         <p class="field-label" >Fullname</p>
@@ -64,7 +62,7 @@
                     <div class="field-div" style="top: 430px;">
                       <label class="field-label">
                         <input type="checkbox" ng-model="checkboxValue" style="display: inline-block;">
-                          Yes, I understand and agree to the global hiring platform terms of service
+                          Yes, I understand and agree to the <span style="color: rgb(3, 186, 109)"> global hiring platform terms of service </span>.
                       </label>
                       <p  ng-show="termsOfServiceShow" class=" red-thin-label" style="font-size: 10px;" > Please accept the global hiring platform terms of service before continuing </p>
                     </div>
@@ -237,11 +235,9 @@
             </a>
         </div>
 
-    </div>
+  </body>
 
 <script>
-
-
 var globalHiring = angular.module('globalHiring',["ngResource"]);
 globalHiring.controller('stepsController',["$scope", "$resource", function($scope,$resource, $http, $window) {
 
@@ -559,11 +555,4 @@ globalHiring.controller('stepsController',["$scope", "$resource", function($scop
 );
 
 </script>
-
-</script>>
-
-
-
-</body>
-
 </html>

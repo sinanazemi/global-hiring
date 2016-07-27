@@ -107,7 +107,7 @@
 
     width: 374px;
     height: 30px;
-  
+
 
 }
 
@@ -175,6 +175,7 @@ input[type=checkbox] + label {
     font-style: bold;
     color: rgb(97, 97, 97);
 }
+
 .select-area2 {
     float: left;;
     resize: none;
@@ -280,7 +281,7 @@ html {
 }
 
 .green-label {
-    font-size: 12px;
+    font-size: 10px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-style:normal;
     font-weight: 450;
