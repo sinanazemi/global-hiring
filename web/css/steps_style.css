@@ -97,6 +97,7 @@
 
 }
 
+
 .field-div {
     width: 374px;
     height: 30px;
@@ -167,6 +168,31 @@ input[type=checkbox] + label {
   font-weight: 450;
   color: rgb(3, 186, 109);
   text-align: center;
+}
+
+.select-style {
+    -webkit-appearance: none;
+     -moz-appearance: none;
+     appearance: none;
+
+    width: 231px;
+    height: 31px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 10px;
+    float: right;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    background-color: #fff;
+    cursor: pointer;
+
+    background: #fff url('../images/combo.png') no-repeat 97% 50%;
+
+
+    font-size: 10px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style: bold;
+    color: rgb(97, 97, 97);
 }
 
 .select-area1 {
