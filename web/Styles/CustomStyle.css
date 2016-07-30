@@ -14,10 +14,11 @@
     background-color: rgba(255,255,255,0.88);
     /*opacity: 0.88;*/
 }
-.brand-img-c{
+.logo-img-c{
     /*margin-top:-5px;*/
     /*height:33.6px;
     width:96.8px;*/
+    width:290px;
 }
 .menu-mo-c{
     display:none;
@@ -57,6 +58,7 @@
 }
 .row-c{
     position:relative;
+    max-width:100%;
 }
 .skill-container-c {
     position:relative;
@@ -99,7 +101,7 @@
 .div-skill-img-c{  
     position:relative; 
     top:65px;
-    right:-73px; 
+    right:-102px; 
 }
 .skill-img-c{ 
     position:absolute; 
@@ -123,7 +125,7 @@
 }
 .container-hiw-c h2 {
     padding-top: 50px;
-    padding-right:87px;
+    /*padding-right:87px;*/
     font-size: 28px;
     font-weight: normal;
     text-align: center;
@@ -133,16 +135,25 @@
     margin-top:28px;
 }
 .img-first-c {
+    display:block;
+     margin-left:auto;
+    margin-right:auto;
     width: 107.5px;
     height: 125.6px;
     /*margin-left:83px;*/
 }
 .img-then-c {
+    display:block;
+     margin-left:auto;
+    margin-right:auto;
     width: 151.2px;
     height: 134.4px;
-    /*margin-left:83px;*/
+   
 }
 .img-finally-c {
+    display:block;
+     margin-left:auto;
+    margin-right:auto;
     width: 106.1px;
     height: 132.8px;
     /*margin-left:83px;*/
@@ -190,6 +201,15 @@
     color: #818181;
 }
 
+.f-items-c{
+    text-decoration:none !important;
+    margin-top: -8px;
+    font-size: 14px;
+    /*padding-left: 79px;*/
+    line-height: 2.1;
+    color: #818181;
+}
+
 .f-copyright-c{
     position: absolute;
     right: 0px;
@@ -198,24 +218,27 @@
     width: auto;
     height: 41.3px;
     background-color: #9b9b9b;
+    
 }
     .f-copyright-c p{
-        position: absolute;
+        /*position: absolute;*/
         font-size: 12px;
         color: #4a4a4a;
         font-weight: 300;
         line-height: 1.33;
         padding-top: 14.3px;
-        /*left: 0px;*/
-        text-align:left;    
-        margin-left: 50px;   
+        left: 0px;
+        text-align:center;  
+        display:block;          
+        margin-left: auto;
+        margin-right: auto;  
     }
     
 @media screen and (max-width: 992px) {
         /*-----------------------
     navbar
     -----------------------*/
-        .brand-img-c {
+        .logo-img-c {
             margin-top:4px;
             width: 230px;
             height: 28px;
@@ -253,7 +276,7 @@
             height:500px;
         }
         .txt-skill-c h2 {
-            font-size: 31.4px;
+            font-size: 30px;
         }
         .txt-skill-c p{
             margin-left:0px;
@@ -278,9 +301,10 @@
         -----------------------*/
         .container-hiw-c {
             height: 394px;
+            
         }
             .container-hiw-c h2 {
-                font-size: 24px;
+                font-size: 22px;
                 /*margin-top: 50px;*/
             }
         .img-first-c{
@@ -310,13 +334,13 @@
         /*-----------------------
     forth footer
     -----------------------*/
-        .container_footer-c{
+        .container-footer-c{ 
             height:185px;
         }
-        .container_footer-c p{
+        .container-footer-c p{
             font-size: 10.5px;
         }
-        .container_footer-c h4{
+        .container-footer-c h4{
             margin-top: 50.4px;
             /*padding-right: 59.1px;*/
             font-size: 13.5px;
@@ -345,7 +369,7 @@
         .nav-container-c{
             /*background-color:lightblue;*/
            /*position:relative;*/
-           height:40px;
+           height:40px;           
            width:auto;
            /*margin-right:50px;*/
            /*align-content:center;*/
@@ -426,15 +450,19 @@
             height: 43px;
             border: solid 0.6px #42cf94;
         }
-        .div-skill-img-c{
-            /*position:relative;*/
+        .div-skill-img-c-2{
+            position:relative; 
+            top:47px;
+            margin-right:-15px;
         }
         .skill-img-c {
             position:absolute;
-            width: 194.2px;  
+            width: 194.2px; 
+            /*width:auto;*/ 
             height:auto;
-            top:-20px;  
-            right:87px;
+            /*height:195px;*/
+            /*top:-20px;*/  
+            /*right:87px;*/
             /*left:40px;*/
             z-index:3; 
                      
@@ -479,11 +507,13 @@
         /*-----------------------
         forth footer
         -----------------------*/
+        .f-section-c{
+            margin-bottom:20px;
+        }
         .container-footer-c{    
             position:relative;        
-            height:auto;
-            /*display:none;*/ 
-            text-align:center;           
+            height:auto; 
+            text-align:center;        
         }
         .container_footer-c p{
             font-size: 10.5px;
@@ -497,7 +527,7 @@
         .f-copyright-c p{
             font-size: 9px;
             text-align:center;
-            padding-right: 89px;
+            /*padding-right: 89px;*/
             /*margin-top: 15.3px;*/
         }
 }
