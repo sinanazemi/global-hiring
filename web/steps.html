@@ -10,9 +10,6 @@
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-resource.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.js"></script>
-
-    <script src="Scripts/steps.js"></script>
-
     <link href="css/steps_style.css" rel="stylesheet">
 
     <title>Create Profile</title>
@@ -28,7 +25,7 @@
                     </div>
                     <img src="images/step_1_bar.png" class="bar-image" alt="Mountain View">
                     <div class="field-div" style="top: 100px;">
-                         <p class="field-center-label " style="text-align:center;" >You can also sign up with <span style="color: rgb(3, 186, 109)"> facebook </span>, <span style="color: rgb(3, 186, 109)"> LinkedIn </span> or <span style="color: rgb(3, 186, 109)"> Google </span>.</p>
+                         <p class="field-center-label " style="text-align:center;" >You can also sign up with <span style="color: rgb(3, 186, 109)"> Facebook </span>, <span style="color: rgb(3, 186, 109)"> LinkedIn </span> or <span style="color: rgb(3, 186, 109)"> Google </span>.</p>
                     </div>
                     <div class="field-div" style="top: 140px;">
                         <p class="field-label" >Fullname</p>
@@ -322,7 +319,7 @@ globalHiring.controller('stepsController',["$scope", "$resource", function($scop
     }
     else {
       $scope.step1Hide=true;
-      if($scope.isStudent){
+      if($scope.isStudent=="true"){
         $scope.stepLangHide=false;
         $scope.langBarImage="images/step_2_bar.png";
       }
@@ -342,7 +339,7 @@ globalHiring.controller('stepsController',["$scope", "$resource", function($scop
        $scope.langs.push(angular.copy($scope.langsToAdd[index]));
     }
     $scope.stepLangHide=true;
-    if($scope.isStudent){
+    if($scope.isStudent =="true"){
       $scope.stepEduHide=false;
       $scope.eduBarImage="images/step_3_bar.png";
     }
@@ -359,7 +356,7 @@ globalHiring.controller('stepsController',["$scope", "$resource", function($scop
        $scope.educations.push(angular.copy($scope.educationsToAdd[indexEdu]));
     }
       $scope.stepEduHide=true;
-    if($scope.isStudent){
+    if($scope.isStudent =="true"){
       $scope.stepMainSRVHide=false;
       $scope.mainSRVBarImage="images/step_4_bar.png";
       $scope.getMainServices();
@@ -373,7 +370,7 @@ globalHiring.controller('stepsController',["$scope", "$resource", function($scop
   $scope.mainSRVNextClick = function(){
 
     $scope.stepMainSRVHide=true;
-    if($scope.isStudent){
+    if($scope.isStudent=="true"){
       $scope.stepSkillHide=false;
       $scope.skillBarImage="images/step_5_bar.png";
     }
@@ -386,7 +383,7 @@ globalHiring.controller('stepsController',["$scope", "$resource", function($scop
   // Previous buttons click
   $scope.langPreClick=function(){
     $scope.stepLangHide=true;
-    if($scope.isStudent){
+    if($scope.isStudent=="true"){
       $scope.step1Hide=false;
     }
     else {
@@ -397,7 +394,7 @@ globalHiring.controller('stepsController',["$scope", "$resource", function($scop
   $scope.eduPreClick=function(){
     $scope.stepEduHide=true;
     $scope.stepLangHide=false;
-    if($scope.isStudent){
+    if($scope.isStudent=="true"){
       $scope.langBarImage="images/step_2_bar.png";
     }
     else {
@@ -406,7 +403,7 @@ globalHiring.controller('stepsController',["$scope", "$resource", function($scop
   }
   $scope.mainSRVPreClick=function(){
     $scope.stepMainSRVHide=true;
-    if($scope.isStudent){
+    if($scope.isStudent=="true"){
       $scope.stepEduHide=false;
       $scope.eduBarImage="images/step_3_bar.png";
     }
@@ -417,7 +414,7 @@ globalHiring.controller('stepsController',["$scope", "$resource", function($scop
   $scope.skillPreClick=function(){
     $scope.stepMainSRVHide=false;
     $scope.stepSkillHide=true;
-    if($scope.isStudent){
+    if($scope.isStudent=="true"){
       $scope.skillBarImage="images/step_5_bar.png";
     }
     else {
@@ -533,7 +530,7 @@ globalHiring.controller('stepsController',["$scope", "$resource", function($scop
       newAccount.city = $scope.selectedCity;
       newAccount.phone = $scope.phone;
       newAccount.password = $scope.password;
-      if($scope.isStudent){
+      if($scope.isStudent=="true"){
         newAccount.isstudent = true;
       }
       else {

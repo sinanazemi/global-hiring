@@ -187,6 +187,7 @@ input[type=checkbox] + label {
     cursor: pointer;
 
     background: #fff url('../images/combo.png') no-repeat 97% 50%;
+    background-size: 12px;
 
 
     font-size: 10px;
@@ -324,7 +325,7 @@ html {
 }
 
 .field-center-label {
-  
+
     font-size: 10px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-style: bold;
