@@ -132,7 +132,10 @@
     color: #03ba6d;
 }
 .hiw-row-c{
-    margin-top:28px;
+    margin-top:28px;    
+}
+.hiw-txt-c{
+    padding-left:110px;
 }
 .img-first-c {
     display:block;
@@ -307,6 +310,9 @@
                 font-size: 22px;
                 /*margin-top: 50px;*/
             }
+    .hiw-txt-c {
+        padding-left: 0px;
+    }
         .img-first-c{
             width: 89.8px;
             height: 99.4px;            
@@ -480,6 +486,9 @@
                 font-size: 24px;
                 /*margin-top: 50px;*/
             }
+    .hiw-txt-c {
+        padding-left: 0px;
+    }
         .img-first-c{
             width: 89.8px;
             height: 99.4px;            
