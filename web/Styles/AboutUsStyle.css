@@ -29,6 +29,12 @@
     font-weight: bold;
     letter-spacing: 1.8px;
 }
+.c-sayhello-c{
+    max-width:900px; 
+    margin-left:auto; 
+    margin-right:auto;
+}
+
 .c-sayhello-c h4 {
     font-size: 30px;
     font-weight: normal;
@@ -40,12 +46,16 @@
     font-weight: normal;
     line-height: 1.5;
     color: #696767;
+    text-align:justify;
 }
 /*-----------------
     FAQ
     ----------------*/
 .c-faq-c{
      margin-top:65px;
+     max-width:900px; 
+    margin-left:auto; 
+    margin-right:auto;
 }
 .faq-h2-c {
     font-size: 30px;

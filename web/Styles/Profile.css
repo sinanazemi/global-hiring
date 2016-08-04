@@ -1,6 +1,12 @@
 ﻿body {
     font-family: Helvetica;
 }
+.prf-nav-c{
+    border-bottom:solid 0.5px #979797;
+}
+.main-cnt-c{
+    background-color:#f3f3f3;
+}
 .small-profile-img-c {
     width: 64px;
     height: 63px;
@@ -18,7 +24,10 @@
 .myProfile-cn-c{
     margin-top:65px;
   background-color:#f3f3f3;
-  border-top: solid 0.5px #979797;
+  max-width: 1300px; 
+  margin-left: auto; 
+  margin-right: auto;
+  
 }
 
 .myProfile-cn-c h2{
@@ -29,10 +38,10 @@
 }
 .prf-img-c {
     margin-top:30px;
-    padding-right:20px;
+    /*padding-right:20px;*/
     margin-left:20px;
-    width: 91px;
-    height: auto;
+    width: 90px;
+    height: 90px;
 }
 
 .prf-info-c{
@@ -100,6 +109,7 @@
 
 .a-btn-c{
     text-decoration:none;
+    color:black;
 }
 .btn-add-c, .btn-edit-c, .btn-delete-c{
     display:none;
@@ -112,18 +122,23 @@
     color:#b8e986;
     display:inline;
 }
-.panel-history-c h5:hover .history-txt-c{
+/*.panel-history-c h5:hover .history-txt-c{
     background-color:#b8e986;
-}
-.panel-history-c h5:hover .edit-history-c,.panel-history-c h5:hover .delete-history-c{
+}*/
+/*.panel-history-c h5:hover .edit-history-c,.panel-history-c h5:hover .delete-history-c{
     background-color:#b8e986;
     color: black;
     display:inline;
-}
+}*/
 
-.history-txt-c:hover{
+/*.panel-history-c p:hover .edit-history-c,.panel-history-c p:hover .delete-history-c{
     background-color:#b8e986;
-}
+    color: black;
+    display:inline;
+}*/
+/*.history-txt-c:hover{
+    background-color:#b8e986;
+}*/
 
 /*-------------------------------
     Education
@@ -357,7 +372,10 @@ input[type=checkbox]:checked+.custom-check::before {
 
 
 
-/*-------------------*/
+/*-------  right info  ------------*/
+.prf-strength-img-c{
+    height:65px;
+}
 .strength-cnt-c h3 {
     font-size: 14px;
     font-weight: bold;
