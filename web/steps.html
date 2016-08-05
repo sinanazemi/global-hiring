@@ -6,83 +6,101 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="googlebot" content="noindex, nofollow">
 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link href="Styles/CustomStyle.css" rel="stylesheet" />
+
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-resource.min.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.js"></script>
     <link href="css/steps_style.css" rel="stylesheet">
 
     <title>Create Profile</title>
 
 </head>
 
-<body bgcolor="#323232" >
-        <div ng-app="globalHiring" ng-controller="stepsController">
-            <a href="#" style="text-decoration: none;">
-              <div id="step1" class="step-div" ng-hide="step1Hide" >
-                    <div class="stepheader">
-                        <p class="steptitle">Account Information</p>
-                    </div>
-                    <img src="images/step_1_bar.png" class="bar-image" alt="Mountain View">
-                    <div class="field-div" style="top: 100px;">
-                         <p class="field-center-label " style="text-align:center;" >You can also sign up with <span style="color: rgb(3, 186, 109)"> Facebook </span>, <span style="color: rgb(3, 186, 109)"> LinkedIn </span> or <span style="color: rgb(3, 186, 109)"> Google </span>.</p>
-                    </div>
-                    <div class="field-div" style="top: 140px;">
-                        <p class="field-label" >Fullname</p>
-                        <input type="text" class="field-text-area" placeholder="{{fullnamePlaceholder}}" rows="1" ng-model="fullname" ng-style="requiedStyleFullname"  required>
-                    </div>
-                    <div class="field-div" style="top: 190px;">
-                        <p class="field-label">Email</p>
-                        <input type="email" class="field-text-area" placeholder="{{emailPlaceholder}}"  rows="1"  ng-model="email" ng-style="requiedStyleEmail"  required/>
-                    </div>
-                    <div class="field-div" style="top: 240px;">
-                        <p class="field-label">Select City</p><img src="images/location.png" class="location-image" alt="Location">
-                        <select class="select-style" ng-model="selectedCity" ng-options="city as city.name for city in cities">
-                        </select>
+<body class="body-c" bgcolor="#323232" ng-app="globalHiring" ng-controller="stepsController" >
+  <div id="step1" class="container step-div " ng-hide="step1Hide" >
+    <div class="step-header">
+      <h4 class="step-title">Create Account </h4>
+    </div>
+    <div class="form-horizontal step-form" role="form">
+        <br />
+        <img src="images/step_1_bar.png" class="img-responsive bar-image" alt="Mountain View">
+        <br />
+        <p class="field-center-label " style="text-align:center;" >You can also sign up with <span style="color: rgb(3, 186, 109)"> Facebook </span>, <span style="color: rgb(3, 186, 109)"> LinkedIn </span> or <span style="color: rgb(3, 186, 109)"> Google </span>.</p>
+        <br />
+        <div class="form-group field-div" >
+          <label class="control-label col-sm-4 field-label" style="text-align:left;" >Fullname</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control input-sm input-style"  placeholder="{{fullnamePlaceholder}}" rows="1" ng-model="fullname" ng-style="requiedStyleFullname"  required>
+          </div>
+        </div>
+        <div class="form-group field-div" >
+          <label class="control-label col-sm-4 field-label" style="text-align:left;" >Email</label>
+          <div class="col-sm-8">
+            <input type="email" class="form-control input-sm input-style" placeholder="{{emailPlaceholder}}"  rows="1"  ng-model="email" ng-style="requiedStyleEmail"  required/>
+          </div>
+        </div>
+        <div class="form-group field-div" >
+          <label class="control-label col-sm-4 field-label" style="text-align:left;" >Select City<img src="images/location.png" class="location-image" alt="Location"></label>
+          <div class="col-sm-8 ">
+            <select class="form-control input-sm input-style select-style" ng-model="selectedCity" ng-options="city as city.name for city in cities"></select>
+          </div>
+        </div>
+        <div class="form-group field-div">
+          <label class="control-label col-sm-4 field-label" style="text-align:left;" >Phone (optional)</label>
+          <div class="col-sm-8 ">
+            <input type="text" class="form-control input-sm input-style" placeholder="(123) 456-7890" rows="1" ng-model="phone" />
+          </div>
+        </div>
+        <div class="form-group field-div">
+          <label class="control-label col-sm-4 field-label" style="text-align:left;" >Password</label>
+          <div class="col-sm-8 ">
+            <input type="password" class="form-control input-sm input-style"  placeholder="{{passwordPlaceholder}}"  ng-model="password" ng-style="requiedStylePassword"  required/>
+          </div>
+        </div>
+        <div class="form-group field-div">
+          <label class="control-label col-sm-4 field-label" style="text-align:left;" >Are you a student?</label>
+          <div class="col-sm-8 ">
 
-                    </div>
-                    <div class="field-div" style="top: 290px;">
-                        <p class="field-label">Phone (optional)</p>
-                        <input type="text" class="field-text-area" placeholder="(123) 456-7890" rows="1" ng-model="phone" />
-                    </div>
-                    <div class="field-div" style="top: 340px;">
-                        <p class="field-label">Password</p>
-                        <input type="password" class="field-text-area" rows="1" placeholder="{{passwordPlaceholder}}"  ng-model="password" ng-style="requiedStylePassword"  required/>
-                    </div>
-                    <div class="field-div" style="top: 390px;">
-                        <p class="field-label" row="1"  >Are you a student?</p>
-                        <input type="radio" name="isStudent" value="true" ng-model="isStudent" style="float: left; margin-left: 60px; margin-top: 10px;"/>
-                        <p class="radio-button-text" style="float: left; margin-top: 10px;">Yes</p>
-                        <input type="radio" name="isStudent" value="false" ng-model="isStudent" style="float: left; margin-left: 50px; margin-top: 10px;"/>
-                        <p class="radio-button-text" style="float: left; margin-top: 10px;"> No </p>
-                    </div>
-                    <div class="field-div" style="top: 420px;">
-                      <label class="field-label">
-                        <input type="checkbox" ng-model="checkboxValue" style="display: inline-block;">
-                          Yes, I understand and agree to the <span style="color: rgb(3, 186, 109)"> global hiring platform terms of service </span>.
-                      </label>
-                      <p  ng-show="termsOfServiceShow" class=" red-thin-label" style="font-size: 10px;" > Please accept the global hiring platform terms of service before continuing </p>
-                    </div>
-                    <a href="#" class="next-button green-button button-center" ng-click="step1NextClick()">Next Step</a>
-                </div>
+            <label class= "radio-inline radio-button-text" >  <input type="radio" name="isStudent" value="true" ng-model="isStudent"> Yes </label>
+            <label class= "radio-inline radio-button-text" >  <input type="radio" name="isStudent" value="false" ng-model="isStudent" > No </label>
 
-                <div id="stepLang" class="step-div" ng-hide="stepLangHide" ng-repeat="langToAdd in langsToAdd" >
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="checkbox">
+            <label class="control-label" style="text-align:left; font-size:12px;"><input type="checkbox" ng-model="checkboxValue"><span class="custom-check"></span>&nbsp; Yes, I understand and agree to the <span style="color: rgb(3, 186, 109)">Global Hiring Platform Terms of Service</span>.</label>
+          </div>
+          <p  ng-show="termsOfServiceShow" class=" red-thin-label" style="font-size: 10px;" > Please accept the global hiring platform terms of service before continuing </p>
+        </div>
+        <div class="btn-div-c">
+          <button type="button" class="next-button btn-next-c" ng-click="step1NextClick()">Next Step</button>
+        </div>
+      </div>  <!-- Form finish -->
+  </div> <!-- step1 finish -->
 
-                    <div class="stepheader">
-                        <p class="steptitle">Language</p>
-                    </div>
-                    <img ng-src="{{langBarImage}}" class="bar-image" alt="Mountain View">
-
-                    <div class="field-div" style="top: 100px;">
-                        <p class="black-bold-label">Language</p>
-                    </div>
-                    <div class="field-div" style="top: 150px;">
-                        <input type="text" class="field-text-area-4" placeholder="English" rows="1" ng-model="langToAdd.name" />
-                    </div>
-                    <div class="field-div" style="top: 200px;">
-                        <p class="black-bold-label">Profeciency</p>
-                      </div>
-
+  <div id="stepLang" class="container step-div " ng-hide="stepLangHide" ng-repeat="langToAdd in langsToAdd" >
+    <div class="step-header">
+      <h4 class="step-title">Language </h4>
+    </div>
+    <div class="form-horizontal step-form" role="form">
+        <br />
+        <img ng-src="{{langBarImage}}" class="img-responsive bar-image" alt="Language Step">
+        <br />
+        <div class="form-group field-div" >
+          <label class="control-label col-sm-12 field-Bold-label" style="text-align:left; margin-top:60px;" >Language</label>
+          <div class="col-sm-12" style="margin-top:10px;">
+            <input type="text" class="form-control input-sm input-style"  placeholder="English" rows="1" ng-model="langToAdd.name" >
+          </div>
+        </div>
+        <div class="form-group field-div" >
+          <label class="control-label col-sm-12 field-Bold-label" style="text-align:left; margin-top:18px;" >Profeciency</label>
+        </div>
 <!--                      <div class="field-div" style="top: 100px;">
                       <div class="container" >
                         <div class="profeciencyRadio-button-text" ng-repeat="profeciency in LanguageProfeciencies" style="display: inline;"  >
@@ -93,146 +111,181 @@
                       </div>
                     </div>
 -->
-                      <div class="field-div" style="top: 240px;">
-                        <input type="radio" name="level" value="E" ng-model="langToAdd.profeciency" style="float: left; "/>
-                        <p class="radio-button-text">Elementry</p>
-                      </div>
-                      <div class="field-div" style="top: 250px;">
-                        <p class="black-thin-label">I am only able to understand written text in it.</p>
-                      </div>
-                      <div class="field-div" style="top: 280px;">
-                        <input type="radio" name="level" value="B" ng-model="langToAdd.profeciency" style="float: left; "/>
-                        <p class="radio-button-text"> Basic</p> </br>
-                      </div>
-                      <div class="field-div" style="top: 290px;">
-                        <p class=" black-thin-label">I am only able to communicate with it through written communication .</p>
-                      </div>
-                      <div class="field-div" style="top: 320px;">
-                        <input type="radio" name="level" value="C" ng-model="langToAdd.profeciency" style="float: left;"/>
-                        <p class="radio-button-text"> Conversational</p>
-                      </div><div class="field-div" style="top: 330px;">
-                        <p class=" black-thin-label">I know it well enough to verbally discuss project details with a client.</p>
-                      </div>
-                      <div class="field-div" style="top: 360px;">
-                        <input type="radio" name="level" value="F" ng-model="langToAdd.profeciency" style="float: left; "/>
-                        <p class="radio-button-text"> Fluent</p>
-                      </div>
-                      <div class="field-div" style="top: 370px;">
-                        <p class=" black-thin-label">I have complete command of it with perfect grammer.</p>
-                      </div>
-                      <div class="field-div" style="top: 400px;">
-                        <input type="radio" name="level" value="N" ng-model="langToAdd.profeciency" style="float: left; "/>
-                        <p class="radio-button-text"> Native or Bollingual</p>
-                      </div>
-                      <div class="field-div" style="top: 410px;">
-                        <p class=" black-thin-label">I have complete command of it, including breadth of vocabulary, idioms.</p>
-                      </div>
-                      <div class="field-div" style="top: 460px;">
-                        <p class="add-more-text" ng-click="addMoreLangClick(langToAdd)" style="text-align:center;" >+ Add More Language</p>
-                      </div>
+      <div class="row radio-langPro-position">
+        <div class="col-sm-12 form-group field-div">
+          <div class="radio">
+            <label class="radio-button-text" ><input type="radio" name="level" value="E" ng-model="langToAdd.profeciency">Elementry <br/><p class="black-thin-label">I am only able to understand written text in it.</p></label>
+          </div>
+        </div>
+      </div>
+      <div class="row radio-langPro-position">
+        <div class="col-sm-12 form-group field-div">
+          <div class="radio ">
+            <label class="radio-button-text" ><input type="radio" name="level" value="B" ng-model="langToAdd.profeciency">Basic <br/><p class="black-thin-label">I am only able to communicate with it through written communication.</p></label>
+          </div>
+        </div>
+      </div>
+      <div class="row radio-langPro-position">
+        <div class="col-sm-12 form-group field-div">
+          <div class="radio ">
+            <label class="radio-button-text" ><input type="radio" name="level" value="C" ng-model="langToAdd.profeciency">Conversational <br/><p class="black-thin-label">I know it well enough to verbally discuss project details with a client.</p></label>
+          </div>
+        </div>
+      </div>
+      <div class="row radio-langPro-position">
+        <div class="col-sm-12 form-group field-div">
+          <div class="radio">
+            <label class="radio-button-text" ><input type="radio" name="level" value="F" ng-model="langToAdd.profeciency">Fluent <br/><p class="black-thin-label">I have complete command of it with perfect grammer.</p></label>
+          </div>
+        </div>
+      </div>
+      <div class="row radio-langPro-position">
+        <div class="col-sm-12 form-group field-div">
+          <div class="radio">
+            <label class="radio-button-text" ><input type="radio" name="level" value="N" ng-model="langToAdd.profeciency">Native or Bollingual <br/><p class="black-thin-label">I have complete command of it, including breadth of vocabulary, idioms.</p></label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="btn-div-c">
+          <p class="btn-add-new" ng-click="addMoreLangClick(langToAdd)" style="padding-top:10px;" >+ Add More Language</p>
+        </div>
+      </div>
 
+        <div class="row">
+          <div class="col-sm-6 btn-div-c" >
+            <button type="button" class="next-button btn-prev-c " ng-click="langPreClick()" style="margin-left:40px;">Previous</button>
+          </div>
+          <div class="col-sm-6 btn-div-c" >
+            <button type="button" class="next-button btn-next-c " ng-click="langNextClick()" style="margin-right:40px;">Next Step</button>
+          </div>
+        </div>
+    </div> <!-- Form finish -->
+  </div> <!-- Language step finish -->
 
-                    <a href="#" class="previous-button gray-button button-left" ng-click="langPreClick()">Previous</a>
-                    <a href="#" class="next-button green-button button-right" ng-click="langNextClick()"> Next Step </a>
-                </div>
-
-                <div id="stepEdu" class="step-div" ng-hide="stepEduHide" ng-repeat="educationToAdd in educationsToAdd">
-
-                   <div class="stepheader">
-                        <p class="steptitle">Education</p>
-                    </div>
-                    <img ng-src="{{eduBarImage}}" class="bar-image" alt="Mountain View">
-
-                    <div class="field-div" style="top: 130px;">
-                        <p class="black-bold-label">School</p>
-                    </div>
-                    <div class="field-div" style="top: 160px;">
-                        <input type="text" class="field-text-area-4" rows="1" ng-model="educationToAdd.school" />
-                    </div>
-
-                    <div class="field-div" style="top: 190px;">
-                        <p class="black-bold-label">Date</p>
-                    </div>
-                    <div class="field-div" style="top: 220px;">
-                        <select class="select-area2" ng-model="educationToAdd.fromdate" placeholder="From"   ng-options="opt as opt for opt in dates" ></select>
-                        <select class="select-area2" ng-model="educationToAdd.todate" placeholder="To(or expected graduation year)"   ng-options="opt as opt for opt in dates" style="margin-left: 10px;"  ></select>
-                    </div>
-
-                    <div class="field-div" style="top: 250px;">
-                        <p class="black-bold-label">Degree</p>
-                    </div>
-                    <div class="field-div" style="top: 280px;">
-                        <select class="select-area3" ng-model="educationToAdd.degree" ng-options="degree as degree.name for degree in degrees">
-                        </select>
-                    </div>
-                    <div class="field-div" style="top: 310px;">
-                        <p class="black-bold-label">Field Of Study</p>
-                    </div>
-                    <div class="field-div" style="top: 340px;">
-                        <input type="text" class="field-text-area-4" rows="1" ng-model="educationToAdd.field" />
-                    </div>
-                    <div class="field-div" style="top: 370px;">
-                        <p class="black-bold-label">Grade</p>
-                    </div>
-                    <div class="field-div" style="top: 400px;">
-                        <input type="text" class="field-text-area-4" rows="1" ng-model="educationToAdd.grade" />
-                    </div>
-
-                    <div class="field-div" style="top: 460px;">
-                      <p class="add-more-text" ng-click="addMoreEduClick(educationToAdd)" style="text-align:center;" >+ Add More Education</p>
-                    </div>
-
-                    <a href="#" class="previous-button gray-button button-left" ng-click="eduPreClick()">Previous</a>
-                    <a href="#" class="next-button green-button button-right" ng-click="eduNextClick()">Next Step</a>
-                </div>
-
-                  <div id="stepMainSRV" class="step-div" ng-hide="stepMainSRVHide">
-                    <div class="stepheader">
-                        <p class="steptitle">Main Service</p>
-                    </div>
-                    <img ng-src={{mainSRVBarImage}} class="bar-image" alt="Mountain View">
-
-                      <div class="container"  >
-                      <div class="item" ng-repeat='service in mainServices' ng-click='toggleSelectedSRV(service)' ng-class="{ selected: service.isselected  }">
-                        <input type="checkbox" ng-attr-id="{{'c' + service.id}}" ng-model="service.isselected" />
-                        <label ng-attr-for="{{'c' +service.id}}" ng-class="{ selected: service.isselected  }"> {{service.name}}
-                        <!--  <img ng-src="{{getIcon(service)}}">
-                        -->
-                        </label>
-                      </div>
-                      </div>
-
-
-                    <a href="#" class="previous-button gray-button button-left" ng-click="mainSRVPreClick()">Previous</a>
-                    <a href="#" class="next-button green-button button-right" ng-click="mainSRVNextClick()">Next Step</a>
-                </div>
-
-
-
-                <div id="stepSkills" class="step-div" ng-hide="stepSkillHide">
-
-                    <div class="stepheader">
-                        <p class="steptitle">Skills</p>
-                    </div>
-                    <img ng-src={{skillBarImage}} class="bar-image" alt="Skill Bar">
-
-                    <div id="skilldList" class="skill-div" style="top: 100px; overflow:auto">
-                      <ul ng-repeat="service in mainServices | filter: {isselected: true } " style="text-align:left; padding-left:2px;" >
-                          <p class="black-bold-label" style="text-align:left; padding-left:2px; font-size:12px">{{service.question}}</p>
-                        <li ng-repeat="skillOfSRV in service.skills " style="list-style-type:none;">
-                          <p class="black-border-label" ng-click="skillClick(skillOfSRV)" ng-class="{ selected: skillOfSRV.isselected }" >{{skillOfSRV.name}}</p>
-                        </li>
-                      </ul>
-                    </div>
-
-                    <a href="#" class="previous-button gray-button button-left" ng-click="skillPreClick()">Previous</a>
-                  <a href="/profile.html" class="next-button green-button button-right" ng-click="finishClick()" >Finish</a>
-                </div>
-
-            </a>
+  <div id="stepEdu" class="container step-div " ng-hide="stepEduHide" ng-repeat="educationToAdd in educationsToAdd" >
+    <div class="step-header">
+      <h4 class="step-title">Education </h4>
+    </div>
+    <div class="form-horizontal step-form" role="form">
+        <br />
+        <img ng-src="{{eduBarImage}}" class="img-responsive bar-image" alt="Education Step">
+        <br />
+        <div class="form-group field-div" >
+          <label class="control-label col-sm-12 field-Bold-label" style="text-align:left; margin-top:60px;" >School</label>
+          <div class="col-sm-12" style="margin-top:10px;">
+            <input type="text" class="form-control input-sm input-style"  placeholder="School Name" rows="1" ng-model="educationToAdd.school" >
+          </div>
+        </div>
+        <div class="form-group field-div" >
+          <label class="control-label col-sm-12 field-Bold-label" style="text-align:left;" >Date Attended</label>
+          </div>
+        <div class="row form-group field-div">
+          <div class="col-sm-6 " >
+            <select class="form-control input-sm input-style select-style" ng-model="educationToAdd.fromdate" placeholder="From"   ng-options="opt as opt for opt in dates" ></select>
+          </div>
+          <div class="col-sm-6 " >
+            <select class="form-control input-sm input-style select-style"  ng-model="educationToAdd.todate" placeholder="To(or expected graduation year)"   ng-options="opt as opt for opt in dates" ></select>
+          </div>
+        </div>
+        <div class="form-group field-div" >
+          <label class="control-label col-sm-12 field-Bold-label" style="text-align:left;" >Degree</label>
+          <div class="col-sm-12" style="margin-top:10px;">
+            <select class="form-control input-sm input-style select-style" ng-model="educationToAdd.degree" ng-options="degree as degree.name for degree in degrees"></select>
+          </div>
+        </div>
+        <div class="form-group field-div" >
+          <label class="control-label col-sm-12 field-Bold-label" style="text-align:left;" >Field Of Study</label>
+          <div class="col-sm-12" style="margin-top:10px;">
+            <input type="text" class="form-control input-sm input-style" rows="1" ng-model="educationToAdd.field" >
+          </div>
+        </div>
+        <div class="form-group field-div" >
+          <label class="control-label col-sm-12 field-Bold-label" style="text-align:left;" >Grade</label>
+          <div class="col-sm-12" style="margin-top:10px;">
+            <input type="text" class="form-control input-sm input-style" rows="1" ng-model="educationToAdd.grade" >
+          </div>
+        </div>
+        <div class="row">
+          <div class="btn-div-c">
+            <p class="btn-add-new" ng-click="addMoreEduClick(educationToAdd)" style="padding-top:10px;" >+ Add More Education</p>
+          </div>
         </div>
 
-  </body>
+          <div class="row">
+            <div class="col-sm-6 btn-div-c" >
+              <button type="button" class="next-button btn-prev-c " ng-click="eduPreClick()" style="margin-left:40px;">Previous</button>
+            </div>
+            <div class="col-sm-6 btn-div-c" >
+              <button type="button" class="next-button btn-next-c " ng-click="eduNextClick()" style="margin-right:40px;">Next Step</button>
+            </div>
+          </div>
+    </div> <!--form finish -->
+  </div><!-- education step finish -->
+
+  <div id="stepMainSRV" class="container step-div " ng-hide="stepMainSRVHide" >
+    <div class="step-header">
+      <h4 class="step-title">Main Services </h4>
+    </div>
+    <div class="form-horizontal step-form" role="form">
+        <br />
+        <img ng-src={{mainSRVBarImage}} class="img-responsive bar-image" alt="Main service Step">
+        <br />
+        <div class="form-group field-div" >
+          <label class="control-label col-sm-12 field-Bold-label" style="text-align:left; margin-top:60px;" >What are the main services you offer?<span style="font-weight:200;">(Please select all that you're oopen to)</span></label>
+        </div>
+        <div class="form-group field-div" >
+          <div class="serviceContainer"  >
+            <div class="item" ng-repeat='service in mainServices' ng-click='toggleSelectedSRV(service)' ng-class="{ selected: service.isselected  }">
+              <input type="checkbox" ng-attr-id="{{'c' + service.id}}" ng-model="service.isselected" />
+              <label ng-attr-for="{{'c' +service.id}}" ng-class="{ selected: service.isselected  }"> {{service.name}}
+              <!--  <img ng-src="{{getIcon(service)}}">
+              -->
+              </label>
+            </div>
+          </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6 btn-div-c" >
+              <button type="button" class="next-button btn-prev-c " ng-click="mainSRVPreClick()" style="margin-left:40px;">Previous</button>
+            </div>
+            <div class="col-sm-6 btn-div-c" >
+              <button type="button" class="next-button btn-next-c " ng-click="mainSRVNextClick()" style="margin-right:40px;">Next Step</button>
+            </div>
+          </div>
+      </div><!--form finish -->
+  </div><!--Main Services step finish -->
+
+  <div id="stepSkills" class="container step-div " ng-hide="stepSkillHide" >
+    <div class="step-header">
+      <h4 class="step-title">Skills</h4>
+    </div>
+    <div class="form-horizontal step-form" role="form">
+        <br />
+        <img ng-src={{skillBarImage}} class="img-responsive bar-image" alt="Skill bar">
+        <br />
+        <div class="form-group field-div" >
+          <div id="skilldList" style="text-align:left; margin-top:60px;">
+            <ul ng-repeat="service in mainServices | filter: {isselected: true } " style="text-align:left; padding-left:2px;" >
+              <p class="black-bold-label" style="text-align:left; padding-left:2px; font-size:16px; font-weight:250"> {{service.name}} <br/> <span style="font-size:12px; font-weight:350">{{service.question}}</span></p>
+              <li ng-repeat="skillOfSRV in service.skills " style="list-style-type:none;">
+                <p class="black-border-label" ng-click="skillClick(skillOfSRV)" ng-class="{ selected: skillOfSRV.isselected }" >{{skillOfSRV.name}}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 btn-div-c" >
+            <button type="button" class="next-button btn-prev-c " nng-click="skillPreClick()" style="margin-left:40px;">Previous</button>
+          </div>
+          <div class="col-sm-6 btn-div-c" >
+            <button type="button" class="next-button btn-next-c " ng-click="finishClick()" style="margin-right:40px;">Next Step</button>
+          </div>
+        </div>
+    </div><!--form finish -->
+  </div><!--Skill step finish -->
+
+</body>
 
 <script>
 var globalHiring = angular.module('globalHiring',["ngResource"]);
