@@ -14,6 +14,7 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <link href="Styles/CustomStyle.css" rel="stylesheet" />
 
+
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-resource.min.js"></script>
     <link href="css/steps_style.css" rel="stylesheet">
@@ -279,17 +280,27 @@
             <button type="button" class="next-button btn-prev-c " nng-click="skillPreClick()" style="margin-left:40px;">Previous</button>
           </div>
           <div class="col-sm-6 btn-div-c" >
-            <button type="button" class="next-button btn-next-c " ng-click="finishClick()" style="margin-right:40px;">Finish</button>
+            <button type="button"  class="next-button btn-next-c " ng-click="finishClick()" style="margin-right:40px;">Finish</button>
           </div>
         </div>
     </div><!--form finish -->
   </div><!--Skill step finish -->
 
+<!-- Profeciency Modal -->
+
+
+
 </body>
 
 <script>
-var globalHiring = angular.module('globalHiring',["ngResource"]);
-globalHiring.controller('stepsController',["$scope", "$resource", function($scope,$resource, $http, $window) {
+var globalHiring = angular.module('globalHiring',['ngResource']);
+globalHiring.controller('stepsController',["$scope", "$resource", function($scope,$resource, $http, $window,$log) {
+
+//Profeciency Modal
+
+//Modal Profeciency is finished
+
+
 
   // Steps controller
   //$scope.authenticateHide=false;
@@ -572,6 +583,10 @@ globalHiring.controller('stepsController',["$scope", "$resource", function($scop
 
   $scope.skillClick=function(selectedSkill){
     selectedSkill.isselected=!selectedSkill.isselected;
+    if(selectedSkill.isselected)
+    {
+
+    }
   }
 
 // Save an account
@@ -598,6 +613,8 @@ globalHiring.controller('stepsController',["$scope", "$resource", function($scop
 
       newAccount.$save(
         function(data){});
+
+      window.location = "/profile.html"; // save and move to profile page
   }// finish click
 
 }
