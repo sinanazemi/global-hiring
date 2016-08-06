@@ -105,7 +105,10 @@
     text-align:left;
     padding-left: 40px;
     padding-right: 40px;
+
 }
+
+.zero-margin{margin: 0;}
 
 .field-label {
 
@@ -282,6 +285,7 @@ input[type=checkbox]:checked+.custom-check::before {
 }
 .radio-langPro-position{
   margin-left:10px;
+  margin-bottom: 0;
 }
 
 
@@ -299,7 +303,7 @@ input[type=checkbox]:checked+.custom-check::before {
     text-align:left;
     display:block;
 
-    font-size: 14px;
+    font-size: 12px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-style: bold;
     color: rgb(97, 97, 97);
@@ -336,6 +340,13 @@ input[type=checkbox]:checked+.custom-check::before {
     padding-left: 33px;
     padding-right: 26px;
 }
+
+ul { list-style: none; }
+li { padding: 2px 0; }
+
+
+
+
 
 
 

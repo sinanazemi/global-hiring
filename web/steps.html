@@ -9,13 +9,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <link href="Styles/CustomStyle.css" rel="stylesheet" />
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.0.1.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
-
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-resource.min.js"></script>
     <link href="css/steps_style.css" rel="stylesheet">
 
@@ -93,7 +91,7 @@
         <br />
         <img ng-src="{{langBarImage}}" class="img-responsive bar-image" alt="Language Step">
         <br />
-        <div class="form-group field-div" >
+        <div class="form-group field-div zero-margin" >
           <label class="control-label col-sm-12 field-Bold-label" style="text-align:left; margin-top:60px;" >Language</label>
           <div class="col-sm-12" style="margin-top:10px;">
             <input type="text" class="form-control input-sm input-style"  placeholder="English" rows="1" ng-model="langToAdd.name" >
@@ -113,35 +111,35 @@
                     </div>
 -->
       <div class="row radio-langPro-position">
-        <div class="col-sm-12 form-group field-div">
+        <div class="col-sm-12 form-group field-div zero-margin">
           <div class="radio">
             <label class="radio-button-text" ><input type="radio" name="level" value="E" ng-model="langToAdd.profeciency">Elementry <br/><p class="black-thin-label">I am only able to understand written text in it.</p></label>
           </div>
         </div>
       </div>
       <div class="row radio-langPro-position">
-        <div class="col-sm-12 form-group field-div">
+        <div class="col-sm-12 form-group field-div zero-margin">
           <div class="radio ">
             <label class="radio-button-text" ><input type="radio" name="level" value="B" ng-model="langToAdd.profeciency">Basic <br/><p class="black-thin-label">I am only able to communicate with it through written communication.</p></label>
           </div>
         </div>
       </div>
       <div class="row radio-langPro-position">
-        <div class="col-sm-12 form-group field-div">
+        <div class="col-sm-12 form-group field-div zero-margin">
           <div class="radio ">
             <label class="radio-button-text" ><input type="radio" name="level" value="C" ng-model="langToAdd.profeciency">Conversational <br/><p class="black-thin-label">I know it well enough to verbally discuss project details with a client.</p></label>
           </div>
         </div>
       </div>
       <div class="row radio-langPro-position">
-        <div class="col-sm-12 form-group field-div">
+        <div class="col-sm-12 form-group field-div zero-margin">
           <div class="radio">
             <label class="radio-button-text" ><input type="radio" name="level" value="F" ng-model="langToAdd.profeciency">Fluent <br/><p class="black-thin-label">I have complete command of it with perfect grammer.</p></label>
           </div>
         </div>
       </div>
       <div class="row radio-langPro-position">
-        <div class="col-sm-12 form-group field-div">
+        <div class="col-sm-12 form-group field-div zero-margin">
           <div class="radio">
             <label class="radio-button-text" ><input type="radio" name="level" value="N" ng-model="langToAdd.profeciency">Native or Bollingual <br/><p class="black-thin-label">I have complete command of it, including breadth of vocabulary, idioms.</p></label>
           </div>
@@ -172,16 +170,16 @@
         <br />
         <img ng-src="{{eduBarImage}}" class="img-responsive bar-image" alt="Education Step">
         <br />
-        <div class="form-group field-div" >
+        <div class="form-group field-div zero-margin" >
           <label class="control-label col-sm-12 field-Bold-label" style="text-align:left; margin-top:60px;" >School</label>
           <div class="col-sm-12" style="margin-top:10px;">
             <input type="text" class="form-control input-sm input-style"  placeholder="School Name" rows="1" ng-model="educationToAdd.school" >
           </div>
         </div>
-        <div class="form-group field-div" >
+        <div class="form-group field-div zero-margin" >
           <label class="control-label col-sm-12 field-Bold-label" style="text-align:left;" >Date Attended</label>
           </div>
-        <div class="row form-group field-div">
+        <div class="row form-group field-div zero-margin">
           <div class="col-sm-6 " >
             <select class="form-control input-sm input-style select-style" ng-model="educationToAdd.fromdate" placeholder="From"   ng-options="opt as opt for opt in dates" ></select>
           </div>
@@ -189,13 +187,13 @@
             <select class="form-control input-sm input-style select-style"  ng-model="educationToAdd.todate" placeholder="To(or expected graduation year)"   ng-options="opt as opt for opt in dates" ></select>
           </div>
         </div>
-        <div class="form-group field-div" >
+        <div class="form-group field-div zero-margin" >
           <label class="control-label col-sm-12 field-Bold-label" style="text-align:left;" >Degree</label>
           <div class="col-sm-12" style="margin-top:10px;">
             <select class="form-control input-sm input-style select-style" ng-model="educationToAdd.degree" ng-options="degree as degree.name for degree in degrees"></select>
           </div>
         </div>
-        <div class="form-group field-div" >
+        <div class="form-group field-div zero-margin" >
           <label class="control-label col-sm-12 field-Bold-label" style="text-align:left;" >Field Of Study</label>
           <div class="col-sm-12" style="margin-top:10px;">
             <input type="text" class="form-control input-sm input-style" rows="1" ng-model="educationToAdd.field" >
@@ -233,7 +231,7 @@
         <img ng-src={{mainSRVBarImage}} class="img-responsive bar-image" alt="Main service Step">
         <br />
         <div class="form-group field-div" >
-          <label class="control-label col-sm-12 field-Bold-label" style="text-align:left; margin-top:60px;" >What are the main services you offer?<span style="font-weight:200;">(Please select all that you're oopen to)</span></label>
+          <label class="control-label col-sm-12 field-Bold-label" style="text-align:left; margin-top:60px;" >What are the main services you offer?<span style="font-weight:200;">(Please select all that you're open to)</span></label>
         </div>
         <div class="form-group field-div" >
           <div class="serviceContainer"  >
@@ -270,14 +268,15 @@
             <ul ng-repeat="service in mainServices | filter: {isselected: true } " style="text-align:left; padding-left:2px;" >
               <p class="black-bold-label" style="text-align:left; padding-left:2px; font-size:16px; font-weight:250"> {{service.name}} <br/> <span style="font-size:12px; font-weight:350">{{service.question}}</span></p>
               <li ng-repeat="skillOfSRV in service.skills " style="list-style-type:none;">
-                <p class="black-border-label" ng-click="skillClick(skillOfSRV)" ng-class="{ selected: skillOfSRV.isselected }" >{{skillOfSRV.name}}</p>
+                <!-- <p class="black-border-label" data-toggle="modal" data-target="#myModal" ng-click="skillClick(skillOfSRV)" ng-class="{ selected: skillOfSRV.isselected }" >{{skillOfSRV.name}}</p> -->
+                <p class="black-border-label"  ng-click="skillClick(skillOfSRV)" ng-class="{ selected: skillOfSRV.isselected }" >{{skillOfSRV.name}}</p>
               </li>
             </ul>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6 btn-div-c" >
-            <button type="button" class="next-button btn-prev-c " nng-click="skillPreClick()" style="margin-left:40px;">Previous</button>
+            <button type="button" class="next-button btn-prev-c " ng-click="skillPreClick()" style="margin-left:40px;">Previous</button>
           </div>
           <div class="col-sm-6 btn-div-c" >
             <button type="button"  class="next-button btn-next-c " ng-click="finishClick()" style="margin-right:40px;">Finish</button>
@@ -287,18 +286,32 @@
   </div><!--Skill step finish -->
 
 <!-- Profeciency Modal -->
-
-
-
+<script type="text/ng-template" id="myModalContent.html">
+  <div class="modal-header btn-div-c" style="margin-bottom:0;">
+    <button type="button" class="close" ng-click="close()" >&times;</button>
+    <h3 class="modal-title btn-next-c" style="text-align:center;padding-top:10px;">{{selectedSkill.name}}</h3>
+  </div>
+  <div class="modal-body">
+    <label class="control-label col-sm-12 field-Bold-label" style="text-align:left;" >How would you describe your level of profeciency?</label>
+    </div>
+    <div class="form-group" >
+    <ul ng-repeat="SkillProf in skillProfeciencies" style="padding-left: 25px;">
+      <li>
+        <div class="row" style="margin:0;">
+          <div class="radio" style="margin:0;">
+            <label class="radio-button-text" ><input type="radio" name="level" ng-value="SkillProf"ng-click="$event.preventDefault(); selected.profeciency = SkillProf">{{ SkillProf.text }} <br/><span class="black-thin-label">Description.</span></label>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</script>
 </body>
 
 <script>
-var globalHiring = angular.module('globalHiring',['ngResource']);
-globalHiring.controller('stepsController',["$scope", "$resource", function($scope,$resource, $http, $window,$log) {
+var globalHiring = angular.module('globalHiring',['ngResource','ngAnimate', 'ui.bootstrap']);
+globalHiring.controller('stepsController',['$scope', '$resource','$uibModal', function($scope, $resource,$uibModal, $http, $window, $log) {
 
-//Profeciency Modal
-
-//Modal Profeciency is finished
 
 
 
@@ -581,10 +594,46 @@ globalHiring.controller('stepsController',["$scope", "$resource", function($scop
     }
   }
 
+  $scope.skillProfeciencies = [
+    {text: "Student/Fresh Graduate", value: "S"},
+    {text: "Junior Professional", value: "J"},
+    {text: "Experienced Professional", value: "E"},
+    {text: "Manager", value: "M"}
+  ]
+  //Profeciency Modal
+
+  $scope.animationsEnabled = true;
+  $scope.openSkillProf = function (selectedSkill) {
+
+    var modalInstance = $uibModal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'myModalContent.html',
+      controller: 'ModalInstanceCtrl',
+      resolve: {
+        skillProfeciencies: function () {
+          return $scope.skillProfeciencies;
+        },
+        selectedSkill : function (){
+          return selectedSkill;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      //TODO: should be checked with Back-end
+      selectedSkill.profeciency=selectedItem.profeciency.value;
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+  //Modal Profeciency is finished
+
+
   $scope.skillClick=function(selectedSkill){
     selectedSkill.isselected=!selectedSkill.isselected;
     if(selectedSkill.isselected)
     {
+      $scope.openSkillProf(selectedSkill);
 
     }
   }
@@ -612,14 +661,35 @@ globalHiring.controller('stepsController',["$scope", "$resource", function($scop
       newAccount.skills = $scope.mainServices;
 
       newAccount.$save(
-        function(data){});
+        function(data){
+          window.location = "/profile.html"; // save and move to profile page
+        });
 
-      window.location = "/profile.html"; // save and move to profile page
+      //window.location = "/profile.html"; // save and move to profile page
   }// finish click
 
 }
 ]// scope, resource
 );
+
+
+angular.module('globalHiring').controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, skillProfeciencies, selectedSkill) {
+
+  $scope.skillProfeciencies = skillProfeciencies;
+  $scope.selectedSkill=selectedSkill;
+  $scope.selected = {
+    profeciency: $scope.skillProfeciencies[0]
+  };
+
+  $scope.close= function () {
+    $uibModalInstance.close($scope.selected);
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+});
+
 
 </script>
 </html>
