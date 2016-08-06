@@ -10,6 +10,7 @@ type Skill struct {
   Id int `json:"id"`
   Name string `json:"name"`
   MainServiceID int `json:"mainserviceid"`
+  Profeciency string `json:"profeciency"` // dummy field, just for leva
 }
 
 func getSkills(serviceID int) []Skill {
