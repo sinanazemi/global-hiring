@@ -45,12 +45,14 @@
 
       <div class="row" style="margin-top:40px; text-align:center;">
         <h2 class="login-header">Log in and make your profile better </h2>
+        <h4 style="color:red; font-size:16px;" ng-show="notLoginMsg">We don't recognize this user ID or password, Please try again. </h4>
       </div>
+
 
       <div class="row">
         <div class="col-sm-4 "></div>
         <div class="col-sm-4 ">
-          <input type="email" class="form-control input-style" placeholder="Email"   ng-model="email" ng-style="requiedStyleEmail"  required/>
+          <input type="email" class="form-control input-style" placeholder="{{emailPlaceholder}}"   ng-model="email" ng-style="requiedStyleEmail"  required/>
         </div>
         <div class="col-sm-4 "></div>
       </div>
@@ -59,7 +61,7 @@
       <div class="row" style="margin-top:30px">
         <div class="col-sm-4 "></div>
         <div class="col-sm-4 ">
-          <input type="password" class="form-control input-style"  placeholder="Password"  ng-model="password" ng-style="requiedStylePassword"  required/>
+          <input type="password" class="form-control input-style"  placeholder="{{passwordPlaceholder}}"  ng-model="password" ng-style="requiedStylePassword"  required/>
         </div>
         <div class="col-sm-4 "></div>
       </div>
@@ -102,7 +104,72 @@
 var myAppLogin = angular.module('myAppLogin',['ngResource']);
 myAppLogin.controller('loginController',['$scope', '$resource', function($scope, $resource,$http, $window, $log) {
 
+  $scope.notLoginMsg=false;
+  $scope.email='';
+  $scope.password='';
+  $scope.emailPlaceholder="you@email.com";
+  $scope.passwordPlaceholder="";
+  $scope.requiedStylePassword='';
+  $scope.requiedStyleEmail='';
+  $scope.isValidAccountInfo=false;
 
+  $scope.checkAccount=function(){
+  $scope.isValidAccountInfo=true;
+  if($scope.email=='' )
+  {
+    $scope.requiedStyleEmail={
+      "border-color": "red",
+      "border-style": "solid",
+      "border-width" : "1px"
+    }
+    $scope.emailPlaceholder="Email is required";
+    $scope.isValidAccountInfo=false;
+  }
+  else {
+    $scope.requiedStyleEmail='';
+    $scope.emailPlaceholder="you@email.com";
+  }
+
+  if($scope.password=='' )
+  {
+    $scope.requiedStylePassword={
+      "border-color": "red",
+      "border-style": "solid",
+      "border-width" : "1px"
+    }
+    $scope.passwordPlaceholder="Password is required";
+    $scope.isValidAccountInfo=false;
+  }
+  else {
+    $scope.requiedStylePassword='';
+    $scope.passwordPlaceholder="";
+  }
+
+}// Check Account
+
+  // login with an account
+    var login = $resource("/authenticate")
+    $scope.login=function(){
+        $scope.notLoginMsg=false;
+        $scope.checkAccount();
+        if($scope.isValidAccountInfo){
+        var accountInfo = new login();
+        accountInfo.email = $scope.email;
+        accountInfo.password = $scope.password;
+
+        accountInfo.$save(
+          function(data){
+            window.location = "/profile.html"; // Login and move to profile page
+          },
+          function(errorMessage){
+            $scope.notLoginMsg=true;
+            $scope.password='';
+            $scope.requiedStylePassword='';
+            $scope.requiedStyleEmail='';
+          }
+        );
+      };
+    }// login click
 
 }// controller function
 ]
