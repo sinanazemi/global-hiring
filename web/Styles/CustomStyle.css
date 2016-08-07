@@ -80,12 +80,12 @@
 .txt-skill-c h2 {
     position:relative;
     padding-top:110px;        
-    font-size:58.8px; /*42px*/
+    font-size:50.4px; /*42px*/
     font-weight:normal;
 }
 .txt-skill-c p{
     position:relative;
-    font-size:30.8px;/*22px*/
+    font-size:26.4px;/*22px*/
     font-weight:normal;
 }
 .btn-skill-c{
@@ -94,10 +94,10 @@
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
     border:solid 1px #42CF94;
     color: white; 
-    height:100.8px; /*72px*/
-    width:672px; /*480px*/
+    height:86.4px; /*72px*/
+    width:576px; /*480px*/
     border-radius:1px; 
-    font-size: 47.6px;/*34px*/
+    font-size: 40.8px;/*34px*/
     font-weight:bold;
     text-align:center;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.24);
@@ -115,7 +115,7 @@
    height:auto;
    /*height:462px;*/
    /*width:100%;*/
-    width:667.8px;/*477px*/
+    width:572.4px;/*477px*/
     /*width:auto;*/
     z-index:6;
      
@@ -132,7 +132,7 @@
 .container-hiw-c h2 {
     padding-top: 50px;
     /*padding-right:87px;*/
-    font-size: 39.2px;/*28px*/
+    font-size: 33.6px;/*28px*/
     font-weight: normal;
     text-align: center;
     color: #03ba6d;
@@ -147,37 +147,37 @@
     display:block;
      margin-left:auto;
     margin-right:auto;
-    width: 150.5px;/*107.5px*/
-    height: 175.84px;/*125.6px*/
+    width: 129px;/*107.5px*/
+    height: 150.72px;/*125.6px*/
     /*margin-left:83px;*/
 }
 .img-then-c {
     display:block;
      margin-left:auto;
     margin-right:auto;
-    width: 211.68px;/*151.2px*/
-    height: 188.16px;/*134.4px*/
+    width: 181.44px;/*151.2px*/
+    height: 161.28px;/*134.4px*/
    
 }
 .img-finally-c {
     display:block;
      margin-left:auto;
     margin-right:auto;
-    width: 148.54px;/*106.1px*/
-    height: 185.92px;/*132.8px*/
+    width: 127.32px;/*106.1px*/
+    height: 159.36px;/*132.8px*/
     /*margin-left:83px;*/
 }
 .container-hiw-c h4 {
     margin-top:47px;
     text-align:left;
     /*padding-left:79px;*/
-    font-size: 28px;/*20px*/
+    font-size: 24px;/*20px*/
     font-weight: bold;
 }
 .container-hiw-c p {    
     /*padding-left:79px;*/
     text-align:left;
-    font-size: 28px;/*20px*/
+    font-size: 24px;/*20px*/
     font-weight:100;    
     
 }
