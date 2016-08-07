@@ -6,143 +6,107 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="googlebot" content="noindex, nofollow">
 
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-resource.min.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.js"></script>
 
     <link href="css/steps_style.css" rel="stylesheet">
+      <link href="css/login_style.css" rel="stylesheet">
+
+    <link href="Styles/CustomStyle.css" rel="stylesheet" />
 
     <title>Login</title>
 
 </head>
+<body bgcolor="#323232" ng-app="myAppLogin" ng-controller="loginController" >
+  <nav class="navbar navbar-fixed-top">
+      <div class="container nav-container-c">
+          <div class="navbar-header">
+              <a class="navbar-brand" href="#/">
+                  <img class="logo-img-c" src="images/logo.png" />
+              </a>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
 
-<body bgcolor="#323232" >
-    <div>
-        <div ng-app="authApp" ng-controller="authCtrl">
-            <a href="#" style="text-decoration: none;">
-
-              <div id="authenticate" class="step-div" ng-hide="authenticateHide" >
-                <div class="stepheader">
-                    <p class="steptitle">Login</p>
-                </div>
-                <form ng-submit="submit()">
-                  <div class="field-div" style="top: 130px;">
-                  <input class="field-text-area-4"  ng-model="user.username" type="text" name="user" placeholder="Email" />
-                </div>
-                <div class="field-div" style="top: 180px;">
-                  <input class="field-text-area-4"  ng-model="user.password" type="password" name="pass" placeholder="Password" />
-                    </div>
-                    <div style="top: 230px;">
-                        <p class="field-center-label" ng-model="resultMSG"> {{resultMSG}} </p>
-                    </div>
-                    <div>
-                      <input type="submit" value="Login" class="next-button green-button button-center"/>
-
-                  </div>
-                </form>
-              </div>
-
-            </div>
+              <ul class="nav navbar-nav navbar-right">
+                  <li><a href="/steps.html" class="login-link-c">Sign up</a></li>
+              </ul>
           </div>
 
-<script>
+      </div>
+  </nav>
 
-var authApp = angular.module('authApp',["ngResource"]);
+  <div class="container container-c">
 
-authApp.factory('authInterceptor', function ($rootScope, $q, $window) {
-  return {
-    request: function (config) {
-      config.headers = config.headers || {};
-      if ($window.sessionStorage.token) {
-        config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
-      }
-      return config;
-    },
-    responseError: function (rejection) {
-      if (rejection.status === 401) {
-        // handle the case where the user is not authenticated
-        $location.path('/home.html');
-      }
-      return $q.reject(rejection);
-    }
-  };
-});
+      <div class="row" style="margin-top:40px; text-align:center;">
+        <h2 class="login-header">Log in and make your profile better </h2>
+      </div>
 
-authApp.config(function ($httpProvider) {
-  $httpProvider.interceptors.push('authInterceptor');
-});
+      <div class="row">
+        <div class="col-sm-4 "></div>
+        <div class="col-sm-4 ">
+          <input type="email" class="form-control input-style" placeholder="Email"   ng-model="email" ng-style="requiedStyleEmail"  required/>
+        </div>
+        <div class="col-sm-4 "></div>
+      </div>
 
-//this is used to parse the profile
-function url_base64_decode(str) {
-  var output = str.replace('-', '+').replace('_', '/');
-  switch (output.length % 4) {
-    case 0:
-      break;
-    case 2:
-      output += '==';
-      break;
-    case 3:
-      output += '=';
-      break;
-    default:
-      throw 'Illegal base64url string!';
-  }
-  return window.atob(output); //polifyll https://github.com/davidchambers/Base64.js
-}
 
-authApp.controller('authCtrl',["$scope", "$resource", "$http", "$window", function($scope,$resource, $http, $window) {
-/*
-  var cities = $resource("/cities")
-  $scope.Service = function() {
-      cities.query(
-        function(data){
-          $scope.cities = data;
-        } // function(data)
-      ) // service.query
+      <div class="row" style="margin-top:30px">
+        <div class="col-sm-4 "></div>
+        <div class="col-sm-4 ">
+          <input type="password" class="form-control input-style"  placeholder="Password"  ng-model="password" ng-style="requiedStylePassword"  required/>
+        </div>
+        <div class="col-sm-4 "></div>
+      </div>
 
-  }
-*/
-  // User Authentication
-   $scope.user = {username: '', password: ''};
-   $scope.isAuthenticated = false;
-   $scope.resultMSG = '';
+<div class="row" style="margin-top:40px">
+  <div class="col-sm-4 "></div>
+  <div class="col-sm-4 ">
+    <div class="col-sm-4" style="float:left;padding-left:0;">
+      <button type="button" class="btn-login-c" ng-click="login()">Login</button>
+    </div>
+    <div class="col-sm-8 checkbox checkbox-remember">
+        <label class="control-label checkbox-label" style="text-align:center;"><input type="checkbox" ng-model="checkboxValue"><span class="custom-check-Login" style="margin:0; text-align:center;"></span>&nbsp; Remember me next time</label>
+    </div >
+  </div>
+  <div class="col-sm-4 "></div>
+</div>
 
-   //TODO: Should be Deleted
-  //  $scope.submit = function () {
-  //      $scope.isAuthenticated=true;
-  //    }
-  //Should be Deleted
+<div class="row" style="margin-top:36px">
+  <div class="col-sm-4 "></div>
+  <div class="col-sm-4 " style="padding-left:15px;">
+      <a href="/login.html" class="green-forgetPass">Forget password?</a>
+  </div>
+</div>
 
-   $scope.submit = function () {
-     $http.post('/authenticate', $scope.user).success(function (data, status, headers, config) {
-         $window.sessionStorage.token = data.token;
-         $scope.isAuthenticated = true;
-         alert(data.token);
-         var encodedProfile = data.token.split('.')[1];
-         var profile = JSON.parse(url_base64_decode(encodedProfile));
-         $scope.resultMSG = 'Welcome ' + profile.Issuer;
-       })
-       .error(function (data, status, headers, config) {
-         // Erase the token if the user fails to log in
-         delete $window.sessionStorage.token;
-         $scope.isAuthenticated = false;
+</div>
 
-         // Handle login errors here
-         $scope.error = 'Error: Invalid user or password';
-         $scope.resultMSG = '';
-       });
-   };
 
-   $scope.logout = function () {
-     $scope.resultMSG = '';
-     $scope.isAuthenticated = false;
-     delete $window.sessionStorage.token;
-   }
-}
-]
-);
-</script>
+    <div class="f-copyright-c">
+        <div class="container">
+            <p>Copyright &copy; Hiring.global 2016</p>
+        </div>
+    </div>
+    <!--</footer>-->
+
+
 
 </body>
+
+<script>
+var myAppLogin = angular.module('myAppLogin',['ngResource']);
+myAppLogin.controller('loginController',['$scope', '$resource', function($scope, $resource,$http, $window, $log) {
+
+
+
+}// controller function
+]
+);
+
+</script>
 </html>

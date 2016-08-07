@@ -1,0 +1,78 @@
+.container-c {
+    position:relative;
+  /*  background-color: #F5EEE8;
+    height: 100%;
+    */
+    width:100%;
+    margin-left:10px;
+    margin-right: 10px;
+}
+
+.login-header{
+  text-align: center;
+  color: rgb(129, 129, 129);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  padding: 3%;
+}
+.btn-login-c {
+    width: 99px;
+    height: 30px;
+    cursor: pointer;
+    background-color: #efecec;
+
+    border: solid 1px #818181;
+    color: #4a4a4a;
+    text-align: center;
+    display: inline-block;
+    font-size: 14px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    padding-left: 0;
+}
+
+.checkbox-label{
+  text-align: center;
+  display: inline-block;
+  font-size: 15px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  color: #616161;
+}
+
+.checkbox-remember{
+  margin:0;
+  float: left;
+  text-align: left;
+  height: 30px;
+  padding-top: 8px;
+}
+
+.custom-check-Login {
+		display: inline-block;
+		width: 16px; height: 16px;
+		background: white;
+		border: 1px solid rgb(3, 186, 109);
+    font-family: 'Glyphicons Halflings';
+	}
+.custom-check-Login::before {
+  content: "\e013";
+  color: #424242;
+  display: none;
+}
+
+input[type=checkbox]:checked+.custom-check-Login::before {
+  display: block;
+}
+
+.green-forgetPass{
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #00bc6d;
+
+  text-align: left;
+}
