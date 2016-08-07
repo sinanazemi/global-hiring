@@ -303,6 +303,17 @@ myapp.controller("controller",
             });
         }
 
+        // for highlight and show the edit and delete buttons
+        $scope.eduMouseOver = function (context) {
+            context.popoverRemove = true;
+            context.eduHoverStyle = { 'background-color': '#b8e986' };
+        }
+
+        $scope.eduMouseLeave = function (context) {
+            context.popoverRemove = false;
+            context.eduHoverStyle = {};
+        }
+
         //*************************
         // Volunteering 
         //*************************
@@ -374,31 +385,32 @@ myapp.controller("controller",
         //    $scope.whDesc = "";
         //}
 
+        // for highlight and show the edit and delete buttons
+        $scope.volMouseOver = function (context) {
+            context.popoverRemove = true;
+            context.volHoverStyle = { 'background-color': '#b8e986' };
+        }
+
+        $scope.volMouseLeave = function (context) {
+            context.popoverRemove = false;
+            context.volHoverStyle = {};
+        }
+
+        //*************************
+        // Certifications 
+        //*************************
+        // for highlight and show the edit and delete buttons
+        $scope.crfMouseOver = function (context) {
+            context.popoverRemove = true;
+            context.crfHoverStyle = { 'background-color': '#b8e986' };
+        }
+
+        $scope.crfMouseLeave = function (context) {
+            context.popoverRemove = false;
+            context.crfHoverStyle = {};
+        }
+
     }
 
   ]
 )
-
-//myapp.directive('whHover', function () {
-//    return {
-//        link: function (scope, element, attr) {
-//            element.hover(
-//     function () {
-//         $(this).addClass('hovering');
-//     },
-
-//            function () {
-//                $(this).removeClass('hovering');
-//     }
-//         );
-//        }
-//    };
-//});
-
-//$(document).ready(function () {
-//    $("h4").hover(function () {
-//        $(this).css("background-color", "yellow");
-//    }, function () {
-//        $(this).css("background-color", "pink");
-//    });
-//});

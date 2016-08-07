@@ -148,14 +148,14 @@
     color:#b8e986;
     display:inline;
 }
-.panel-education-c h5:hover .edit-education-c,.panel-education-c h5:hover .delete-education-c{
+/*.panel-education-c h5:hover .edit-education-c,.panel-education-c h5:hover .delete-education-c{
     background-color:#b8e986;
     color: black;
     display:inline;
 }
 .education-txt-c:hover{
     background-color:#b8e986;
-}
+}*/
 
 /*-------------------------------
     Volunteering
@@ -164,14 +164,14 @@
     color:#b8e986;
     display:inline;
 }
-.panel-volunteering-c h5:hover .edit-volunteering-c,.panel-volunteering-c h5:hover .delete-volunteering-c{
+/*.panel-volunteering-c h5:hover .edit-volunteering-c,.panel-volunteering-c h5:hover .delete-volunteering-c{
     background-color:#b8e986;
     color: black;
     display:inline;
 }
 .volunteering-txt-c:hover{
     background-color:#b8e986;
-}
+}*/
 
 /*-------------------------------
     Certifications
@@ -180,14 +180,14 @@
     color:#b8e986;
     display:inline;
 }
-.panel-certifications-c h5:hover .edit-certifications-c,.panel-certifications-c h5:hover .delete-certifications-c{
+/*.panel-certifications-c h5:hover .edit-certifications-c,.panel-certifications-c h5:hover .delete-certifications-c{
     background-color:#b8e986;
     color: black;
     display:inline;
 }
 .certifications-txt-c:hover{
     background-color:#b8e986;
-}
+}*/
 
 /*-------------------------------
     Test Scores
@@ -196,14 +196,14 @@
     color:#b8e986;
     display:inline;
 }
-.panel-scores-c h5:hover .edit-scores-c,.panel-scores-c h5:hover .delete-scores-c{
+/*.panel-scores-c h5:hover .edit-scores-c,.panel-scores-c h5:hover .delete-scores-c{
     background-color:#b8e986;
     color: black;
     display:inline;
 }
 .scores-txt-c:hover{
     background-color:#b8e986;
-}
+}*/
 
 /*-------------------------------
     Projects
@@ -212,14 +212,14 @@
     color:#b8e986;
     display:inline;
 }
-.panel-projects-c h5:hover .edit-projects-c,.panel-projects-c h5:hover .delete-projects-c{
+/*.panel-projects-c h5:hover .edit-projects-c,.panel-projects-c h5:hover .delete-projects-c{
     background-color:#b8e986;
     color: black;
     display:inline;
 }
 .projects-txt-c:hover{
     background-color:#b8e986;
-}
+}*/
 /*---------- modal ------------*/
 .prj-tmb-txt-c {
     /*width: 291px;*/
@@ -246,14 +246,14 @@
     color:#b8e986;
     display:inline;
 }
-.panel-awards-c h5:hover .edit-awards-c,.panel-awards-c h5:hover .delete-awards-c{
+/*.panel-awards-c h5:hover .edit-awards-c,.panel-awards-c h5:hover .delete-awards-c{
     background-color:#b8e986;
     color: black;
     display:inline;
 }
 .awards-txt-c:hover{
     background-color:#b8e986;
-}
+}*/
 
 /*-------------------------------
     Courses
@@ -262,14 +262,14 @@
     color:#b8e986;
     display:inline;
 }
-.panel-courses-c h5:hover .edit-courses-c,.panel-courses-c h5:hover .delete-courses-c{
+/*.panel-courses-c h5:hover .edit-courses-c,.panel-courses-c h5:hover .delete-courses-c{
     background-color:#b8e986;
     color: black;
     display:inline;
 }
 .courses-txt-c:hover{
     background-color:#b8e986;
-}
+}*/
 
 
 /*---------------

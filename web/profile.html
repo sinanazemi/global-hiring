@@ -219,22 +219,22 @@
                                        Education
                                        &nbsp;<a class="btn-add-c add-education-c" data-toggle="modal" data-target="#addEducation"><span class="glyphicon glyphicon-plus-sign"></span></a>
                                    </h4>
-                                   <div ng-repeat="x in account.educations">
+                                   <div ng-repeat="x in account.educations" ng-mouseleave="eduMouseLeave(this)" ng-mouseover="eduMouseOver(this)">
                                        <h5>
-                                           <span class="education-txt-c">
+                                           <span class="education-txt-c" ng-style="eduHoverStyle">
                                                <!--Bachelor of Science (B.S.), Computer science | BIHE-->
                                                {{x.degree.name}}, {{x.field}} | {{x.school}}
                                            </span>
-                                           &nbsp;<a href="#" class="a-btn-c btn-edit-c edit-education-c" data-toggle="modal" data-target="#addEducation" ng-click="editEducation(x)">
-                                               <span class="glyphicon glyphicon-pencil"></span>
-                                           </a>
-                                           &nbsp;<a href="#" class=" a-btn-c btn-delete-c delete-education-c" ng-click="deleteEducation(x)">
-                                               <span class="glyphicon glyphicon-trash"></span>
-                                           </a>
+                                           &nbsp;<a href="#" class="a-btn-c edit-education-c" data-toggle="modal" data-target="#addEducation" ng-click="editEducation(x)" ng-show="popoverRemove" ng-style="eduHoverStyle">
+    <span class="glyphicon glyphicon-pencil"></span>
+</a>
+                                           &nbsp;<a href="#" class=" a-btn-c delete-education-c" ng-click="deleteEducation(x)" ng-show="popoverRemove" ng-style="eduHoverStyle">
+    <span class="glyphicon glyphicon-trash"></span>
+</a>
                                        </h5>
 
                                        <!--<p><span class="education-txt-c">2007 - 2012</span></p>-->
-                                       <p><span class="education-txt-c">{{x.fromdate}} - {{x.todate}}</span></p>
+                                       <p><span class="education-txt-c" ng-style="eduHoverStyle" ng-mouseleave="eduMouseLeave(this)" ng-mouseover="eduMouseOver(this)">{{x.fromdate}} - {{x.todate}}</span></p>
                                    </div>
                                </div>
                            </div>
@@ -302,21 +302,23 @@
                                        Volunteering Experience
                                        &nbsp;<a class="btn-add-c add-volunteering-c" data-toggle="modal" data-target="#addVolunteering"><span class="glyphicon glyphicon-plus-sign"></span></a>
                                    </h4>
-                                   <h5>
-                                       <span class="volunteering-txt-c"></span>
-                                       &nbsp;<a href="#" class="a-btn-c btn-edit-c edit-volunteering-c" data-toggle="modal" data-target="#addHistory">
-                                           <span class="glyphicon glyphicon-pencil"></span>
-                                       </a>
-                                       &nbsp;<a href="#" class=" a-btn-c btn-delete-c delete-volunteering-c">
-                                           <span class="glyphicon glyphicon-trash"></span>
-                                       </a>
-                                   </h5>
-                                   <p>
-                                       <span class="volunteering-txt-c">
-                                           No items to display. 1 in 5 managers hired someone because of their
-                                           volunteer experiences
-                                       </span>
-                                   </p>
+                                   <div ng-mouseleave="volMouseLeave(this)" ng-mouseover="volMouseOver(this)">
+                                       <h5>
+                                           <span class="volunteering-txt-c" ng-style="volHoverStyle"></span>
+                                           &nbsp;<a href="#" class="a-btn-c edit-volunteering-c" data-toggle="modal" data-target="#addHistory" ng-show="popoverRemove" ng-style="volHoverStyle">
+    <span class="glyphicon glyphicon-pencil"></span>
+</a>
+                                           &nbsp;<a href="#" class=" a-btn-c delete-volunteering-c" ng-show="popoverRemove" ng-style="volHoverStyle">
+    <span class="glyphicon glyphicon-trash"></span>
+</a>
+                                       </h5>
+                                       <p>
+                                           <span class="volunteering-txt-c" ng-style="volHoverStyle" ng-mouseleave="volMouseLeave(this)" ng-mouseover="volMouseOver(this)">
+                                               No items to display. 1 in 5 managers hired someone because of their
+                                               volunteer experiences
+                                           </span>
+                                       </p>
+                                   </div>
                                </div>
                            </div>
                            <!-- Modal Volunteering Experience -->
@@ -402,16 +404,18 @@
                                        Certifications
                                        &nbsp;<a class="btn-add-c add-certifications-c" data-toggle="modal" data-target="#addCertifications"><span class="glyphicon glyphicon-plus-sign"></span></a>
                                    </h4>
-                                   <h5>
-                                       <span class="certifications-txt-c"></span>
-                                       &nbsp;<a href="#" class="a-btn-c btn-edit-c edit-certifications-c" data-toggle="modal" data-target="#addHistory">
-                                           <span class="glyphicon glyphicon-pencil"></span>
-                                       </a>
-                                       &nbsp;<a href="#" class=" a-btn-c btn-delete-c delete-certifications-c">
-                                           <span class="glyphicon glyphicon-trash"></span>
-                                       </a>
-                                   </h5>
-                                   <p><span class="certifications-txt-c">No items to display.</span> </p>
+                                   <div ng-mouseleave="crfMouseLeave(this)" ng-mouseover="crfMouseOver(this)">
+                                       <h5>
+                                           <span class="certifications-txt-c" ng-style="crfHoverStyle"></span>
+                                           &nbsp;<a href="#" class="a-btn-c edit-certifications-c" data-toggle="modal" data-target="#addHistory" ng-show="popoverRemove" ng-style="crfHoverStyle">
+    <span class="glyphicon glyphicon-pencil"></span>
+</a>
+                                           &nbsp;<a href="#" class=" a-btn-c delete-certifications-c" ng-show="popoverRemove" ng-style="crfHoverStyle">
+    <span class="glyphicon glyphicon-trash"></span>
+</a>
+                                       </h5>
+                                       <p><span class="certifications-txt-c" ng-style="crfHoverStyle" ng-mouseleave="crfMouseLeave(this)" ng-mouseover="crfMouseOver(this)">No items to display.</span> </p>
+                                   </div>
                                </div>
                            </div>
                            <!-- Modal Certifications -->
