@@ -1,3 +1,18 @@
+/*
+delete from accountcertificate;
+delete from accountcourse;
+delete from accounteducation;
+delete from accounthonor;
+delete from accountlanguage;
+delete from accountproject;
+delete from accountskill;
+delete from accounttest;
+delete from accountvolunteering;
+delete from accountwork;
+delete from account;
+*/
+
+
 -- password: globePassword
 
 -- Role: globeAdmin

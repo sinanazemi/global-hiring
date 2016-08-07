@@ -8,7 +8,7 @@ import (
 
 const (
   sessionName string = "session-name"
-  accountKey string = "accountKey"
+  accountKey string = "accountKeyForGlobalHiring"
 )
 
 var (
@@ -31,6 +31,12 @@ func GetSession(w http.ResponseWriter, r *http.Request) (*Session, error) {
         return nil, err
     }
 
+    session.Options = &sessions.Options{
+    Path:     "/",
+    MaxAge:   60 * 10, // 10 minutes
+    HttpOnly: true,
+}
+
     return &Session{r, w, session}, nil
 }
 
@@ -39,16 +45,18 @@ func (session Session) Get (key interface{}) interface{} {
 }
 
 func (session Session) Put (key interface{}, value interface{}) {
+
   session.session.Values[key] = value
   session.session.Save(session.request, session.response)
 }
 
 func (session Session) GetAccountID() int {
-  id := session.Get(accountKey)
-  if id == nil {
+  idVal := session.Get(accountKey)
+  id, ok := idVal.(int)
+  if !ok {
     return -1
   }
-  return id.(int)
+  return id
 }
 
 func (session Session) PutAccountID(accountID int) {

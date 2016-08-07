@@ -2,6 +2,7 @@ package model
 
 import (
   "errors"
+  "strings"
   "database/sql"
   "net/http"
   "github.com/sinanazemi/global-hiring/util"
@@ -122,6 +123,10 @@ func (acc *Account) save(session *util.Session) error {
 }
 
 func (acc *Account) saveNew(session *util.Session) error {
+
+  acc.Email = strings.ToLower(strings.TrimSpace(acc.Email))
+  acc.Password = util.GetMD5Hash(acc.Password)
+
   query :=
     "INSERT INTO Account" +
     "(Name, Email, cityID, Phone, Password, isStudent) " +
@@ -219,5 +224,5 @@ func SaveAccount(w http.ResponseWriter, r *http.Request) (interface{}, *util.Han
     return nil, &util.HandlerError{err, "Problem while saving account", http.StatusBadRequest}
   }
 
-  return account, nil
+  return GetAccount(w, r)
 }

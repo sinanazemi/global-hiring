@@ -79,6 +79,28 @@ func Select(mapper MapperFunc, query string, args ...interface{}) ([]interface{}
   return result, nil
 }
 
+func SelectInteger(query string, args ...interface{}) (int, error) {
+
+  result := -1
+
+  err := checkConnection()
+  checkErr(err)
+  if err != nil {
+    return result, err
+  }
+
+  rows, err := db.Query(query, args...)
+  checkErr(err)
+  if err != nil {
+    return result, err
+  }
+
+  for rows.Next() {
+    err = rows.Scan(&result)
+  }
+  return result, err
+}
+
 func Insert(query string, args ...interface{}) (int, error) {
 
   err := checkConnection()

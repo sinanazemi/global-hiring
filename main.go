@@ -12,6 +12,16 @@ import (
 
 )
 
+
+func Authenticate(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
+	_ , err := util.Authenticate(w, r)
+	if (err != nil) {
+		return nil, err
+	}
+
+  return model.GetAccount(w, r)
+}
+
 func main() {
 
   // command line flags
@@ -23,6 +33,9 @@ func main() {
 	fs := http.Dir(*dir)
 	fileHandler := http.FileServer(fs)
 	http.Handle("/", fileHandler)
+
+	http.Handle("/redirect", util.Handler(util.RedirectCheck))
+	http.Handle("/authenticate", util.Handler(Authenticate))
 
 	http.Handle("/cities", util.Handler(model.GetCities))
 	http.Handle("/degrees", util.Handler(model.GetDegrees))
