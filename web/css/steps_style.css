@@ -8,7 +8,7 @@
     margin-right: auto;
     margin-left: auto;
     width: 519px;
-    height: 682px;
+    min-height: 682px;
     }
   }
 
@@ -26,6 +26,7 @@
         margin-right: 0px;
         margin-left: 0px;
         width: 100%;
+        min-height: 800px;
         }
       }
 
@@ -234,7 +235,7 @@ input[type=checkbox]:checked+.custom-check::before {
 
 .btn-div-c{
     text-align:center;
-    margin-bottom:30px;
+/*    margin-bottom:30px;*/
 }
 .btn-next-c {
     width: 216px;
@@ -250,6 +251,10 @@ input[type=checkbox]:checked+.custom-check::before {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-style: normal;
     font-weight: 700;
+
+
+    /*margin-bottom: -40px;*/
+
 }
 
 .btn-prev-c {
@@ -266,8 +271,20 @@ input[type=checkbox]:checked+.custom-check::before {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-style: normal;
     font-weight: 700;
-    margin-bottom: 28px;
+
+
+    /*margin-bottom: -40px;*/
+
 }
+
+.footer {
+bottom: 0;
+text-align: center !important;
+height: 65px;
+position:absolute;
+width:100%;
+ }
+
 .btn-add-new {
     width: 216px;
     height: 40px;
@@ -281,7 +298,6 @@ input[type=checkbox]:checked+.custom-check::before {
     font-size: 12px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-style: normal;
-    margin-bottom: 28px;
 }
 .radio-langPro-position{
   margin-left:10px;

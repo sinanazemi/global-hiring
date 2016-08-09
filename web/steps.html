@@ -79,10 +79,14 @@
           </div>
           <p  ng-show="termsOfServiceShow" class=" red-thin-label" style="font-size: 10px;" > Please accept the global hiring platform terms of service before continuing </p>
         </div>
-        <div class="btn-div-c">
+<!--        <div class="btn-div-c">
           <button type="button" class="next-button btn-next-c" ng-click="step1NextClick()">Next Step</button>
         </div>
+-->
       </div>  <!-- Form finish -->
+      <div class="footer btn-div-c">
+        <button type="button" class="next-button btn-next-c" ng-click="step1NextClick()">Next Step</button>
+      </div>
   </div> <!-- step1 finish -->
 
   <div id="stepLang" class="container step-div " ng-hide="stepLangHide" ng-repeat="langToAdd in langsToAdd" >
@@ -149,11 +153,11 @@
       </div>
       <div class="row">
         <div class="btn-div-c">
-          <p class="btn-add-new" ng-click="addMoreLangClick(langToAdd)" style="padding-top:10px;" >+ Add More Language</p>
+          <p class="btn-add-new" ng-click="addMoreLangClick(langToAdd)" style="padding-top:10px; margin-top:20px;" >+ Add More Language</p>
         </div>
       </div>
 
-        <div class="row">
+<!--        <div class="row">
           <div class="col-sm-6 btn-div-c" >
             <button type="button" class="next-button btn-prev-c " ng-click="langPreClick()" style="margin-left:40px;">Previous</button>
           </div>
@@ -161,7 +165,18 @@
             <button type="button" class="next-button btn-next-c " ng-click="langNextClick()" style="margin-right:40px;">Next Step</button>
           </div>
         </div>
+-->
     </div> <!-- Form finish -->
+
+    <div class="footer row">
+      <div class="col-sm-6 btn-div-c" >
+        <button type="button" class="next-button btn-prev-c " ng-click="langPreClick()" >Previous</button>
+      </div>
+      <div class="col-sm-6 btn-div-c" >
+        <button type="button" class="next-button btn-next-c " ng-click="langNextClick()" >Next Step</button>
+      </div>
+    </div>
+
   </div> <!-- Language step finish -->
 
   <div id="stepEdu" class="container step-div " ng-hide="stepEduHide" ng-repeat="educationToAdd in educationsToAdd" >
@@ -180,12 +195,11 @@
         </div>
         <div class="form-group field-div zero-margin" >
           <label class="control-label col-sm-12 field-Bold-label" style="text-align:left;" >Date Attended</label>
-          </div>
-        <div class="row form-group field-div zero-margin">
-          <div class="col-sm-6 " >
+
+          <div class="col-sm-6 " style="margin-top:10px;">
             <select class="form-control input-sm input-style select-style" ng-model="educationToAdd.fromdate" placeholder="From"   ng-options="opt as opt for opt in dates" ></select>
           </div>
-          <div class="col-sm-6 " >
+          <div class="col-sm-6 " style="margin-top:10px;">
             <select class="form-control input-sm input-style select-style"  ng-model="educationToAdd.todate" placeholder="To(or expected graduation year)"   ng-options="opt as opt for opt in dates" ></select>
           </div>
         </div>
@@ -209,11 +223,11 @@
         </div>
         <div class="row">
           <div class="btn-div-c">
-            <p class="btn-add-new" ng-click="addMoreEduClick(educationToAdd)" style="padding-top:10px;" >+ Add More Education</p>
+            <p class="btn-add-new" ng-click="addMoreEduClick(educationToAdd)" style="padding-top:10px;margin-top:60px;" >+ Add More Education</p>
           </div>
         </div>
 
-          <div class="row">
+<!--          <div class="row">
             <div class="col-sm-6 btn-div-c" >
               <button type="button" class="next-button btn-prev-c " ng-click="eduPreClick()" style="margin-left:40px;">Previous</button>
             </div>
@@ -221,7 +235,17 @@
               <button type="button" class="next-button btn-next-c " ng-click="eduNextClick()" style="margin-right:40px;">Next Step</button>
             </div>
           </div>
+-->
     </div> <!--form finish -->
+
+    <div class="footer row">
+      <div class="col-sm-6 btn-div-c" >
+        <button type="button" class="next-button btn-prev-c " ng-click="eduPreClick()" >Previous</button>
+      </div>
+      <div class="col-sm-6 btn-div-c" >
+        <button type="button" class="next-button btn-next-c " ng-click="eduNextClick()" >{{eduBTNLabel}}</button>
+      </div>
+    </div>
   </div><!-- education step finish -->
 
   <div id="stepMainSRV" class="container step-div " ng-hide="stepMainSRVHide" >
@@ -233,7 +257,7 @@
         <img ng-src={{mainSRVBarImage}} class="img-responsive bar-image" alt="Main service Step">
         <br />
         <div class="form-group field-div" >
-          <label class="control-label col-sm-12 field-Bold-label" style="text-align:left; margin-top:60px;" >What are the main services you offer?<span style="font-weight:200;">(Please select all that you're open to)</span></label>
+          <label class="control-label col-sm-12 field-Bold-label" style="text-align:left; margin-top:60px;padding-left:0" >What are the main services you offer?<span style="font-weight:200;">(Please select all that you're open to)</span></label>
         </div>
         <div class="form-group service-div" >
           <div class="serviceContainer"  >
@@ -247,7 +271,7 @@
             </div>
           </div>
           </div>
-          <div class="row">
+<!--          <div class="row">
             <div class="col-sm-6 btn-div-c" >
               <button type="button" class="next-button btn-prev-c " ng-click="mainSRVPreClick()" style="margin-left:40px;">Previous</button>
             </div>
@@ -255,7 +279,18 @@
               <button type="button" class="next-button btn-next-c " ng-click="mainSRVNextClick()" style="margin-right:40px;">Next Step</button>
             </div>
           </div>
+-->
       </div><!--form finish -->
+
+<div class="footer row">
+  <div class="col-sm-6 btn-div-c" >
+    <button type="button" class="next-button btn-prev-c " ng-click="mainSRVPreClick()" >Previous</button>
+  </div>
+  <div class="col-sm-6 btn-div-c" >
+    <button type="button" class="next-button btn-next-c " ng-click="mainSRVNextClick()" >Next Step</button>
+  </div>
+</div>
+
   </div><!--Main Services step finish -->
 
   <div id="stepSkills" class="container step-div " ng-hide="stepSkillHide" >
@@ -266,8 +301,8 @@
         <br />
         <img ng-src={{skillBarImage}} class="img-responsive bar-image" alt="Skill bar">
         <br />
-        <div class="form-group field-div" >
-          <div id="skilldList" style="text-align:left; margin-top:60px;">
+        <div class="form-group field-div" style="overflow-y: scroll; margin-bottom:50px;" >
+          <div id="skilldList" style="text-align:left; margin-top:60px;" >
             <ul ng-repeat="service in mainServices | filter: {isselected: true } " style="text-align:left; padding-left:2px;" >
               <p class="black-bold-label" style="text-align:left; padding-left:2px; font-size:16px; font-weight:250"> {{service.name}} <br/> <span style="font-size:12px; font-weight:350">{{service.question}}</span></p>
               <li ng-repeat="skillOfSRV in service.skills " style="list-style-type:none;">
@@ -276,7 +311,7 @@
             </ul>
           </div>
         </div>
-        <div class="row">
+<!--        <div class="row">
           <div class="col-sm-6 btn-div-c" >
             <button type="button" class="next-button btn-prev-c " ng-click="skillPreClick()" style="margin-left:40px;">Previous</button>
           </div>
@@ -284,7 +319,17 @@
             <button type="button"  class="next-button btn-next-c " ng-click="finishClick()" style="margin-right:40px;">Finish</button>
           </div>
         </div>
+-->
     </div><!--form finish -->
+
+    <div class="footer row">
+      <div class="col-sm-6 btn-div-c" >
+        <button type="button" class="next-button btn-prev-c " ng-click="skillPreClick()" >Previous</button>
+      </div>
+      <div class="col-sm-6 btn-div-c" >
+        <button type="button"  class="next-button btn-next-c " ng-click="skillNextClick()" >{{skillsBTNLabel}}</button>
+      </div>
+    </div>
   </div><!--Skill step finish -->
 
 <!-- Profeciency Modal -->
@@ -354,6 +399,9 @@ globalHiring.controller('stepsController',['$scope', '$resource','$uibModal', fu
   $scope.requiedStyleEmail='';
 
   $scope.errorMsg='';
+
+  $scope.skillsBTNLabel="";
+  $scope.eduBTNLabel="";
   // Next buttons click
   $scope.step1NextClick = function(){
     $scope.requiedStyleFullname='';
@@ -436,10 +484,12 @@ globalHiring.controller('stepsController',['$scope', '$resource','$uibModal', fu
     $scope.stepLangHide=true;
     if($scope.isStudent =="true"){
       $scope.stepEduHide=false;
+      $scope.eduBTNLabel="Next";
       $scope.eduBarImage="images/step_3_bar.png";
     }
     else{
       $scope.stepEduHide=false;
+      $scope.eduBTNLabel="Finish";
       $scope.eduBarImage="images/step_5_bar.png";
 
     }
@@ -467,13 +517,27 @@ globalHiring.controller('stepsController',['$scope', '$resource','$uibModal', fu
     $scope.stepMainSRVHide=true;
     if($scope.isStudent=="true"){
       $scope.stepSkillHide=false;
+      $scope.skillsBTNLabel="Finish";
       $scope.skillBarImage="images/step_5_bar.png";
     }
     else{
       $scope.stepSkillHide=false;
+      $scope.skillsBTNLabel="Next";
       $scope.skillBarImage="images/step_3_bar.png";
     }
   };
+
+  $scope.skillNextClick=function(){
+    if($scope.isStudent=="true"){
+      $scope.finishClick();
+    }
+    else{
+      $scope.stepSkillHide=true;
+      $scope.stepLangHide=false;
+      $scope.langBarImage="images/step_4_bar.png";
+
+    }
+  }
 
   // Previous buttons click
   $scope.langPreClick=function(){
@@ -510,10 +574,10 @@ globalHiring.controller('stepsController',['$scope', '$resource','$uibModal', fu
     $scope.stepMainSRVHide=false;
     $scope.stepSkillHide=true;
     if($scope.isStudent=="true"){
-      $scope.skillBarImage="images/step_5_bar.png";
+      $scope.mainSRVBarImage="images/step_5_bar.png";
     }
     else {
-      $scope.skillBarImage="images/step_3_bar.png";
+      $scope.mainSRVBarImage="images/step_3_bar.png";
     }
   }
 
