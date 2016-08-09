@@ -235,10 +235,11 @@
         <div class="form-group field-div" >
           <label class="control-label col-sm-12 field-Bold-label" style="text-align:left; margin-top:60px;" >What are the main services you offer?<span style="font-weight:200;">(Please select all that you're open to)</span></label>
         </div>
-        <div class="form-group field-div" >
+        <div class="form-group service-div" >
           <div class="serviceContainer"  >
             <div class="item" ng-repeat='service in mainServices' ng-click='toggleSelectedSRV(service)' ng-class="{ selected: service.isselected  }">
               <input type="checkbox" ng-attr-id="{{'c' + service.id}}" ng-model="service.isselected" />
+            <!--   <img src="images/sample_main_service.png" class="img-responsive" style="padding-top:0px" alt="main Service Img"> -->
               <label ng-attr-for="{{'c' +service.id}}" ng-class="{ selected: service.isselected  }"> {{service.name}}
               <!--  <img ng-src="{{getIcon(service)}}">
               -->
@@ -270,7 +271,6 @@
             <ul ng-repeat="service in mainServices | filter: {isselected: true } " style="text-align:left; padding-left:2px;" >
               <p class="black-bold-label" style="text-align:left; padding-left:2px; font-size:16px; font-weight:250"> {{service.name}} <br/> <span style="font-size:12px; font-weight:350">{{service.question}}</span></p>
               <li ng-repeat="skillOfSRV in service.skills " style="list-style-type:none;">
-                <!-- <p class="black-border-label" data-toggle="modal" data-target="#myModal" ng-click="skillClick(skillOfSRV)" ng-class="{ selected: skillOfSRV.isselected }" >{{skillOfSRV.name}}</p> -->
                 <p class="black-border-label"  ng-click="skillClick(skillOfSRV)" ng-class="{ selected: skillOfSRV.isselected }" >{{skillOfSRV.name}}</p>
               </li>
             </ul>
@@ -308,14 +308,28 @@
     </ul>
   </div>
 </script>
+
+<!-- Error Modal -->
+<script type="text/ng-template" id="errorModal.html">
+  <div class="modal-header btn-div-c" style="margin-bottom:0;">
+    <button type="button" class="close" ng-click="close()" >&times;</button>
+    <h3 class="modal-title" style="text-align:center;padding-top:10px;">Error</h3>
+  </div>
+  <div class="modal-body">
+    <div class="row" style="margin-top:30px;margin-bottom:30px;">
+      <label class="control-label col-sm-12 error-label" style="text-align:center;" >{{errorMsgToShow}}</label>
+    </div>
+  </div>
+  <div class="modal-footer">
+          <button class="btn ok-btn" type="button" ng-click="ok()">OK</button>
+  </div>
+</script>
+
 </body>
 
 <script>
 var globalHiring = angular.module('globalHiring',['ngResource','ngAnimate', 'ui.bootstrap']);
 globalHiring.controller('stepsController',['$scope', '$resource','$uibModal', function($scope, $resource,$uibModal, $http, $window, $log) {
-
-
-
 
   // Steps controller
   //$scope.authenticateHide=false;
@@ -338,6 +352,8 @@ globalHiring.controller('stepsController',['$scope', '$resource','$uibModal', fu
   $scope.requiedStyleFullname='';
   $scope.requiedStylePassword='';
   $scope.requiedStyleEmail='';
+
+  $scope.errorMsg='';
   // Next buttons click
   $scope.step1NextClick = function(){
     $scope.requiedStyleFullname='';
@@ -640,6 +656,32 @@ globalHiring.controller('stepsController',['$scope', '$resource','$uibModal', fu
     }
   }
 
+  //ErrorMsg Modal
+
+  $scope.animationsEnabled = true;
+  $scope.errorModal = function () {
+
+    var errorModalInstance = $uibModal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'errorModal.html',
+      controller: 'ErrormodalInstanceCtrl',
+      resolve: {
+        errorMsg: function () {
+          return $scope.errorMsg;
+        }
+      }
+    });
+
+    errorModalInstance.result.then(function () {
+      var test="";
+        window.location = "/steps.html";
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+  //Modal ErrorMsg is finished
+
+
 // Save an account
   var saveAccount = $resource("/saveAccount")
   $scope.finishClick=function(){
@@ -665,7 +707,12 @@ globalHiring.controller('stepsController',['$scope', '$resource','$uibModal', fu
       newAccount.$save(
         function(data){
           window.location = "/profile.html"; // save and move to profile page
-        });
+        },
+        function(errorMsg){
+          $scope.errorMsg="There is a problem in creating your account, Please Try Again."
+          $scope.errorModal();
+        }
+      );
 
       //window.location = "/profile.html"; // save and move to profile page
   }// finish click
@@ -693,5 +740,16 @@ angular.module('globalHiring').controller('ModalInstanceCtrl', function ($scope,
 });
 
 
+angular.module('globalHiring').controller('ErrormodalInstanceCtrl', function ($scope, $uibModalInstance, errorMsg) {
+
+  $scope.errorMsgToShow=errorMsg;
+
+  $scope.close= function () {
+    $uibModalInstance.close();
+  };
+  $scope.ok= function () {
+    $uibModalInstance.close();
+  };
+});
 </script>
 </html>

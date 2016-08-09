@@ -7,7 +7,8 @@
   .step-div{
     margin-right: auto;
     margin-left: auto;
-    width: 606px;
+    width: 519px;
+    height: 682px;
     }
   }
 
@@ -40,13 +41,6 @@
     border-radius: 5px;
     background-color: rgb(255, 255, 255);
     position: relative;
-  /*  width: 40%;
-
-    width: 433px;
-    height: 555px;
-
-    margin-left:auto;
-    margin-right:auto;*/
     margin-top:30px;
 }
 
@@ -105,6 +99,8 @@
     text-align:left;
     padding-left: 40px;
     padding-right: 40px;
+
+    margin-bottom: 30px;
 
 }
 
@@ -241,7 +237,7 @@ input[type=checkbox]:checked+.custom-check::before {
     margin-bottom:30px;
 }
 .btn-next-c {
-    width: 230px;
+    width: 216px;
     height: 40px;
     cursor: pointer;
     background-color: rgb(3, 186, 109);
@@ -253,10 +249,11 @@ input[type=checkbox]:checked+.custom-check::before {
     font-size: 14px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-style: normal;
+    font-weight: 700;
 }
 
 .btn-prev-c {
-    width: 230px;
+    width: 216px;
     height: 40px;
     cursor: pointer;
     background-color: rgb(255, 255, 255);
@@ -268,10 +265,12 @@ input[type=checkbox]:checked+.custom-check::before {
     font-size: 14px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-style: normal;
+    font-weight: 700;
+    margin-bottom: 28px;
 }
 .btn-add-new {
-    width: 168px;
-    height: 35px;
+    width: 216px;
+    height: 40px;
     cursor: pointer;
     background-color: rgb(255, 255, 255);
     border-radius: 2px;
@@ -282,6 +281,7 @@ input[type=checkbox]:checked+.custom-check::before {
     font-size: 12px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-style: normal;
+    margin-bottom: 28px;
 }
 .radio-langPro-position{
   margin-left:10px;
@@ -317,16 +317,27 @@ input[type=checkbox]:checked+.custom-check::before {
 }
 
 .item {
-  background: #ddd;
+  background: rgb(255, 255, 255);
   float:left;
   display: inline-block;
   margin: 10px 10px 0 0;
-  height: 117px;
-  width: 117px;
+  height: 108px;
+  width: 108px;
+  padding-top: 66px;
+  border: solid 0.5px #979797;
+
+  font-size: 9px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-style: bold;
+  color:#616161;
+  font-weight: 300;
+  text-align: center;
 }
 
-.selected {
-  background-color: rgb(3, 186, 109);
+.item.selected {
+  /*background-color: rgb(3, 186, 109);*/
+  color: rgb(3, 186, 109);
+  border: solid 1.4px #03ba6d;
 }
 
 
@@ -344,9 +355,47 @@ input[type=checkbox]:checked+.custom-check::before {
 ul { list-style: none; }
 li { padding: 2px 0; }
 
+.error-label {
+
+    font-size: 16px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style: bold;
+    color: red;
+    font-weight: 300;
+}
+
+.ok-btn{
+  width: 100px;
+  height: 30px;
+  cursor: pointer;
+  background-color: rgb(3, 186, 109);
+  border-radius: 2px;
+  border: none;
+  color: white;
+  text-align: center;
+  display: inline-block;
+  font-size: 14px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-style: normal;
+
+}
 
 
+.service-div{
+  /*  width: 374px;
+    height: 30px;
+    position: absolute;
+    padding-left: 33px;
+    padding-right: 26px;
+*/
+    display:block;
+    text-align:left;
+    padding-left: 10px;
+    padding-right: 10px;
 
+    /*margin-bottom: 30px;*/
+
+}
 
 
 
