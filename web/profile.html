@@ -156,14 +156,14 @@
                                                    <label class="control-label" for="role">Role</label>
                                                    <div class="row">
                                                        <div class="col-sm-5" ng-class="{ 'has-error': vwhFromMonthShow || (whForm.whFromMonth.$touched && whForm.whFromMonth.$invalid) }">
-                                                           <select class="form-control" id="fMonth" ng-model="whFromMonth" ng-options="month as month.name for month in months track by month.value" ng-change="whFromMonthChg()" required><option value="" disabled selected>Month</option></select>
+                                                           <select class="form-control" id="fMonth" ng-model="whFromMonth" ng-options="month as month.name for month in months track by month.value" ng-click="whFromMonthChg()" ng-change="whFromMonthChg()" required><option value="" disabled selected>Month</option></select>
                                                            <div ng-messages="whForm.whFromMonth.$error" ng-if=" vwhFromMonthShow || (whForm.whFromMonth.$touched && whForm.whFromMonth.$invalid)">
                                                                <p ng-message="required" style="color:red;">From month is required.</p>
                                                            </div>
                                                        </div>
                                                        <div class="col-sm-2"></div>
                                                        <div class="col-sm-5" ng-class="{ 'has-error': vwhFromYearShow || (whForm.whFromYear.$touched && whForm.whFromYear.$invalid) }">
-                                                           <select class="form-control" id="fDate" ng-model="whFromYear" ng-options="opt as opt for opt in dates" ng-change="whFromYearChg()" required><option value="" disabled selected>Year</option></select>
+                                                           <select class="form-control" id="fDate" ng-model="whFromYear" ng-options="opt as opt for opt in dates" ng-click="whFromYearChg()" ng-change="whFromYearChg()" required><option value="" disabled selected>Year</option></select>
                                                            <div ng-messages="whForm.whFromYear.$error" ng-if=" vwhFromYearShow || (whForm.whFromYear.$touched && whForm.whFromYear.$invalid)">
                                                                <p ng-message="required" style="color:red;">From year is required.</p>
                                                            </div>
@@ -171,19 +171,19 @@
                                                    </div>
                                                    <div class="row">
                                                        <div class="col-sm-5"></div>
-                                                       <div class="col-sm-2 through-txt-c">through</div>
+                                                       <div class="col-sm-2 through-txt-c" ng-hide="whCurrently">through</div>
                                                        <div class="col-sm-5"></div>
                                                    </div>
                                                    <div class="row">
                                                        <div class="col-sm-5" ng-class="{ 'has-error': vwhToMonthShow || (whForm.whToMonth.$touched && whForm.whToMonth.$invalid) }">
-                                                           <select class="form-control" id="tMonth" ng-model="whToMonth" ng-options="month as month.name for month in months track by month.value" ng-disabled="whCurrently" ng-change="whToMonthChg()" required><option value="" disabled selected>Month</option></select>
+                                                           <select class="form-control" id="tMonth" ng-model="whToMonth" ng-options="month as month.name for month in months track by month.value" ng-hide="whCurrently" ng-click="whToMonthChg()" ng-change="whToMonthChg()" required><option value="" disabled selected>Month</option></select>
                                                            <div ng-messages="whForm.whToMonth.$error" ng-if=" vwhToMonthShow || (whForm.whToMonth.$touched && whForm.whToMonth.$invalid)">
                                                                <p ng-message="required" style="color:red;">To month is required or select "I currently work here".</p>
                                                            </div>
                                                        </div>
                                                        <div class="col-sm-2"></div>
                                                        <div class="col-sm-5" ng-class="{ 'has-error': vwhToYearShow || (whForm.whToYear.$touched && whForm.whToYear.$invalid) }">
-                                                           <select class="form-control" id="tDate" ng-model="whToYear" ng-options="opt as opt for opt in dates" ng-disabled="whCurrently" ng-change="whToYearChg()" required><option value="" disabled selected>Year</option></select>
+                                                           <select class="form-control" id="tDate" ng-model="whToYear" ng-options="opt as opt for opt in dates" ng-hide="whCurrently" ng-click="whToYearChg()" ng-change="whToYearChg()" required><option value="" disabled selected>Year</option></select>
                                                            <div ng-messages="whForm.whToYear.$error" ng-if=" vwhToYearShow || (whForm.whToYear.$touched && whForm.whToYear.$invalid)">
                                                                <p ng-message="required" style="color:red;">To year is required or select "I currently work here".</p>
                                                            </div>
@@ -217,7 +217,7 @@
                                <div class="panel-body">
                                    <h4>
                                        Education
-                                       &nbsp;<a class="btn-add-c add-education-c" data-toggle="modal" data-target="#addEducation"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                                       &nbsp;<a class="btn-add-c add-education-c" data-toggle="modal" data-target="#addEducation" ng-click="cleanEduInputs()"><span class="glyphicon glyphicon-plus-sign"></span></a>
                                    </h4>
                                    <div ng-repeat="x in account.educations" ng-mouseleave="eduMouseLeave(this)" ng-mouseover="eduMouseOver(this)">
                                        <h5>
@@ -226,15 +226,18 @@
                                                {{x.degree.name}}, {{x.field}} | {{x.school}}
                                            </span>
                                            &nbsp;<a href="#" class="a-btn-c edit-education-c" data-toggle="modal" data-target="#addEducation" ng-click="editEducation(x)" ng-show="popoverRemove" ng-style="eduHoverStyle">
-    <span class="glyphicon glyphicon-pencil"></span>
-</a>
+                                               <span class="glyphicon glyphicon-pencil"></span>
+                                           </a>
                                            &nbsp;<a href="#" class=" a-btn-c delete-education-c" ng-click="deleteEducation(x)" ng-show="popoverRemove" ng-style="eduHoverStyle">
-    <span class="glyphicon glyphicon-trash"></span>
-</a>
+                                               <span class="glyphicon glyphicon-trash"></span>
+                                           </a>
                                        </h5>
 
                                        <!--<p><span class="education-txt-c">2007 - 2012</span></p>-->
-                                       <p><span class="education-txt-c" ng-style="eduHoverStyle" ng-mouseleave="eduMouseLeave(this)" ng-mouseover="eduMouseOver(this)">{{x.fromdate}} - {{x.todate}}</span></p>
+                                       <p><span class="education-txt-c" ng-style="eduHoverStyle" ng-mouseleave="eduMouseLeave(this)" ng-mouseover="eduMouseOver(this)">
+                                           {{x.fromdate}} - {{x.todate}}
+                                           </span>
+                                       </p>
                                    </div>
                                </div>
                            </div>
@@ -249,31 +252,43 @@
                                            <h4 class="modal-title m-title-c">Add Education</h4>
                                        </div>
                                        <div class="modal-body modal-b-c">
-                                           <form role="form">
+                                           <form name="eduForm" role="form">
                                                <input ng-model="eduId" ng-hide="true" />
-                                               <div class="form-group form-g-c">
+                                               <div class="form-group form-g-c" ng-class="{ 'has-error': veduSchoolShow || (eduForm.eduSchool.$touched && eduForm.eduSchool.$invalid) }">
                                                    <label class="control-label" for="school">School</label>
-                                                   <input class="form-control" id="school" name="school" type="text" ng-model="eduSchool" required>
+                                                   <input class="form-control" id="school" name="eduSchool" type="text" ng-model="eduSchool" ng-change="eduSchoolChg()" required>
+                                                   <div ng-messages="eduForm.eduSchool" ng-if=" veduSchoolShow || (eduForm.eduSchool.$touched && eduForm.eduSchool.$invalid)">
+                                                       <p ng-message="required" style="color:red;">School is required.</p>
+                                                   </div>
                                                </div>
                                                <div class="form-group">
                                                    <label class="control-label" for="dates_attended">Dates Attended</label>
                                                    <div class="row">
-                                                       <div class="col-sm-6">
-                                                           <select class="form-control" id="fDate" ng-model="eduFromDate" ng-options="opt as opt for opt in dates"><option value="" disabled selected>From</option></select>
+                                                       <div class="col-sm-6" ng-class="{ 'has-error': veduFromDateShow || (eduForm.eduFromDate.$touched && eduForm.eduFromDate.$invalid) }">
+                                                           <select class="form-control" id="fDate" ng-model="eduFromDate" ng-options="opt as opt for opt in dates" ng-click="eduFromDateChg()" ng-change="eduFromDateChg()" required><option value="" disabled selected>From</option></select>
+                                                           <div ng-messages="eduForm.eduFromDate.$error" ng-if=" veduFromDateShow || (eduForm.eduFromDate.$touched && eduForm.eduFromDate.$invalid)">
+                                                               <p ng-message="required" style="color:red;">From year is required.</p>
+                                                           </div>
                                                        </div>
-                                                       <div class="col-sm-6">
-                                                           <select class="form-control" id="tDate" ng-model="eduToDate" ng-options="opt as opt for opt in dates"><option value="" disabled selected>To (or expected graducation year)</option></select>
+                                                       <div class="col-sm-6" ng-class="{ 'has-error': veduToDateShow || (eduForm.eduToDate.$touched && eduForm.eduToDate.$invalid) }">
+                                                           <select class="form-control" id="tDate" ng-model="eduToDate" ng-options="opt as opt for opt in dates" ng-click="eduToDateChg()" ng-change="eduToDateChg()" required><option value="" disabled selected>To (or expected graducation year)</option></select>
+                                                           <div ng-messages="eduForm.eduToDate.$error" ng-if=" veduToDateShow || (eduForm.eduToDate.$touched && eduForm.eduToDate.$invalid)">
+                                                               <p ng-message="required" style="color:red;">To year is required.</p>
+                                                           </div>
                                                        </div>
                                                    </div>
                                                </div>
-                                               <div class="form-group">
+                                               <div class="form-group" ng-class="{ 'has-error': veduDegreeShow || (eduForm.eduDegree.$touched && eduForm.eduDegree.$invalid) }">
                                                    <label class="control-label" for="degree">Degree</label>
                                                    <!--<input class="form-control" id="degree" name="degree" type="text" required>-->
-                                                   <select class="form-control" id="degree" ng-model="eduDegree" ng-options="degree.name for degree in degrees  track by degree.id"></select>
+                                                   <select class="form-control" id="degree" ng-model="eduDegree" ng-options="degree.name for degree in degrees track by degree.id" ng-click="eduDegreeChg()" ng-change="eduDegreeChg()" required></select>
+                                                   <div ng-messages="eduForm.eduDegree.$error" ng-if=" veduDegreeShow || (eduForm.eduDegree.$touched && eduForm.eduDegree.$invalid)">
+                                                       <p ng-message="required" style="color:red;">Degree is required.</p>
+                                                   </div>
                                                </div>
                                                <div class="form-group">
-                                                   <label class="control-label" for="area">Area of Study (optional)</label>
-                                                   <input class="form-control" id="area" name="area" type="text" ng-model="eduField" required>
+                                                   <label class="control-label" for="area">Area of study (optional)</label>
+                                                   <input class="form-control" id="area" name="area" type="text" ng-model="eduField">
                                                </div>
                                                <div class="form-group">
                                                    <label class="control-label" for="grade">Grade</label>
@@ -286,8 +301,8 @@
                                            </form>
                                        </div>
                                        <div class="modal-footer m-footer-c">
-                                           <button type="button" class="btn btn-save-c" ng-click="saveEducation()" data-dismiss="modal">Save</button>
-                                           <button type="button" class="btn btn-save-more-c">Save And Add More</button>
+                                           <button type="button" class="btn btn-save-c" ng-click="saveEducation()">Save</button>
+                                           <button type="button" class="btn btn-save-more-c" ng-click="saveEducationMore()">Save And Add More</button>
                                            <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
                                        </div>
                                    </div>
@@ -300,25 +315,30 @@
                                <div class="panel-body">
                                    <h4>
                                        Volunteering Experience
-                                       &nbsp;<a class="btn-add-c add-volunteering-c" data-toggle="modal" data-target="#addVolunteering"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                                       &nbsp;<a class="btn-add-c add-volunteering-c" data-toggle="modal" data-target="#addVolunteering" ng-click="cleanVolInputs()"><span class=" glyphicon glyphicon-plus-sign"></span></a>
                                    </h4>
-                                   <div ng-mouseleave="volMouseLeave(this)" ng-mouseover="volMouseOver(this)">
+                                   <div ng-repeat="x in account.volunteerings" ng-mouseleave="volMouseLeave(this)" ng-mouseover="volMouseOver(this)">
                                        <h5>
-                                           <span class="volunteering-txt-c" ng-style="volHoverStyle"></span>
-                                           &nbsp;<a href="#" class="a-btn-c edit-volunteering-c" data-toggle="modal" data-target="#addHistory" ng-show="popoverRemove" ng-style="volHoverStyle">
-    <span class="glyphicon glyphicon-pencil"></span>
-</a>
-                                           &nbsp;<a href="#" class=" a-btn-c delete-volunteering-c" ng-show="popoverRemove" ng-style="volHoverStyle">
-    <span class="glyphicon glyphicon-trash"></span>
-</a>
+                                           <span class="volunteering-txt-c" ng-style="volHoverStyle">
+                                               {{x.organization}} | {{x.role}} | {{x.cause.name}}
+                                           </span>
+                                           &nbsp;<a href="#" class="a-btn-c edit-volunteering-c" data-toggle="modal" data-target="#addVolunteering" ng-click="editVolunteering(x)" ng-show="popoverRemove" ng-style="volHoverStyle">
+                                               <span class="glyphicon glyphicon-pencil"></span>
+                                           </a>
+                                           &nbsp;<a href="#" class=" a-btn-c delete-volunteering-c" ng-click="deleteVolunteering(x)" ng-show="popoverRemove" ng-style="volHoverStyle">
+                                               <span class="glyphicon glyphicon-trash"></span>
+                                           </a>
                                        </h5>
                                        <p>
                                            <span class="volunteering-txt-c" ng-style="volHoverStyle" ng-mouseleave="volMouseLeave(this)" ng-mouseover="volMouseOver(this)">
-                                               No items to display. 1 in 5 managers hired someone because of their
-                                               volunteer experiences
+                                               {{x.fromyear}} - {{x.toyear}}
                                            </span>
                                        </p>
                                    </div>
+                                   <p>
+                                       1 in 5 managers hired someone because of their
+                                       volunteer experiences
+                                   </p>
                                </div>
                            </div>
                            <!-- Modal Volunteering Experience -->
@@ -332,21 +352,30 @@
                                            <h4 class="modal-title m-title-c">Volunteering Experience</h4>
                                        </div>
                                        <div class="modal-body modal-b-c">
-                                           <form role="form">
-                                               <div class="form-group form-g-c">
+                                           <form role="form" name="volForm">
+                                               <div class="form-group form-g-c" ng-class="{ 'has-error': vvolOrganizationShow || (volForm.volOrganization.$touched && volForm.volOrganization.$invalid) }">
                                                    <label class="control-label" for="org">Organization</label>
-                                                   <input class="form-control" id="org" name="org" type="text" ng-model="volOrganization" required>
+                                                   <input class="form-control" id="org" name="volOrganization" type="text" ng-model="volOrganization" ng-change="volOrganizationChg()" required>
+                                                   <div ng-messages="volForm.volOrganization" ng-if=" vvolOrganizationShow || (volForm.volOrganization.$touched && volForm.volOrganization.$invalid)">
+                                                       <p ng-message="required" style="color:red;">Organization is required.</p>
+                                                   </div>
                                                </div>
-                                               <div class="form-group">
+                                               <div class="form-group" ng-class="{ 'has-error': vvolRoleShow || (volForm.volRole.$touched && volForm.volRole.$invalid) }">
                                                    <label class="control-label" for="role">Role</label>
-                                                   <input class="form-control" id="role" name="role" type="text" ng-model="volRole" required>
+                                                   <input class="form-control" id="role" name="volRole" type="text" ng-model="volRole" ng-change="volRoleChg()" required>
+                                                   <div ng-messages="volForm.volRole" ng-if=" vvolRoleShow || (volForm.volRole.$touched && volForm.volRole.$invalid)">
+                                                       <p ng-message="required" style="color:red;">Role is required.</p>
+                                                   </div>
                                                </div>
                                                <div class="form-group">
                                                    <div class="row">
                                                        <div class="col-sm-5">
-                                                           <div class="form-group">
+                                                           <div class="form-group" ng-class="{ 'has-error': vvolCauseShow || (volForm.volCause.$touched && volForm.volCause.$invalid) }">
                                                                <label class="control-label" for="cause">Cause</label>
-                                                               <select class="form-control" id="cause" ng-model="volCause" ng-options="cause.name for cause in volCauses"></select>
+                                                               <select class="form-control" id="volCause" ng-model="volCause" ng-options="cause.name for cause in volCauses track by cause.id" ng-click="volCauseChg()" ng-change="volCauseChg()" required></select>
+                                                               <div ng-messages="volForm.volCause.$error" ng-if=" vvolCauseShow || (volForm.volCause.$touched && volForm.volCause.$invalid)">
+                                                                   <p ng-message="required" style="color:red;">Cause is required.</p>
+                                                               </div>
                                                            </div>
                                                        </div>
                                                        <div class="col-sm-2"></div>
@@ -356,12 +385,18 @@
                                                <div class="form-group">
                                                    <label class="control-label" for="date">Date</label>
                                                    <div class="row">
-                                                       <div class="col-sm-5">
-                                                           <select class="form-control" id="fMonth" ng-model="volFromMonth" ng-options="month as month for month in months"><option value="" disabled selected>Month</option></select>
+                                                       <div class="col-sm-5" ng-class="{ 'has-error': vvolFromMonthShow || (volForm.volFromMonth.$touched && volForm.volFromMonth.$invalid) }">
+                                                           <select class="form-control" id="fMonth" ng-model="volFromMonth" ng-options="month as month.name for month in months track by month.value" ng-click="volFromMonthChg()" ng-change="volFromMonthChg()" required><option value="" disabled selected>Month</option></select>
+                                                           <div ng-messages="volForm.volFromMonth.$error" ng-if=" vvolFromMonthShow || (volForm.volFromMonth.$touched && volForm.volFromMonth.$invalid)">
+                                                               <p ng-message="required" style="color:red;">From month is required.</p>
+                                                           </div>
                                                        </div>
                                                        <div class="col-sm-2"></div>
-                                                       <div class="col-sm-5">
-                                                           <select class="form-control" id="fDate" ng-model="volFromYear" ng-options="opt as opt for opt in dates"><option value="" disabled selected>Year</option></select>
+                                                       <div class="col-sm-5" ng-class="{ 'has-error': vvolFromYearShow || (volForm.volFromYear.$touched && volForm.volFromYear.$invalid) }">
+                                                           <select class="form-control" id="fDate" ng-model="volFromYear" ng-options="opt as opt for opt in dates" ng-click="volFromYearChg()" ng-change="volFromYearChg()" required><option value="" disabled selected>Year</option></select>
+                                                           <div ng-messages="volForm.volFromYear.$error" ng-if=" vvolFromYearShow || (volForm.volFromYear.$touched && volForm.volFromYear.$invalid)">
+                                                               <p ng-message="required" style="color:red;">From year is required.</p>
+                                                           </div>
                                                        </div>
                                                    </div>
                                                    <div class="row">
@@ -371,7 +406,7 @@
                                                    </div>
                                                    <div class="row">
                                                        <div class="col-sm-5">
-                                                           <select class="form-control" id="tMonth" ng-model="volToMonth" ng-options="month as month for month in months"><option value="" disabled selected>Month</option></select>
+                                                           <select class="form-control" id="tMonth" ng-model="volToMonth" ng-options="month as month.name for month in months track by month.value"><option value="" disabled selected>Month</option></select>
                                                        </div>
                                                        <div class="col-sm-2"></div>
                                                        <div class="col-sm-5">
@@ -388,8 +423,8 @@
                                            </form>
                                        </div>
                                        <div class="modal-footer m-footer-c">
-                                           <button type="button" class="btn btn-save-c">Save</button>
-                                           <button type="button" class="btn btn-save-more-c">Save And Add More</button>
+                                           <button type="button" class="btn btn-save-c" ng-click="saveVolunteering()">Save</button>
+                                           <button type="button" class="btn btn-save-more-c" ng-click="saveVolunteeringMore()">Save And Add More</button>
                                            <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
                                        </div>
                                    </div>
@@ -402,19 +437,19 @@
                                <div class="panel-body">
                                    <h4>
                                        Certifications
-                                       &nbsp;<a class="btn-add-c add-certifications-c" data-toggle="modal" data-target="#addCertifications"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                                       &nbsp;<a class="btn-add-c add-certifications-c" data-toggle="modal"><span class="glyphicon glyphicon-plus-sign"></span></a>
                                    </h4>
-                                   <div ng-mouseleave="crfMouseLeave(this)" ng-mouseover="crfMouseOver(this)">
-                                       <h5>
-                                           <span class="certifications-txt-c" ng-style="crfHoverStyle"></span>
-                                           &nbsp;<a href="#" class="a-btn-c edit-certifications-c" data-toggle="modal" data-target="#addHistory" ng-show="popoverRemove" ng-style="crfHoverStyle">
-    <span class="glyphicon glyphicon-pencil"></span>
-</a>
-                                           &nbsp;<a href="#" class=" a-btn-c delete-certifications-c" ng-show="popoverRemove" ng-style="crfHoverStyle">
-    <span class="glyphicon glyphicon-trash"></span>
-</a>
-                                       </h5>
-                                       <p><span class="certifications-txt-c" ng-style="crfHoverStyle" ng-mouseleave="crfMouseLeave(this)" ng-mouseover="crfMouseOver(this)">No items to display.</span> </p>
+                                   <div>
+                                       <!--<h5>
+                                                           <span class="certifications-txt-c" ng-style="crfHoverStyle"></span>
+                                                           &nbsp;<a href="#" class="a-btn-c edit-certifications-c" data-toggle="modal" data-target="#addHistory" ng-show="popoverRemove" ng-style="crfHoverStyle">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+                                                           &nbsp;<a href="#" class=" a-btn-c delete-certifications-c" ng-show="popoverRemove" ng-style="crfHoverStyle">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+                                                       </h5>-->
+                                       <p><span class="certifications-txt-c">No items to display.</span> </p>
                                    </div>
                                </div>
                            </div>
@@ -435,18 +470,25 @@
                                <div class="panel-body">
                                    <h4>
                                        Test Scores
-                                       &nbsp;<a class="btn-add-c add-scores-c" data-toggle="modal" data-target="#addScores"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                                       &nbsp;<a class="btn-add-c add-scores-c" data-toggle="modal" data-target="#addScores" ng-click="cleanTcInputs()"><span class="glyphicon glyphicon-plus-sign"></span></a>
                                    </h4>
-                                   <h5>
-                                       <span class="scores-txt-c"></span>
-                                       &nbsp;<a href="#" class="a-btn-c btn-edit-c edit-scores-c" data-toggle="modal" data-target="#addHistory">
-                                           <span class="glyphicon glyphicon-pencil"></span>
-                                       </a>
-                                       &nbsp;<a href="#" class=" a-btn-c btn-delete-c delete-scores-c">
-                                           <span class="glyphicon glyphicon-trash"></span>
-                                       </a>
-                                   </h5>
-                                   <p><span class="scores-txt-c">No items to display. Here’s another way to show your accomplishments</span> </p>
+                                   <div ng-repeat="x in account.tests" ng-mouseleave="tcMouseLeave(this)" ng-mouseover="tcMouseOver(this)">
+                                       <h5>
+                                           <span class="scores-txt-c" ng-style="tcHoverStyle">
+                                               {{x.name}} | {{x.occupation.name}} | {{x.score}}
+                                           </span>
+                                           &nbsp;<a href="#" class="a-btn-c edit-scores-c" data-toggle="modal" data-target="#addScores" ng-click="editTestScores(x)" ng-show="popoverRemove" ng-style="tcHoverStyle">
+                                               <span class="glyphicon glyphicon-pencil"></span>
+                                           </a>
+                                           &nbsp;<a href="#" class=" a-btn-c delete-scores-c" ng-click="deleteTestScores(x)" ng-show="popoverRemove" ng-style="tcHoverStyle">
+                                               <span class="glyphicon glyphicon-trash"></span>
+                                           </a>
+                                       </h5>
+                                       <span class="scores-txt-c" ng-style="tcHoverStyle" ng-mouseleave="tcMouseLeave(this)" ng-mouseover="tcMouseOver(this)">
+                                           {{x.month}} - {{x.year}}
+                                       </span>
+                                   </div>
+                                   <p>No items to display. Here’s another way to show your accomplishments </p>
                                </div>
                            </div>
                            <!-- Modal Test Scores -->
@@ -460,21 +502,22 @@
                                            <h4 class="modal-title m-title-c">Test Scores</h4>
                                        </div>
                                        <div class="modal-body modal-b-c">
-                                           <form role="form">
-                                               <div class="form-group form-g-c">
+                                           <form role="form" name="tcForm">
+                                               <div class="form-group form-g-c" ng-class="{ 'has-error': vtcNameShow || (tcForm.tcName.$touched && tcForm.tcName.$invalid) }">
                                                    <label class="control-label" for="name">Name</label>
-                                                   <input class="form-control" id="name" name="name" type="text" required>
+                                                   <input class="form-control" id="name" name="tcName" type="text" ng-model="tcName" ng-change="tcNameChg()" required>
+                                                   <div ng-messages="tcForm.tcName" ng-if=" vtcNameShow || (tcForm.tcName.$touched && tcForm.tcName.$invalid)">
+                                                       <p ng-message="required" style="color:red;">Name is required.</p>
+                                                   </div>
                                                </div>
                                                <div class="form-group">
                                                    <div class="row">
-                                                       <div class="col-sm-5">
+                                                       <div class="col-sm-5" ng-class="{ 'has-error': vtcOccupationShow || (tcForm.tcOccupation.$touched && tcForm.tcOccupation.$invalid) }">
                                                            <label class="control-label" for="occupation">Occupation</label>
-                                                           <input class="form-control" id="occupation" name="occupation" type="text" list="occupations" placeholder="choose..." />
-                                                           <datalist id="occupations">
-                                                               <option>occupation 1</option>
-                                                               <option>occupation 2</option>
-                                                               <option>occupation 3</option>
-                                                           </datalist>
+                                                           <select class="form-control" id="occupation" ng-model="tcOccupation" ng-options="occ as occ for occ in occupations" ng-change="tcOccupationChg()" required></select>
+                                                           <div ng-messages="tcForm.tcOccupation.$error" ng-if=" vtcOccupationShow || (tcForm.tcOccupation.$touched && tcForm.tcOccupation.$invalid)">
+                                                               <p ng-message="required" style="color:red;">Occupation is required.</p>
+                                                           </div>
                                                        </div>
                                                        <div class="col-sm-2"></div>
                                                        <div class="col-sm-5"></div>
@@ -483,58 +526,38 @@
                                                <div class="form-group">
                                                    <label class="control-label" for="dates_completion">Date</label>
                                                    <div class="row">
-                                                       <div class="col-sm-5">
-                                                           <input class="form-control" id="fMonth" name="fMonth" type="text" list="months" placeholder="Month" />
-                                                           <datalist id="months">
-                                                               <option>January</option>
-                                                               <option>February</option>
-                                                               <option>March</option>
-                                                               <option>April</option>
-                                                               <option>May</option>
-                                                               <option>June</option>
-                                                               <option>July</option>
-                                                               <option>August</option>
-                                                               <option>September</option>
-                                                               <option>September</option>
-                                                               <option>November</option>
-                                                               <option>December</option>
-                                                           </datalist>
+                                                       <div class="col-sm-5" ng-class="{ 'has-error': vtcFromMonthShow || (tcForm.tcFromMonth.$touched && tcForm.tcFromMonth.$invalid) }">                                                           
+                                                           <select class="form-control" id="fMonth" ng-model="tcFromMonth" ng-options="month as month.name for month in months track by month.value" ng-click="tcFromMonthChg()" ng-change="tcFromMonthChg()" required><option value="" disabled selected>Month</option></select>
+                                                           <div ng-messages="tcForm.tcFromMonth.$error" ng-if=" vtcFromMonthShow || (tcForm.tcFromMonth.$touched && tcForm.tcFromMonth.$invalid)">
+                                                               <p ng-message="required" style="color:red;">Month is required.</p>
+                                                           </div>
                                                        </div>
                                                        <div class="col-sm-2"></div>
-                                                       <div class="col-sm-5">
-                                                           <input class="form-control" id="fYear" name="fYear" type="text" list="years" placeholder="Year" />
-                                                           <datalist id="years">
-                                                               <option>2005</option>
-                                                               <option>2006</option>
-                                                               <option>2007</option>
-                                                               <option>2008</option>
-                                                               <option>2009</option>
-                                                               <option>2010</option>
-                                                               <option>2012</option>
-                                                               <option>2013</option>
-                                                               <option>2014</option>
-                                                               <option>2015</option>
-                                                               <option>2016</option>
-                                                               <option>2017</option>
-                                                           </datalist>
-
+                                                       <div class="col-sm-5" ng-class="{ 'has-error': vtcFromYearShow || (tcForm.tcFromYear.$touched && tcForm.tcFromYear.$invalid) }">
+                                                           <select class="form-control" id="fDate" ng-model="tcFromYear" ng-options="opt as opt for opt in dates" ng-click="tcFromYearChg()" ng-change="tcFromYearChg()" required><option value="" disabled selected>Year</option></select>
+                                                           <div ng-messages="tcForm.tcFromYear.$error" ng-if=" vtcFromYearShow || (tcForm.tcFromYear.$touched && tcForm.tcFromYear.$invalid)">
+                                                               <p ng-message="required" style="color:red;">Year is required.</p>
+                                                           </div>
                                                        </div>
                                                    </div>
                                                </div>
-                                               <div class="form-group">
+                                               <div class="form-group" ng-class="{ 'has-error': vtcScoreShow || (tcForm.tcScore.$touched && tcForm.tcScore.$invalid) }">
                                                    <label class="control-label" for="score">Score</label>
-                                                   <input class="form-control" id="score" name="score" type="text" required>
+                                                   <input class="form-control" id="score" name="tcScore" type="text" ng-model="tcScore" ng-change="tcScoreChg()" required>
+                                                   <div ng-messages="tcForm.tcScore" ng-if=" vtcScoreShow || (tcForm.tcScore.$touched && tcForm.tcScore.$invalid)">
+                                                       <p ng-message="required" style="color:red;">Score is required.</p>
+                                                   </div>
                                                </div>
                                                <div class="form-group">
                                                    <label class="control-label" for="description">Description (optional)</label>
-                                                   <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+                                                   <textarea class="form-control" rows="5" id="description" name="description" ng-model="tcDesc"></textarea>
                                                </div>
 
                                            </form>
                                        </div>
                                        <div class="modal-footer m-footer-c">
-                                           <button type="button" class="btn btn-save-c">Save</button>
-                                           <button type="button" class="btn btn-save-more-c">Save And Add More</button>
+                                           <button type="button" class="btn btn-save-c" ng-click="saveTestScores()">Save</button>
+                                           <button type="button" class="btn btn-save-more-c" ng-click="saveTestScoresMore()">Save And Add More</button>
                                            <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
                                        </div>
                                    </div>
