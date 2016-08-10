@@ -152,7 +152,7 @@ func (test *AccountTest) saveNew(session *util.Session) error {
 
   query :=
     "INSERT INTO AccountTest " +
-    "(Title, OccupationID, Month, Year, Score, Description, accountID) " +
+    "(Name, OccupationID, Month, Year, Score, Description, accountID) " +
     "VALUES($1, $2, $3, $4, $5, $6) " +
     "returning ID"
 
