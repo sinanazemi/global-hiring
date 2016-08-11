@@ -335,10 +335,10 @@
                                            </span>
                                        </p>
                                    </div>
-                                   <p>
+                                   <!--<p>
                                        1 in 5 managers hired someone because of their
                                        volunteer experiences
-                                   </p>
+                                   </p>-->
                                </div>
                            </div>
                            <!-- Modal Volunteering Experience -->
@@ -477,18 +477,18 @@
                                            <span class="scores-txt-c" ng-style="tcHoverStyle">
                                                {{x.name}} | {{x.occupation.name}} | {{x.score}}
                                            </span>
-                                           &nbsp;<a href="#" class="a-btn-c edit-scores-c" data-toggle="modal" data-target="#addScores" ng-click="editTestScores(x)" ng-show="popoverRemove" ng-style="tcHoverStyle">
+                                           &nbsp;<a href="#" class="a-btn-c edit-scores-c" data-toggle="modal" data-target="#addScores" ng-click="editTestScore(x)" ng-show="popoverRemove" ng-style="tcHoverStyle">
                                                <span class="glyphicon glyphicon-pencil"></span>
                                            </a>
-                                           &nbsp;<a href="#" class=" a-btn-c delete-scores-c" ng-click="deleteTestScores(x)" ng-show="popoverRemove" ng-style="tcHoverStyle">
+                                           &nbsp;<a href="#" class=" a-btn-c delete-scores-c" ng-click="deleteTestScore(x)" ng-show="popoverRemove" ng-style="tcHoverStyle">
                                                <span class="glyphicon glyphicon-trash"></span>
                                            </a>
                                        </h5>
                                        <span class="scores-txt-c" ng-style="tcHoverStyle" ng-mouseleave="tcMouseLeave(this)" ng-mouseover="tcMouseOver(this)">
-                                           {{x.month}} - {{x.year}}
+                                           {{x.month.name}} - {{x.year}}
                                        </span>
                                    </div>
-                                   <p>No items to display. Here’s another way to show your accomplishments </p>
+                                   <!--<p>No items to display. Here’s another way to show your accomplishments </p>-->
                                </div>
                            </div>
                            <!-- Modal Test Scores -->
@@ -514,7 +514,7 @@
                                                    <div class="row">
                                                        <div class="col-sm-5" ng-class="{ 'has-error': vtcOccupationShow || (tcForm.tcOccupation.$touched && tcForm.tcOccupation.$invalid) }">
                                                            <label class="control-label" for="occupation">Occupation</label>
-                                                           <select class="form-control" id="occupation" ng-model="tcOccupation" ng-options="occ as occ for occ in occupations" ng-change="tcOccupationChg()" required></select>
+                                                           <select class="form-control" id="occupation" ng-model="tcOccupation" ng-options="ocu.name for ocu in occupations track by ocu.id" ng-change="tcOccupationChg()" required></select>
                                                            <div ng-messages="tcForm.tcOccupation.$error" ng-if=" vtcOccupationShow || (tcForm.tcOccupation.$touched && tcForm.tcOccupation.$invalid)">
                                                                <p ng-message="required" style="color:red;">Occupation is required.</p>
                                                            </div>
@@ -543,7 +543,7 @@
                                                </div>
                                                <div class="form-group" ng-class="{ 'has-error': vtcScoreShow || (tcForm.tcScore.$touched && tcForm.tcScore.$invalid) }">
                                                    <label class="control-label" for="score">Score</label>
-                                                   <input class="form-control" id="score" name="tcScore" type="text" ng-model="tcScore" ng-change="tcScoreChg()" required>
+                                                   <input class="form-control" id="score" name="tcScore" type="number" ng-model="tcScore" ng-change="tcScoreChg()" required>
                                                    <div ng-messages="tcForm.tcScore" ng-if=" vtcScoreShow || (tcForm.tcScore.$touched && tcForm.tcScore.$invalid)">
                                                        <p ng-message="required" style="color:red;">Score is required.</p>
                                                    </div>
@@ -570,99 +570,74 @@
                                <div class="panel-body">
                                    <h4>
                                        Projects
-                                       &nbsp;<a class="btn-add-c add-projects-c" data-toggle="modal" data-target="#addProjects"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                                       &nbsp;<a class="btn-add-c add-projects-c" data-toggle="modal" data-target="#addProjects" ng-click="cleanPrjInputs()"><span class=" glyphicon glyphicon-plus-sign"></span></a>
                                    </h4>
-                                   <h5>
-                                       <span class="projects-txt-c"></span>
-                                       &nbsp;<a href="#" class="a-btn-c btn-edit-c edit-projects-c" data-toggle="modal" data-target="#addHistory">
-                                           <span class="glyphicon glyphicon-pencil"></span>
-                                       </a>
-                                       &nbsp;<a href="#" class=" a-btn-c btn-delete-c delete-projects-c">
-                                           <span class="glyphicon glyphicon-trash"></span>
-                                       </a>
-                                   </h5>
-                                   <p>
-                                       <span class="projects-txt-c">
-                                           No items to display. This helps show your skills, experience, and people
-                                           you’ve worked with
-                                       </span>
-                                   </p>
+                                   <div ng-repeat="x in account.projects" ng-mouseleave="prjMouseLeave(this)" ng-mouseover="prjMouseOver(this)">
+                                       <h5>
+                                           <span class="projects-txt-c" ng-style="prjHoverStyle">
+                                               {{x.name}}
+                                           </span>
+                                           &nbsp;<a href="#" class="a-btn-c edit-projects-c" data-toggle="modal" data-target="#addProjects" ng-click="editProject(x)" ng-show="popoverRemove" ng-style="prjHoverStyle">
+                                               <span class="glyphicon glyphicon-pencil"></span>
+                                           </a>
+                                           &nbsp;<a href="#" class=" a-btn-c delete-projects-c" ng-click="deleteProject(x)" ng-show="popoverRemove" ng-style="prjHoverStyle">
+                                               <span class="glyphicon glyphicon-trash"></span>
+                                           </a>
+                                       </h5>
+                                       <p>
+                                           <span class="projects-txt-c" ng-style="prjHoverStyle" ng-mouseleave="prjMouseLeave(this)" ng-mouseover="prjMouseOver(this)">
+                                               {{x.year}} - {{x.month.name}}
+                                           </span>
+                                       </p>
+                                   </div>
                                </div>
                            </div>
                            <!-- Modal Projects -->
                            <div id="addProjects" class="modal fade" role="dialog">
-                               <div class="modal-dialog modal-c">
+                               <div class="modal-dialog">
 
                                    <!-- Modal content-->
-                                   <div class="modal-content">
+                                   <div class="modal-content modal-c">
                                        <div class="modal-header modal-h-c">
                                            <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
                                            <h4 class="modal-title m-title-c">My Project</h4>
                                        </div>
                                        <div class="modal-body modal-b-c">
-                                           <form role="form">
-                                               <div class="form-group form-g-c">
+                                           <form role="form" name="prjForm">
+                                               <div class="form-group form-g-c" ng-class="{ 'has-error': vprjNameShow || (prjForm.prjName.$touched && prjForm.prjName.$invalid) }">
                                                    <label class="control-label" for="name">Name</label>
-                                                   <input class="form-control" id="name" name="name" type="text" required>
+                                                   <input class="form-control" id="name" name="prjName" type="text" ng-model="prjName" ng-change="prjNameChg()" required>
+                                                   <div ng-messages="prjForm.prjName" ng-if=" vprjNameShow || (prjForm.prjName.$touched && prjForm.prjName.$invalid)">
+                                                       <p ng-message="required" style="color:red;">Name is required.</p>
+                                                   </div>
                                                </div>
-                                               <div class="form-group">
+                                               <div class="form-group" ng-class="{ 'has-error': vprjOccupationShow || (prjForm.prjOccupation.$touched && prjForm.prjOccupation.$invalid) }">
                                                    <label class="control-label" for="occupation">Occupation</label>
-                                                   <input class="form-control" id="occupation" name="occupation" type="text" list="occupations" placeholder="choose..." />
-                                                   <datalist id="occupations">
-                                                       <option>occupation 1</option>
-                                                       <option>occupation 2</option>
-                                                       <option>occupation 3</option>
-                                                   </datalist>
+                                                   <select class="form-control" id="occupation" ng-model="prjOccupation" ng-options="ocu.name for ocu in occupations track by ocu.id" ng-change="prjOccupationChg()" required></select>
+                                                   <div ng-messages="prjForm.prjOccupation.$error" ng-if=" vprjOccupationShow || (prjForm.prjOccupation.$touched && prjForm.prjOccupation.$invalid)">
+                                                       <p ng-message="required" style="color:red;">Occupation is required.</p>
+                                                   </div>
                                                </div>
                                                <div class="form-group">
                                                    <label class="control-label" for="dates_completion">Completion Date (optional)</label>
                                                    <div class="row">
                                                        <div class="col-sm-5">
-                                                           <input class="form-control" id="fMonth" name="fMonth" type="text" list="months" placeholder="Month" />
-                                                           <datalist id="months">
-                                                               <option>January</option>
-                                                               <option>February</option>
-                                                               <option>March</option>
-                                                               <option>April</option>
-                                                               <option>May</option>
-                                                               <option>June</option>
-                                                               <option>July</option>
-                                                               <option>August</option>
-                                                               <option>September</option>
-                                                               <option>September</option>
-                                                               <option>November</option>
-                                                               <option>December</option>
-                                                           </datalist>
+                                                           <select class="form-control" id="fMonth" ng-model="prjMonth" ng-options="month as month.name for month in months track by month.value"><option value="" disabled selected>Month</option></select>
                                                        </div>
                                                        <div class="col-sm-2"></div>
                                                        <div class="col-sm-5">
-                                                           <input class="form-control" id="fYear" name="fYear" type="text" list="years" placeholder="Year" />
-                                                           <datalist id="years">
-                                                               <option>2005</option>
-                                                               <option>2006</option>
-                                                               <option>2007</option>
-                                                               <option>2008</option>
-                                                               <option>2009</option>
-                                                               <option>2010</option>
-                                                               <option>2012</option>
-                                                               <option>2013</option>
-                                                               <option>2014</option>
-                                                               <option>2015</option>
-                                                               <option>2016</option>
-                                                               <option>2017</option>
-                                                           </datalist>
-
+                                                           <select class="form-control" id="fDate" ng-model="prjYear" ng-options="opt as opt for opt in dates"><option value="" disabled selected>Year</option></select>
                                                        </div>
                                                    </div>
                                                </div>
                                                <div class="form-group">
                                                    <label class="control-label" for="url">Project URL</label>
-                                                   <input class="form-control" id="url" name="url" type="text" required>
+                                                   <input class="form-control" id="url" name="prjUrl" ng-model="prjUrl" type="text">
                                                </div>
 
                                                <div class="form-group">
                                                    <label class="control-label" for="description">Description (optional)</label>
-                                                   <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+                                                   <textarea class="form-control" rows="5" id="description" name="prjDesc" ng-model="prjDesc"></textarea>
                                                </div>
                                                <div class="form-group">
                                                    <div class="row">
@@ -683,8 +658,8 @@
                                            </form>
                                        </div>
                                        <div class="modal-footer m-footer-c">
-                                           <button type="button" class="btn btn-save-c">Save</button>
-                                           <button type="button" class="btn btn-save-more-c">Save And Add More</button>
+                                           <button type="button" class="btn btn-save-c" ng-click="saveProjects()">Save</button>
+                                           <button type="button" class="btn btn-save-more-c" ng-click="saveProjectsMore()">Save And Add More</button>
                                            <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
                                        </div>
                                    </div>
@@ -697,18 +672,26 @@
                                <div class="panel-body">
                                    <h4>
                                        Honors & Awards
-                                       &nbsp;<a class="btn-add-c add-awards-c" data-toggle="modal" data-target="#addAwards"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                                       &nbsp;<a class="btn-add-c add-awards-c" data-toggle="modal" data-target="#addAwards" ng-click="cleanHaInputs()"><span class="glyphicon glyphicon-plus-sign"></span></a>
                                    </h4>
-                                   <h5>
-                                       <span class="awards-txt-c"></span>
-                                       &nbsp;<a href="#" class="a-btn-c btn-edit-c edit-awards-c" data-toggle="modal" data-target="#addHistory">
-                                           <span class="glyphicon glyphicon-pencil"></span>
-                                       </a>
-                                       &nbsp;<a href="#" class=" a-btn-c btn-delete-c delete-awards-c">
-                                           <span class="glyphicon glyphicon-trash"></span>
-                                       </a>
-                                   </h5>
-                                   <p><span class="awards-txt-c">No items to display. Show the recognition you’ve earned.</span></p>
+                                   <div ng-repeat="x in account.honors" ng-mouseleave="haMouseLeave(this)" ng-mouseover="haMouseOver(this)">
+                                       <h5>
+                                           <span class="awards-txt-c" ng-style="haHoverStyle">
+                                               {{x.title}} | {{x.occupation.name}}
+                                           </span>
+                                           &nbsp;<a href="#" class="a-btn-c edit-awards-c" data-toggle="modal" data-target="#addAwards" ng-click="editAward(x)" ng-show="popoverRemove" ng-style="haHoverStyle">
+                                               <span class="glyphicon glyphicon-pencil"></span>
+                                           </a>
+                                           &nbsp;<a href="#" class=" a-btn-c delete-awards-c" ng-click="deleteAward(x)" ng-show="popoverRemove" ng-style="haHoverStyle">
+                                               <span class="glyphicon glyphicon-trash"></span>
+                                           </a>
+                                       </h5>
+                                       <p>
+                                           <span class="awards-txt-c" ng-style="haHoverStyle" ng-mouseleave="haMouseLeave(this)" ng-mouseover="haMouseOver(this)">
+                                               {{x.year}} - {{x.month.name}}
+                                           </span>
+                                       </p>
+                                   </div>
                                </div>
                            </div>
                            <!-- Modal Honors & Awards -->
@@ -722,21 +705,22 @@
                                            <h4 class="modal-title m-title-c">Honors & Awards</h4>
                                        </div>
                                        <div class="modal-body modal-b-c">
-                                           <form role="form">
-                                               <div class="form-group form-g-c">
+                                           <form role="form" name="haForm">
+                                               <div class="form-group form-g-c" ng-class="{ 'has-error': vhaTitleShow || (haForm.haTitle.$touched && haForm.haTitle.$invalid) }">
                                                    <label class="control-label" for="title">Title</label>
-                                                   <input class="form-control" id="title" name="title" type="text" required>
+                                                   <input class="form-control" id="title" name="haTitle" type="text" ng-model="haTitle" ng-change="haTitleChg()" required>
+                                                   <div ng-messages="haForm.haTitle" ng-if=" vhaTitleShow || (haForm.haTitle.$touched && haForm.haTitle.$invalid)">
+                                                       <p ng-message="required" style="color:red;">Title is required.</p>
+                                                   </div>
                                                </div>
                                                <div class="form-group">
                                                    <div class="row">
-                                                       <div class="col-sm-5">
+                                                       <div class="col-sm-5" ng-class="{ 'has-error': vhaOccupationShow || (haForm.haOccupation.$touched && haForm.haOccupation.$invalid) }">
                                                            <label class="control-label" for="occupation">Occupation</label>
-                                                           <input class="form-control" id="occupation" name="occupation" type="text" list="occupations" placeholder="choose..." />
-                                                           <datalist id="occupations">
-                                                               <option>occupation 1</option>
-                                                               <option>occupation 2</option>
-                                                               <option>occupation 3</option>
-                                                           </datalist>
+                                                           <select class="form-control" id="occupation" ng-model="haOccupation" ng-options="ocu.name for ocu in occupations track by ocu.id" ng-change="haOccupationChg()" required></select>
+                                                           <div ng-messages="haForm.haOccupation.$error" ng-if=" vhaOccupationShow || (haForm.haOccupation.$touched && haForm.haOccupation.$invalid)">
+                                                               <p ng-message="required" style="color:red;">Occupation is required.</p>
+                                                           </div>
                                                        </div>
                                                        <div class="col-sm-2"></div>
                                                        <div class="col-sm-5"></div>
@@ -745,55 +729,31 @@
                                                <div class="form-group">
                                                    <label class="control-label" for="dates_completion">Date</label>
                                                    <div class="row">
-                                                       <div class="col-sm-5">
-                                                           <input class="form-control" id="fMonth" name="fMonth" type="text" list="months" placeholder="Month" />
-                                                           <datalist id="months">
-                                                               <option>January</option>
-                                                               <option>February</option>
-                                                               <option>March</option>
-                                                               <option>April</option>
-                                                               <option>May</option>
-                                                               <option>June</option>
-                                                               <option>July</option>
-                                                               <option>August</option>
-                                                               <option>September</option>
-                                                               <option>September</option>
-                                                               <option>November</option>
-                                                               <option>December</option>
-                                                           </datalist>
+                                                       <div class="col-sm-5" ng-class="{ 'has-error': vhaMonthShow || (haForm.haMonth.$touched && haForm.haMonth.$invalid) }">
+                                                           <select class="form-control" id="month" ng-model="haMonth" ng-options="month as month.name for month in months track by month.value" ng-click="haMonthChg()" ng-change="haMonthChg()" required><option value="" disabled selected>Month</option></select>
+                                                           <div ng-messages="haForm.haMonth.$error" ng-if=" vhaMonthShow || (haForm.haMonth.$touched && haForm.haMonth.$invalid)">
+                                                               <p ng-message="required" style="color:red;">Month is required.</p>
+                                                           </div>
                                                        </div>
                                                        <div class="col-sm-2"></div>
-                                                       <div class="col-sm-5">
-                                                           <input class="form-control" id="fYear" name="fYear" type="text" list="years" placeholder="Year" />
-                                                           <datalist id="years">
-                                                               <option>2005</option>
-                                                               <option>2006</option>
-                                                               <option>2007</option>
-                                                               <option>2008</option>
-                                                               <option>2009</option>
-                                                               <option>2010</option>
-                                                               <option>2012</option>
-                                                               <option>2013</option>
-                                                               <option>2014</option>
-                                                               <option>2015</option>
-                                                               <option>2016</option>
-                                                               <option>2017</option>
-                                                           </datalist>
-
+                                                       <div class="col-sm-5" ng-class="{ 'has-error': vhaYearShow || (haForm.haYear.$touched && haForm.haYear.$invalid) }">
+                                                           <select class="form-control" id="date" ng-model="haYear" ng-options="opt as opt for opt in dates" ng-click="haYearChg()" ng-change="haYearChg()" required><option value="" disabled selected>Year</option></select>
+                                                           <div ng-messages="haForm.haYear.$error" ng-if=" vhaYearShow || (haForm.haYear.$touched && haForm.haYear.$invalid)">
+                                                               <p ng-message="required" style="color:red;">Year is required.</p>
+                                                           </div>
                                                        </div>
                                                    </div>
                                                </div>
-
                                                <div class="form-group">
                                                    <label class="control-label" for="description">Description (optional)</label>
-                                                   <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+                                                   <textarea class="form-control" rows="5" id="description" name="haDesc" ng-model="haDesc"></textarea>
                                                </div>
 
                                            </form>
                                        </div>
                                        <div class="modal-footer m-footer-c">
-                                           <button type="button" class="btn btn-save-c">Save</button>
-                                           <button type="button" class="btn btn-save-more-c">Save And Add More</button>
+                                           <button type="button" class="btn btn-save-c" ng-click="saveAwards()">Save</button>
+                                           <button type="button" class="btn btn-save-more-c" ng-click="saveAwardsMore()">Save And Add More</button>
                                            <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
                                        </div>
                                    </div>
@@ -806,23 +766,25 @@
                                <div class="panel-body">
                                    <h4>
                                        Courses
-                                       &nbsp;<a class="btn-add-c add-courses-c" data-toggle="modal" data-target="#addCourses"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                                       &nbsp;<a class="btn-add-c add-courses-c" data-toggle="modal" data-target="#addCourses" ng-click="cleanCrInputs()"><span class="glyphicon glyphicon-plus-sign"></span></a>
                                    </h4>
-                                   <h5>
-                                       <span class="courses-txt-c"></span>
-                                       &nbsp;<a href="#" class="a-btn-c btn-edit-c edit-courses-c" data-toggle="modal" data-target="#addHistory">
-                                           <span class="glyphicon glyphicon-pencil"></span>
-                                       </a>
-                                       &nbsp;<a href="#" class=" a-btn-c btn-delete-c delete-courses-c">
-                                           <span class="glyphicon glyphicon-trash"></span>
-                                       </a>
-                                   </h5>
-                                   <p>
-                                       <span class="courses-txt-c">
-                                           No items to display. Showing more information about your background will
-                                           help you get found for more opportunities.
-                                       </span>
-                                   </p>
+                                   <div ng-repeat="x in account.courses" ng-mouseleave="crMouseLeave(this)" ng-mouseover="crMouseOver(this)">
+                                       <h5>
+                                           <span class="courses-txt-c" ng-style="crHoverStyle">
+                                               {{x.name}} | {{x.occupation.name}} | {{x.number}}
+                                           </span>
+                                           &nbsp;<a href="#" class="a-btn-c edit-courses-c" data-toggle="modal" data-target="#addCourses" ng-click="editCourse(x)" ng-show="popoverRemove" ng-style="crHoverStyle">
+    <span class="glyphicon glyphicon-pencil"></span>
+</a>
+                                           &nbsp;<a href="#" class=" a-btn-c delete-courses-c" ng-click="deleteCourse(x)" ng-show="popoverRemove" ng-style="crHoverStyle">
+    <span class="glyphicon glyphicon-trash"></span>
+</a>
+                                       </h5>
+                                       <!--<p>
+                                           <span class="courses-txt-c">
+                                           </span>
+                                       </p>-->
+                                   </div>
                                </div>
                            </div>
                            <!-- Modal Add Courses -->
@@ -836,43 +798,45 @@
                                            <h4 class="modal-title m-title-c">Courses</h4>
                                        </div>
                                        <div class="modal-body modal-b-c">
-                                           <form role="form">
-                                               <div class="form-group form-g-c">
+                                           <form role="form" name="crForm">
+                                               <div class="form-group form-g-c" ng-class="{ 'has-error': vcrNameShow || (crForm.crName.$touched && crForm.crName.$invalid) }">
                                                    <label class="control-label" for="name">Course Name</label>
-                                                   <input class="form-control" id="name" name="name" type="text" required>
+                                                   <input class="form-control" id="name" name="name" type="text" ng-model="crName" ng-change="crNameChg()" required>
+                                                   <div ng-messages="crForm.crName" ng-if=" vcrNameShow || (crForm.crName.$touched && crForm.crName.$invalid)">
+                                                       <p ng-message="required" style="color:red;">Name is required.</p>
+                                                   </div>
                                                </div>
                                                <div class="form-group">
                                                    <div class="row">
-                                                       <div class="col-sm-5">
+                                                       <div class="col-sm-5" ng-class="{ 'has-error': vcrOccupationShow || (crForm.crOccupation.$touched && crForm.crOccupation.$invalid) }">
                                                            <label class="control-label" for="occupation">Occupation</label>
-                                                           <input class="form-control" id="occupation" name="occupation" type="text" list="occupations" placeholder="choose..." />
-                                                           <datalist id="occupations">
-                                                               <option>occupation 1</option>
-                                                               <option>occupation 2</option>
-                                                               <option>occupation 3</option>
-                                                           </datalist>
+                                                           <select class="form-control" id="occupation" ng-model="crOccupation" ng-options="ocu.name for ocu in occupations track by ocu.id" ng-change="crOccupationChg()" required><option value="" disabled selected>Choose...</option></select>
+                                                           <div ng-messages="crForm.crOccupation.$error" ng-if=" vcrOccupationShow || (crForm.crOccupation.$touched && crForm.crOccupation.$invalid)">
+                                                               <p ng-message="required" style="color:red;">Occupation is required.</p>
+                                                           </div>
                                                        </div>
                                                        <div class="col-sm-2"></div>
                                                        <div class="col-sm-5">
                                                            <div class="form-group">
                                                                <label class="control-label" for="number">Number</label>
-                                                               <input class="form-control" id="number" name="number" type="text" required>
+                                                               <input class="form-control" id="number" name="crNumber" type="text" ng-model="crNumber" ng-change="crNumberChg()" required>
+                                                               <div ng-messages="crForm.crNumber" ng-if=" vcrNumberShow || (crForm.crNumber.$touched && crForm.crNumber.$invalid)">
+                                                                   <p ng-message="required" style="color:red;">Number is required.</p>
+                                                               </div>
                                                            </div>
                                                        </div>
                                                    </div>
                                                </div>
-
-
                                                <div class="form-group">
                                                    <label class="control-label" for="description">Description (optional)</label>
-                                                   <textarea class="form-control" rows="5" id="description" name="description"></textarea>
+                                                   <textarea class="form-control" rows="5" id="description" name="crDesc" ng-model="crDesc"></textarea>
                                                </div>
 
                                            </form>
                                        </div>
                                        <div class="modal-footer m-footer-c">
-                                           <button type="button" class="btn btn-save-c">Save</button>
-                                           <button type="button" class="btn btn-save-more-c">Save And Add More</button>
+                                           <button type="button" class="btn btn-save-c" ng-click="saveCourses()">Save</button>
+                                           <button type="button" class="btn btn-save-more-c" ng-click="saveCoursesMore()">Save And Add More</button>
                                            <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
                                        </div>
                                    </div>
