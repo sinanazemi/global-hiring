@@ -54,6 +54,16 @@ myapp.controller("controller",
               $scope.occupations = data;
           } // function(data)
         )
+
+        function checkInvDate(fMonth, fYear, tMonth, tYear) {
+            if (tYear < fYear)
+                return true;
+            if (tYear == fYear)
+                if (tMonth < fMonth)
+                    return true;
+
+            return false;
+        }
         //**************************
         // Work History
         //*************************
@@ -224,28 +234,41 @@ myapp.controller("controller",
         $scope.whFromMonthChg = function () {
             if ($scope.whFromMonth == "")
                 $scope.vwhFromMonthShow = true;
-            else
-            $scope.vwhFromMonthShow = false;
+            else {
+                $scope.vwhFromMonthShow = false;
+                if (!$scope.whCurrently && $scope.whToYear != "" && $scope.whToMonth != "")
+                    $scope.whInvalidDate = checkInvDate($scope.whFromMonth.value, $scope.whFromYear, $scope.whToMonth.value, $scope.whToYear);
+            }
         }
         $scope.whFromYearChg = function () {
             if ($scope.whFromYear == "")
                 $scope.vwhFromYearShow = true;
-            else
-            $scope.vwhFromYearShow = false;
+            else {
+                $scope.vwhFromYearShow = false;
+                if (!$scope.whCurrently && $scope.whToMonth != "" && $scope.whToYear != "")
+                    $scope.whInvalidDate = checkInvDate($scope.whFromMonth.value, $scope.whFromYear, $scope.whToMonth.value, $scope.whToYear);
+
+            }
         }
         $scope.whToMonthChg = function () {
             if ($scope.whToMonth == "")
                 $scope.vwhToMonthShow = true;
-            else
-            $scope.vwhToMonthShow = false;
+            else {
+                $scope.vwhToMonthShow = false;
+                if ($scope.whToYear != "")
+                $scope.whInvalidDate = checkInvDate($scope.whFromMonth.value, $scope.whFromYear, $scope.whToMonth.value, $scope.whToYear);
+            }
         }
         $scope.whToYearChg = function () {
             if ($scope.whToYear == "")
                 $scope.vwhToYearShow = true;
-            else
-            $scope.vwhToYearShow = false;
+            else {
+                $scope.vwhToYearShow = false;
+                if ($scope.whToMonth != "")
+                $scope.whInvalidDate = checkInvDate($scope.whFromMonth.value, $scope.whFromYear, $scope.whToMonth.value, $scope.whToYear);
+            }
         }
-
+        
 
         $scope.whCurrentlyChg = function () {
             if($scope.whCurrently)
@@ -546,14 +569,29 @@ myapp.controller("controller",
         $scope.volFromMonthChg = function () {
             if ($scope.volFromMonth == "")
                 $scope.vvolFromMonthShow = true;
-            else
+            else {
                 $scope.vvolFromMonthShow = false;
+                if ($scope.volToMonth !="" && $scope.volToYear != "")
+                    $scope.volInvalidDate = checkInvDate($scope.volFromMonth.value, $scope.volFromYear, $scope.volToMonth.value, $scope.volToYear);
+            }
         }
         $scope.volFromYearChg = function () {
             if ($scope.volFromYear == "")
                 $scope.vvolFromYearShow = true;
-            else
+            else {
                 $scope.vvolFromYearShow = false;
+                if ($scope.volToMonth != "" && $scope.volToYear != "")
+                    $scope.volInvalidDate = checkInvDate($scope.volFromMonth.value, $scope.volFromYear, $scope.volToMonth.value, $scope.volToYear);
+            }
+        }
+        $scope.volToMonthChg = function ()
+        {
+            if ($scope.volToMonth != "" && $scope.volToYear != "")
+                $scope.volInvalidDate = checkInvDate($scope.volFromMonth.value, $scope.volFromYear, $scope.volToMonth.value, $scope.volToYear);
+        }
+        $scope.volToYearChg = function () {
+            if ($scope.volToMonth != "" && $scope.volToYear != "")
+                $scope.volInvalidDate = checkInvDate($scope.volFromMonth.value, $scope.volFromYear, $scope.volToMonth.value, $scope.volToYear);
         }
 
 
@@ -624,7 +662,11 @@ myapp.controller("controller",
         }
 
         $scope.editTestScore = function (tc) {
-
+            occupations.query(
+            function (data) {
+                $scope.occupations = data;
+            } // function(data)
+            );
             $scope.tcId = tc.id;
             $scope.tcName = tc.name;
             $scope.tcOccupation = tc.occupation;
@@ -645,7 +687,12 @@ myapp.controller("controller",
         }
 
         function cleanScoresInputs() {
-            //isValid = true;
+            isValid = true;
+            occupations.query(
+            function (data) {
+              $scope.occupations = data;
+            } // function(data)
+            );
             $scope.tcForm.$setUntouched();
             $scope.vtcNameShow = false;
             $scope.vtcOccupationShow = false;
@@ -777,7 +824,11 @@ myapp.controller("controller",
         }
 
         $scope.editProject = function (prj) {
-
+            occupations.query(
+           function (data) {
+               $scope.occupations = data;
+           } // function(data)
+           );
             $scope.prjId = prj.id;
             $scope.prjName = prj.name;
             $scope.prjOccupation = prj.occupation;
@@ -798,6 +849,11 @@ myapp.controller("controller",
         }
 
         function cleanProjectsInputs() {
+            occupations.query(
+           function (data) {
+               $scope.occupations = data;
+           } // function(data)
+           );
             //isValid = true;
             $scope.prjForm.$setUntouched();
             $scope.vprjNameShow = false;
@@ -813,7 +869,7 @@ myapp.controller("controller",
         }
 
         $scope.cleanPrjInputs = function () {
-            cleanScoresInputs();
+            cleanProjectsInputs();
         }
 
         // ********** check validation ****************
@@ -896,7 +952,11 @@ myapp.controller("controller",
         }
 
         $scope.editAward = function (ha) {
-
+            occupations.query(
+            function (data) {
+                $scope.occupations = data;
+            } // function(data)
+            );
             $scope.haId = ha.id;
             $scope.haTitle = ha.title;
             $scope.haOccupation = ha.occupation;
@@ -916,7 +976,12 @@ myapp.controller("controller",
         }
 
         function cleanAwardsInputs() {
-            //isValid = true;
+            occupations.query(
+            function (data) {
+                $scope.occupations = data;
+            } // function(data)
+            );
+            isValid = true;
             $scope.haForm.$setUntouched();
             $scope.vhaTitleShow = false;
             $scope.vhaOccupationShow = false;
@@ -1035,7 +1100,11 @@ myapp.controller("controller",
         }
 
         $scope.editCourse = function (cr) {
-
+            occupations.query(
+            function (data) {
+                $scope.occupations = data;
+            } // function(data)
+            );
             $scope.crId = cr.id;
             $scope.crName = cr.name;
             $scope.crOccupation = cr.occupation;
@@ -1054,6 +1123,11 @@ myapp.controller("controller",
         }
 
         function cleanCoursesInputs() {
+            occupations.query(
+            function (data) {
+                $scope.occupations = data;
+            } // function(data)
+            );
             //isValid = true;
             $scope.crForm.$setUntouched();
             $scope.vcrNameShow = false;

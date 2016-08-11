@@ -1,6 +1,37 @@
 ﻿body {
     font-family: Helvetica;
 }
+
+/*-----------------------
+    navbar
+-----------------------*/
+.nav-container-c{
+    width:100%;
+    background-color: rgba(255,255,255,0.88);
+    /*opacity: 0.88;*/
+}
+.logo-img-c{
+    /*margin-top:-5px;*/
+    /*height:33.6px;
+    width:96.8px;*/
+    width:290px;
+}
+.nav-right-c{
+    margin-right:-60px;
+}
+
+.menu-mo-c{
+    display:none;
+}
+.acc_name-c{
+    margin-top: 10px;
+    color:#616161;
+    font-weight: bold;
+    font-size:16px;
+    letter-spacing:0.8px;  
+}
+
+
 .prf-nav-c{
     border-bottom:solid 0.5px #979797;
 }
@@ -114,48 +145,23 @@
 .btn-add-c, .btn-edit-c, .btn-delete-c{
     display:none;
 }
+
+
 /*-------------------------------
     History
     ------------------------------*/
-
 .panel-history-c h4:hover .add-history-c{
     color:#b8e986;
     display:inline;
 }
-/*.panel-history-c h5:hover .history-txt-c{
-    background-color:#b8e986;
-}*/
-/*.panel-history-c h5:hover .edit-history-c,.panel-history-c h5:hover .delete-history-c{
-    background-color:#b8e986;
-    color: black;
-    display:inline;
-}*/
-
-/*.panel-history-c p:hover .edit-history-c,.panel-history-c p:hover .delete-history-c{
-    background-color:#b8e986;
-    color: black;
-    display:inline;
-}*/
-/*.history-txt-c:hover{
-    background-color:#b8e986;
-}*/
 
 /*-------------------------------
     Education
     ------------------------------*/
-
 .panel-education-c h4:hover .add-education-c{
     color:#b8e986;
     display:inline;
 }
-/*.panel-education-c h5:hover .edit-education-c,.panel-education-c h5:hover .delete-education-c{
-    background-color:#b8e986;
-    color: black;
-    display:inline;
-}
-.education-txt-c:hover{
-    background-color:#b8e986;
-}*/
 
 /*-------------------------------
     Volunteering
@@ -164,14 +170,7 @@
     color:#b8e986;
     display:inline;
 }
-/*.panel-volunteering-c h5:hover .edit-volunteering-c,.panel-volunteering-c h5:hover .delete-volunteering-c{
-    background-color:#b8e986;
-    color: black;
-    display:inline;
-}
-.volunteering-txt-c:hover{
-    background-color:#b8e986;
-}*/
+
 
 /*-------------------------------
     Certifications
@@ -180,14 +179,7 @@
     color:#b8e986;
     display:inline;
 }
-/*.panel-certifications-c h5:hover .edit-certifications-c,.panel-certifications-c h5:hover .delete-certifications-c{
-    background-color:#b8e986;
-    color: black;
-    display:inline;
-}
-.certifications-txt-c:hover{
-    background-color:#b8e986;
-}*/
+
 
 /*-------------------------------
     Test Scores
@@ -196,14 +188,7 @@
     color:#b8e986;
     display:inline;
 }
-/*.panel-scores-c h5:hover .edit-scores-c,.panel-scores-c h5:hover .delete-scores-c{
-    background-color:#b8e986;
-    color: black;
-    display:inline;
-}
-.scores-txt-c:hover{
-    background-color:#b8e986;
-}*/
+
 
 /*-------------------------------
     Projects
@@ -212,14 +197,7 @@
     color:#b8e986;
     display:inline;
 }
-/*.panel-projects-c h5:hover .edit-projects-c,.panel-projects-c h5:hover .delete-projects-c{
-    background-color:#b8e986;
-    color: black;
-    display:inline;
-}
-.projects-txt-c:hover{
-    background-color:#b8e986;
-}*/
+
 /*---------- modal ------------*/
 .prj-tmb-txt-c {
     /*width: 291px;*/
@@ -239,6 +217,7 @@
         .prj-tmb-txt-c a span {
             color: #03ba6d;
         }
+
 /*-------------------------------
     Honors & Awards
     ------------------------------*/
@@ -246,14 +225,7 @@
     color:#b8e986;
     display:inline;
 }
-/*.panel-awards-c h5:hover .edit-awards-c,.panel-awards-c h5:hover .delete-awards-c{
-    background-color:#b8e986;
-    color: black;
-    display:inline;
-}
-.awards-txt-c:hover{
-    background-color:#b8e986;
-}*/
+
 
 /*-------------------------------
     Courses
@@ -262,14 +234,6 @@
     color:#b8e986;
     display:inline;
 }
-/*.panel-courses-c h5:hover .edit-courses-c,.panel-courses-c h5:hover .delete-courses-c{
-    background-color:#b8e986;
-    color: black;
-    display:inline;
-}
-.courses-txt-c:hover{
-    background-color:#b8e986;
-}*/
 
 
 /*---------------
@@ -371,7 +335,6 @@ input[type=checkbox]:checked+.custom-check::before {
 }
 
 
-
 /*-------  right info  ------------*/
 .prf-strength-img-c{
     height:65px;
@@ -408,3 +371,216 @@ input[type=checkbox]:checked+.custom-check::before {
         letter-spacing: 0.6px;
         color: #a1a1a7;
     }
+
+
+/*-----------------------
+    forth footer
+    -----------------------*/
+.container-footer-c{
+    position:relative;
+    width: auto;
+    height: 305px;
+    background-color: #d8d8d8;
+    border: solid 0.0px #979797;
+    text-align: left;
+    color: #818181;
+    margin-bottom:0px;
+}
+.container-footer-c h4{
+    /*padding-left:79px;*/
+    margin-top:77px;
+    font-weight: bold;
+    font-size:18px;
+}
+.f-section-c{
+    margin-top:-35px;
+}
+.f-section-c p{
+    margin-top: -8px;
+    font-size: 14px;
+    /*padding-left: 79px;*/
+    line-height: 2.1;
+    color: #818181;
+}
+
+.f-items-c{
+    text-decoration:none !important;
+    margin-top: -8px;
+    font-size: 14px;
+    /*padding-left: 79px;*/
+    line-height: 2.1;
+    color: #818181;
+}
+
+.f-copyright-c{
+    position: absolute;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    width: auto;
+    height: 41.3px;
+    background-color: #9b9b9b;
+    
+}
+    .f-copyright-c p{
+        /*position: absolute;*/
+        font-size: 12px;
+        color: #4a4a4a;
+        font-weight: 300;
+        line-height: 1.33;
+        padding-top: 14.3px;
+        left: 0px;
+        text-align:center;  
+        display:block;          
+        margin-left: auto;
+        margin-right: auto;  
+    }
+   
+@media screen and (max-width: 992px) {
+        /*-----------------------
+    navbar
+    -----------------------*/
+        .logo-img-c {
+            margin-top:4px;
+            width: 230px;
+            height: 28px;
+        }
+        .acc_name-c {
+            width: 41px;
+            height: 14px;
+            font-size: 12px;
+            letter-spacing: 0.6px;
+            margin-right: 31.4px;
+        }
+
+        /*-----------------------
+    forth footer
+    -----------------------*/
+        .container-footer-c{ 
+            height:185px;
+        }
+        .container-footer-c p{
+            font-size: 10.5px;
+        }
+        .container-footer-c h4{
+            margin-top: 50.4px;
+            /*padding-right: 59.1px;*/
+            font-size: 13.5px;
+            font-weight: bold;
+        }
+        .f-copyright-c p{
+            font-size: 9px;
+            /*padding-right: 59px;*/
+            /*margin-top: 15.3px;*/
+        }
+    }
+
+@media screen and (max-width: 767px) {
+   .container-fluid{
+        /*padding: inherit;*/
+        padding-left:0px;
+        padding-right:0px;
+        text-align: center;
+        /*margin-left: -50px;*/
+        /*background-color:orange;*/
+        
+    }
+        /*-----------------------
+        navbar
+        -----------------------*/
+        .nav-container-c{
+            /*background-color:lightblue;*/
+           /*position:relative;*/
+           height:50px;           
+           width:auto;
+           /*margin-right:50px;*/
+           /*align-content:center;*/
+       }
+        .logo-img-c {
+            position:absolute;
+            width: 75px;
+            height: 10px;
+            /*margin:auto;*/
+            /*margin-left:50%;
+            margin-right:50%;*/
+            right:50%;
+            left:50%;
+            margin-left:-20px;
+
+        }
+        #myNavbar{
+            display:none;
+        }
+        .menu-mo-c{
+            display:inline-block;
+        }
+        .small-profile-img-c{
+            position:absolute;
+            top:8px;
+            /*right:0px;*/
+            width:30px;
+            height:30px;
+        }
+        .acc_name-c{
+            position:absolute;
+            top:8px;
+            /*right:0px;*/
+            left:50px;
+            font-size: 10px;
+            letter-spacing: 0.5px;
+        }
+
+
+    .myProfile-cn-c {
+        text-align:center;        
+    margin-top:50px;
+    }
+        .panels-c{
+            width:100%;
+            margin-left:15px;
+            margin-right:15px;
+        }
+
+        .modal-c{
+    width:100%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+        .myProfile-cn-c h2{
+    padding:inherit;
+    font-size: 28px;
+    font-weight: normal;
+}
+        .strength-cnt-c hr{
+            width:100%;
+            margin-left:15px;
+            margin-right:15px;
+        }
+        /*-----------------------
+        forth footer
+        -----------------------*/
+        .f-section-c{
+            margin-bottom:20px;
+        }
+        .container-footer-c{    
+            position:relative;        
+            height:auto; 
+            text-align:center;        
+        }
+        .container_footer-c p{
+            font-size: 10.5px;
+        }
+        .container_footer-c h4{
+            /*margin-top: 50.4px;
+            padding-right: 59.1px;*/
+            font-size: 13.5px;
+            font-weight: bold;
+        }
+        .f-copyright-c p{
+            font-size: 9px;
+            text-align:center;
+            /*padding-right: 89px;*/
+            /*margin-top: 15.3px;*/
+        }
+} 

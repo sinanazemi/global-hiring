@@ -2,13 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>My Profile</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-resource.min.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <link href="Styles/CustomStyle.css" rel="stylesheet" />
+    <!--<link href="Styles/CustomStyle.css" rel="stylesheet" />-->
     <link href="Styles/Profile.css" rel="stylesheet" />
     <script src="Scripts/ProfileScript.js"></script>
     <!--<script src="Scripts/prfDirectives.js"></script>-->
@@ -33,24 +36,22 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <img class="small-profile-img-c img-circle" src="images/Chrysanthemum.jpg" /></li>
-                    <li><a href="#name" class="login-link-c">{{account.name}}<span class="glyphicon glyphicon-chevron-down pf_icon-c"></span></a></li>
+                    <li><a href="#name" class="acc_name-c">{{account.name}}<span class="glyphicon glyphicon-chevron-down pf_icon-c"></span></a></li>
 
                 </ul>
             </div>
             <div class="menu-mo-c">
-                <a href="#login" class="login-link-c">LOGIN</a>
-                <a href="#hiring" class="btn btn-hire-c" role="button">
-                    <div class="txt-hire-c">Hiring Manager?</div>
-                </a>
+                <img class="small-profile-img-c img-circle" src="images/Chrysanthemum.jpg" />
+                <a href="#login" class="acc_name-c">{{account.name}}</a>                
             </div>
         </div>
     </nav>
 
     <!-- My Profile -->
-    <div class="container-fluid myProfile-cn-c">
+           <div class="container-fluid myProfile-cn-c">
                <div>
                    <h2>My Profile</h2>
-                   <div class="row">
+                   <div class="row" style="max-width:100%;">
                        <div class="col-sm-9 panels-c">
 
                            <!-- Overview -->
@@ -133,7 +134,7 @@
                                                        <p ng-message="required" style="color:red;">Location is required.</p>
                                                    </div>
                                                </div>
-                                               <div class="form-group" >
+                                               <div class="form-group">
                                                    <div class="row">
                                                        <div class="col-sm-5" ng-class="{ 'has-error': vwhTitleShow || (whForm.whTitle.$touched && whForm.whTitle.$invalid) }">
                                                            <label class="control-label" for="title">Title</label>
@@ -166,7 +167,7 @@
                                                            <select class="form-control" id="fDate" ng-model="whFromYear" ng-options="opt as opt for opt in dates" ng-click="whFromYearChg()" ng-change="whFromYearChg()" required><option value="" disabled selected>Year</option></select>
                                                            <div ng-messages="whForm.whFromYear.$error" ng-if=" vwhFromYearShow || (whForm.whFromYear.$touched && whForm.whFromYear.$invalid)">
                                                                <p ng-message="required" style="color:red;">From year is required.</p>
-                                                           </div>
+                                                           </div>                                                          
                                                        </div>
                                                    </div>
                                                    <div class="row">
@@ -179,21 +180,21 @@
                                                            <select class="form-control" id="tMonth" ng-model="whToMonth" ng-options="month as month.name for month in months track by month.value" ng-hide="whCurrently" ng-click="whToMonthChg()" ng-change="whToMonthChg()" required><option value="" disabled selected>Month</option></select>
                                                            <div ng-messages="whForm.whToMonth.$error" ng-if=" vwhToMonthShow || (whForm.whToMonth.$touched && whForm.whToMonth.$invalid)">
                                                                <p ng-message="required" style="color:red;">To month is required or select "I currently work here".</p>
-                                                           </div>
+                                                           </div>                                                           
                                                        </div>
                                                        <div class="col-sm-2"></div>
                                                        <div class="col-sm-5" ng-class="{ 'has-error': vwhToYearShow || (whForm.whToYear.$touched && whForm.whToYear.$invalid) }">
                                                            <select class="form-control" id="tDate" ng-model="whToYear" ng-options="opt as opt for opt in dates" ng-hide="whCurrently" ng-click="whToYearChg()" ng-change="whToYearChg()" required><option value="" disabled selected>Year</option></select>
                                                            <div ng-messages="whForm.whToYear.$error" ng-if=" vwhToYearShow || (whForm.whToYear.$touched && whForm.whToYear.$invalid)">
                                                                <p ng-message="required" style="color:red;">To year is required or select "I currently work here".</p>
-                                                           </div>
-                                                       </div>
+                                                           </div>                                                           
+                                                       </div>                                                      
                                                    </div>
+                                                   <p ng-show="whInvalidDate" style="color:red;">to date is less than from date!</p>
                                                </div>
-
                                                <div class="form-group">
                                                    <div class="checkbox">
-                                                       <label class="control-label chk-lbl-c"><input type="checkbox" ng-model="whCurrently" ng-change="whCurrentlyChg()"><span class="custom-check"></span>&nbsp; I currently work here </label>
+                                                       <label class="control-label chk-lbl-c"><input type="checkbox" ng-init="false" ng-model="whCurrently" ng-change="whCurrentlyChg()"><span class="custom-check"></span>&nbsp; I currently work here </label>
                                                    </div>
                                                </div>
                                                <div class="form-group">
@@ -203,7 +204,7 @@
                                            </form>
                                        </div>
                                        <div class="modal-footer m-footer-c">
-                                           <button type="button" class="btn btn-save-c" ng-click="saveWorkHistory()" >Save</button>
+                                           <button type="button" class="btn btn-save-c" ng-click="saveWorkHistory()">Save</button>
                                            <button type="button" class="btn btn-save-more-c" ng-click="saveWorkHistoryMore()">Save And Add More</button>
                                            <button type="button" class="btn btn-cancel btn-cancel-c" ng-click="cleanWhInputs()" data-dismiss="modal" style="border:none;">Cancel</button>
                                        </div>
@@ -234,8 +235,9 @@
                                        </h5>
 
                                        <!--<p><span class="education-txt-c">2007 - 2012</span></p>-->
-                                       <p><span class="education-txt-c" ng-style="eduHoverStyle" ng-mouseleave="eduMouseLeave(this)" ng-mouseover="eduMouseOver(this)">
-                                           {{x.fromdate}} - {{x.todate}}
+                                       <p>
+                                           <span class="education-txt-c" ng-style="eduHoverStyle" ng-mouseleave="eduMouseLeave(this)" ng-mouseover="eduMouseOver(this)">
+                                               {{x.fromdate}} - {{x.todate}}
                                            </span>
                                        </p>
                                    </div>
@@ -336,9 +338,9 @@
                                        </p>
                                    </div>
                                    <!--<p>
-                                       1 in 5 managers hired someone because of their
-                                       volunteer experiences
-                                   </p>-->
+                                1 in 5 managers hired someone because of their
+                                volunteer experiences
+                            </p>-->
                                </div>
                            </div>
                            <!-- Modal Volunteering Experience -->
@@ -406,13 +408,14 @@
                                                    </div>
                                                    <div class="row">
                                                        <div class="col-sm-5">
-                                                           <select class="form-control" id="tMonth" ng-model="volToMonth" ng-options="month as month.name for month in months track by month.value"><option value="" disabled selected>Month</option></select>
+                                                           <select class="form-control" id="tMonth" ng-model="volToMonth" ng-options="month as month.name for month in months track by month.value" ng-click="volToMonthChg()" ng-change="volToMonthChg()"><option value="" disabled selected>Month</option></select>
                                                        </div>
                                                        <div class="col-sm-2"></div>
                                                        <div class="col-sm-5">
-                                                           <select class="form-control" id="tDate" ng-model="volToYear" ng-options="opt as opt for opt in dates"><option value="" disabled selected>Year</option></select>
+                                                           <select class="form-control" id="tDate" ng-model="volToYear" ng-options="opt as opt for opt in dates" ng-click="volToYearChg()" ng-change="volToYearChg()"><option value="" disabled selected>Year</option></select>
                                                        </div>
                                                    </div>
+                                                   <p ng-show="volInvalidDate" style="color:red;">to date is less than from date!</p>
                                                </div>
 
                                                <div class="form-group">
@@ -441,14 +444,14 @@
                                    </h4>
                                    <div>
                                        <!--<h5>
-                                                           <span class="certifications-txt-c" ng-style="crfHoverStyle"></span>
-                                                           &nbsp;<a href="#" class="a-btn-c edit-certifications-c" data-toggle="modal" data-target="#addHistory" ng-show="popoverRemove" ng-style="crfHoverStyle">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                </a>
-                                                           &nbsp;<a href="#" class=" a-btn-c delete-certifications-c" ng-show="popoverRemove" ng-style="crfHoverStyle">
-                    <span class="glyphicon glyphicon-trash"></span>
-                </a>
-                                                       </h5>-->
+                                                                           <span class="certifications-txt-c" ng-style="crfHoverStyle"></span>
+                                                                           &nbsp;<a href="#" class="a-btn-c edit-certifications-c" data-toggle="modal" data-target="#addHistory" ng-show="popoverRemove" ng-style="crfHoverStyle">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </a>
+                                                                           &nbsp;<a href="#" class=" a-btn-c delete-certifications-c" ng-show="popoverRemove" ng-style="crfHoverStyle">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                                                                       </h5>-->
                                        <p><span class="certifications-txt-c">No items to display.</span> </p>
                                    </div>
                                </div>
@@ -526,7 +529,7 @@
                                                <div class="form-group">
                                                    <label class="control-label" for="dates_completion">Date</label>
                                                    <div class="row">
-                                                       <div class="col-sm-5" ng-class="{ 'has-error': vtcFromMonthShow || (tcForm.tcFromMonth.$touched && tcForm.tcFromMonth.$invalid) }">                                                           
+                                                       <div class="col-sm-5" ng-class="{ 'has-error': vtcFromMonthShow || (tcForm.tcFromMonth.$touched && tcForm.tcFromMonth.$invalid) }">
                                                            <select class="form-control" id="fMonth" ng-model="tcFromMonth" ng-options="month as month.name for month in months track by month.value" ng-click="tcFromMonthChg()" ng-change="tcFromMonthChg()" required><option value="" disabled selected>Month</option></select>
                                                            <div ng-messages="tcForm.tcFromMonth.$error" ng-if=" vtcFromMonthShow || (tcForm.tcFromMonth.$touched && tcForm.tcFromMonth.$invalid)">
                                                                <p ng-message="required" style="color:red;">Month is required.</p>
@@ -774,16 +777,16 @@
                                                {{x.name}} | {{x.occupation.name}} | {{x.number}}
                                            </span>
                                            &nbsp;<a href="#" class="a-btn-c edit-courses-c" data-toggle="modal" data-target="#addCourses" ng-click="editCourse(x)" ng-show="popoverRemove" ng-style="crHoverStyle">
-    <span class="glyphicon glyphicon-pencil"></span>
-</a>
+                                               <span class="glyphicon glyphicon-pencil"></span>
+                                           </a>
                                            &nbsp;<a href="#" class=" a-btn-c delete-courses-c" ng-click="deleteCourse(x)" ng-show="popoverRemove" ng-style="crHoverStyle">
-    <span class="glyphicon glyphicon-trash"></span>
-</a>
+                                               <span class="glyphicon glyphicon-trash"></span>
+                                           </a>
                                        </h5>
                                        <!--<p>
-                                           <span class="courses-txt-c">
-                                           </span>
-                                       </p>-->
+                                    <span class="courses-txt-c">
+                                    </span>
+                                </p>-->
                                    </div>
                                </div>
                            </div>
@@ -868,40 +871,40 @@
 
     <!-- Footer -->
     <div class="container-fluid container-footer-c">
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <!-- Candidates -->
-                            <h4>CANDIDATES</h4>
-                            <div class="f-section-c">
-                                <p>
-                                    <br>HOW IT WORKS
-                                </p>
-                                <p>INVITE A FRIEND</p>
-                                <p>FAQ</p>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <!-- Employers -->
-                            <h4>EMPLOYERS</h4>
-                            <div class="f-section-c">
-                                <p>
-                                    <br>FOR EMPLOYERS
-                                </p>
-                                <p>FAQ</p>
-                            </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <!-- Global Hiring -->
-                            <h4>GLOBAL HIRING</h4>
-                            <div class="f-section-c">
-                                <p>
-                                    <br>ABOUT
-                                </p>
-                                <p>BLOG</p>
-                                <p>CONTACT US</p>
-                            </div>
-                        </div>
-                    </div>
+        <div class="row" style="max-width:100%;">
+            <div class="col-sm-4">
+                <!-- Candidates -->
+                <h4>CANDIDATES</h4>
+                <div class="f-section-c">
+                    <p>
+                        <br>HOW IT WORKS
+                    </p>
+                    <p>INVITE A FRIEND</p>
+                    <p>FAQ</p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <!-- Employers -->
+                <h4>EMPLOYERS</h4>
+                <div class="f-section-c">
+                    <p>
+                        <br>FOR EMPLOYERS
+                    </p>
+                    <p>FAQ</p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <!-- Global Hiring -->
+                <h4>GLOBAL HIRING</h4>
+                <div class="f-section-c">
+                    <p>
+                        <br>ABOUT
+                    </p>
+                    <p>BLOG</p>
+                    <p>CONTACT US</p>
+                </div>
+            </div>
+        </div>
                     <!-- Copyright etc -->
                     <div class="f-copyright-c">
                         <div class="container">
