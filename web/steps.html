@@ -89,7 +89,7 @@
       </div>
   </div> <!-- step1 finish -->
 
-  <div id="stepLang" class="container step-div " ng-hide="stepLangHide" ng-repeat="langToAdd in langsToAdd" >
+  <div id="stepLang" class="container step-div " ng-hide="stepLangHide" >
     <div class="step-header">
       <h4 class="step-title">Language </h4>
     </div>
@@ -179,7 +179,7 @@
 
   </div> <!-- Language step finish -->
 
-  <div id="stepEdu" class="container step-div " ng-hide="stepEduHide" ng-repeat="educationToAdd in educationsToAdd" >
+  <div id="stepEdu" class="container step-div " ng-hide="stepEduHide" >
     <div class="step-header">
       <h4 class="step-title">Education </h4>
     </div>
@@ -206,7 +206,7 @@
         <div class="form-group field-div zero-margin" >
           <label class="control-label col-sm-12 field-Bold-label" style="text-align:left;" >Degree</label>
           <div class="col-sm-12" style="margin-top:10px;">
-            <select class="form-control input-sm input-style select-style" ng-model="educationToAdd.degree" ng-options="degree as degree.name for degree in degrees"></select>
+            <select class="form-control input-sm input-style select-style" ng-value="educationToAdd.degree" ng-model="educationToAdd.degree" ng-options="degree as degree.name for degree in degrees"></select>
           </div>
         </div>
         <div class="form-group field-div zero-margin" >
@@ -332,6 +332,28 @@
     </div>
   </div><!--Skill step finish -->
 
+  <!-- ForceEnglish Modal -->
+  <script type="text/ng-template" id="forceEnglishModalContent.html">
+    <div class="modal-header btn-div-c" style="margin-bottom:0;">
+      <button type="button" class="close" ng-click="close()" >&times;</button>
+      <h3 class="modal-title btn-next-c" style="text-align:center;padding-top:10px;">English</h3>
+    </div>
+    <div class="modal-body">
+      <label class="control-label col-sm-12 field-Bold-label" style="text-align:left;" >How would you describe your level of profeciency in English?</label>
+      </div>
+      <div class="form-group" >
+      <ul ng-repeat="langProf in LanguageProfeciencies" style="padding-left: 25px;">
+        <li>
+          <div class="row" style="margin:0;">
+            <div class="radio" style="margin:0;">
+              <label class="radio-button-text" ><input type="radio" name="level" ng-value="langProf.value" ng-click="$event.preventDefault(); langToAdd.profeciency = langProf.value">{{ langProf.text }} <br/><span class="black-thin-label">Description.</span></label>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </script>
+
 <!-- Profeciency Modal -->
 <script type="text/ng-template" id="myModalContent.html">
   <div class="modal-header btn-div-c" style="margin-bottom:0;">
@@ -346,7 +368,7 @@
       <li>
         <div class="row" style="margin:0;">
           <div class="radio" style="margin:0;">
-            <label class="radio-button-text" ><input type="radio" name="level" ng-value="SkillProf"ng-click="$event.preventDefault(); selected.profeciency = SkillProf">{{ SkillProf.text }} <br/><span class="black-thin-label">Description.</span></label>
+            <label class="radio-button-text" ><input type="radio" name="level" ng-value="SkillProf" ng-click="$event.preventDefault(); selected.profeciency = SkillProf">{{ SkillProf.text }} <br/><span class="black-thin-label">Description.</span></label>
           </div>
         </div>
       </li>
@@ -369,6 +391,8 @@
           <button class="btn ok-btn" type="button" ng-click="ok()">OK</button>
   </div>
 </script>
+
+
 
 </body>
 
@@ -476,11 +500,32 @@ globalHiring.controller('stepsController',['$scope', '$resource','$uibModal', fu
 
   $scope.langNextClick = function(){
 
-    if ((index==0 && $scope.langsToAdd[index].name!="" )|| ( $scope.langsToAdd[index].name!="" && $scope.langs[index-1].name != $scope.langsToAdd[index].name ))
+    if (($scope.langs.length==0 && $scope.langToAdd.name!='')||($scope.langs.length>0 && $scope.langs[$scope.langs.length-1].name!=$scope.langToAdd.name))
     {
-      $scope.langsToAdd.splice(index, 0);
-       $scope.langs.push(angular.copy($scope.langsToAdd[index]));
+      $scope.addMoreLangClick($scope.langToAdd);
     }
+    if($scope.langs.length>0)
+    {
+      hasEnglish=false;
+      for(i=0;i<$scope.langs.length;i++)
+      {
+        if($scope.langs[i].name=="English")
+        {
+          hasEnglish=true;
+        }
+      }
+      if(!hasEnglish)
+      {
+        $scope.errorMsg="NO ENGLISH"
+        $scope.forceEnglishModal();
+      }
+    }
+    if($scope.langs.length==0)
+    {
+      $scope.errorMsg="NO ENGLISH"
+      $scope.forceEnglishModal();
+    }
+
     $scope.stepLangHide=true;
     if($scope.isStudent =="true"){
       $scope.stepEduHide=false;
@@ -495,11 +540,12 @@ globalHiring.controller('stepsController',['$scope', '$resource','$uibModal', fu
     }
   };
   $scope.eduNextClick = function(){
-    if ((indexEdu==0 && $scope.educationsToAdd[indexEdu].school!=""  )|| ($scope.educationsToAdd[indexEdu].school!="" && $scope.educations[indexEdu-1].school != $scope.educationsToAdd[indexEdu].school) )
+
+    if (($scope.educations.length==0 && $scope.educationToAdd.school!='')||($scope.educations.length>0 && $scope.educations[$scope.educations.length-1].school!=$scope.educationToAdd.school))
     {
-      $scope.educationsToAdd.splice(indexEdu, 0);
-       $scope.educations.push(angular.copy($scope.educationsToAdd[indexEdu]));
+      $scope.addMoreEduClick($scope.educationToAdd);
     }
+
       $scope.stepEduHide=true;
     if($scope.isStudent =="true"){
       $scope.stepMainSRVHide=false;
@@ -612,47 +658,72 @@ globalHiring.controller('stepsController',['$scope', '$resource','$uibModal', fu
     {text: "Native", value: "N", desc: "Discription"}
   ]
   $scope.langs = [];
-  $scope.langsToAdd = [{
-    name: '',
-    profeciency: ''
-  }];
+  $scope.langToAdd={
+    name:'',
+    profeciency:''
+  };
+
   var index =0;
   $scope.addMoreLangClick=function(langToAdd){
-    $scope.langsToAdd.splice(index, 0);
-    $scope.langs.push(angular.copy(langToAdd));
-    $scope.langsToAdd.push({
-        name: '',
-        profeciency: ''
-      });
-      index++
-
+    if( langToAdd.name!='' && langToAdd.profeciency!='')
+    {
+      $scope.langs.push(angular.copy(langToAdd));
+      $scope.langToAdd.name='';
+      $scope.langToAdd.profeciency='';
+    }
   }
+
+
+  //Force Englisg Modal
+
+  $scope.animationsEnabled = true;
+  $scope.forceEnglishModal = function () {
+
+    var modalInstance = $uibModal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'forceEnglishModalContent.html',
+      controller: 'ForceEnglishModalInstanceCtrl',
+      resolve: {
+        langToAdd: function () {
+          return $scope.langToAdd;
+        },
+        LanguageProfeciencies: function () {
+          return $scope.LanguageProfeciencies;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (langToAdd) {
+      $scope.addMoreLangClick(langToAdd);
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
+    });
+  };
+  //Modal Force Englisg is finished
 
   //Add Education
   $scope.educations = [];
-  $scope.educationsToAdd = [{
+  $scope.educationToAdd = {
     school: '',
     fromdate: '',
     todate: '',
     degree:'',
     field:'',
     grade:''
-  }];
+  };
 
   var indexEdu =0;
   $scope.addMoreEduClick=function(educationToAdd){
-    $scope.educationsToAdd.splice(indexEdu, 0);
-    $scope.educations.push(angular.copy(educationToAdd));
-    $scope.educationsToAdd.push({
-      school: '',
-      fromdate: '',
-      todate: '',
-      degree:'',
-      field:'',
-      grade:''
-    });
-      indexEdu++
-
+    if($scope.educationToAdd.school!='')
+    {
+      $scope.educations.push(angular.copy(educationToAdd));
+      $scope.educationToAdd.school='';
+      $scope.educationToAdd.fromdate='';
+      $scope.educationToAdd.todate='';
+      $scope.educationToAdd.degree='';
+      $scope.educationToAdd.field='';
+      $scope.educationToAdd.grade='';
+    }
   }
 
   // Main Services
@@ -813,6 +884,25 @@ angular.module('globalHiring').controller('ErrormodalInstanceCtrl', function ($s
   };
   $scope.ok= function () {
     $uibModalInstance.close();
+  };
+});
+
+
+angular.module('globalHiring').controller('ForceEnglishModalInstanceCtrl', function ($scope, $uibModalInstance,langToAdd,LanguageProfeciencies) {
+
+  $scope.langToAdd = langToAdd;
+  $scope.LanguageProfeciencies=LanguageProfeciencies;
+  $scope.langToAdd = {
+    name:"English",
+    profeciency: $scope.LanguageProfeciencies[0].value
+  };
+
+  $scope.close= function () {
+    $uibModalInstance.close($scope.langToAdd);
+  };
+
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
   };
 });
 </script>
