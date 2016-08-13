@@ -1,7 +1,6 @@
 package model
 
 import (
-  "errors"
   "strings"
   "database/sql"
   "net/http"
@@ -53,36 +52,19 @@ func parseAccount(dataMap map[string]interface{}) (Account, error) {
   result.Phone = util.ParseString(dataMap, "phone")
   result.Password = util.ParseString(dataMap, "password")
   result.IsStudent = util.ParseBool(dataMap, "isstudent")
+  result.City, _ = parseCity(dataMap["city"])
 
-  cityMap := dataMap["city"].(map[string]interface{})
-  city, _ := parseCity(cityMap)
-  result.City = city
+  result.Languages      = parseAccountLanguages(      dataMap["languages"])
+  result.Educations     = parseAccountEducations(     dataMap["educations"])
+  result.Skills         = parseAccountSkills(         dataMap["skills"])
 
-  langsArr := dataMap["languages"].([]interface{})
-  result.Languages = parseAccountLanguages(langsArr)
-
-  eduArr := dataMap["educations"].([]interface{})
-  result.Educations = parseAccountEducations(eduArr)
-
-  skillArr := dataMap["skills"].([]interface{})
-  result.Skills = parseAccountSkills(skillArr)
-
-  if dataMap["certificates"] != nil {
-    cerArr := dataMap["certificates"].([]interface{})
-    result.Certificates = parseAccountCertificates(cerArr)
-  }
-
-  result.Works = parseAccountWorks(dataMap["works"])
-
-  result.Volunteerings = parseAccountVolunteerings(dataMap["volunteerings"])
-
-  result.Courses = parseAccountCourses(dataMap["courses"])
-
-  result.Honors = parseAccountHonors(dataMap["honors"])
-
-  result.Tests = parseAccountTests(dataMap["tests"])
-
-  result.Projects = parseAccountProjects(dataMap["projects"])
+  result.Certificates   = parseAccountCertificates(   dataMap["certificates"])
+  result.Works          = parseAccountWorks(          dataMap["works"])
+  result.Volunteerings  = parseAccountVolunteerings(  dataMap["volunteerings"])
+  result.Courses        = parseAccountCourses(        dataMap["courses"])
+  result.Honors         = parseAccountHonors(         dataMap["honors"])
+  result.Tests          = parseAccountTests(          dataMap["tests"])
+  result.Projects       = parseAccountProjects(       dataMap["projects"])
 
   return result, nil
 }
@@ -115,14 +97,7 @@ func readAccount(rows *sql.Rows) (interface{}, error) {
   return acc, err
 }
 
-func (acc *Account) save(session *util.Session) error {
-  if acc.Id <= 0 {
-    return acc.saveNew(session)
-  }
-  return acc.saveUpdate(session)
-}
-
-func (acc *Account) saveNew(session *util.Session) error {
+func (acc *Account) create(session *util.Session) error {
 
   acc.Email = strings.ToLower(strings.TrimSpace(acc.Email))
   acc.Password = util.GetMD5Hash(acc.Password)
@@ -141,51 +116,52 @@ func (acc *Account) saveNew(session *util.Session) error {
   acc.Id = id
   session.PutAccountID(id)
 
-  for _ , language := range acc.Languages {
-    language.save(session)
-  }
-
-  for _ , education := range acc.Educations {
-    education.save(session)
-  }
-
-  for _ , skill := range acc.Skills {
-    skill.save(session)
-  }
-
-  for _ , certificate := range acc.Certificates {
-    certificate.save(session)
-  }
-
-  for _ , work := range acc.Works {
-    work.save(session)
-  }
-
-  for _ , vol := range acc.Volunteerings {
-    vol.save(session)
-  }
-
-  for _ , course := range acc.Courses {
-    course.save(session)
-  }
-
-  for _ , honor := range acc.Honors {
-    honor.save(session)
-  }
-
-  for _ , test := range acc.Tests {
-    test.save(session)
-  }
-
-  for _ , project := range acc.Projects {
-    project.save(session)
-  }
-
-  return nil
+  return acc.createComplete(session)
 }
 
-func (acc *Account) saveUpdate(session *util.Session) error {
-  return errors.New("account.saveUpdate is not implemented")
+func (acc *Account) createComplete(session *util.Session) error {
+
+    for _ , language := range acc.Languages {
+      language.save(session)
+    }
+
+    for _ , education := range acc.Educations {
+      education.save(session)
+    }
+
+    for _ , skill := range acc.Skills {
+      skill.save(session)
+    }
+
+    for _ , certificate := range acc.Certificates {
+      certificate.save(session)
+    }
+
+    for _ , work := range acc.Works {
+      work.save(session)
+    }
+
+    for _ , vol := range acc.Volunteerings {
+      vol.save(session)
+    }
+
+    for _ , course := range acc.Courses {
+      course.save(session)
+    }
+
+    for _ , honor := range acc.Honors {
+      honor.save(session)
+    }
+
+    for _ , test := range acc.Tests {
+      test.save(session)
+    }
+
+    for _ , project := range acc.Projects {
+      project.save(session)
+    }
+
+    return nil
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -219,7 +195,29 @@ func SaveAccount(w http.ResponseWriter, r *http.Request) (interface{}, *util.Han
 
   account, _ := parseAccount(accountMap)
 
-  err = account.save(session)
+  err = account.create(session)
+  if err != nil {
+    return nil, &util.HandlerError{err, "Problem while saving account", http.StatusBadRequest}
+  }
+
+  return GetAccount(w, r)
+}
+
+func CompleteAccount(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
+
+  session, err := util.GetSession(w, r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Problems in session", http.StatusBadRequest}
+  }
+
+  accountMap, err := util.ParseJsonRequest(r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Invalid JSON Account", http.StatusBadRequest}
+  }
+
+  account, _ := parseAccount(accountMap)
+
+  err = account.createComplete(session)
   if err != nil {
     return nil, &util.HandlerError{err, "Problem while saving account", http.StatusBadRequest}
   }

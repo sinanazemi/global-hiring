@@ -21,8 +21,13 @@ type AccountSkill struct {
   Profeciency string `json:"profeciency"`
 }
 
-func parseAccountSkill(dataMap map[string]interface{}) (AccountSkill, error) {
+func parseAccountSkill(data interface{}) (AccountSkill, error) {
   result := AccountSkill{}
+
+  dataMap, ok := data.(map[string]interface{})
+  if (!ok) {
+    return result, errors.New("looking for a 'map[string]interface{}' to parse an 'AccountSkill', but not found.\n")
+  }
 
   result.Id = util.ParseInteger(dataMap, "accountskillid")
   result.SkillID = util.ParseInteger(dataMap, "id")
@@ -34,13 +39,18 @@ func parseAccountSkill(dataMap map[string]interface{}) (AccountSkill, error) {
   return result, nil
 }
 
-func parseAccountSkills(skillsArr []interface{}) []AccountSkill {
+func parseAccountSkills(data interface{}) []AccountSkill {
   result := make([]AccountSkill, 0)
 
-  for _ , s := range skillsArr {
-    smap := s.(map[string]interface{})
-    skill, err := parseAccountSkill(smap)
-    if err == nil {
+  sArr, ok := data.([]interface{})
+  if (!ok) {
+    print("looking for a 'm[]interface{}' to parse an array of 'AccountSkill's, but not found.\n")
+    return result
+  }
+
+  for _ , s := range sArr {
+    skill, err := parseAccountSkill(s)
+    if (err == nil) {
       result = append(result, skill)
     }
   }

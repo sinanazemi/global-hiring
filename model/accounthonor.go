@@ -40,7 +40,7 @@ func parseAccountHonors(data interface{}) []AccountHonor {
 
   hArr, ok := data.([]interface{})
   if (!ok) {
-    print("lokking for a '[]interface{}' to parse an array of 'AccountHonor's, but not found.\n")
+    print("looking for a '[]interface{}' to parse an array of 'AccountHonor's, but not found.\n")
     return result
   }
 

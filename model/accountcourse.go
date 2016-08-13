@@ -38,7 +38,7 @@ func parseAccountCourses(data interface{}) []AccountCourse {
 
   cArr, ok := data.([]interface{})
   if (!ok) {
-    print("lokking for a '[]interface{}' to parse an array of 'AccountCourse's, but not found.\n")
+    print("looking for a '[]interface{}' to parse an array of 'AccountCourse's, but not found.\n")
     return result
   }
 

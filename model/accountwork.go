@@ -54,7 +54,7 @@ func parseAccountWorks(data interface{}) []AccountWork {
 
   wArr, ok := data.([]interface{})
   if (!ok) {
-    print("lokking for a 'm[]interface{}' to parse an array of 'AccountWork's, but not found.\n")
+    print("looking for a 'm[]interface{}' to parse an array of 'AccountWork's, but not found.\n")
     return result
   }
 

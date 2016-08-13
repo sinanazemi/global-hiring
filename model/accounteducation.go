@@ -19,8 +19,13 @@ type AccountEducation struct {
   Degree Degree `json:"degree"`
 }
 
-func parseAccountEducation(dataMap map[string]interface{}) (AccountEducation, error) {
+func parseAccountEducation(data interface{}) (AccountEducation, error) {
   result := AccountEducation{}
+
+  dataMap, ok := data.(map[string]interface{})
+  if (!ok) {
+    return result, errors.New("looking for a 'map[string]interface{}' to parse an 'AccountEducation', but not found.\n")
+  }
 
   result.Id = util.ParseInteger(dataMap, "id")
   result.School = util.ParseString(dataMap, "school")
@@ -33,14 +38,19 @@ func parseAccountEducation(dataMap map[string]interface{}) (AccountEducation, er
   return result, nil
 }
 
-func parseAccountEducations(edusArr []interface{}) []AccountEducation {
+func parseAccountEducations(data interface{}) []AccountEducation {
   result := make([]AccountEducation, 0)
 
-  for _ , edu := range edusArr {
-    emap := edu.(map[string]interface{})
-    education, err := parseAccountEducation(emap)
+  eArr, ok := data.([]interface{})
+  if (!ok) {
+    print("looking for a 'm[]interface{}' to parse an array of 'AccountEducation's, but not found.\n")
+    return result
+  }
+
+  for _ , e := range eArr {
+    edu, err := parseAccountEducation(e)
     if (err == nil) {
-      result = append(result, education)
+      result = append(result, edu)
     }
   }
   return result

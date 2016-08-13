@@ -1,6 +1,7 @@
 package model
 
 import(
+  "errors"
   "database/sql"
   "net/http"
   "github.com/sinanazemi/global-hiring/util"
@@ -11,9 +12,19 @@ type City struct{
   Name string `json:"name"`
 }
 
-func parseCity(dataMap map[string]interface{}) (City, error) {
+func parseCity(data interface{}) (City, error) {
+
+  id, ok := data.(float64)
+  if (ok) {
+    return loadCity(int(id)), nil
+  }
 
   result := City{}
+
+  dataMap, ok := data.(map[string]interface{})
+  if (!ok) {
+    return result, errors.New("looking for a 'map[string]interface{}' to parse a 'City', but not found.\n")
+  }
 
   result.Id = util.ParseInteger(dataMap, "id")
   result.Name = util.ParseString(dataMap, "name")

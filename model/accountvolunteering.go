@@ -50,7 +50,7 @@ func parseAccountVolunteerings(data interface{}) []AccountVolunteering {
 
   vArr, ok := data.([]interface{})
   if (!ok) {
-    print("lokking for a 'm[]interface{}' to parse an array of 'AccountVolunteering's, but not found.\n")
+    print("looking for a 'm[]interface{}' to parse an array of 'AccountVolunteering's, but not found.\n")
     return result
   }
 

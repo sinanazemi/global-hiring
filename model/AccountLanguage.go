@@ -20,8 +20,13 @@ type AccountLanguage struct{
   Profeciency string `json:"profeciency"`
 }
 
-func parseAccountLanguage(dataMap map[string]interface{}) (AccountLanguage, error) {
+func parseAccountLanguage(data interface{}) (AccountLanguage, error) {
   result := AccountLanguage{}
+
+  dataMap, ok := data.(map[string]interface{})
+  if (!ok) {
+    return result, errors.New("looking for a 'map[string]interface{}' to parse an 'AccountLanguage', but not found.\n")
+  }
 
   result.Id = util.ParseInteger(dataMap, "id")
   result.Name = util.ParseString(dataMap, "name")
@@ -30,13 +35,18 @@ func parseAccountLanguage(dataMap map[string]interface{}) (AccountLanguage, erro
   return result, nil
 }
 
-func parseAccountLanguages(langsArr []interface{}) []AccountLanguage {
+func parseAccountLanguages(data interface{}) []AccountLanguage {
   result := make([]AccountLanguage, 0)
 
-  for _ , lang := range langsArr {
-    lmap := lang.(map[string]interface{})
-    lang, err := parseAccountLanguage(lmap)
-    if err == nil {
+  lArr, ok := data.([]interface{})
+  if (!ok) {
+    print("looking for a 'm[]interface{}' to parse an array of 'AccountLanguage's, but not found.\n")
+    return result
+  }
+
+  for _ , l := range lArr {
+    lang, err := parseAccountLanguage(l)
+    if (err == nil) {
       result = append(result, lang)
     }
   }

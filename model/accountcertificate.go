@@ -17,8 +17,13 @@ type AccountCertificate struct {
   Description string `json:"description"`
 }
 
-func parseAccountCertificate(dataMap map[string]interface{}) (AccountCertificate, error) {
+func parseAccountCertificate(data interface{}) (AccountCertificate, error) {
   result := AccountCertificate{}
+
+  dataMap, ok := data.(map[string]interface{})
+  if (!ok) {
+    return result, errors.New("looking for a 'map[string]interface{}' to parse an 'AccountCertificate', but not found.\n")
+  }
 
   result.Id = util.ParseInteger(dataMap, "id")
   result.Name = util.ParseString(dataMap, "name")
@@ -30,14 +35,19 @@ func parseAccountCertificate(dataMap map[string]interface{}) (AccountCertificate
   return result, nil
 }
 
-func parseAccountCertificates(cerArr []interface{}) []AccountCertificate {
+func parseAccountCertificates(data interface{}) []AccountCertificate {
   result := make([]AccountCertificate, 0)
 
-  for _ , cer := range cerArr {
-    cmap := cer.(map[string]interface{})
-    certificate, err := parseAccountCertificate(cmap)
+  cArr, ok := data.([]interface{})
+  if (!ok) {
+    print("looking for a 'm[]interface{}' to parse an array of 'AccountCertificate's, but not found.\n")
+    return result
+  }
+
+  for _ , c := range cArr {
+    cer, err := parseAccountCertificate(c)
     if (err == nil) {
-      result = append(result, certificate)
+      result = append(result, cer)
     }
   }
   return result
