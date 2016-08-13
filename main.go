@@ -36,6 +36,7 @@ func main() {
 
 	http.Handle("/redirect", util.Handler(util.RedirectCheck))
 	http.Handle("/authenticate", util.Handler(Authenticate))
+	http.Handle("/logout", util.Handler(util.Logout))
 
 	http.Handle("/cities", util.Handler(model.GetCities))
 	http.Handle("/degrees", util.Handler(model.GetDegrees))

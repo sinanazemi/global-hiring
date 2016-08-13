@@ -62,3 +62,7 @@ func (session Session) GetAccountID() int {
 func (session Session) PutAccountID(accountID int) {
   session.Put(accountKey, accountID)
 }
+
+func (session Session) clearAccountID() {
+  session.Put(accountKey, nil)
+}
