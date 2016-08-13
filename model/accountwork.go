@@ -239,6 +239,29 @@ func (work *AccountWork) delete(session *util.Session) error {
   return err
 }
 
+func getWorkStrength(works []AccountWork) int {
+
+  //adding first work experience +15
+  //adding second work experience +10
+  //adding third work experience +5
+  //(more work experience doesn't change)
+
+  if (works == nil) {
+    return 0;
+  }
+  size := len(works)
+  if(size == 0) {
+    return 0
+  }
+  if(size == 1) {
+    return 15
+  }
+  if(size == 2) {
+    return 25
+  }
+  return 30
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 func SaveWork(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {

@@ -204,6 +204,20 @@ func (test *AccountTest) delete(session *util.Session) error {
   return err
 }
 
+func getTestStrength(tests []AccountTest) int {
+
+  //adding test score +10
+
+  if (tests == nil) {
+    return 0;
+  }
+  size := len(tests)
+  if(size < 1) {
+    return 0
+  }
+  return 10
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 func SaveTest(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {

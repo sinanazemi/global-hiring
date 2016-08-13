@@ -193,6 +193,18 @@ func (course *AccountCourse) delete(session *util.Session) error {
   return err
 }
 
+func getCourseStrength(courses []AccountCourse) int {
+
+  //adding course each course +3
+
+  if (courses == nil) {
+    return 0;
+  }
+  size := len(courses)
+  return size * 3
+}
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 func SaveCourse(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {

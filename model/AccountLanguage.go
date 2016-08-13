@@ -182,6 +182,20 @@ func (lang *AccountLanguage) delete(session *util.Session) error {
   return err
 }
 
+func getLanguageStrength(langs []AccountLanguage) int {
+
+  //adding Second language +5
+
+  if (langs == nil) {
+    return 0;
+  }
+  size := len(langs)
+  if(size < 2) {
+    return 0
+  }
+  return 5
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 func SaveLanguage(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {

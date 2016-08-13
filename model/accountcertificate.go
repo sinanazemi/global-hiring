@@ -196,6 +196,20 @@ func (cer *AccountCertificate) delete(session *util.Session) error {
   return err
 }
 
+func getCertificateStrength(certificates []AccountCertificate) int {
+
+  //adding certificate +10
+
+  if (certificates == nil) {
+    return 0;
+  }
+  size := len(certificates)
+  if(size < 1) {
+    return 0
+  }
+  return 10
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 func SaveCertificate(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {

@@ -66,3 +66,10 @@ func (session Session) PutAccountID(accountID int) {
 func (session Session) clearAccountID() {
   session.Put(accountKey, nil)
 }
+
+func (session Session) Refresh() {
+  id := session.GetAccountID()
+  if (id > 0){
+    session.PutAccountID(id)
+  }
+}

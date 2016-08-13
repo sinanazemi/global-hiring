@@ -228,6 +228,21 @@ func (avl *AccountVolunteering) delete(session *util.Session) error {
   return err
 }
 
+func getVolunteeringStrength(volunteerings []AccountVolunteering) int {
+
+  //adding volunteering experience +10
+
+  if (volunteerings == nil) {
+    return 0;
+  }
+  size := len(volunteerings)
+  if(size < 1) {
+    return 0
+  }
+  return 10
+}
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 func SaveVolunteering(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {

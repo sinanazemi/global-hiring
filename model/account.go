@@ -164,6 +164,25 @@ func (acc *Account) createComplete(session *util.Session) error {
     return nil
 }
 
+func (acc *Account) getStrength() int {
+  var result int = 0
+
+  //adding profile summary, each character +0.2
+  //result = result + ?
+
+  result = result + getWorkStrength(acc.Works)
+  result = result + getLanguageStrength(acc.Languages)
+  result = result + getEducationStrength(acc.Educations)
+  result = result + getCertificateStrength(acc.Certificates)
+  result = result + getHonorStrength(acc.Honors)
+  result = result + getProjectStrength(acc.Projects)
+  result = result + getTestStrength(acc.Tests)
+  result = result + getVolunteeringStrength(acc.Volunteerings)
+  result = result + getCourseStrength(acc.Courses)
+
+  return result
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 func GetAccount(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
@@ -223,4 +242,18 @@ func CompleteAccount(w http.ResponseWriter, r *http.Request) (interface{}, *util
   }
 
   return GetAccount(w, r)
+}
+
+func GetAccountStrength(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
+
+  session, err := util.GetSession(w, r)
+  if err != nil {
+      return -1, &util.HandlerError{err, "Problems in session", http.StatusBadRequest}
+  }
+
+  account, err := loadAccount(session)
+  if err != nil {
+    return -1, &util.HandlerError{err, "Problem while loading account", http.StatusBadRequest}
+  }
+  return account.getStrength(), nil
 }

@@ -200,6 +200,20 @@ func (project *AccountProject) delete(session *util.Session) error {
   return err
 }
 
+func getProjectStrength(projects []AccountProject) int {
+
+  //adding project +10
+
+  if (projects == nil) {
+    return 0;
+  }
+  size := len(projects)
+  if(size < 1) {
+    return 0
+  }
+  return 10
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 func SaveProject(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {

@@ -205,6 +205,29 @@ func (edu *AccountEducation) delete(session *util.Session) error {
   return err
 }
 
+func getEducationStrength(educations []AccountEducation) int {
+
+  //adding first education +15
+  //adding second education +10
+  //adding third education and +5
+  //(more education doesn't change)
+
+  if (educations == nil) {
+    return 0;
+  }
+  size := len(educations)
+  if(size == 0) {
+    return 0
+  }
+  if(size == 1) {
+    return 15
+  }
+  if(size == 2) {
+    return 25
+  }
+  return 30
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 func SaveEducation(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {

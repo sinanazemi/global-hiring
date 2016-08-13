@@ -24,6 +24,11 @@ func (fn Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// here we could do some prep work before calling the handler if we wanted to
   log.Printf("ServeHTTP %s %s %s %d", r.RemoteAddr, r.Method, r.URL, 200)
 
+  session, er := GetSession(w, r)
+  if er == nil {
+      session.Refresh()
+  }
+
 	// call the actual handler
 	response, err := fn(w, r)
 

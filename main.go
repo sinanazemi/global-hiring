@@ -48,6 +48,7 @@ func main() {
 
 	// Editting Accounts
 	http.Handle("/account", util.Handler(model.GetAccount))
+	http.Handle("/accountStrength", util.Handler(GetAccountStrength))
 	http.Handle("/saveAccount", util.Handler(model.SaveAccount))
 	http.Handle("/completeAccount", util.Handler(model.CompleteAccount))
 

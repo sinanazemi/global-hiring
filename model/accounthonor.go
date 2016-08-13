@@ -197,6 +197,20 @@ func (honor *AccountHonor) delete(session *util.Session) error {
   return err
 }
 
+func getHonorStrength(honors []AccountHonor) int {
+
+  //adding rewards +10
+
+  if (honors == nil) {
+    return 0;
+  }
+  size := len(honors)
+  if(size < 1) {
+    return 0
+  }
+  return 10
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 func SaveHonor(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
