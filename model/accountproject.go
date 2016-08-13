@@ -175,7 +175,7 @@ func (project *AccountProject) saveUpdate(session *util.Session) error {
     "OccupationID = $2, " +
     "Month = $3, " +
     "Year = $4, " +
-    "Url = $5 " +
+    "Url = $5, " +
     "Description = $6 " +
     "WHERE ID = $7 "
 

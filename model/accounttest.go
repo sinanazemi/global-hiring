@@ -179,7 +179,7 @@ func (test *AccountTest) saveUpdate(session *util.Session) error {
     "OccupationID = $2, " +
     "Month = $3, " +
     "Year = $4, " +
-    "Score = $5 " +
+    "Score = $5, " +
     "Description = $6 " +
     "WHERE ID = $7 "
 
