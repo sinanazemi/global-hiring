@@ -28,7 +28,7 @@
     <div class="step-header">
       <h4 class="step-title">Create Account </h4>
     </div>
-    <div class="form-horizontal step-form" role="form">
+    <div class="form-horizontal step-form" role="form" id="step1Form">
         <br />
         <img src="images/step_1_bar.png" class="img-responsive bar-image" alt="Mountain View">
         <br />
@@ -55,14 +55,15 @@
         <div class="form-group field-div">
           <label class="control-label col-sm-4 field-label" style="text-align:left;" >Phone (optional)</label>
           <div class="col-sm-8 ">
-            <input type="text" class="form-control input-sm input-style" placeholder="(123) 456-7890" rows="1" ng-model="phone" />
+            <input type="text" class="form-control input-sm input-style" placeholder="0912 1234567" rows="1" ng-model="phone" />
           </div>
         </div>
         <div class="form-group field-div">
           <label class="control-label col-sm-4 field-label" style="text-align:left;" >Password</label>
           <div class="col-sm-8 ">
-            <input type="password" class="form-control input-sm input-style"  placeholder="{{passwordPlaceholder}}"  ng-model="password" ng-style="requiedStylePassword"  required/>
+            <input type="password" name="password" class="form-control input-sm input-style"  placeholder="{{passwordPlaceholder}}" ng-minlength="6"  ng-model="password" ng-style="requiedStylePassword"  required/>
           </div>
+          <span class="error" ng-show="step1Form.password.$error.minlength">Too short!</span>
         </div>
         <div class="form-group field-div">
           <label class="control-label col-sm-4 field-label" style="text-align:left;" >Are you a student?</label>
@@ -417,7 +418,7 @@ globalHiring.controller('stepsController',['$scope', '$resource','$uibModal', fu
 
   $scope.fullnamePlaceholder="Your full name";
   $scope.emailPlaceholder="you@email.com";
-  $scope.passwordPlaceholder="";
+  $scope.passwordPlaceholder="min 6 characters";
   $scope.requiedStyleFullname='';
   $scope.requiedStylePassword='';
   $scope.requiedStyleEmail='';
