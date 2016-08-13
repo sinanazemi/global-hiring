@@ -8,16 +8,10 @@ import (
   "github.com/sinanazemi/global-hiring/util"
 )
 
-const LANGUAGE_PROFECIENCY_ELEMENTARY string = "E"
-const LANGUAGE_PROFECIENCY_BASIC string = "B"
-const LANGUAGE_PROFECIENCY_CONVERSATIONAL string = "C"
-const LANGUAGE_PROFECIENCY_FLUENT string = "F"
-const LANGUAGE_PROFECIENCY_NATIVE string = "N"
-
 type AccountLanguage struct{
   Id     int    `json:"id"`
   Name string `json:"name"`
-  Profeciency string `json:"profeciency"`
+  Profeciency LanguageProfeciency `json:"profeciency"`
 }
 
 func parseAccountLanguage(data interface{}) (AccountLanguage, error) {
@@ -30,7 +24,7 @@ func parseAccountLanguage(data interface{}) (AccountLanguage, error) {
 
   result.Id = util.ParseInteger(dataMap, "id")
   result.Name = util.ParseString(dataMap, "name")
-  result.Profeciency = util.ParseString(dataMap, "profeciency", " ")
+  result.Profeciency, _ = parseLanguageProfeciency(dataMap["profeciency"])
 
   return result, nil
 }
@@ -64,14 +58,7 @@ func (lang *AccountLanguage) dataValidation(session *util.Session) error {
     errStr = errStr + "AccountLanguage.Name is Empty\n"
   }
 
-  profeciencyCheck := false
-  profeciencyCheck = profeciencyCheck || (lang.Profeciency == LANGUAGE_PROFECIENCY_ELEMENTARY)
-  profeciencyCheck = profeciencyCheck || (lang.Profeciency == LANGUAGE_PROFECIENCY_BASIC)
-  profeciencyCheck = profeciencyCheck || (lang.Profeciency == LANGUAGE_PROFECIENCY_CONVERSATIONAL)
-  profeciencyCheck = profeciencyCheck || (lang.Profeciency == LANGUAGE_PROFECIENCY_FLUENT)
-  profeciencyCheck = profeciencyCheck || (lang.Profeciency == LANGUAGE_PROFECIENCY_NATIVE)
-
-  if (!profeciencyCheck) {
+  if (lang.Profeciency.isEmpty()) {
     errStr = errStr + "AccountLanguage.Profeciency is not valid\n"
   }
 
@@ -114,6 +101,9 @@ func loadAccountLanguages(session *util.Session) ([]AccountLanguage, error) {
 
     for _, dummyLang := range languages {
       language, _ := dummyLang.(AccountLanguage)
+
+      language.Profeciency = loadLanguageProfeciency(language.Profeciency.Value)
+
       result = append(result, language)
     }
 
@@ -123,7 +113,7 @@ func loadAccountLanguages(session *util.Session) ([]AccountLanguage, error) {
 func readAccountLanguage(rows *sql.Rows) (interface{}, error) {
 
     var lang AccountLanguage = AccountLanguage{}
-    err := rows.Scan(&lang.Id, &lang.Name, &lang.Profeciency)
+    err := rows.Scan(&lang.Id, &lang.Name, &lang.Profeciency.Value)
 
     return lang, err
 }
@@ -148,7 +138,7 @@ func (lang *AccountLanguage) saveNew(session *util.Session) error {
     "VALUES($1, $2, $3) " +
     "returning ID"
 
-  id, err := util.Insert(query, lang.Name, lang.Profeciency, session.GetAccountID())
+  id, err := util.Insert(query, lang.Name, lang.Profeciency.Value, session.GetAccountID())
 
   if err != nil {
     return err
@@ -171,7 +161,7 @@ func (lang *AccountLanguage) saveUpdate(session *util.Session) error {
     "Profeciency = $2 " +
     "WHERE ID = $3 "
 
-  err = util.Update(query, lang.Name, lang.Profeciency, lang.Id)
+  err = util.Update(query, lang.Name, lang.Profeciency.Value, lang.Id)
 
   return err
 
