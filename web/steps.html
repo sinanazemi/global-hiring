@@ -402,6 +402,7 @@ var globalHiring = angular.module('globalHiring',['ngResource','ngAnimate', 'ui.
 globalHiring.controller('stepsController',['$scope', '$resource','$uibModal', function($scope, $resource,$uibModal, $http, $window, $log) {
 
   $scope.phoneRegex='[0-9 ]+';
+  $scope.userAccount='';
   // Steps controller
   //$scope.authenticateHide=false;
   $scope.step1Hide=false;
@@ -488,6 +489,8 @@ globalHiring.controller('stepsController',['$scope', '$resource','$uibModal', fu
     }
     else {
       $scope.step1Hide=true;
+      $scope.createNewAccount();
+
       if($scope.isStudent=="true"){
         $scope.stepLangHide=false;
         $scope.langBarImage="images/step_2_bar.png";
@@ -818,10 +821,9 @@ globalHiring.controller('stepsController',['$scope', '$resource','$uibModal', fu
   };
   //Modal ErrorMsg is finished
 
-
-// Save an account
-  var saveAccount = $resource("/saveAccount")
-  $scope.finishClick=function(){
+// Create A New Account in First steps
+var saveAccount = $resource("/saveAccount")
+$scope.createNewAccount=function(){
       var newAccount = new saveAccount();
       newAccount.name = $scope.fullname;
       newAccount.email = $scope.email;
@@ -835,14 +837,35 @@ globalHiring.controller('stepsController',['$scope', '$resource','$uibModal', fu
         newAccount.isstudent = false;
       }
 
-      newAccount.languages = $scope.langs;
-
-      newAccount.educations = $scope.educations;
-
-      newAccount.skills = $scope.mainServices;
-
       newAccount.$save(
         function(data){
+          $scope.userAccount=data;
+          //window.location = "/profile.html"; // save and move to profile page
+        },
+        function(errorMsg){
+          $scope.errorMsg="There is a problem in creating your account, Please Try Again."
+          $scope.errorModal();
+        }
+      );
+
+}
+// End of $scope.createNewAccount
+
+
+// Save an account
+  var completeAccount = $resource("/completeAccount")
+  $scope.finishClick=function(){
+      var finishAccount = new completeAccount();
+      finishAccount.id=$scope.userAccount.id;
+      finishAccount.languages = $scope.langs;
+
+      finishAccount.educations = $scope.educations;
+
+      finishAccount.skills = $scope.mainServices;
+
+      finishAccount.$save(
+        function(data){
+          $scope.userAccount=data;
           window.location = "/profile.html"; // save and move to profile page
         },
         function(errorMsg){
