@@ -89,14 +89,18 @@ func Authenticate(w http.ResponseWriter, r *http.Request) (int, *HandlerError) {
   return id, nil
 }
 
+type DummyStruct struct{
+
+}
+
 func Logout(w http.ResponseWriter, r *http.Request) (interface{}, *HandlerError) {
 
 	session, err := GetSession(w, r)
   if err != nil {
-      return nil, &HandlerError{err, "Problems in session", http.StatusBadRequest}
+      return DummyStruct{}, &HandlerError{err, "Problems in session", http.StatusBadRequest}
   }
 
   session.clearAccountID()
 
-  return nil, nil
+  return DummyStruct{}, nil
 }
