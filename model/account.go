@@ -1,6 +1,7 @@
 package model
 
 import (
+  "errors"
   "strings"
   "database/sql"
   "net/http"
@@ -16,6 +17,7 @@ type Account struct {
   Phone string `json:"phone"`
   Password string `json:"password"`
   IsStudent bool `json:"isstudent"`
+  IsCompleted bool `json:"iscompleted"`
 
   Languages []AccountLanguage `json:"languages"`
 
@@ -52,6 +54,7 @@ func parseAccount(dataMap map[string]interface{}) (Account, error) {
   result.Phone = util.ParseString(dataMap, "phone")
   result.Password = util.ParseString(dataMap, "password")
   result.IsStudent = util.ParseBool(dataMap, "isstudent")
+  result.IsCompleted = util.ParseBool(dataMap, "iscompleted")
   result.City, _ = parseCity(dataMap["city"])
 
   result.Languages      = parseAccountLanguages(      dataMap["languages"])
@@ -87,6 +90,8 @@ func loadAccount(session *util.Session) (Account, error) {
   account.Tests, _ = loadAccountTests(session)
   account.Projects, _ = loadAccountProjects(session)
 
+  account.IsCompleted = len(account.Languages) > 0
+
   return account, nil
 }
 
@@ -120,6 +125,10 @@ func (acc *Account) create(session *util.Session) error {
 }
 
 func (acc *Account) createComplete(session *util.Session) error {
+
+    if session.GetAccountID() != acc.Id {
+      return errors.New("It seems that this account is not authenticated in this session")
+    }
 
     for _ , language := range acc.Languages {
       language.save(session)
