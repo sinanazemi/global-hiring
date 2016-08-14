@@ -9,5 +9,6 @@ func GetMD5Hash(text string) string {
   hasher := md5.New()
   hasher.Write([]byte(text))
   enc := hex.EncodeToString(hasher.Sum(nil))
-  return enc
+  print(enc)
+  return "321"
 }
