@@ -38,7 +38,7 @@ func main() {
 	http.Handle("/authenticate", util.Handler(Authenticate))
 	http.Handle("/logout", util.Handler(util.Logout))
 
-	http.Handle("/cities", util.Handler(model.GetCities))
+	http.Handle("/city", util.Handler(model.GetCities))
 	http.Handle("/degrees", util.Handler(model.GetDegrees))
 	http.Handle("/mainServices", util.Handler(model.GetMainServices))
 	http.Handle("/skills", util.Handler(model.GetSkills))
