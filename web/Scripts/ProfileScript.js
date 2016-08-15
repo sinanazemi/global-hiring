@@ -3,8 +3,8 @@ var myapp = new angular.module("app", ["ngResource"]);
 
 // inject the $resource dependency here
 myapp.controller("controller",
-  ["$scope", "$window", "$resource", "$rootScope",
-    function ($scope, $window, $resource, $rootScope) {
+  ["$scope", "$window", "$resource",
+    function ($scope, $window, $resource) {
 
         var accountRes = $resource("/account")
         accountRes.get(
@@ -34,12 +34,13 @@ myapp.controller("controller",
         //) // service.query
 
         var degrees = $resource("/degrees")
-        degrees.query(
-          function (data) {
-              $scope.degrees = data;
-          } // function(data)
-        ) // service.query
-
+        function setDegrees() {
+            degrees.query(
+              function (data) {
+                  $scope.degrees = data;
+              } // function(data)
+            ) // service.query
+        }
         var volCauses = $resource("/volunteeringCauses")
         volCauses.query(
          function (data) {
@@ -80,58 +81,53 @@ myapp.controller("controller",
         //********************** Auto Suggestion ************************
         //************************************        
         //Function To Call On ng-change
-        //$rootScope.search = function (data) {
+        //$scope.search = function (data) {
         function search(data,searchText) {
             data.sort();
             //Define Suggestions List
-            $rootScope.suggestions = [];
+            $scope.suggestions = [];
             //Define Selected Suggestion Item
-            $rootScope.selectedIndex = -1;
-            $rootScope.suggestions = [];
+            $scope.selectedIndex = -1;
             var myMaxSuggestionListLength = 0;
             for (var i = 0; i < data.length; i++) {
-                var searchItemsSmallLetters = angular.lowercase(data[i]);
+                var searchItemsSmallLetters = angular.lowercase(data[i].name);
                 var searchTextSmallLetters = angular.lowercase(searchText);
-                if (searchItemsSmallLetters.name.indexOf(searchTextSmallLetters) !== -1) {
-                    $rootScope.suggestions.push(searchItemsSmallLetters);
+                if (searchItemsSmallLetters.indexOf(searchTextSmallLetters) !== -1) {
+                    $scope.suggestions.push(data[i]);
                     myMaxSuggestionListLength += 1;
-                    if (myMaxSuggestionListLength == 5) {
-                        break;
-                    }
+                    //TODO: un comment
+                    //Define maximum number of sugestion in list
+                    //if (myMaxSuggestionListLength == 5) {
+                    //    break;
+                    //}
                 }
             }
         }
-
-        var suggestionDate = []
-        function searchSug(data, searchText) {
-            data.sort();
-            //Define Suggestions List
-            suggestionDate = [];
-            //Define Selected Suggestion Item
-            $rootScope.selectedIndex = -1;
-            var myMaxSuggestionListLength = 0;
-            for (var i = 0; i < data.length; i++) {
-                var searchItemsSmallLetters = angular.lowercase(data[i]);
-                var searchTextSmallLetters = angular.lowercase(searchText);
-                if (searchItemsSmallLetters.name.indexOf(searchTextSmallLetters) !== -1) {
-                    suggestionDate.push(searchItemsSmallLetters);
-                    myMaxSuggestionListLength += 1;
-                    if (myMaxSuggestionListLength == 5) {
-                        break;
-                    }
-                }
-            }
-        }
-       
-       
 
         //**************************
         // Work History
         //*************************
-        $scope.locations = [{ id: 1, name: "location 1" }, { id: 2, name: "location 2" }, { id: 3, name: "location 3" }, { id: 4, name: "location 11" }, { id: 5, name: "location 12" }, { id: 6, name: "location 13" }
-        , { id: 7, name: "location 21" }, { id: 8, name: "location 22" }, { id: 9, name: "location 23" }, { id: 10, name: "location 31" }, { id: 11, name: "location 32" }, { id: 12, name: "location 33" }];
-        //$scope.roles = ["Intern", "Individual Contributor", "Lead", "Manager", "Executive", "Owner"];
-        $scope.roles = [{ value: "I", name: "Intern" }, { value: "C", name: "Individual Contributor" }, { value: "L", name: "Lead" }, { value: "M", name: "Manager" }, { value: "E", name: "Executive" }, { value: "O", name: "Owner" }];
+        function setLocation() {
+            $scope.locations = [{ id: 1, name: "location 1" }, { id: 2, name: "location 2" }, { id: 3, name: "location 3" }, { id: 4, name: "location 11" }, { id: 5, name: "location 12" }, { id: 6, name: "location 13" }
+            , { id: 7, name: "location 21" }, { id: 8, name: "location 22" }, { id: 9, name: "location 23" }, { id: 10, name: "location 31" }, { id: 11, name: "location 32" }, { id: 12, name: "location 33" }];
+        }
+        function setRoles() {
+            $scope.roles = [{ value: "I", name: "Intern" }, { value: "C", name: "Individual Contributor" }, { value: "L", name: "Lead" }, { value: "M", name: "Manager" }, { value: "E", name: "Executive" }, { value: "O", name: "Owner" }];
+        }
+
+       
+        $scope.addWorkHistory = function()
+        {
+            if ($scope.locations == null)
+            {
+                setLocation();
+            }
+            if ($scope.roles==null)
+            {
+                setRoles();
+            }
+            cleanHistoryInputs();
+        }
 
         var saveWhRes = $resource("/saveWork")
         $scope.saveWorkHistory = function () {
@@ -150,7 +146,7 @@ myapp.controller("controller",
                 saveWh.company = $scope.whCompany;
                 saveWh.location = $scope.whLocation;
                 saveWh.title = $scope.whTitle;
-                saveWh.role = $scope.whRole; /*$scope.whRole;*/
+                saveWh.role = $scope.whRoleValue; /*$scope.whRole;*/
                 saveWh.frommonth = $scope.whFromMonth;/*$scope.months.indexOf($scope.whFromMonth)+1;*/
                 saveWh.fromyear = $scope.whFromYear;
                 saveWh.tomonth = $scope.whToMonth;/*$scope.months.indexOf($scope.whToMonth)+1;*/
@@ -177,12 +173,18 @@ myapp.controller("controller",
         }
 
         $scope.editWorkHistory = function (wh) {
-
+            if ($scope.locations == null) {
+                setLocation();
+            }
+            if ($scope.roles==null) {
+                setRoles();
+            }
             $scope.whId = wh.id;
             $scope.whCompany = wh.company;
             $scope.whLocation = wh.location;
             $scope.whTitle = wh.title;
-            $scope.whRole = wh.role.value;
+            $scope.whRole = wh.role.name;
+            $scope.whRoleValue = wh.role.value;
             $scope.whFromMonth = wh.frommonth;
             $scope.whFromYear = wh.fromyear;
             $scope.whToMonth = wh.tomonth;//wh.tomonth.name;
@@ -225,10 +227,6 @@ myapp.controller("controller",
             $scope.whDesc = "";
         }
 
-        $scope.cleanWhInputs = function () {
-            cleanHistoryInputs();
-        }
-
         // ********** check validation ****************
         $scope.vwhCompanyShow = false;
         $scope.vwhLocationShow = false;
@@ -246,7 +244,7 @@ myapp.controller("controller",
                 $scope.vwhCompanyShow = true;
 
             }
-            if ($scope.whLocation == "") {
+            if ($scope.whLocation == "" || $scope.whLocation == null) {
                 isValid = false;
                 $scope.vwhLocationShow = true;
             }
@@ -254,7 +252,7 @@ myapp.controller("controller",
                 isValid = false;
                 $scope.vwhTitleShow = true;
             }
-            if ($scope.whRole == "") {
+            if ($scope.whRole == "" || $scope.whRole==null) {
                 isValid = false;
                 $scope.vwhRoleShow = true;
             }
@@ -285,18 +283,15 @@ myapp.controller("controller",
             $scope.vwhCompanyShow = false;
         }
         $scope.whLocationChg = function (data) {
-            $scope.vwhLocationShow = false;
-
+            $scope.vwhLocationShow = false;     // for validation
             search(data, $scope.whLocation);       // auto suggestion search
-            //$scope.whLcSgListShow = true;
-            //$scope.locations = suggestionDate;
-            //$rootScope.suggestions = suggestionDate;
         }
         $scope.whTitleChg = function () {
             $scope.vwhTitleShow = false;
         }
-        $scope.whRoleChg = function () {
-            $scope.vwhRoleShow = false;
+        $scope.whRoleChg = function (data) {
+            $scope.vwhRoleShow = false;             // for validation
+            search(data, $scope.whRole);       // auto suggestion search
         }
         $scope.whFromMonthChg = function () {
             if ($scope.whFromMonth == "")
@@ -336,7 +331,6 @@ myapp.controller("controller",
             }
         }
         
-
         $scope.whCurrentlyChg = function () {
             if($scope.whCurrently)
             {
@@ -360,53 +354,50 @@ myapp.controller("controller",
 
         // *********** for auto suggestion ***************
         //***************************************************
+        //===== location ==================
+        $scope.whLocationClick = function () {
+            if ($scope.whLocation == null || $scope.whLocation == "")
+                $scope.suggestions = $scope.locations;
+            $scope.whLcSgListShow = !$scope.whLcSgListShow;
+            $("#whLc").focus();
+        }
         //List Item Events
         //Function To Call on ng-click
-        $rootScope.whLcAssignValueAndHide = function (index) {
-            //$scope.searchText = $rootScope.suggestions[index].name;
-            $scope.whLocation = $rootScope.suggestions[index].name;
-            $rootScope.suggestions = [];
+        $scope.whLcAssignValueAndHide = function (index) {        
+            $scope.whLocation = $scope.suggestions[index].name;
+            $scope.suggestions = [];
             $scope.whLcSgListShow = false;
         }
         
         //Text Field Events
         //Function To Call on ng-keydown
-        $rootScope.whLcCheckKeyDown = function (event) {
+        $scope.whLcCheckKeyDown = function (event) {
             if (event.keyCode === 40) {//down key, increment selectedIndex
                 $scope.whLcSgListShow = true;
+                if ($scope.whLocation == null || $scope.whLocation == "")
+                    $scope.suggestions = $scope.locations;
                 event.preventDefault();
-                if ($rootScope.selectedIndex + 1 !== $rootScope.suggestions.length) {
-                    $rootScope.selectedIndex++;                    
-                    //$scope.lcsShow = false;
-                    //if ($rootScope.suggestions[$rootScope.selectedIndex] != null)
-                    //    $scope.whLocation = $rootScope.suggestions[$rootScope.selectedIndex].name;
-                    //$scope.whLcSgListShow = false;
+                if ($scope.selectedIndex + 1 !== $scope.suggestions.length) {
+                    $scope.selectedIndex++; 
                 }
             } else if (event.keyCode === 38) { //up key, decrement selectedIndex
                 event.preventDefault();
-                if ($rootScope.selectedIndex - 1 !== -1) {
-                    $rootScope.selectedIndex--;
-                    //$scope.lcsShow = false;
-                    //if ($rootScope.suggestions[$rootScope.selectedIndex] != null)
-                    //    $scope.whLocation = $rootScope.suggestions[$rootScope.selectedIndex].name;
-                    //$scope.whLcSgListShow = false;
+                if ($scope.selectedIndex - 1 !== -1) {
+                    $scope.selectedIndex--;
                 }
             } else if (event.keyCode === 13) { //enter key, empty suggestions array
                 event.preventDefault();
-                //$rootScope.suggestions = [];
-                //$scope.whLcSgListShow = false;
-                $scope.whLocation = $rootScope.suggestions[$rootScope.selectedIndex].name;
-                $rootScope.suggestions = $scope.locations;
+                $scope.whLocation = $scope.suggestions[$scope.selectedIndex].name;
+                $scope.suggestions = [];
                 $scope.whLcSgListShow = false;
             }
         }
         //Function To Call on ng-keyup
-        $rootScope.whLcCheckKeyUp = function (event) {
+        $scope.whLcCheckKeyUp = function (event) {
             if (event.keyCode !== 8 || event.keyCode !== 46) {//delete or backspace
                 
-                if ($scope.whLocation == "") {
-                    $rootScope.suggestions = $scope.locations;
-                    //$scope.whLcSgListShow = false;
+                if ($scope.whLocation == "" || $scope.whLocation==null) {
+                    $scope.suggestions = $scope.locations;
                 }
                 else if (event.keyCode !== 40 && event.keyCode !== 38)
                     search($scope.locations, $scope.whLocation);
@@ -415,22 +406,100 @@ myapp.controller("controller",
                 $scope.whLcSgListShow = true;
         }
 
-        $scope.whLocationClick = function () {
-            if ($scope.whLocation == null || $scope.whLocation == "")
-                $rootScope.suggestions = $scope.locations;
-            $scope.whLcSgListShow = !$scope.whLcSgListShow;
-            $("#whLc").focus();
+        // for close the list out of input select
+        var whLcliSel = false;
+        $scope.whLcLiSel = function () {
+            whLcliSel = true;
         }
-
+        $scope.whLcLiUnSel = function () {
+            whLcliSel = false;
+        }
         $scope.whLcLeave = function () {
-            $scope.whLcSgListShow = false;
+            if (!whLcliSel) {
+                $scope.whLcSgListShow = false;
+                $scope.suggestions = [];
+            }
+        }
+        //====================================
+        //======== role =================
+        $scope.whRoleClick = function () {
+            if ($scope.whRole == null || $scope.whRole == "")
+                $scope.suggestions = $scope.roles;
+            $scope.whRlSgListShow = !$scope.whRlSgListShow;
+            $("#whRl").focus();
+        }
+        //List Item Events
+        //Function To Call on ng-click
+        $scope.whRlAssignValueAndHide = function (index) {
+            $scope.whRole = $scope.suggestions[index].name;
+            $scope.whRoleValue = $scope.suggestions[index].value;
+            $scope.suggestions = [];
+            $scope.whRlSgListShow = false;
         }
 
-        //====================================
+        //Text Field Events
+        //Function To Call on ng-keydown
+        $scope.whRlCheckKeyDown = function (event) {
+            if (event.keyCode === 40) {//down key, increment selectedIndex
+                $scope.whRlSgListShow = true;
+                if ($scope.whRole == null || $scope.whRole == "")
+                    $scope.suggestions = $scope.roles;
+                event.preventDefault();
+                if ($scope.selectedIndex + 1 !== $scope.suggestions.length) {
+                    $scope.selectedIndex++;
+                }
+            } else if (event.keyCode === 38) { //up key, decrement selectedIndex
+                event.preventDefault();
+                if ($scope.selectedIndex - 1 !== -1) {
+                    $scope.selectedIndex--;
+                }
+            } else if (event.keyCode === 13) { //enter key, empty suggestions array
+                event.preventDefault();
+                $scope.whRole = $scope.suggestions[$scope.selectedIndex].name;
+                $scope.whRoleValue = $scope.suggestions[$scope.selectedIndex].value;
+                $scope.suggestions = [];
+                $scope.whRlSgListShow = false;
+            }
+        }
+        //Function To Call on ng-keyup
+        $scope.whRlCheckKeyUp = function (event) {
+            if (event.keyCode !== 8 || event.keyCode !== 46) {//delete or backspace
+
+                if ($scope.whRole == "" || $scope.whRole == null) {
+                    $scope.suggestions = $scope.roles;
+                }
+                else if (event.keyCode !== 40 && event.keyCode !== 38) // is not arrow keys
+                    search($scope.roles, $scope.whRole);
+            }
+            if (event.keyCode == 8 || event.keyCode == 46)
+                $scope.whRlSgListShow = true;
+        }
+
+        // for close the list out of input select
+        var whRlliSel = false;
+        $scope.whRlLiSel = function () {
+            whRlliSel = true;
+        }
+        $scope.whRlLiUnSel = function () {
+            whRlliSel = false;
+        }
+        $scope.whRlLeave = function () {
+            if (!whRlliSel) {
+                $scope.whRlSgListShow = false;
+                $scope.suggestions = [];
+            }
+        }
+
 
         //*************************
         // education
         //*************************
+        $scope.addEducation = function () {
+            if ($scope.degrees == null)
+                setDegrees();
+            cleanEducationInputs();
+        }
+
         var saveEduRes = $resource("/saveEducation")
         $scope.saveEducation = function () {
             if (saveEdu())
@@ -469,6 +538,8 @@ myapp.controller("controller",
         }
 
         $scope.editEducation = function (edu) {
+            if ($scope.degrees == null)
+                setDegrees();
             $scope.eduId = edu.id;
             $scope.eduSchool = edu.school;
             $scope.eduFromDate = edu.fromdate;
@@ -496,9 +567,7 @@ myapp.controller("controller",
             $scope.eduDesc = "";
         }
 
-        $scope.cleanEduInputs = function () {
-            cleanEducationInputs();
-        }
+        
 
         var delEduRes = $resource("/deleteEducation")
         $scope.deleteEducation = function (edu) {

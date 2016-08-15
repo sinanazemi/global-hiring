@@ -181,6 +181,16 @@
 	outline:none;
 }
 
+
+.autoCmb{
+    position:relative;
+}
+.cmbSign{
+    position: absolute; 
+    right: 10px; 
+    top: 10px; 
+    color: #03ba6d;
+}
 /*-------------------------------
     History
     ------------------------------*/
