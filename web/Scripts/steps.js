@@ -481,6 +481,13 @@ $scope.createNewAccount=function(){
         function(data){
           $scope.userAccount=data;
           //window.location = "/profile.html"; // save and move to profile page
+          if($scope.userAccount.isstudent)
+          {
+            $scope.langPrevBtn=true;
+          }
+          else {
+            $scope.mainSrvPrevBtn=true;
+          }
         },
         function(errorMsg){
           $scope.errorMsg="There is a problem in creating your account, Please Try Again."
