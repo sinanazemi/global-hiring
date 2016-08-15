@@ -390,13 +390,13 @@
        }
         .logo-img-c {
             position:absolute;
-            width: 75px;
-            height: 10px;
+            width: 125px;
+            height: 15px;
             /*margin:auto;*/
             /*margin-left:50%;
             margin-right:50%;*/
-            right:50%;
-            left:50%;
+            right:40%;
+            left:40%;
             margin-left:-20px;
 
         }

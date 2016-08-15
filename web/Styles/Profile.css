@@ -145,7 +145,41 @@
 .btn-add-c, .btn-edit-c, .btn-delete-c{
     display:none;
 }
-
+/*------------------------------
+    suggestion list
+    ----------------------------*/
+.suggestions-list {
+	position: absolute;
+    z-index:20;
+	list-style-type: none;
+	/*margin: 0 0 0 23px;*/
+    height:150px;
+	padding: 0;
+	overflow: auto;
+}
+.suggestions-list li {
+	color: #000000;
+	/*padding: 10px 10px;*/
+    padding-left:10px;
+    padding-top:5px;
+	/*height:10px;*/    
+	cursor: pointer;
+	background: #f9f9f9;
+	border-bottom: 1px solid #eeeeee;
+	/*width:234px;*/
+}
+.suggestions-list li:hover {
+	background: #eeeeee;
+}
+.suggestions-list li:active,
+.suggestions-list li.active {
+	color: #FFFFFF;
+	background: #0099FF;
+	/*width:234px;*/
+}
+.suggestions-list:focus{
+	outline:none;
+}
 
 /*-------------------------------
     History

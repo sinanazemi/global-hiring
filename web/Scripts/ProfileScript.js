@@ -3,8 +3,8 @@ var myapp = new angular.module("app", ["ngResource"]);
 
 // inject the $resource dependency here
 myapp.controller("controller",
-  ["$scope", "$window", "$resource",
-    function ($scope, $window, $resource) {
+  ["$scope", "$window", "$resource", "$rootScope",
+    function ($scope, $window, $resource, $rootScope) {
 
         var accountRes = $resource("/account")
         accountRes.get(
@@ -64,10 +64,72 @@ myapp.controller("controller",
 
             return false;
         }
+
+        $scope.logoutShow = false;
+        $scope.accPrfClick = function () {
+            $scope.logoutShow = !$scope.logoutShow
+        };
+        var logout = $resource("/logout");
+        $scope.btnLogout = function () {
+            logout.get(function (data) {
+                window.location = "/HomePage.html"; // Logout and move to home page
+            })
+            
+        };
+
+        //********************** Auto Suggestion ************************
+        //************************************        
+        //Function To Call On ng-change
+        //$rootScope.search = function (data) {
+        function search(data,searchText) {
+            data.sort();
+            //Define Suggestions List
+            $rootScope.suggestions = [];
+            //Define Selected Suggestion Item
+            $rootScope.selectedIndex = -1;
+            $rootScope.suggestions = [];
+            var myMaxSuggestionListLength = 0;
+            for (var i = 0; i < data.length; i++) {
+                var searchItemsSmallLetters = angular.lowercase(data[i]);
+                var searchTextSmallLetters = angular.lowercase(searchText);
+                if (searchItemsSmallLetters.name.indexOf(searchTextSmallLetters) !== -1) {
+                    $rootScope.suggestions.push(searchItemsSmallLetters);
+                    myMaxSuggestionListLength += 1;
+                    if (myMaxSuggestionListLength == 5) {
+                        break;
+                    }
+                }
+            }
+        }
+
+        var suggestionDate = []
+        function searchSug(data, searchText) {
+            data.sort();
+            //Define Suggestions List
+            suggestionDate = [];
+            //Define Selected Suggestion Item
+            $rootScope.selectedIndex = -1;
+            var myMaxSuggestionListLength = 0;
+            for (var i = 0; i < data.length; i++) {
+                var searchItemsSmallLetters = angular.lowercase(data[i]);
+                var searchTextSmallLetters = angular.lowercase(searchText);
+                if (searchItemsSmallLetters.name.indexOf(searchTextSmallLetters) !== -1) {
+                    suggestionDate.push(searchItemsSmallLetters);
+                    myMaxSuggestionListLength += 1;
+                    if (myMaxSuggestionListLength == 5) {
+                        break;
+                    }
+                }
+            }
+        }
+       
+       
+
         //**************************
         // Work History
         //*************************
-        $scope.locations = ["location1", "location2", "location3"];
+        $scope.locations = [{ id: 1, name: "location 1" }, { id: 2, name: "location 2" }, { id: 3, name: "location 3" }, { id: 4, name: "location 11" }, { id: 5, name: "location 12" }, { id: 6, name: "location 13" }
+        , { id: 7, name: "location 21" }, { id: 8, name: "location 22" }, { id: 9, name: "location 23" }, { id: 10, name: "location 31" }, { id: 11, name: "location 32" }, { id: 12, name: "location 33" }];
         //$scope.roles = ["Intern", "Individual Contributor", "Lead", "Manager", "Executive", "Owner"];
         $scope.roles = [{ value: "I", name: "Intern" }, { value: "C", name: "Individual Contributor" }, { value: "L", name: "Lead" }, { value: "M", name: "Manager" }, { value: "E", name: "Executive" }, { value: "O", name: "Owner" }];
 
@@ -222,8 +284,13 @@ myapp.controller("controller",
         $scope.whCompanyChg = function () {
             $scope.vwhCompanyShow = false;
         }
-        $scope.whLocationChg = function () {
+        $scope.whLocationChg = function (data) {
             $scope.vwhLocationShow = false;
+
+            search(data, $scope.whLocation);       // auto suggestion search
+            //$scope.whLcSgListShow = true;
+            //$scope.locations = suggestionDate;
+            //$rootScope.suggestions = suggestionDate;
         }
         $scope.whTitleChg = function () {
             $scope.vwhTitleShow = false;
@@ -290,6 +357,77 @@ myapp.controller("controller",
             context.popoverRemove = false;
             context.whHoverStyle = {};
         }
+
+        // *********** for auto suggestion ***************
+        //***************************************************
+        //List Item Events
+        //Function To Call on ng-click
+        $rootScope.whLcAssignValueAndHide = function (index) {
+            //$scope.searchText = $rootScope.suggestions[index].name;
+            $scope.whLocation = $rootScope.suggestions[index].name;
+            $rootScope.suggestions = [];
+            $scope.whLcSgListShow = false;
+        }
+        
+        //Text Field Events
+        //Function To Call on ng-keydown
+        $rootScope.whLcCheckKeyDown = function (event) {
+            if (event.keyCode === 40) {//down key, increment selectedIndex
+                $scope.whLcSgListShow = true;
+                event.preventDefault();
+                if ($rootScope.selectedIndex + 1 !== $rootScope.suggestions.length) {
+                    $rootScope.selectedIndex++;                    
+                    //$scope.lcsShow = false;
+                    //if ($rootScope.suggestions[$rootScope.selectedIndex] != null)
+                    //    $scope.whLocation = $rootScope.suggestions[$rootScope.selectedIndex].name;
+                    //$scope.whLcSgListShow = false;
+                }
+            } else if (event.keyCode === 38) { //up key, decrement selectedIndex
+                event.preventDefault();
+                if ($rootScope.selectedIndex - 1 !== -1) {
+                    $rootScope.selectedIndex--;
+                    //$scope.lcsShow = false;
+                    //if ($rootScope.suggestions[$rootScope.selectedIndex] != null)
+                    //    $scope.whLocation = $rootScope.suggestions[$rootScope.selectedIndex].name;
+                    //$scope.whLcSgListShow = false;
+                }
+            } else if (event.keyCode === 13) { //enter key, empty suggestions array
+                event.preventDefault();
+                //$rootScope.suggestions = [];
+                //$scope.whLcSgListShow = false;
+                $scope.whLocation = $rootScope.suggestions[$rootScope.selectedIndex].name;
+                $rootScope.suggestions = $scope.locations;
+                $scope.whLcSgListShow = false;
+            }
+        }
+        //Function To Call on ng-keyup
+        $rootScope.whLcCheckKeyUp = function (event) {
+            if (event.keyCode !== 8 || event.keyCode !== 46) {//delete or backspace
+                
+                if ($scope.whLocation == "") {
+                    $rootScope.suggestions = $scope.locations;
+                    //$scope.whLcSgListShow = false;
+                }
+                else if (event.keyCode !== 40 && event.keyCode !== 38)
+                    search($scope.locations, $scope.whLocation);
+            }
+            if (event.keyCode == 8 || event.keyCode == 46)
+                $scope.whLcSgListShow = true;
+        }
+
+        $scope.whLocationClick = function () {
+            if ($scope.whLocation == null || $scope.whLocation == "")
+                $rootScope.suggestions = $scope.locations;
+            $scope.whLcSgListShow = !$scope.whLcSgListShow;
+            $("#whLc").focus();
+        }
+
+        $scope.whLcLeave = function () {
+            $scope.whLcSgListShow = false;
+        }
+
+        //====================================
+
         //*************************
         // education
         //*************************
@@ -413,11 +551,13 @@ myapp.controller("controller",
             else
             $scope.veduToDateShow = false;
         }
-        $scope.eduDegreeChg = function () {
+        $scope.eduDegreeChg = function (data) {
             if ($scope.eduDegree == "")
                 $scope.veduDegreeShow = true;
             else
                 $scope.veduDegreeShow = false;
+
+            search(data);
         }
 
 
@@ -1190,7 +1330,17 @@ myapp.controller("controller",
             context.crHoverStyle = {};
         }
 
+       
+
     }
 
   ]
 )
+
+$(document).ready(function () {
+    $('#logout').popover({ content: "<div style=\"height: 40px; width: 313px;display:inline-block\"> <button style=\"display:black\" class=\"glyphicon glyphicon-log-out\" ng-click=\"btnLogout()\">Logout</button><p style=\"display:black;font-family: Helvetica; font-size: 10px; font-weight: 400; letter-spacing: 0.5px; color: #7e7d7e;\">{{account.email}}</p></div>", html: true, placement: "bottom" })
+        .click(function (ev) {
+        //this is workaround needed in order to make ng-click work inside of popover
+            $compile($('#logout').contents())($scope);
+        });
+});
