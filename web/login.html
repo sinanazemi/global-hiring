@@ -159,7 +159,14 @@ myAppLogin.controller('loginController',['$scope', '$resource', function($scope,
 
         accountInfo.$save(
           function(data){
-            window.location = "/profile.html"; // Login and move to profile page
+            if(data.iscompleted)
+            {
+              window.location = "/profile.html"; // Login and move to profile page
+            }
+            else {
+              window.location = "/steps.html?id";
+            }
+
           },
           function(errorMessage){
             $scope.notLoginMsg=true;

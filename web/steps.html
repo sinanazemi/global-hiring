@@ -171,7 +171,7 @@
 
     <div class="footer row">
       <div class="col-sm-6 btn-div-c" >
-        <button type="button" class="next-button btn-prev-c " ng-click="langPreClick()" >Previous</button>
+        <button type="button" class="next-button btn-prev-c " ng-click="langPreClick()" ng-disabled="langPrevBtn" >Previous</button>
       </div>
       <div class="col-sm-6 btn-div-c" >
         <button type="button" class="next-button btn-next-c " ng-click="langNextClick()" >Next Step</button>
@@ -285,7 +285,7 @@
 
 <div class="footer row">
   <div class="col-sm-6 btn-div-c" >
-    <button type="button" class="next-button btn-prev-c " ng-click="mainSRVPreClick()" >Previous</button>
+    <button type="button" class="next-button btn-prev-c " ng-click="mainSRVPreClick()" ng-disabled="mainSrvPrevBtn" >Previous</button>
   </div>
   <div class="col-sm-6 btn-div-c" >
     <button type="button" class="next-button btn-next-c " ng-click="mainSRVNextClick()" >Next Step</button>
@@ -399,10 +399,48 @@
 
 <script>
 var globalHiring = angular.module('globalHiring',['ngResource','ngAnimate', 'ui.bootstrap']);
-globalHiring.controller('stepsController',['$scope', '$resource','$uibModal', function($scope, $resource,$uibModal, $http, $window, $log) {
+globalHiring.controller('stepsController',['$scope', '$resource','$uibModal','$location', function($scope, $resource,$uibModal,$location, $http, $window, $log) {
+
+//initializing page
+var accountUser = $resource("/account")
+$scope.init = function () {
+
+    if($location.absUrl().indexOf('id') > -1){
+      //$scope.id= $location.absUrl().split('=')[1];
+
+      accountUser.get(
+        function (data) {
+            $scope.userAccount = data
+            if(!$scope.userAccount.iscompleted)
+            {
+              $scope.step1Hide=true;
+              if($scope.userAccount.isstudent){
+                $scope.stepLangHide=false;
+                $scope.langBarImage="images/step_2_bar.png";
+                $scope.langPrevBtn=true;
+              }
+              else {
+                $scope.stepMainSRVHide=false;
+                $scope.mainSRVBarImage="images/step_2_bar.png";
+                $scope.mainSrvPrevBtn=true;
+                $scope.getMainServices();
+              }
+            }//if iscompleted
+        },
+        function(errorMsg){
+          $scope.errorMsg="There is a problem in Loading your account, Please Try Again."
+          $scope.errorModal();
+        }
+      );
+    }
+}
+// finish initializing
 
   $scope.phoneRegex='[0-9 ]+';
   $scope.userAccount='';
+
+  $scope.langPrevBtn=false;
+  $scope.mainSrvPrevBtn=false;
   // Steps controller
   //$scope.authenticateHide=false;
   $scope.step1Hide=false;
@@ -837,6 +875,8 @@ $scope.createNewAccount=function(){
         newAccount.isstudent = false;
       }
 
+      newAccount.isCompleted=false;
+
       newAccount.$save(
         function(data){
           $scope.userAccount=data;
@@ -847,10 +887,8 @@ $scope.createNewAccount=function(){
           $scope.errorModal();
         }
       );
-
 }
 // End of $scope.createNewAccount
-
 
 // Save an account
   var completeAccount = $resource("/completeAccount")
@@ -862,6 +900,7 @@ $scope.createNewAccount=function(){
       finishAccount.educations = $scope.educations;
 
       finishAccount.skills = $scope.mainServices;
+      finishAccount.isCompleted=true;
 
       finishAccount.$save(
         function(data){
@@ -873,10 +912,9 @@ $scope.createNewAccount=function(){
           $scope.errorModal();
         }
       );
-
-      //window.location = "/profile.html"; // save and move to profile page
   }// finish click
 
+  $scope.init();
 }
 ]// scope, resource
 );
