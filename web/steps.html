@@ -349,7 +349,7 @@
         <li>
           <div class="row" style="margin:0;">
             <div class="radio" style="margin:0;">
-              <label class="radio-button-text" ><input type="radio" name="level" ng-value="langProf.value" ng-click="$event.preventDefault(); langToAdd.profeciency = langProf.value">{{ langProf.text }} <br/><span class="black-thin-label">Description.</span></label>
+              <label class="radio-button-text" ><input type="radio" name="level" ng-value="langProf.value" ng-click="langToAdd.profeciency = langProf.value; close()">{{ langProf.text }} <br/><span class="black-thin-label">Description.</span></label>
             </div>
           </div>
         </li>
@@ -371,7 +371,7 @@
       <li>
         <div class="row" style="margin:0;">
           <div class="radio" style="margin:0;">
-            <label class="radio-button-text" ><input type="radio" name="level" ng-value="SkillProf" ng-click="$event.preventDefault(); selected.profeciency = SkillProf">{{ SkillProf.text }} <br/><span class="black-thin-label">Description.</span></label>
+            <label class="radio-button-text" ><input type="radio" name="level" ng-value="SkillProf" ng-click="selected.profeciency = SkillProf; close()">{{ SkillProf.text }} <br/><span class="black-thin-label">Description.</span></label>
           </div>
         </div>
       </li>
