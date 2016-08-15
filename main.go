@@ -7,8 +7,8 @@ import (
 
 	"net/http"
 
+	"github.com/sinanazemi/global-hiring/util"
   "github.com/sinanazemi/global-hiring/model"
-  "github.com/sinanazemi/global-hiring/util"
 
 )
 
