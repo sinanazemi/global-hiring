@@ -42,14 +42,18 @@
             </div>
             <div class="menu-mo-c">
                 <img class="small-profile-img-c img-circle" src="images/Chrysanthemum.jpg" />
-                <a href="#login" class="acc_name-c">{{account.name}}</a>                
+                <a href="#login" class="acc_name-c" ng-click="accPrfClick()">{{account.name}}<span class="glyphicon glyphicon-chevron-down pf_icon-c"></span></a> 
+                <div class="logout-div-c" id="signOut" ng-show="logoutShow">
+                    <!--<button class="glyphicon glyphicon-log-out" ng-click="btnLogout()">Logout</button>-->
+                    <span class="glyphicon glyphicon-log-out logout-btn-c"></span><a href="#" ng-click="btnLogout()">Logout</a>
+                    <p class="logout-email-c">{{account.email}}</p>
+                </div>                 
             </div>
         </div>
     </nav>
-             <div id="signOut" ng-show="logoutShow" style="height: 47px; width: 313px; border: 1px solid #979797; position: absolute; right: 0px; top: 63px;">
-                 <!--<button class="glyphicon glyphicon-log-out" ng-click="btnLogout()">Logout</button>-->
-                 <span class="glyphicon glyphicon-log-out" style="margin-top:15px;margin-bottom:auto;margin-left:30px;"></span> <a href="#" ng-click="btnLogout()">Logout</a>
-                 <p style="font-family: Helvetica; font-size: 10px; font-weight: 400; letter-spacing: 0.5px; color: #7e7d7e;position:absolute; top:15px;right:0px;">{{account.email}}</p>
+             <div class="logout-div-c" id="signOut" ng-show="logoutShow" >
+                 <span class="glyphicon glyphicon-log-out logout-btn-c"></span><a href="#" ng-click="btnLogout()">Logout</a>
+                 <p class="logout-email-c" >{{account.email}}</p>
              </div>         
          <!--<button type="button" class="glyphicon glyphicon-chevron-down pf_icon-c"id="logout"></button>-->
 
