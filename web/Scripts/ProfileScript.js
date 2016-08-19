@@ -103,6 +103,82 @@ myapp.controller("controller",
                 }
             }
         }
+        //**************************
+        // language
+        //**************************
+        $scope.lblLgName = false;
+
+        $scope.addLanguage = function () {
+            cleanLanguageInputs();
+        }
+        var saveLgRes = $resource("/saveLanguage")
+        function saveLg() {
+            //if(!checkExist())
+            var saveLg = new saveLgRes();
+            saveLg.id = $scope.lgId;
+            saveLg.name = $scope.lgName;
+            saveLg.profeciency=$scope.lgProfeciency;
+            $scope.lblLgName = false;
+            var index;
+            $scope.account.languages.some(function (elem, i) {
+                return elem.id === $scope.lgId ? (index = i, true) : false;
+            });
+            saveLg.$save(function (lg) {
+                if (index >= 0)
+                    $scope.account.languages[index] = lg;
+                else
+                    $scope.account.languages.push(lg);
+
+            });
+            return true;
+        }
+        $scope.saveLanguage = function () {
+            if (saveLg())
+                $('#addLanguage').modal('hide');
+        }
+        $scope.saveLanguageMore = function()
+        {
+            saveLg();
+            cleanLanguageInputs();
+        }
+        $scope.editLanguage = function (lg) {            
+            $scope.lgId = lg.id;
+            $scope.lgName = lg.name;
+            $scope.lgProfeciency = lg.profeciency.value;
+            $scope.lblLgName = true;
+            
+        }
+
+        var delLgRes = $resource("/deleteLanguage")
+        $scope.deleteLanguage = function (lg) {
+            var delLg = new delLgRes();
+            delLg.id = lg.id;
+            delLg.$save(function (dlg) {
+                $scope.account.languages.splice($scope.account.languages.indexOf(dlg), 1);
+                //cleanHistoryInputs();
+            });
+        }
+
+
+        function cleanLanguageInputs() {
+            $scope.lgId = '';
+            $scope.lgName = '';
+            $scope.lgProfeciency = '';
+            $scope.lblLgName = false;
+        }
+
+        // ************* for highlight and show the edit and delete buttons
+        $scope.lgMouseOver = function (context) {            
+            context.popoverRemove = true;
+            context.lgHoverStyle = { 'background-color': '#b8e986' };
+        }
+
+        $scope.lgMouseLeave = function (context) {
+            context.popoverRemove = false;
+            context.lgHoverStyle = {};
+        }       
+
+
 
         //**************************
         // Work History

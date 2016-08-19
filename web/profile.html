@@ -885,13 +885,96 @@
                            <br />
                            <hr />
                            <br />
-                           <h3>Languages</h3>
-                           <p ng-repeat="x in account.languages">{{x.name}}: <span>{{x.profeciency.name}}</span></p>
-                       </div>
+                           <div class="panel-body panel-language-c">
+                               <h3>
+                                   Languages
+                                   &nbsp;<a class="btn-add-c add-language-c" data-toggle="modal" data-target="#addLanguage" ng-click="addLanguage()"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                               </h3>
+                               <p ng-repeat="x in account.languages"
+                                  ng-mouseleave="lgMouseLeave(this)" ng-mouseover="lgMouseOver(this)">
+                                   {{x.name}}: <span>{{x.profeciency.name}}</span>
+                                   &nbsp;
+                                   <a href="#" class="a-btn-c edit-language-c" data-toggle="modal" data-target="#addLanguage" ng-click="editLanguage(x)" ng-show="popoverRemove" ng-style="lgHoverStyle">
+                                       <span class="glyphicon glyphicon-pencil"></span>
+                                   </a>
+                                   &nbsp;
+                                   <a href="#" class=" a-btn-c delete-language-c" ng-click="deleteLanguage(x)" ng-show="popoverRemove && (x.name!='English')" ng-style="lgHoverStyle">
+                                       <span class="glyphicon glyphicon-trash"></span>
+                                   </a>
+                               </p>
+                           </div>
+                           <div id="addLanguage" class="modal fade modal-c" role="dialog">
+                               <div class="modal-dialog">
 
-                   </div>
-               </div>
-           </div>
+                                   <!-- Modal content-->
+                                   <div class="modal-content">
+                                       <div class="modal-header modal-h-c">
+                                           <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                           <h4 class="modal-title m-title-c">Add Language</h4>
+                                       </div>
+                                       <div class="modal-body modal-b-c">
+                                           <form name="whForm" role="form">
+                                               <input class="form-control" type="text" ng-model="lgId" ng-hide="true">
+                                               <div class="form-group field-div zero-margin">
+                                                   <label class="control-label col-sm-12 field-Bold-label">Language</label>
+                                                   <div class="col-sm-12" style="margin-top:10px;">
+                                                       <input type="text" class="form-control input-sm input-style" ng-model="lgName" ng-show="!lblLgName">
+                                                       <label ng-model="lgName" ng-show="lblLgName" style="font-weight: normal;">{{lgName}}</label>
+                                                   </div>
+                                               </div>
+                                               <div class="form-group field-div">
+                                                   <label class="control-label col-sm-12 field-Bold-label" style="text-align:left; margin-top:18px;">Profeciency</label>
+                                               </div>
+                                               <div class="row radio-langPro-position">
+                                                   <div class="col-sm-12 form-group field-div zero-margin">
+                                                       <div class="radio">
+                                                           <label class="radio-button-text"><input type="radio" name="level" value="E" ng-model="lgProfeciency">Elementry <br /><span class="black-thin-label">I am only able to understand written text in it.</span></label>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                               <div class="row radio-langPro-position">
+                                                   <div class="col-sm-12 form-group field-div zero-margin">
+                                                       <div class="radio ">
+                                                           <label class="radio-button-text"><input type="radio" name="level" value="B" ng-model="lgProfeciency">Basic <br /><span class="black-thin-label">I am only able to communicate with it through written communication.</span></label>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                               <div class="row radio-langPro-position">
+                                                   <div class="col-sm-12 form-group field-div zero-margin">
+                                                       <div class="radio ">
+                                                           <label class="radio-button-text"><input type="radio" name="level" value="C" ng-model="lgProfeciency">Conversational <br /><span class="black-thin-label">I know it well enough to verbally discuss project details with a client.</span></label>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                               <div class="row radio-langPro-position">
+                                                   <div class="col-sm-12 form-group field-div zero-margin">
+                                                       <div class="radio">
+                                                           <label class="radio-button-text"><input type="radio" name="level" value="F" ng-model="lgProfeciency">Fluent <br /><span class="black-thin-label">I have complete command of it with perfect grammer.</span></label>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                               <div class="row radio-langPro-position">
+                                                   <div class="col-sm-12 form-group field-div zero-margin">
+                                                       <div class="radio">
+                                                           <label class="radio-button-text"><input type="radio" name="level" value="N" ng-model="lgProfeciency">Native or Bollingual <br /><span class="black-thin-label">I have complete command of it, including breadth of vocabulary, idioms.</span></label>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                           </form>
+                                       </div>
+                                       <div class="modal-footer m-footer-c">
+                                           <button type="button" class="btn btn-save-c" ng-click="saveLanguage()">Save</button>
+                                           <button type="button" class="btn btn-save-more-c" ng-click="saveLanguageMore()">Save And Add More</button>
+                                           <button type="button" class="btn btn-cancel btn-cancel-c" ng-click="cleanWhInputs()" data-dismiss="modal" style="border:none;">Cancel</button>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                           </div>
+
+                               </div>
+                           </div>
+                       </div>
 
     <!-- Footer -->
     <div class="container-fluid container-footer-c">
