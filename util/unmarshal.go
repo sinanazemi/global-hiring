@@ -26,6 +26,19 @@ func ParseJsonRequest(r *http.Request) (map[string]interface{}, error) {
   return result, nil
 }
 
+func CheckString(dataMap map[string]interface{}, paramName string) error {
+
+  if dataMap[paramName] == nil {
+    return errors.New("No Prameter is set as '" + paramName + "'.")
+  }
+
+  _ , ok := dataMap[paramName].(string)
+  if (! ok) {
+    return errors.New("Prameter '"+paramName+"' is not a string!")
+  }
+  return nil
+}
+
 func ParseString(dataMap map[string]interface{}, paramName string, defaultValue ...string) string {
 
   defaultVal := ""
@@ -33,15 +46,13 @@ func ParseString(dataMap map[string]interface{}, paramName string, defaultValue 
     defaultVal = defaultValue[0]
   }
 
-  if dataMap[paramName] == nil {
-    log.Printf("No Prameter is set as '%s', default value '%s' will be returned.", paramName, defaultVal)
+  err := CheckString(dataMap, paramName)
+  if err != nil {
+    log.Printf(err.Error() + " default value '%s' will be returned.", defaultVal)
     return defaultVal
   }
-  str, ok := dataMap[paramName].(string)
-  if (! ok) {
-    log.Printf("Prameter '%s' is not a string! default value '%s' will be returned.", paramName, defaultVal)
-    return defaultVal
-  }
+
+  str, _ := dataMap[paramName].(string)
   return str
 }
 

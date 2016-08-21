@@ -16,6 +16,8 @@ type Account struct {
   City City `json:"city"`
   Phone string `json:"phone"`
   Password string `json:"password"`
+  Description string `json:"description"`
+  JobTitle string `json:"jobtitle"`
   IsStudent bool `json:"isstudent"`
   IsCompleted bool `json:"iscompleted"`
 
@@ -53,6 +55,8 @@ func parseAccount(dataMap map[string]interface{}) (Account, error) {
   result.Email = util.ParseString(dataMap, "email")
   result.Phone = util.ParseString(dataMap, "phone")
   result.Password = util.ParseString(dataMap, "password")
+  result.Description = util.ParseString(dataMap, "description")
+  result.JobTitle = util.ParseString(dataMap, "jobtitle")
   result.IsStudent = util.ParseBool(dataMap, "isstudent")
   result.IsCompleted = util.ParseBool(dataMap, "iscompleted")
   result.City, _ = parseCity(dataMap["city"])
@@ -73,7 +77,7 @@ func parseAccount(dataMap map[string]interface{}) (Account, error) {
 }
 
 func loadAccount(session *util.Session) (Account, error) {
-  query := "select ID, Name, Email, Phone, Password, IsStudent, cityID from Account Where ID = $1"
+  query := "select ID, Name, Email, Phone, Password, Description, JobTitle, IsStudent, cityID from Account Where ID = $1"
   accArr, _ := util.Select(readAccount, query, session.GetAccountID())
   account := accArr[0].(Account)
 
@@ -97,9 +101,13 @@ func loadAccount(session *util.Session) (Account, error) {
 
 func readAccount(rows *sql.Rows) (interface{}, error) {
   var acc Account = Account{}
-  err := rows.Scan(&acc.Id, &acc.Name, &acc.Email, &acc.Phone, &acc.Password, &acc.IsStudent, &acc.City.Id)
+  err := rows.Scan(&acc.Id, &acc.Name, &acc.Email, &acc.Phone, &acc.Password, &acc.Description, &acc.JobTitle, &acc.IsStudent, &acc.City.Id)
 
   return acc, err
+}
+
+func (acc *Account) initializeJobTitle() {
+  acc.JobTitle = acc.Skills[0].Name
 }
 
 func (acc *Account) create(session *util.Session) error {
@@ -107,13 +115,15 @@ func (acc *Account) create(session *util.Session) error {
   acc.Email = strings.ToLower(strings.TrimSpace(acc.Email))
   acc.Password = util.GetMD5Hash(acc.Password)
 
+  acc.initializeJobTitle()
+
   query :=
     "INSERT INTO Account" +
-    "(Name, Email, cityID, Phone, Password, isStudent) " +
-    "VALUES($1, $2, $3, $4, $5, $6) " +
+    "(Name, Email, cityID, Phone, Password, Description, JobTilte, isStudent) " +
+    "VALUES($1, $2, $3, $4, $5, $6, $7, $8) " +
     "returning ID"
 
-  id, err := util.Insert(query, acc.Name, acc.Email, acc.City.Id, acc.Phone, acc.Password, acc.IsStudent)
+  id, err := util.Insert(query, acc.Name, acc.Email, acc.City.Id, acc.Phone, acc.Password, acc.Description, acc.JobTitle, acc.IsStudent)
 
   if err != nil {
     return err
@@ -171,6 +181,64 @@ func (acc *Account) createComplete(session *util.Session) error {
     }
 
     return nil
+}
+
+func (acc *Account) updateDescription (session *util.Session, dataMap map[string]interface{}) error {
+
+  if session.GetAccountID() != acc.Id {
+    return errors.New("It seems that this account is not authenticated in this session")
+  }
+
+  err := util.CheckString(dataMap, "description")
+  if err != nil {
+    return err
+  }
+
+  description := util.ParseString(dataMap, "description")
+
+  query :=
+  "UPDATE Account " +
+  "SET Description = $1 " +
+  "WHERE ID = $2 "
+
+  err = util.Update(query, description, acc.Id)
+
+  if err != nil {
+    return err
+  }
+
+  acc.Description = description
+
+  return nil
+}
+
+func (acc *Account) updateJobTitle (session *util.Session, dataMap map[string]interface{}) error {
+
+  if session.GetAccountID() != acc.Id {
+    return errors.New("It seems that this account is not authenticated in this session")
+  }
+
+  err := util.CheckString(dataMap, "jobtitle")
+  if err != nil {
+    return err
+  }
+
+  jobtitle := util.ParseString(dataMap, "jobtitle")
+
+  query :=
+  "UPDATE Account " +
+  "SET JobTitle = $1 " +
+  "WHERE ID = $2 "
+
+  err = util.Update(query, jobtitle, acc.Id)
+
+  if err != nil {
+    return err
+  }
+
+  acc.JobTitle = jobtitle
+
+  return nil
 }
 
 func (acc *Account) getStrength() int {
@@ -265,4 +333,54 @@ func GetAccountStrength(w http.ResponseWriter, r *http.Request) (interface{}, *u
     return -1, &util.HandlerError{err, "Problem while loading account", http.StatusBadRequest}
   }
   return account.getStrength(), nil
+}
+
+func SaveDescription(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
+
+  session, err := util.GetSession(w, r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Problems in session", http.StatusBadRequest}
+  }
+
+  descMap, err := util.ParseJsonRequest(r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Invalid JSON Account", http.StatusBadRequest}
+  }
+
+  account, err := loadAccount(session)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Invalid Account in this session", http.StatusBadRequest}
+  }
+
+  err = account.updateDescription(session, descMap)
+  if err != nil {
+    return nil, &util.HandlerError{err, "Problem while saving account Description", http.StatusBadRequest}
+  }
+
+  return account, nil
+}
+
+func SaveJobTitle(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
+
+  session, err := util.GetSession(w, r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Problems in session", http.StatusBadRequest}
+  }
+
+  jobMap, err := util.ParseJsonRequest(r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Invalid JSON Account", http.StatusBadRequest}
+  }
+
+  account, err := loadAccount(session)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Invalid Account in this session", http.StatusBadRequest}
+  }
+
+  err = account.updateJobTitle(session, jobMap)
+  if err != nil {
+    return nil, &util.HandlerError{err, "Problem while saving account Job Title", http.StatusBadRequest}
+  }
+
+  return account, nil
 }

@@ -495,6 +495,8 @@ CREATE TABLE Account
   cityID integer NOT NULL,
   phone character varying(30) NOT NULL,
   password character varying(100) NOT NULL,
+  Description character varying(2000),
+  JobTitle character varying(2000),
   isStudent BOOLEAN DEFAULT FALSE NOT NULL,
   CONSTRAINT account_pk PRIMARY KEY (id),
   CONSTRAINT account_city_fk FOREIGN KEY (cityID)

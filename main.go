@@ -52,6 +52,12 @@ func main() {
 	http.Handle("/saveAccount", util.Handler(model.SaveAccount))
 	http.Handle("/completeAccount", util.Handler(model.CompleteAccount))
 
+	// Editting Description
+	http.Handle("/saveDescription", util.Handler(model.SaveDescription))
+
+	// Editting Job Title
+	http.Handle("/saveJobTitle", util.Handler(model.SaveJobTitle))
+
 	// Editting Skills
 	http.Handle("/saveSkill", util.Handler(model.SaveSkill))
 	http.Handle("/deleteSkill", util.Handler(model.DeleteSkill))
