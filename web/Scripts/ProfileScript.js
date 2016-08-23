@@ -1,10 +1,12 @@
 ﻿// new dependency: ngResource is included just above
-var myapp = new angular.module("app", ["ngResource"]);
+//var myapp = new angular.module("app", ["ngResource"]);
+var myapp = new angular.module("app", ["selectize","ngResource"]);
+//var app2 = angular.module("ngResource", ["selectize"]);
 
 // inject the $resource dependency here
 myapp.controller("controller",
-  ["$scope", "$window", "$resource",
-    function ($scope, $window, $resource) {
+  ["$scope", "$window", "$resource","$document",
+    function ($scope, $window, $resource,$document) {
 
         var accountRes = $resource("/account")
         accountRes.get(
@@ -17,13 +19,11 @@ myapp.controller("controller",
             $scope.skills = $scope.selectedService.skills;
         }; // function()
 
-
         $scope.dates = [];
         for (var i = 1970; i <= 2020; i++) {
             $scope.dates.push(i);
         }
-
-
+        
         $scope.months = [{ value: 1, name: "January" }, { value: 2, name: "February" }, { value: 3, name: "March" }, { value: 4, name: "April" }, { value: 5, name: "May" }, { value: 6, name: "June" }, { value: 7, name: "July" }
             , { value: 8, name: "August" }, { value: 9, name: "September" }, { value: 10, name: "October" }, { value: 11, name: "November" }, { value: 12, name: "December" }];
         //var months = $resource("/month")
@@ -35,12 +35,13 @@ myapp.controller("controller",
 
         var degrees = $resource("/degrees")
         function setDegrees() {
-            degrees.query(
-              function (data) {
-                  $scope.degrees = data;
-              } // function(data)
-            ) // service.query
+        degrees.query(
+          function (data) {
+              $scope.degrees = data;
+          } // function(data)
+        ) // service.query
         }
+
         var volCauses = $resource("/volunteeringCauses")
         volCauses.query(
          function (data) {
@@ -75,34 +76,60 @@ myapp.controller("controller",
             logout.get(function (data) {
                 window.location = "/HomePage.html"; // Logout and move to home page
             })
-            
+
         };
 
         //********************** Auto Suggestion ************************
-        //************************************        
-        //Function To Call On ng-change
-        //$scope.search = function (data) {
-        function search(data,searchText) {
-            data.sort();
-            //Define Suggestions List
-            $scope.suggestions = [];
-            //Define Selected Suggestion Item
-            $scope.selectedIndex = -1;
-            var myMaxSuggestionListLength = 0;
-            for (var i = 0; i < data.length; i++) {
-                var searchItemsSmallLetters = angular.lowercase(data[i].name);
-                var searchTextSmallLetters = angular.lowercase(searchText);
-                if (searchItemsSmallLetters.indexOf(searchTextSmallLetters) !== -1) {
-                    $scope.suggestions.push(data[i]);
-                    myMaxSuggestionListLength += 1;
-                    //TODO: un comment
-                    //Define maximum number of sugestion in list
-                    //if (myMaxSuggestionListLength == 5) {
-                    //    break;
-                    //}
-                }
-            }
+        //************************************   
+        $scope.nameConfig = {
+            valueField: 'name',
+            labelField: 'name',
+            searchField: 'name',
+            maxItems: 1,
+            maxOptions: 5,
+        };
+
+        $scope.idConfig = {
+            valueField: 'id',
+            labelField: 'name',
+            searchField: 'name',
+            maxItems: 1,
+            maxOptions: 5,         
+        };
+
+        $scope.valueConfig = {
+            valueField: 'value',
+            labelField: 'name',
+            searchField: 'name',
+            maxItems: 1,
+            maxOptions: 5,
+        };
+
+
+        //******************************
+        // Job title
+        //******************************
+        //$scope.jtTitle = "Experienced Web and Mobile Developer";
+
+        var saveJtRes = $resource("/saveJobTitle")
+        $scope.saveJobTitle = function()
+        {
+            var saveJt = new saveCrRes();
+            saveJt.jobtitle = $scope.account.jobtitle;
+            saveJt.$save();
         }
+
+        // ************* for highlight and show the edit and delete buttons
+        $scope.jtMouseOver = function (context) {
+            context.jtPopoverRemove = true;
+            context.jtHoverStyle = { 'background-color': '#b8e986' };
+        }
+
+        $scope.jtMouseLeave = function (context) {
+            context.jtPopoverRemove = false;
+            context.jtHoverStyle = {};
+        }
+
         //**************************
         // language
         //**************************
@@ -113,40 +140,41 @@ myapp.controller("controller",
         }
         var saveLgRes = $resource("/saveLanguage")
         function saveLg() {
-            //if(!checkExist())
-            var saveLg = new saveLgRes();
-            saveLg.id = $scope.lgId;
-            saveLg.name = $scope.lgName;
-            saveLg.profeciency=$scope.lgProfeciency;
-            $scope.lblLgName = false;
-            var index;
-            $scope.account.languages.some(function (elem, i) {
-                return elem.id === $scope.lgId ? (index = i, true) : false;
-            });
-            saveLg.$save(function (lg) {
-                if (index >= 0)
-                    $scope.account.languages[index] = lg;
-                else
-                    $scope.account.languages.push(lg);
+            if (!checkExist()) {
+                var saveLg = new saveLgRes();
+                saveLg.id = $scope.lgId;
+                saveLg.name = $scope.lgName;
+                saveLg.profeciency = $scope.lgProfeciency;
+                $scope.lblLgName = false;
+                var index;
+                $scope.account.languages.some(function (elem, i) {
+                    return elem.id === $scope.lgId ? (index = i, true) : false;
+                });
+                saveLg.$save(function (lg) {
+                    if (index >= 0)
+                        $scope.account.languages[index] = lg;
+                    else
+                        $scope.account.languages.push(lg);
 
-            });
-            return true;
+                });
+                return true;
+            }
+            return false;
         }
         $scope.saveLanguage = function () {
             if (saveLg())
                 $('#addLanguage').modal('hide');
         }
-        $scope.saveLanguageMore = function()
-        {
+        $scope.saveLanguageMore = function () {
             saveLg();
             cleanLanguageInputs();
         }
-        $scope.editLanguage = function (lg) {            
+        $scope.editLanguage = function (lg) {
             $scope.lgId = lg.id;
             $scope.lgName = lg.name;
             $scope.lgProfeciency = lg.profeciency.value;
             $scope.lblLgName = true;
-            
+
         }
 
         var delLgRes = $resource("/deleteLanguage")
@@ -167,8 +195,18 @@ myapp.controller("controller",
             $scope.lblLgName = false;
         }
 
+        function checkExist() {
+            var data = $scope.account.languages;
+            for (var i; i < data.length; i++) {
+                if (angular.lowercase(data[i].name) == angular.lowercase($scope.lgName))
+                    return true;
+            }
+
+            return false;
+        }
+
         // ************* for highlight and show the edit and delete buttons
-        $scope.lgMouseOver = function (context) {            
+        $scope.lgMouseOver = function (context) {
             context.popoverRemove = true;
             context.lgHoverStyle = { 'background-color': '#b8e986' };
         }
@@ -176,7 +214,7 @@ myapp.controller("controller",
         $scope.lgMouseLeave = function (context) {
             context.popoverRemove = false;
             context.lgHoverStyle = {};
-        }       
+        }
 
 
 
@@ -184,22 +222,18 @@ myapp.controller("controller",
         // Work History
         //*************************
         function setLocation() {
-            $scope.locations = [{ id: 1, name: "location 1" }, { id: 2, name: "location 2" }, { id: 3, name: "location 3" }, { id: 4, name: "location 11" }, { id: 5, name: "location 12" }, { id: 6, name: "location 13" }
-            , { id: 7, name: "location 21" }, { id: 8, name: "location 22" }, { id: 9, name: "location 23" }, { id: 10, name: "location 31" }, { id: 11, name: "location 32" }, { id: 12, name: "location 33" }];
+        $scope.locations = [{ id: 1, name: "location 1" }, { id: 2, name: "location 2" }, { id: 3, name: "location 3" }, { id: 4, name: "location 11" }, { id: 5, name: "location 12" }, { id: 6, name: "location 13" }
+        , { id: 7, name: "location 21" }, { id: 8, name: "location 22" }, { id: 9, name: "location 23" }, { id: 10, name: "location 31" }, { id: 11, name: "location 32" }, { id: 12, name: "location 33" }];
         }
         function setRoles() {
             $scope.roles = [{ value: "I", name: "Intern" }, { value: "C", name: "Individual Contributor" }, { value: "L", name: "Lead" }, { value: "M", name: "Manager" }, { value: "E", name: "Executive" }, { value: "O", name: "Owner" }];
         }
-
-       
-        $scope.addWorkHistory = function()
-        {
-            if ($scope.locations == null)
-            {
+        
+        $scope.addWorkHistory = function () {
+            if ($scope.locations == null || $scope.locations.length==0) {
                 setLocation();
             }
-            if ($scope.roles==null)
-            {
+            if ($scope.roles == null || $scope.roles.length==0) {
                 setRoles();
             }
             cleanHistoryInputs();
@@ -213,9 +247,8 @@ myapp.controller("controller",
         $scope.saveWorkHistoryMore = function () {
             saveWh();
         }
-        function saveWh()
-        {
-            if (checkWhValidation()) {                
+        function saveWh() {
+            if (checkWhValidation()) {
                 var saveWh = new saveWhRes();
                 //if(checkWhValidation())
                 saveWh.id = $scope.whId;
@@ -249,17 +282,17 @@ myapp.controller("controller",
         }
 
         $scope.editWorkHistory = function (wh) {
-            if ($scope.locations == null) {
+            if ($scope.locations == null || $scope.locations.length==0) {
                 setLocation();
             }
-            if ($scope.roles==null) {
+            if ($scope.roles == null || $scope.roles.length==0) {
                 setRoles();
             }
             $scope.whId = wh.id;
             $scope.whCompany = wh.company;
             $scope.whLocation = wh.location;
             $scope.whTitle = wh.title;
-            $scope.whRole = wh.role.name;
+            $scope.whRole = wh.role.value;
             $scope.whRoleValue = wh.role.value;
             $scope.whFromMonth = wh.frommonth;
             $scope.whFromYear = wh.fromyear;
@@ -328,7 +361,7 @@ myapp.controller("controller",
                 isValid = false;
                 $scope.vwhTitleShow = true;
             }
-            if ($scope.whRole == "" || $scope.whRole==null) {
+            if ($scope.whRole == "" || $scope.whRole == null) {
                 isValid = false;
                 $scope.vwhRoleShow = true;
             }
@@ -344,11 +377,11 @@ myapp.controller("controller",
                 isValid = false;
                 $scope.vwhToMonthShow = true;
             }
-            if (!$scope.whCurrently &&($scope.whToYear == "")) {
+            if (!$scope.whCurrently && ($scope.whToYear == "")) {
                 isValid = false;
                 $scope.vwhToYearShow = true;
             }
-            
+
 
             if (isValid)
                 return true;
@@ -360,14 +393,12 @@ myapp.controller("controller",
         }
         $scope.whLocationChg = function (data) {
             $scope.vwhLocationShow = false;     // for validation
-            search(data, $scope.whLocation);       // auto suggestion search
         }
         $scope.whTitleChg = function () {
             $scope.vwhTitleShow = false;
         }
         $scope.whRoleChg = function (data) {
             $scope.vwhRoleShow = false;             // for validation
-            search(data, $scope.whRole);       // auto suggestion search
         }
         $scope.whFromMonthChg = function () {
             if ($scope.whFromMonth == "")
@@ -394,7 +425,7 @@ myapp.controller("controller",
             else {
                 $scope.vwhToMonthShow = false;
                 if ($scope.whToYear != "")
-                $scope.whInvalidDate = checkInvDate($scope.whFromMonth.value, $scope.whFromYear, $scope.whToMonth.value, $scope.whToYear);
+                    $scope.whInvalidDate = checkInvDate($scope.whFromMonth.value, $scope.whFromYear, $scope.whToMonth.value, $scope.whToYear);
             }
         }
         $scope.whToYearChg = function () {
@@ -403,13 +434,12 @@ myapp.controller("controller",
             else {
                 $scope.vwhToYearShow = false;
                 if ($scope.whToMonth != "")
-                $scope.whInvalidDate = checkInvDate($scope.whFromMonth.value, $scope.whFromYear, $scope.whToMonth.value, $scope.whToYear);
+                    $scope.whInvalidDate = checkInvDate($scope.whFromMonth.value, $scope.whFromYear, $scope.whToMonth.value, $scope.whToYear);
             }
         }
-        
+
         $scope.whCurrentlyChg = function () {
-            if($scope.whCurrently)
-            {
+            if ($scope.whCurrently) {
                 $scope.vwhToMonthShow = false;
                 $scope.vwhToYearShow = false;
                 $scope.whToMonth = "";
@@ -418,7 +448,7 @@ myapp.controller("controller",
         }
 
         // *********** for highlight and show the edit and delete buttons
-        $scope.whMouseOver=function(context){
+        $scope.whMouseOver = function (context) {
             context.popoverRemove = true;
             context.whHoverStyle = { 'background-color': '#b8e986' };
         }
@@ -429,149 +459,12 @@ myapp.controller("controller",
         }
 
         // *********** for auto suggestion ***************
-        //***************************************************
-        //===== location ==================
-        $scope.whLocationClick = function () {
-            if ($scope.whLocation == null || $scope.whLocation == "")
-                $scope.suggestions = $scope.locations;
-            $scope.whLcSgListShow = !$scope.whLcSgListShow;
-            $("#whLc").focus();
-        }
-        //List Item Events
-        //Function To Call on ng-click
-        $scope.whLcAssignValueAndHide = function (index) {        
-            $scope.whLocation = $scope.suggestions[index].name;
-            $scope.suggestions = [];
-            $scope.whLcSgListShow = false;
-        }
-        
-        //Text Field Events
-        //Function To Call on ng-keydown
-        $scope.whLcCheckKeyDown = function (event) {
-            if (event.keyCode === 40) {//down key, increment selectedIndex
-                $scope.whLcSgListShow = true;
-                if ($scope.whLocation == null || $scope.whLocation == "")
-                    $scope.suggestions = $scope.locations;
-                event.preventDefault();
-                if ($scope.selectedIndex + 1 !== $scope.suggestions.length) {
-                    $scope.selectedIndex++; 
-                }
-            } else if (event.keyCode === 38) { //up key, decrement selectedIndex
-                event.preventDefault();
-                if ($scope.selectedIndex - 1 !== -1) {
-                    $scope.selectedIndex--;
-                }
-            } else if (event.keyCode === 13) { //enter key, empty suggestions array
-                event.preventDefault();
-                $scope.whLocation = $scope.suggestions[$scope.selectedIndex].name;
-                $scope.suggestions = [];
-                $scope.whLcSgListShow = false;
-            }
-        }
-        //Function To Call on ng-keyup
-        $scope.whLcCheckKeyUp = function (event) {
-            if (event.keyCode !== 8 || event.keyCode !== 46) {//delete or backspace
-                
-                if ($scope.whLocation == "" || $scope.whLocation==null) {
-                    $scope.suggestions = $scope.locations;
-                }
-                else if (event.keyCode !== 40 && event.keyCode !== 38)
-                    search($scope.locations, $scope.whLocation);
-            }
-            if (event.keyCode == 8 || event.keyCode == 46)
-                $scope.whLcSgListShow = true;
-        }
-
-        // for close the list out of input select
-        var whLcliSel = false;
-        $scope.whLcLiSel = function () {
-            whLcliSel = true;
-        }
-        $scope.whLcLiUnSel = function () {
-            whLcliSel = false;
-        }
-        $scope.whLcLeave = function () {
-            if (!whLcliSel) {
-                $scope.whLcSgListShow = false;
-                $scope.suggestions = [];
-            }
-        }
-        //====================================
-        //======== role =================
-        $scope.whRoleClick = function () {
-            if ($scope.whRole == null || $scope.whRole == "")
-                $scope.suggestions = $scope.roles;
-            $scope.whRlSgListShow = !$scope.whRlSgListShow;
-            $("#whRl").focus();
-        }
-        //List Item Events
-        //Function To Call on ng-click
-        $scope.whRlAssignValueAndHide = function (index) {
-            $scope.whRole = $scope.suggestions[index].name;
-            $scope.whRoleValue = $scope.suggestions[index].value;
-            $scope.suggestions = [];
-            $scope.whRlSgListShow = false;
-        }
-
-        //Text Field Events
-        //Function To Call on ng-keydown
-        $scope.whRlCheckKeyDown = function (event) {
-            if (event.keyCode === 40) {//down key, increment selectedIndex
-                $scope.whRlSgListShow = true;
-                if ($scope.whRole == null || $scope.whRole == "")
-                    $scope.suggestions = $scope.roles;
-                event.preventDefault();
-                if ($scope.selectedIndex + 1 !== $scope.suggestions.length) {
-                    $scope.selectedIndex++;
-                }
-            } else if (event.keyCode === 38) { //up key, decrement selectedIndex
-                event.preventDefault();
-                if ($scope.selectedIndex - 1 !== -1) {
-                    $scope.selectedIndex--;
-                }
-            } else if (event.keyCode === 13) { //enter key, empty suggestions array
-                event.preventDefault();
-                $scope.whRole = $scope.suggestions[$scope.selectedIndex].name;
-                $scope.whRoleValue = $scope.suggestions[$scope.selectedIndex].value;
-                $scope.suggestions = [];
-                $scope.whRlSgListShow = false;
-            }
-        }
-        //Function To Call on ng-keyup
-        $scope.whRlCheckKeyUp = function (event) {
-            if (event.keyCode !== 8 || event.keyCode !== 46) {//delete or backspace
-
-                if ($scope.whRole == "" || $scope.whRole == null) {
-                    $scope.suggestions = $scope.roles;
-                }
-                else if (event.keyCode !== 40 && event.keyCode !== 38) // is not arrow keys
-                    search($scope.roles, $scope.whRole);
-            }
-            if (event.keyCode == 8 || event.keyCode == 46)
-                $scope.whRlSgListShow = true;
-        }
-
-        // for close the list out of input select
-        var whRlliSel = false;
-        $scope.whRlLiSel = function () {
-            whRlliSel = true;
-        }
-        $scope.whRlLiUnSel = function () {
-            whRlliSel = false;
-        }
-        $scope.whRlLeave = function () {
-            if (!whRlliSel) {
-                $scope.whRlSgListShow = false;
-                $scope.suggestions = [];
-            }
-        }
-
 
         //*************************
         // education
         //*************************
         $scope.addEducation = function () {
-            if ($scope.degrees == null)
+            if ($scope.degrees == null || $scope.degrees.length==0)
                 setDegrees();
             cleanEducationInputs();
         }
@@ -585,7 +478,7 @@ myapp.controller("controller",
             saveEdu();
         }
         saveEdu = function () {
-            if (checkEduValidation()) {  
+            if (checkEduValidation()) {
                 var saveEdu = new saveEduRes();
                 saveEdu.id = $scope.eduId;
                 saveEdu.school = $scope.eduSchool;
@@ -605,7 +498,7 @@ myapp.controller("controller",
                     if (index >= 0)
                         $scope.account.educations[index] = edu;
                     else
-                        $scope.account.educations.push(edu);                    
+                        $scope.account.educations.push(edu);
                 });
                 cleanEducationInputs();
                 return true;
@@ -643,7 +536,7 @@ myapp.controller("controller",
             $scope.eduDesc = "";
         }
 
-        
+
 
         var delEduRes = $resource("/deleteEducation")
         $scope.deleteEducation = function (edu) {
@@ -665,7 +558,7 @@ myapp.controller("controller",
             if ($scope.eduSchool == "") {
                 isValid = false;
                 $scope.veduSchoolShow = true;
-            }       
+            }
             if ($scope.eduFromDate == "") {
                 isValid = false;
                 $scope.veduFromDateShow = true;
@@ -679,11 +572,11 @@ myapp.controller("controller",
                 return true;
             else
                 return false;
-            }
+        }
 
         $scope.eduSchoolChg = function () {
             $scope.veduSchoolShow = false;
-        }        
+        }
         $scope.eduFromDateChg = function () {
             if ($scope.eduFromDate == "")
                 $scope.veduFromDateShow = true;
@@ -694,7 +587,7 @@ myapp.controller("controller",
             if ($scope.eduToDate == "")
                 $scope.veduToDateShow = true;
             else
-            $scope.veduToDateShow = false;
+                $scope.veduToDateShow = false;
         }
         $scope.eduDegreeChg = function (data) {
             if ($scope.eduDegree == "")
@@ -856,7 +749,7 @@ myapp.controller("controller",
                 $scope.vvolFromMonthShow = true;
             else {
                 $scope.vvolFromMonthShow = false;
-                if ($scope.volToMonth !="" && $scope.volToYear != "")
+                if ($scope.volToMonth != "" && $scope.volToYear != "")
                     $scope.volInvalidDate = checkInvDate($scope.volFromMonth.value, $scope.volFromYear, $scope.volToMonth.value, $scope.volToYear);
             }
         }
@@ -869,8 +762,7 @@ myapp.controller("controller",
                     $scope.volInvalidDate = checkInvDate($scope.volFromMonth.value, $scope.volFromYear, $scope.volToMonth.value, $scope.volToYear);
             }
         }
-        $scope.volToMonthChg = function ()
-        {
+        $scope.volToMonthChg = function () {
             if ($scope.volToMonth != "" && $scope.volToYear != "")
                 $scope.volInvalidDate = checkInvDate($scope.volFromMonth.value, $scope.volFromYear, $scope.volToMonth.value, $scope.volToYear);
         }
@@ -975,7 +867,7 @@ myapp.controller("controller",
             isValid = true;
             occupations.query(
             function (data) {
-              $scope.occupations = data;
+                $scope.occupations = data;
             } // function(data)
             );
             $scope.tcForm.$setUntouched();
@@ -1039,7 +931,7 @@ myapp.controller("controller",
         }
         $scope.tcOccupationChg = function () {
             $scope.vtcOccupationShow = false;
-        }        
+        }
         $scope.tcFromMonthChg = function () {
             if ($scope.tcFromMonth == "")
                 $scope.vtcFromMonthShow = true;
@@ -1183,7 +1075,7 @@ myapp.controller("controller",
         $scope.prjOccupationChg = function () {
             $scope.vprjOccupationShow = false;
         }
-       
+
 
         // *********** for highlight and show the edit and delete buttons
         $scope.prjMouseOver = function (context) {
@@ -1475,7 +1367,7 @@ myapp.controller("controller",
             context.crHoverStyle = {};
         }
 
-       
+
 
     }
 
@@ -1488,4 +1380,22 @@ $(document).ready(function () {
         //this is workaround needed in order to make ng-click work inside of popover
             $compile($('#logout').contents())($scope);
         });
+
+    var xhr;
+    var select_state, $select_state;
+    var select_city, $select_city;
+
+    $select_state = $('#select-state').selectize();
+
+    //$select_city = $('#select-city').selectize({
+    //    valueField: 'name',
+    //    labelField: 'name',
+    //    searchField: ['name']
+    //});
+
+    //select_city = $select_city[0].selectize;
+    //select_state = $select_state[0].selectize;
+
+    //select_city.disable();
 });
+
