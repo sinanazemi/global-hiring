@@ -78,7 +78,11 @@ func parseAccount(dataMap map[string]interface{}) (Account, error) {
 
 func loadAccount(session *util.Session) (Account, error) {
   query := "select ID, Name, Email, Phone, Password, Description, JobTitle, IsStudent, cityID from Account Where ID = $1"
-  accArr, _ := util.Select(readAccount, query, session.GetAccountID())
+  accArr, err := util.Select(readAccount, query, session.GetAccountID())
+  if err != nil {
+    return Account{}, err
+  }
+
   account := accArr[0].(Account)
 
   account.City = loadCity(account.City.Id)
@@ -101,8 +105,11 @@ func loadAccount(session *util.Session) (Account, error) {
 
 func readAccount(rows *sql.Rows) (interface{}, error) {
   var acc Account = Account{}
-  err := rows.Scan(&acc.Id, &acc.Name, &acc.Email, &acc.Phone, &acc.Password, &acc.Description, &acc.JobTitle, &acc.IsStudent, &acc.City.Id)
 
+  err := rows.Scan(
+      &acc.Id, &acc.Name, &acc.Email, &acc.Phone, &acc.Password,
+      &util.NullableString{&acc.Description}, &util.NullableString{&acc.JobTitle},
+      &acc.IsStudent, &acc.City.Id)
   return acc, err
 }
 
