@@ -111,12 +111,18 @@ myapp.controller("controller",
         //******************************
         //$scope.jtTitle = "Experienced Web and Mobile Developer";
 
+        $scope.editJobtitle = function () {
+            $scope.jtTitle = $scope.account.jobtitle;
+        }
+
         var saveJtRes = $resource("/saveJobTitle")
         $scope.saveJobTitle = function()
         {
-            var saveJt = new saveCrRes();
-            saveJt.jobtitle = $scope.account.jobtitle;
+            var saveJt = new saveJtRes();
+            saveJt.jobtitle = $scope.jtTitle;
             saveJt.$save();
+            $('#addJobtitle').modal('hide');
+            $scope.account.jobtitle = $scope.jtTitle;
         }
 
         // ************* for highlight and show the edit and delete buttons
@@ -255,7 +261,7 @@ myapp.controller("controller",
                 saveWh.company = $scope.whCompany;
                 saveWh.location = $scope.whLocation;
                 saveWh.title = $scope.whTitle;
-                saveWh.role = $scope.whRoleValue; /*$scope.whRole;*/
+                saveWh.role = $scope.whRole; 
                 saveWh.frommonth = $scope.whFromMonth;/*$scope.months.indexOf($scope.whFromMonth)+1;*/
                 saveWh.fromyear = $scope.whFromYear;
                 saveWh.tomonth = $scope.whToMonth;/*$scope.months.indexOf($scope.whToMonth)+1;*/
