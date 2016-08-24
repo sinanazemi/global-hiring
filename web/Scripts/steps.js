@@ -49,6 +49,7 @@ $scope.init = function () {
   $scope.stepMainSRVHide=true;
   $scope.stepSkillHide=true;
   $scope.isStudent=true;
+  $scope.isStudentShow=false;
 
   $scope.fullname='';
   $scope.termsOfServiceShow= false;
@@ -56,27 +57,123 @@ $scope.init = function () {
   $scope.password='';
   $scope.email='';
 
-  $scope.fullnamePlaceholder="Your full name";
-  $scope.emailPlaceholder="you@email.com";
+  $scope.fullnamePlaceholder="";
+  $scope.emailPlaceholder="";
   $scope.passwordPlaceholder="min 6 characters";
   $scope.requiedStyleFullname='';
   $scope.requiedStylePassword='';
   $scope.requiedStyleEmail='';
+  $scope.cityPlaceholder="";
+  $scope.requiedSelectedCity='';
+  $scope.selectColorStyle="";
+  $scope.requiedStyleisStudent="";
 
   $scope.errorMsg='';
 
   $scope.skillsBTNLabel="";
   $scope.eduBTNLabel="";
+//Changes for proper style
+$scope.fullNameChange= function(){
+  if($scope.fullname=='' )
+  {
+
+    $scope.requiedStyleFullname={
+      "border-color": "red",
+      "border-style": "solid",
+      "border-width" : "1px"
+    }
+    $scope.fullnamePlaceholder="Fullname is required";
+  }
+  else {
+    $scope.requiedStyleFullname='';
+    $scope.fullnamePlaceholder="";
+  }
+}
+
+$scope.emailChange=function(){
+  if($scope.email=='' )
+  {
+
+    $scope.requiedStyleEmail={
+      "border-color": "red",
+      "border-style": "solid",
+      "border-width" : "1px"
+    }
+
+    $scope.emailPlaceholder="Email is required";
+  }
+  else {
+    $scope.requiedStyleEmail='';
+    $scope.emailPlaceholder="";
+  }
+
+}
+
+$scope.cityChange=function(){
+  if( $scope.selectedCity=="" )
+  {
+      $scope.requiedSelectedCity={
+      "border-color": "red",
+      "border-style": "solid",
+      "border-width" : "1px",
+      "background-image":"url('../images/combo-red.png')",
+      "background-color":"#f9f9f9",
+      "background-repeat":"no-repeat"
+    }
+
+    $scope.cityPlaceholder="City is required";
+    $scope.selectColorStyle={"color":"red"};
+  }
+  else {
+    $scope.requiedSelectedCity='';
+    $scope.cityPlaceholder="";
+    $scope.selectColorStyle={"color":"#8a8888"};
+  }
+
+}
+$scope.passwordChange=function(){
+  if($scope.password=='' )
+  {
+
+    $scope.requiedStylePassword={
+      "border-color": "red",
+      "border-style": "solid",
+      "border-width" : "1px"
+    }
+
+    $scope.passwordPlaceholder="Password is required";
+  }
+  else {
+    $scope.requiedStylePassword='';
+    $scope.passwordPlaceholder="";
+  }
+
+}
+
   // Next buttons click
   $scope.step1NextClick = function(){
     $scope.requiedStyleFullname='';
     $scope.requiedStylePassword='';
     $scope.requiedStyleEmail='';
 
-    if($scope.fullname=='' || $scope.email=='' || !$scope.checkboxValue || $scope.password==''  )
+
+    if($scope.fullname=='' || $scope.email=='' || !$scope.checkboxValue || $scope.password=='' || $scope.selectedCity=='' || (!($scope.isStudent=="yes" || $scope.isStudent=="no"))  )
     {
+      if(!($scope.isStudent=="yes" || $scope.isStudent=="no"))
+      {
+        $scope.requiedStyleisStudent={
+          "border-color":"red"
+        }
+        $scope.isStudentShow=true;
+      }
+      else{
+          $scope.requiedStyleisStudent="";
+          $scope.isStudentShow=false;
+      }
+
       if($scope.fullname=='' )
       {
+
         $scope.requiedStyleFullname={
           "border-color": "red",
           "border-style": "solid",
@@ -86,30 +183,54 @@ $scope.init = function () {
       }
       else {
         $scope.requiedStyleFullname='';
-        $scope.fullnamePlaceholder="Your full name";
+        $scope.fullnamePlaceholder="";
       }
 
       if($scope.email=='' )
       {
+
         $scope.requiedStyleEmail={
           "border-color": "red",
           "border-style": "solid",
           "border-width" : "1px"
         }
+
         $scope.emailPlaceholder="Email is required";
       }
       else {
         $scope.requiedStyleEmail='';
-        $scope.emailPlaceholder="you@email.com";
+        $scope.emailPlaceholder="";
+      }
+
+      if( $scope.selectedCity=="" )
+      {
+          $scope.requiedSelectedCity={
+          "border-color": "red",
+          "border-style": "solid",
+          "border-width" : "1px",
+          "background-image":"url('../images/combo-red.png')",
+          "background-color":"#f9f9f9",
+          "background-repeat":"no-repeat"
+        }
+
+        $scope.cityPlaceholder="City is required";
+        $scope.selectColorStyle={"color":"red"};
+      }
+      else {
+        $scope.requiedSelectedCity='';
+        $scope.cityPlaceholder="";
+        $scope.selectColorStyle={"color":"#8a8888"};
       }
 
       if($scope.password=='' )
       {
+
         $scope.requiedStylePassword={
           "border-color": "red",
           "border-style": "solid",
           "border-width" : "1px"
         }
+
         $scope.passwordPlaceholder="Password is required";
       }
       else {
@@ -128,8 +249,9 @@ $scope.init = function () {
     else {
       $scope.step1Hide=true;
       $scope.createNewAccount();
+      if($scope.isStudent=="yes"){$scope.isStudent=true;}else{$scope.isStudent=false;}
 
-      if($scope.isStudent=="true"){
+      if($scope.isStudent){
         $scope.stepLangHide=false;
         $scope.langBarImage="images/step_2_bar.png";
       }
@@ -170,7 +292,7 @@ $scope.init = function () {
     }
 
     $scope.stepLangHide=true;
-    if($scope.isStudent =="true"){
+    if($scope.isStudent){
       $scope.stepEduHide=false;
       $scope.eduBTNLabel="Next";
       $scope.eduBarImage="images/step_3_bar.png";
@@ -190,7 +312,7 @@ $scope.init = function () {
     }
 
       $scope.stepEduHide=true;
-    if($scope.isStudent =="true"){
+    if($scope.isStudent){
       $scope.stepMainSRVHide=false;
       $scope.mainSRVBarImage="images/step_4_bar.png";
       $scope.getMainServices();
@@ -204,7 +326,7 @@ $scope.init = function () {
   $scope.mainSRVNextClick = function(){
 
     $scope.stepMainSRVHide=true;
-    if($scope.isStudent=="true"){
+    if($scope.isStudent){
       $scope.stepSkillHide=false;
       $scope.skillsBTNLabel="Finish";
       $scope.skillBarImage="images/step_5_bar.png";
@@ -217,7 +339,7 @@ $scope.init = function () {
   };
 
   $scope.skillNextClick=function(){
-    if($scope.isStudent=="true"){
+    if($scope.isStudent){
       $scope.finishClick();
     }
     else{
@@ -231,7 +353,7 @@ $scope.init = function () {
   // Previous buttons click
   $scope.langPreClick=function(){
     $scope.stepLangHide=true;
-    if($scope.isStudent=="true"){
+    if($scope.isStudent){
       $scope.step1Hide=false;
     }
     else {
@@ -242,7 +364,7 @@ $scope.init = function () {
   $scope.eduPreClick=function(){
     $scope.stepEduHide=true;
     $scope.stepLangHide=false;
-    if($scope.isStudent=="true"){
+    if($scope.isStudent){
       $scope.langBarImage="images/step_2_bar.png";
     }
     else {
@@ -251,7 +373,7 @@ $scope.init = function () {
   }
   $scope.mainSRVPreClick=function(){
     $scope.stepMainSRVHide=true;
-    if($scope.isStudent=="true"){
+    if($scope.isStudent){
       $scope.stepEduHide=false;
       $scope.eduBarImage="images/step_3_bar.png";
     }
@@ -262,7 +384,7 @@ $scope.init = function () {
   $scope.skillPreClick=function(){
     $scope.stepMainSRVHide=false;
     $scope.stepSkillHide=true;
-    if($scope.isStudent=="true"){
+    if($scope.isStudent){
       $scope.mainSRVBarImage="images/step_5_bar.png";
     }
     else {
@@ -468,7 +590,7 @@ $scope.createNewAccount=function(){
       newAccount.city = $scope.selectedCity;
       newAccount.phone = $scope.phone;
       newAccount.password = $scope.password;
-      if($scope.isStudent=="true"){
+      if($scope.isStudent){
         newAccount.isstudent = true;
       }
       else {
