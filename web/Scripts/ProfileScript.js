@@ -8,10 +8,13 @@ myapp.controller("controller",
   ["$scope", "$window", "$resource","$document",
     function ($scope, $window, $resource,$document) {
 
+        $scope.shAddOverview = true;
         var accountRes = $resource("/account")
         accountRes.get(
           function (data) {
-              $scope.account = data
+              $scope.account = data;
+              if ($scope.account.description != "")
+                  $scope.shAddOverview = false;
           }
         );
 
@@ -128,12 +131,48 @@ myapp.controller("controller",
         // ************* for highlight and show the edit and delete buttons
         $scope.jtMouseOver = function (context) {
             context.jtPopoverRemove = true;
-            context.jtHoverStyle = { 'background-color': '#b8e986' };
+            context.jtHoverStyle = { 'background-color': '#b8e986'};
         }
 
         $scope.jtMouseLeave = function (context) {
             context.jtPopoverRemove = false;
             context.jtHoverStyle = {};
+        }
+
+        //******************************
+        // Overview
+        //******************************
+        //$scope.jtTitle = "Experienced Web and Mobile Developer";
+        
+        $scope.editOverview = function () {
+            $scope.ovOverview = $scope.account.description;
+        }
+
+        var saveOvRes = $resource("/saveDescription")
+        $scope.saveOverview = function () {
+            var saveOv = new saveOvRes();
+            saveOv.description = $scope.ovOverview;
+            saveOv.$save();
+            $('#addOverview').modal('hide');
+            $scope.account.description = $scope.ovOverview;
+            $scope.shAddOverview = false;
+        }
+
+        // ************* for highlight and show the edit and delete buttons
+        $scope.ovMouseOver = function (context) {
+            if ($scope.account.description != "")
+                context.ovPopoverRemove = true;
+            else
+                context.ovAddSign = true;
+            context.ovHoverStyle = { 'background-color': '#b8e986' };
+        }
+
+        $scope.ovMouseLeave = function (context) {
+            if ($scope.account.description != "")
+                context.ovPopoverRemove = false;
+            else
+                context.ovAddSign = false;
+            context.ovHoverStyle = {};
         }
 
         //**************************
@@ -1387,21 +1426,6 @@ $(document).ready(function () {
             $compile($('#logout').contents())($scope);
         });
 
-    var xhr;
-    var select_state, $select_state;
-    var select_city, $select_city;
-
-    $select_state = $('#select-state').selectize();
-
-    //$select_city = $('#select-city').selectize({
-    //    valueField: 'name',
-    //    labelField: 'name',
-    //    searchField: ['name']
-    //});
-
-    //select_city = $select_city[0].selectize;
-    //select_state = $select_state[0].selectize;
-
-    //select_city.disable();
+    
 });
 
