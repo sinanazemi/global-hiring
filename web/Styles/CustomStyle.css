@@ -6,6 +6,9 @@
     padding-right:87px;
 }
 
+.max-fram-c{
+    max-width:1300px;
+}
 /*-----------------------
     navbar
 -----------------------*/
@@ -66,16 +69,17 @@
 }
 .skill-container-c {
     position:relative;
-    background-color: #F5EEE8;         
+    /*background-color: #F5EEE8;*/         
     height: 900px;     
     width:100%; 
-    margin-left:0px; 
+    /*margin-left:0px;*/ 
     /*padding-left:87px;*/
 }
 .txt-skill-c{    
     color: #4A4A4A;
     padding-left:80px;
     margin-top:95px;
+    
 }
 .txt-skill-c h2 {
     position:relative;
@@ -443,7 +447,9 @@
         .skill-container-c{            
             /*position:relative;*/            
             height:460px;
+            background-color: #F5EEE8;
         }
+  
         .txt-skill-c{
             position:relative;
             

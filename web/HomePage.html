@@ -20,8 +20,8 @@
 </head>
 <body ng-app="myApp">
     <!-- navigation bar -->
-    <nav class="navbar navbar-fixed-top">
-        <div class="container nav-container-c">
+    <nav class="navbar navbar-fixed-top nav-container-c">
+        <div class="container nav-container-c max-fram-c">
             <div class="navbar-header">
                 <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                     <span class="icon-bar"></span>
@@ -55,48 +55,53 @@
     <div ng-view></div>
 
     <!-- Footer -->
-    <div class="container-fluid container-footer-c">
-        <div class="row" style="max-width:100%;">
-            <div class="col-sm-4">
-                <!-- Candidates -->
-                <h4>CANDIDATES</h4>
-                <div class="f-section-c">
-                    <p>
-                        <br>HOW IT WORKS
-                    </p>
-                    <p>INVITE A FRIEND</p>
-                    <p><a class="f-items-c" href="#/FAQ">FAQ</a></p>
+    <div class=" container-footer-c">
+        <div class="container-fluid container-footer-c max-fram-c">
+
+            <div class="row" style="max-width:100%;">
+                <div class="col-sm-4">
+                    <!-- Candidates -->
+                    <h4>CANDIDATES</h4>
+                    <div class="f-section-c">
+                        <p>
+                            <br>HOW IT WORKS
+                        </p>
+                        <p>INVITE A FRIEND</p>
+                        <p><a class="f-items-c" href="#/FAQ">FAQ</a></p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <!-- Employers -->
+                    <h4>EMPLOYERS</h4>
+                    <div class="f-section-c">
+                        <p>
+                            <br>FOR EMPLOYERS
+                        </p>
+                        <p>FAQ</p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <!-- Global Hiring -->
+                    <h4>GLOBAL HIRING</h4>
+                    <div class="f-section-c">
+                        <p>
+                            <br><a class="f-items-c" href="#/About">ABOUT</a>
+                        </p>
+                        <p>BLOG</p>
+                        <p>CONTACT US</p>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-4">
-                <!-- Employers -->
-                <h4>EMPLOYERS</h4>
-                <div class="f-section-c">
-                    <p>
-                        <br>FOR EMPLOYERS
-                    </p>
-                    <p>FAQ</p>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <!-- Global Hiring -->
-                <h4>GLOBAL HIRING</h4>
-                <div class="f-section-c">
-                    <p>
-                        <br><a class="f-items-c" href="#/About">ABOUT</a>
-                    </p>
-                    <p>BLOG</p>
-                    <p>CONTACT US</p>
-                </div>
-            </div>
+
+           
+            <!--</footer>-->
         </div>
         <!-- Copyright etc -->
         <div class="f-copyright-c">
-            <div class="container">
+            <div class="container max-fram-c">
                 <p>Copyright &copy; Hiring.global 2016</p>
             </div>
         </div>
-        <!--</footer>-->
     </div>
 </body>
 </html>

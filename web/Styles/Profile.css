@@ -2,6 +2,9 @@
     font-family: Helvetica;
 }
 
+.max-fram-c{
+    max-width: 1300px;
+}
 /*-----------------------
     navbar
 -----------------------*/
@@ -57,6 +60,7 @@
 
 .prf-nav-c{
     border-bottom:solid 0.5px #979797;
+    background-color: rgba(255,255,255,0.88);
 }
 .main-cnt-c{
     background-color:#f3f3f3;
