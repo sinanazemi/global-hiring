@@ -114,7 +114,9 @@ func readAccount(rows *sql.Rows) (interface{}, error) {
 }
 
 func (acc *Account) initializeJobTitle() {
-  acc.JobTitle = acc.Skills[0].Name
+  if len(acc.Skills) > 0 {
+    acc.JobTitle = acc.Skills[0].Name
+  }
 }
 
 func (acc *Account) create(session *util.Session) error {
