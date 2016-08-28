@@ -128,7 +128,7 @@ func (acc *Account) create(session *util.Session) error {
 
   query :=
     "INSERT INTO Account" +
-    "(Name, Email, cityID, Phone, Password, Description, JobTilte, isStudent) " +
+    "(Name, Email, cityID, Phone, Password, Description, JobTitle, isStudent) " +
     "VALUES($1, $2, $3, $4, $5, $6, $7, $8) " +
     "returning ID"
 
