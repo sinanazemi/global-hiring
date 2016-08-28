@@ -92,10 +92,6 @@
           </div>
           <label  ng-show="termsOfServiceShow && !checkboxValue" class="red-thin-label" style="padding-left: 25px;"  > Please accept the global hiring platform terms of service before continuing </label>
         </div>
-<!--        <div class="btn-div-c">
-          <button type="button" class="next-button btn-next-c" ng-click="step1NextClick()">Next Step</button>
-        </div>
--->
       </form>  <!-- Form finish -->
       <div class="footer btn-div-c">
         <button type="button" class="next-button btn-next-c" ng-click="step1NextClick()">Next Step</button>
@@ -111,85 +107,60 @@
     <img ng-src="{{langBarImage}}" class="img-responsive bar-image" alt="Language Step">
   </div >
     <form class="form-horizontal step-form" role="form" name="stepLangForm">
-        <div class="form-group field-div zero-margin" >
-          <label class="control-label col-sm-12 field-Bold-label" style="text-align:left; margin-top:60px;" >Language</label>
-          <div class="col-sm-12" style="margin-top:10px;">
-            <input type="text" class="form-control input-sm input-style"  placeholder="English" rows="1" ng-model="langToAdd.name" >
-          </div>
+        <div class="col-sm-12 field-div-right-left" style="margin-bottom:10px;margin-left: 5px;">
+          <label class="control-label field-Bold-label" style="text-align:left; padding:0;" >Language</label>
         </div>
-        <div class="form-group field-div" >
-          <label class="control-label col-sm-12 field-Bold-label" style="text-align:left; margin-top:18px;" >Profeciency</label>
+        <div class="col-sm-12 field-div" >
+          <input type="text" class="form-control textbox-style"  placeholder="{{langPlaceholder}}" rows="1" ng-model="langToAdd.name" ng-style="requiedStyleLang" >
         </div>
-<!--                      <div class="field-div" style="top: 100px;">
-                      <div class="container" >
-                        <div class="profeciencyRadio-button-text" ng-repeat="profeciency in LanguageProfeciencies" style="display: inline;"  >
-                        <input type="radio" name="level" value="elementry" ng-model="langToAdd.profeciency" style="float: left; "/>
-                        <p >{{profeciency.text}}</p>
-                        <p style="padding-left: 30Px;" >{{profeciency.desc}}</p>
-                        </div>
-                      </div>
-                    </div>
--->
-      <div class="row radio-langPro-position">
-        <div class="col-sm-12 form-group field-div zero-margin">
-          <div class="radio">
-            <label class="radio-button-text" ><input type="radio" name="level" value="E" ng-model="langToAdd.profeciency">Elementry <br/><p class="black-thin-label">I am only able to understand written text in it.</p></label>
-          </div>
+        <div class="col-sm-12 field-div-right-left" style="margin-bottom:10px;margin-left: 5px;" >
+          <label class="control-label  field-Bold-label" style="text-align:left; padding:0; " >Level of Profeciency</label>
         </div>
-      </div>
-      <div class="row radio-langPro-position">
-        <div class="col-sm-12 form-group field-div zero-margin">
-          <div class="radio ">
-            <label class="radio-button-text" ><input type="radio" name="level" value="B" ng-model="langToAdd.profeciency">Basic <br/><p class="black-thin-label">I am only able to communicate with it through written communication.</p></label>
-          </div>
+
+        <div class="col-sm-12 field-div-right-left" style="margin-left: 5px;"  >
+        <ul ng-repeat="langProf in LanguageProfeciencies" style="margin:0; padding:0; margin-bottom:10px;">
+          <li style="padding:0;">
+            <div class="row" style="margin:0;">
+              <div class="radio" style="margin:0;">
+                <label><input type="radio" name="level" ng-value="langProf.value" ng-model="langToAdd.profeciency" style="border-color:#03ba6d"><span class="radio-button-text-lang">{{ langProf.text }}</span> <br/><span class="black-thin-label-lang">{{ langProf.desc }}</span></label>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div style="margin-left:20px;">
+          <label ng-show="langProfErrorShow" class="error-label" style="font-size:15px;">This Field is required</label>
         </div>
-      </div>
-      <div class="row radio-langPro-position">
-        <div class="col-sm-12 form-group field-div zero-margin">
-          <div class="radio ">
-            <label class="radio-button-text" ><input type="radio" name="level" value="C" ng-model="langToAdd.profeciency">Conversational <br/><p class="black-thin-label">I know it well enough to verbally discuss project details with a client.</p></label>
-          </div>
         </div>
-      </div>
-      <div class="row radio-langPro-position">
-        <div class="col-sm-12 form-group field-div zero-margin">
-          <div class="radio">
-            <label class="radio-button-text" ><input type="radio" name="level" value="F" ng-model="langToAdd.profeciency">Fluent <br/><p class="black-thin-label">I have complete command of it with perfect grammer.</p></label>
-          </div>
-        </div>
-      </div>
-      <div class="row radio-langPro-position">
-        <div class="col-sm-12 form-group field-div zero-margin">
-          <div class="radio">
-            <label class="radio-button-text" ><input type="radio" name="level" value="N" ng-model="langToAdd.profeciency">Native or Bollingual <br/><p class="black-thin-label">I have complete command of it, including breadth of vocabulary, idioms.</p></label>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="btn-div-c">
-          <p class="btn-add-new" ng-click="addMoreLangClick(langToAdd)" style="padding-top:10px; margin-top:20px;" >+ Add More Language</p>
-        </div>
+
+      <div class="col-sm-12 field-div-right-left" style="margin-top:15px;">
+        <ul ng-repeat="lang in langs" class="list-inline" style="margin:0; padding:0; margin-bottom:10px;display: inline-block;">
+          <li style="padding:0;">
+            <span class="tag label tag-label">
+              <span>{{lang.name}}</span>
+              <a ng-click="removeLanguage(lang)"><i class="remove glyphicon glyphicon-remove" style="color:#ffffff"></i></a>
+            </span>
+          </li>
+        </ul>
       </div>
 
-<!--        <div class="row">
-          <div class="col-sm-6 btn-div-c" >
-            <button type="button" class="next-button btn-prev-c " ng-click="langPreClick()" style="margin-left:40px;">Previous</button>
-          </div>
-          <div class="col-sm-6 btn-div-c" >
-            <button type="button" class="next-button btn-next-c " ng-click="langNextClick()" style="margin-right:40px;">Next Step</button>
-          </div>
-        </div>
--->
+
     </form> <!-- Form finish -->
 
-    <div class="footer row">
-      <div class="col-sm-6 btn-div-c" >
+    <div class="footer-AddBTN field-div-right-left">
+      <div class="row" >
+        <div class="col-sm-12 field-div-right-left btn-div-c">
+          <div class="btn-add-new" ng-click="addMoreLangClick(langToAdd)" style="padding-top:10px;" >Sava and Add More Language</div>
+        </div>
+      </div>
+      <div class="row" style="margin-top:28px;">
+      <div class="col-sm-6 btn-div-c" style="text-align:right;" >
         <button type="button" class="next-button btn-prev-c " ng-click="langPreClick()" ng-disabled="langPrevBtn" >Previous</button>
       </div>
-      <div class="col-sm-6 btn-div-c" >
+      <div class="col-sm-6 btn-div-c" style="text-align:left;" >
         <button type="button" class="next-button btn-next-c " ng-click="langNextClick()" >Next Step</button>
       </div>
     </div>
+  </div>
 
   </div> <!-- Language step finish -->
 <!-- -Education Step -->
@@ -235,11 +206,6 @@
             <input type="text" class="form-control input-sm input-style" rows="1" ng-model="educationToAdd.grade" >
           </div>
         </div>
-        <div class="row">
-          <div class="btn-div-c">
-            <p class="btn-add-new" ng-click="addMoreEduClick(educationToAdd)" style="padding-top:10px;margin-top:60px;" >+ Add More Education</p>
-          </div>
-        </div>
 
 <!--          <div class="row">
             <div class="col-sm-6 btn-div-c" >
@@ -252,14 +218,22 @@
 -->
     </form> <!--form finish -->
 
-    <div class="footer row">
-      <div class="col-sm-6 btn-div-c" >
-        <button type="button" class="next-button btn-prev-c " ng-click="eduPreClick()" >Previous</button>
+    <div class="footer-AddBTN field-div-right-left">
+      <div class="row" >
+        <div class="col-sm-12 field-div-right-left btn-div-c">
+          <div class="btn-add-new" ng-click="addMoreEduClick(educationToAdd)" style="padding-top:10px;" >Sava and Add More Education</div>
+        </div>
       </div>
-      <div class="col-sm-6 btn-div-c" >
-        <button type="button" class="next-button btn-next-c " ng-click="eduNextClick()" >{{eduBTNLabel}}</button>
-      </div>
+      <div class="row" style="margin-top:28px;">
+        <div class="col-sm-6 btn-div-c" style="text-align:right;">
+          <button type="button" class="next-button btn-prev-c " ng-click="eduPreClick()" >Previous</button>
+        </div>
+        <div class="col-sm-6 btn-div-c" style="text-align:left;" >
+          <button type="button" class="next-button btn-next-c " ng-click="eduNextClick()" >{{eduBTNLabel}}</button>
+        </div>
     </div>
+  </div>
+
   </div><!-- education step finish -->
 
   <div id="stepMainSRV" class="container step-div " ng-hide="stepMainSRVHide" >
@@ -296,11 +270,11 @@
 -->
       </form><!--form finish -->
 
-<div class="footer row">
-  <div class="col-sm-6 btn-div-c" >
+<div class="footer ">
+  <div class="col-sm-6 btn-div-c" style="text-align:right;">
     <button type="button" class="next-button btn-prev-c " ng-click="mainSRVPreClick()" ng-disabled="mainSrvPrevBtn" >Previous</button>
   </div>
-  <div class="col-sm-6 btn-div-c" >
+  <div class="col-sm-6 btn-div-c" style="text-align:left;" >
     <button type="button" class="next-button btn-next-c " ng-click="mainSRVNextClick()" >Next Step</button>
   </div>
 </div>
@@ -337,11 +311,11 @@
 -->
     </form><!--form finish -->
 
-    <div class="footer row">
-      <div class="col-sm-6 btn-div-c" >
+    <div class="footer ">
+      <div class="col-sm-6 btn-div-c" style="text-align:right;">
         <button type="button" class="next-button btn-prev-c " ng-click="skillPreClick()" >Previous</button>
       </div>
-      <div class="col-sm-6 btn-div-c" >
+      <div class="col-sm-6 btn-div-c" style="text-align:left;" >
         <button type="button"  class="next-button btn-next-c " ng-click="skillNextClick()" >{{skillsBTNLabel}}</button>
       </div>
     </div>
@@ -349,23 +323,30 @@
 
   <!-- ForceEnglish Modal -->
   <script type="text/ng-template" id="forceEnglishModalContent.html">
-    <div class="modal-header btn-div-c" style="margin-bottom:0;">
-      <button type="button" class="close" ng-click="close()" >&times;</button>
-      <h3 class="modal-title btn-next-c" style="text-align:center;padding-top:10px;">English</h3>
+    <div class="modal-header " style="margin-bottom:0;background-color:#eeeeee;min-height:71px;text-align:center;">
+      <h3 class="modal-title modal-title-font " style="text-align:center;">How about <span style="font-weight:bold">English?</span></h3>
     </div>
-    <div class="modal-body">
-      <label class="control-label col-sm-12 field-Bold-label" style="text-align:left;" >How would you describe your level of profeciency in English?</label>
-      </div>
-      <div class="form-group" >
-      <ul ng-repeat="langProf in LanguageProfeciencies" style="padding-left: 25px;">
+    <div class="field-div-right-left" >
+      <div class="col-sm-12 " style="margin-top:40px; margin-left:5px;padding:0;" >
+      <label class="control-label col-sm-12 field-Bold-label" style="text-align:left;padding:0;" >How would you describe your level of profeciency in English?</label>
+    </div>
+      <div class="col-sm-12 " style="padding:0;margin-top:30px;margin-bottom:42px">
+      <ul ng-repeat="langProf in LanguageProfeciencies" style="padding: 0;padding-left: 20px;">
         <li>
-          <div class="row" style="margin:0;">
-            <div class="radio" style="margin:0;">
-              <label class="radio-button-text" ><input type="radio" name="level" ng-value="langProf.value" ng-click="langToAdd.profeciency = langProf.value; close()">{{ langProf.text }} <br/><span class="black-thin-label">Description.</span></label>
+          <div class="row">
+              <div class="radio" style="margin:0;">
+              <label class="radio-button-text" ><input type="radio" name="level" ng-value="langProf.value" ng-click="langToAdd.profeciency = langProf.value; close()" style="border-color:#03ba6d"><span class="radio-button-text-lang">{{ langProf.text }}</span> <br/><span class="black-thin-label-lang">{{ langProf.desc }}</span></label>
             </div>
           </div>
         </li>
       </ul>
+      <div style="margin-left:20px;">
+        <label ng-show="langModalProfErrorShow" class="error-label" style="font-size:15px;">This Field is required</label>
+      </div>
+    </div>
+    </div>
+    <div class="btn-div-c" style="margin-bottom:30px; margin-top:42px;">
+      <button type="button" class="next-button btn-next-c" ng-click="close()">Next Step</button>
     </div>
   </script>
 

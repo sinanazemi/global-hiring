@@ -1,6 +1,5 @@
 var globalHiring = angular.module('globalHiring',['ngResource','ngAnimate', 'ui.bootstrap']);
 globalHiring.controller('stepsController',['$scope', '$resource','$uibModal','$location', function($scope, $resource,$uibModal,$location, $http, $window, $log) {
-
 //initializing page
 var accountUser = $resource("/account")
 $scope.init = function () {
@@ -67,6 +66,10 @@ $scope.init = function () {
   $scope.requiedSelectedCity='';
   $scope.selectColorStyle="";
   $scope.requiedStyleisStudent="";
+
+  $scope.langPlaceholder="English";
+  $scope.requiedStyleLang="";
+  $scope.langProfErrorShow=false;
 
   $scope.errorMsg='';
 
@@ -264,12 +267,13 @@ $scope.passwordChange=function(){
   };
 
   $scope.langNextClick = function(){
-
-    if (($scope.langs.length==0 && $scope.langToAdd.name!='')||($scope.langs.length>0 && $scope.langs[$scope.langs.length-1].name!=$scope.langToAdd.name))
+    isValidationComplete= $scope.validateLang();
+    if (isValidationComplete &&(($scope.langs.length==0 && $scope.langToAdd.name!='')||($scope.langs.length>0 && !$scope.checkIfHasLang())))
     {
       $scope.addMoreLangClick($scope.langToAdd);
     }
-    if($scope.langs.length>0)
+
+    if(isValidationComplete && $scope.langs.length>0)
     {
       hasEnglish=false;
       for(i=0;i<$scope.langs.length;i++)
@@ -285,16 +289,22 @@ $scope.passwordChange=function(){
         $scope.forceEnglishModal();
       }
     }
-    if($scope.langs.length==0)
+    if(isValidationComplete && $scope.langs.length==0)
     {
       $scope.errorMsg="NO ENGLISH"
       $scope.forceEnglishModal();
     }
 
+    if(isValidationComplete)
+    {
+      $scope.langProfErrorShow=false;
+      $scope.langPlaceholder="English";
+      $scope.requiedStyleLang="";
+
     $scope.stepLangHide=true;
     if($scope.isStudent){
       $scope.stepEduHide=false;
-      $scope.eduBTNLabel="Next";
+      $scope.eduBTNLabel="Next Step";
       $scope.eduBarImage="images/step_3_bar.png";
     }
     else{
@@ -302,6 +312,7 @@ $scope.passwordChange=function(){
       $scope.eduBTNLabel="Finish";
       $scope.eduBarImage="images/step_5_bar.png";
 
+    }
     }
   };
   $scope.eduNextClick = function(){
@@ -333,7 +344,7 @@ $scope.passwordChange=function(){
     }
     else{
       $scope.stepSkillHide=false;
-      $scope.skillsBTNLabel="Next";
+      $scope.skillsBTNLabel="Next Step";
       $scope.skillBarImage="images/step_3_bar.png";
     }
   };
@@ -416,11 +427,11 @@ $scope.passwordChange=function(){
 
   //Add more Language
   $scope.LanguageProfeciencies = [
-    {text: "Elementary", value: "E", desc: "Discription"},
-    {text: "Basic", value: "B", desc: "Discription"},
-    {text: "Conversational", value: "C", desc: "Discription"},
-    {text: "Fluent", value: "F", desc: "Discription"},
-    {text: "Native", value: "N", desc: "Discription"}
+    {text: "Elementary", value: "E", desc: "I am only able to understand written text in it."},
+    {text: "Basic", value: "B", desc: "I am only able to communicate with it through written communication."},
+    {text: "Conversational", value: "C", desc: "I know it well enough to verbally discuss project details with a client."},
+    {text: "Fluent", value: "F", desc: "I have complete command of this language with perfect grammer."},
+    {text: "Native", value: "N", desc: "I have complete command of this language, including breadth of vocabulary, idioms and colloquialisms."}
   ]
   $scope.langs = [];
   $scope.langToAdd={
@@ -428,16 +439,77 @@ $scope.passwordChange=function(){
     profeciency:''
   };
 
+  $scope.checkIfHasLang=function(){
+    if($scope.langToAdd.name!='')
+    {
+      haslang=false;
+      for(i=0;i<$scope.langs.length;i++)
+      {
+        if($scope.langs[i].name==$scope.langToAdd.name)
+        {
+          haslang=true;
+        }
+      }
+      return haslang;
+    }
+    else{return true;}
+  }
+  $scope.validateLang=function(){
+    isValidationComplete=false;
+    if($scope.langToAdd.name==''&& $scope.langToAdd.profeciency!='')
+    {
+      $scope.langPlaceholder="This field is required";
+      $scope.requiedStyleLang={
+      "border-color": "red",
+      "border-style": "solid",
+      "border-width" : "1px"
+      }
+    }
+    else if($scope.langToAdd.name!=''&& $scope.langToAdd.profeciency==''){
+      $scope.langProfErrorShow=true;
+    }
+    else if ($scope.langToAdd.name!=''&& $scope.langToAdd.profeciency!=''){
+      $scope.langProfErrorShow=false;
+      $scope.langPlaceholder="English";
+      $scope.requiedStyleLang="";
+      isValidationComplete=true;
+    }
+    else if($scope.langToAdd.name==''&& $scope.langToAdd.profeciency==''){ isValidationComplete=true;}
+    return isValidationComplete;
+  }
+
+
   var index =0;
   $scope.addMoreLangClick=function(langToAdd){
-    if( langToAdd.name!='' && langToAdd.profeciency!='')
+    isValidationComplete=$scope.validateLang();
+    if(langToAdd.name!="English"){
+      if(langToAdd.profeciency==''){$scope.langProfErrorShow=true;}
+      if(langToAdd.name==''){
+        $scope.langPlaceholder="This field is required";
+        $scope.requiedStyleLang={
+        "border-color": "red",
+        "border-style": "solid",
+        "border-width" : "1px"
+        }
+      }
+    }
+    if(isValidationComplete && langToAdd.name!='')
     {
       $scope.langs.push(angular.copy(langToAdd));
       $scope.langToAdd.name='';
       $scope.langToAdd.profeciency='';
+      $scope.langProfErrorShow=false;
+      $scope.langPlaceholder="English";
+      $scope.requiedStyleLang="";
     }
   }
 
+$scope.removeLanguage=function(lang){
+  var removeLangIndex = $scope.langs.indexOf(lang);
+  if (index > -1) {
+    $scope.langs.splice(removeLangIndex, 1);
+  }
+}
 
   //Force Englisg Modal
 
@@ -448,6 +520,9 @@ $scope.passwordChange=function(){
       animation: $scope.animationsEnabled,
       templateUrl: 'forceEnglishModalContent.html',
       controller: 'ForceEnglishModalInstanceCtrl',
+      windowClass: 'app-lang-modal-window',
+      backdrop  : 'static',
+      keyboard  : false,
       resolve: {
         langToAdd: function () {
           return $scope.langToAdd;
@@ -538,7 +613,6 @@ $scope.passwordChange=function(){
     });
 
     modalInstance.result.then(function (selectedItem) {
-      //TODO: should be checked with Back-end
       selectedSkill.profeciency=selectedItem.profeciency.value;
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
@@ -682,15 +756,22 @@ angular.module('globalHiring').controller('ErrormodalInstanceCtrl', function ($s
 
 angular.module('globalHiring').controller('ForceEnglishModalInstanceCtrl', function ($scope, $uibModalInstance,langToAdd,LanguageProfeciencies) {
 
+  $scope.langModalProfErrorShow=false;
   $scope.langToAdd = langToAdd;
   $scope.LanguageProfeciencies=LanguageProfeciencies;
   $scope.langToAdd = {
     name:"English",
-    profeciency: $scope.LanguageProfeciencies[0].value
+    //profeciency: $scope.LanguageProfeciencies[0].value
+    profeciency:''
   };
 
   $scope.close= function () {
+    if($scope.langToAdd.profeciency!=''){
     $uibModalInstance.close($scope.langToAdd);
+    }
+    else {
+        $scope.langModalProfErrorShow=true;
+    }
   };
 
   $scope.cancel = function () {

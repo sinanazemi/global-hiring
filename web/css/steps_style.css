@@ -10,6 +10,11 @@
     width: 640px;
     min-height: 831px;
     }
+    .app-lang-modal-window .modal-dialog {
+      width: 640px;
+      border-radius: 3px;
+      min-height: 580px;
+    }
   }
 
   @media only screen and (min-width: 600px) and (max-width: 767px) {
@@ -106,6 +111,19 @@
 
 }
 
+.field-div-right-left {
+
+    display:block;
+    text-align:left;
+
+    padding-top: 0px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-bottom: 0px;
+
+}
+
+
 .zero-margin{margin: 0;}
 
 .field-label {
@@ -182,10 +200,17 @@
 .radio-button-text {
     float: left;
     font-size: 16px;
-    font-weight: 400;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #616161;
 }
+
+.radio-button-text-lang {
+  font-size: 15px;
+  font-weight: bold;
+  color: #616161;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
 
 input[type='radio'] {
   -webkit-appearance:none;
@@ -252,68 +277,82 @@ input[type=checkbox]:checked+.custom-check::before {
 .btn-next-c {
     width: 200px;
     height: 42px;
+    cursor: pointer;
     border-radius: 2px;
     background-color: #03ba6d;
-    cursor: pointer;
+    border:0;
 
     font-size: 15px;
-    font-weight: 700;
-    border: none;
-    color: #ffffff;
+    font-weight: bold;
     text-align: center;
+    color: #ffffff;
     display: inline-block;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
 }
 
 .btn-prev-c {
-    width: 216px;
-    height: 40px;
+    width: 200px;
+    height: 42px;
     cursor: pointer;
-    background-color: rgb(255, 255, 255);
+    background-color: #f9f9f9;
     border-radius: 2px;
     border: 1px solid rgb(204,204,204);
-    color: rgb(204, 204, 204);
+
     text-align: center;
     display: inline-block;
-    font-size: 14px;
+    font-size: 15px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-style: normal;
-    font-weight: 700;
-
-
-    /*margin-bottom: -40px;*/
-
+    font-weight: bold;
+    color: #cdcdcd;
 }
 
 .footer {
-bottom: 0;
-text-align: center !important;
-height: 74px;
-position:absolute;
-width:100%;
+    bottom: 0;
+    text-align: center !important;
+    height: 74px;
+    position:absolute;
+    width:100%;
  }
 
+ .footer-AddBTN {
+     bottom: 0;
+     text-align: center !important;
+     height: 144px;
+     position:absolute;
+     width:100%;
+  }
+
+
 .btn-add-new {
-    width: 216px;
-    height: 40px;
+    width: 260px;
+    height: 42px;
     cursor: pointer;
-    background-color: rgb(255, 255, 255);
+    background-color: #f9f9f9;
     border-radius: 2px;
-    border: 1px solid rgb(204,204,204);
-    color: rgb(3, 186, 109);
+    border: 1px solid #cdcdcd;
+
+    font-size: 15px;
+    font-weight: bold;
     text-align: center;
+    color: #03ba6d;
     display: inline-block;
-    font-size: 12px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-style: normal;
-}
-.radio-langPro-position{
-  margin-left:10px;
-  margin-bottom: 0;
 }
 
+.modal-title-font{
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 21px;
+  font-weight: 300;
+  letter-spacing: 1.1px;
+  text-align: center;
+  color: #616060;
+}
+
+.black-thin-label-lang{
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #616161;
+}
 
 .black-thin-label {
     float: left;
@@ -329,11 +368,10 @@ width:100%;
     text-align:left;
     display:block;
 
-    font-size: 12px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-style: bold;
-    color: rgb(97, 97, 97);
-    font-weight: 350;
+    font-size: 16px;
+    font-weight: bold;
+    color: #616161;
 }
 
 
@@ -432,6 +470,57 @@ li { padding: 2px 0; }
     /*margin-bottom: 30px;*/
 
 }
+.tag {
+  font-family: Helvetica;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  color: #ffffff;
+
+  padding: 0.5em 1em 0.5em;
+  margin: 2px 1px !important;
+  display: inline-block;
+  max-width: 100%;
+}
+
+.tag-label{
+  border-radius: 8px;
+  background-color: #03ba6d
+}
+.tag > span {
+  display: inline-block;
+  max-width: 94%;
+  white-space: nowrap;
+  overflow: hidden;
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+.tag a {
+  display: inline-block;
+  color: #bbb;
+  cursor: pointer;
+  opacity: 0.3;
+  margin: 0 0 0 0.3em;
+}
+
+.tag a:hover {
+  opacity: 1.0;
+}
+
+.tag a .glyphicon-white {
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.tag .remove {
+  vertical-align: bottom;
+  top: 0;
+}
+
+
+
 
 
 
