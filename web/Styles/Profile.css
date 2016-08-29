@@ -33,18 +33,43 @@
     font-size:16px;
     letter-spacing:0.8px;  
 }
+.popover{
+    max-width:100px;
+    margin-left:10px;
+}
+.popover-content {
+    max-width: 800px; /* optional max width */
+    width: intrinsic; /* Safari/WebKit uses a non-standard name */
+    width: -moz-max-content; /* Firefox/Gecko */
+    width: -webkit-max-content; /* Chrome */
+    height:40px;
+    margin-left:-10px;
+    margin-right:-10px;
+}
 .logout-div-c{
-    height: 47px; 
+    /*height: 47px; 
     width: 313px; 
-    border: 1px solid #979797; 
-    position: absolute; 
-    right: 0px; 
-    top: 63px;
+    border: 1px solid #979797;*/ 
+    /*position: relative;*/ 
+    /*right: 0px; 
+    top: 63px;*/
+    display:block;
+    width:300px;
+    border: 1px solid #979797;
 }
 .logout-btn-c{
-    margin-top:15px;
+    /*margin-top:15px;
     margin-bottom:auto;
     margin-left:30px;
+    display:inline-block;*/ 
+    color: #4a4a4a;   
+}
+.logout-txt-c{
+  font-family: Helvetica;
+  font-size: 14px;
+  letter-spacing: 0.7px;
+  color: #4a4a4a;
+  text-decoration:none;
 }
 .logout-email-c{
     font-family: Helvetica; 
@@ -52,9 +77,11 @@
     font-weight: 400; 
     letter-spacing: 0.5px; 
     color: #7e7d7e;
-    position:absolute; 
-    top:15px;
-    right:0px;
+    /*position:absolute; 
+    top:15px;*/
+    /*right:0px;*/
+    /*right:10px;
+    display:inline-block;*/
 }
 
 
@@ -557,6 +584,7 @@ input[type=checkbox]:checked+.custom-check::before {
             margin-left:-20px;
 
         }
+    
         #myNavbar{
             display:none;
         }
@@ -578,32 +606,44 @@ input[type=checkbox]:checked+.custom-check::before {
             font-size: 10px;
             letter-spacing: 0.5px;
         }
+    .pf_icon-c {
+        font-size:10px;
+    }
+    .popover-content {
+        max-width: 175px;
+    }
         .logout-div-c{
-            position:absolute;
-            top:50px;
+            /*position:absolute;
+            top:50px*/;
             /*right:0px;*/
-            left:0px;
+            /*left:0px;
             width:150px;
             height:30px;
             font-size: 10px;
-            letter-spacing: 0.5px;
-
+            letter-spacing: 0.5px;*/
+            width:100px;
+            font-size:10px;
+            margin-left:-5px;            
         }
+
         .logout-btn-c{
             margin-top:7px;
             margin-bottom:auto;
-            margin-left:10px;
+            /*margin-left:10px;*/
 
         }
+        .logout-txt-c {
+        font-size:10px;
+    }
     .logout-email-c{
         font-family: Helvetica; 
         font-size: 10px; 
         font-weight: 400; 
         letter-spacing: 0.5px; 
         color: #7e7d7e;
-        position:absolute; 
+        /*position:absolute; 
         top:7px;
-        right:0px;
+        right:5px;/*0px;*/*/
     }
 
 

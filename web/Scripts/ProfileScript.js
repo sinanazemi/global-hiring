@@ -1,7 +1,5 @@
 ﻿// new dependency: ngResource is included just above
-//var myapp = new angular.module("app", ["ngResource"]);
-var myapp = new angular.module("app", ["selectize","ngResource"]);
-//var app2 = angular.module("ngResource", ["selectize"]);
+var myapp = new angular.module("app", ['ngAnimate', 'ui.bootstrap', 'selectize', 'ngResource']);
 
 // inject the $resource dependency here
 myapp.controller("controller",

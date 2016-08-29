@@ -17,6 +17,12 @@
     
     <link href="Styles/Profile.css" rel="stylesheet" />
     <script src="Scripts/ProfileScript.js"></script>
+
+    <!-- for logout popover -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.4.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
     
 </head>
 <body>
@@ -40,25 +46,43 @@
                         <li>
                             <img class="small-profile-img-c img-circle" src="images/Chrysanthemum.jpg" />
                         </li>
-                        <li><a href="#" class="acc_name-c" ng-click="accPrfClick()">{{account.name}}<span class="glyphicon glyphicon-chevron-down pf_icon-c"></span></a></li>
+                        <li>
+                            <a href="#" class="acc_name-c" popover-template="'popover.html'" popover-placement="bottom" popover-trigger="focus">{{account.name}}<span class="glyphicon glyphicon-chevron-down pf_icon-c"></span></a>
+
+                        </li>
                     </ul>
                 </div>
                 <div class="menu-mo-c">
                     <img class="small-profile-img-c img-circle" src="images/Chrysanthemum.jpg" />
-                    <a href="#login" class="acc_name-c" ng-click="accPrfClick()">{{account.name}}<span class="glyphicon glyphicon-chevron-down pf_icon-c"></span></a>
-                    <div class="logout-div-c" id="signOut" ng-show="logoutShow">
-                        <!--<button class="glyphicon glyphicon-log-out" ng-click="btnLogout()">Logout</button>-->
-                        <span class="glyphicon glyphicon-log-out logout-btn-c"></span><a href="#" ng-click="btnLogout()">Logout</a>
-                        <p class="logout-email-c">{{account.email}}</p>
-                    </div>
-                </div>
+                    <a href="#login" class="acc_name-c" popover-template="'popover.html'" popover-placement="bottom" popover-trigger="focus">{{account.name}}<span class="glyphicon glyphicon-chevron-down pf_icon-c"></span></a>
+                    <!--<div class="logout-div-c" id="signOut" ng-show="logoutShow">
+                <span class="glyphicon glyphicon-log-out logout-btn-c"></span><a href="#" ng-click="btnLogout()">Logout</a>
+                <p class="logout-email-c">{{account.email}}</p>
+            </div>-->
+                    <script type="text/ng-template" id="popover.html">
+                        <!--<div class="logout-div-c">
+                            <span style="display:inline-block" class="glyphicon glyphicon-log-out logout-btn-c"></span>
+                            <a style="display:inline-block" href="#" ng-click="btnLogout()">Logout</a>
+                            <p style="display:inline-block;padding-left:20px;">{{account.email}}</p>
+                        </div>-->
+                        
+                            <label class="logout-txt-c">
+                                <span class="glyphicon glyphicon-log-out logout-btn-c"></span>
+                                &nbsp;&nbsp;<a href="#" ng-click="btnLogout()" class="logout-txt-c">Logout</a>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="logout-email-c"> {{account.email}}</span>
+                            </label>
+                        
+                    </script>
+
+            </div>
             </div>
         </nav>
-        <div class="logout-div-c" id="signOut" ng-show="logoutShow">
+        <!--<div class="logout-div-c" id="signOut" ng-show="logoutShow">
             <span class="glyphicon glyphicon-log-out logout-btn-c"></span><a href="#" ng-click="btnLogout()">Logout</a>
             <p class="logout-email-c">{{account.email}}</p>
-        </div>
+        </div>-->
         <!--<button type="button" class="glyphicon glyphicon-chevron-down pf_icon-c"id="logout"></button>-->
+
         <!-- My Profile -->
         <div class="container-fluid myProfile-cn-c">
             <div>
