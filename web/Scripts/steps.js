@@ -55,6 +55,10 @@ $scope.init = function () {
   $scope.checkboxValue=false;
   $scope.password='';
   $scope.email='';
+  $scope.isRedFNPlacehoder=false;
+  $scope.isRedEmailPlacehoder=false;
+  $scope.isRedPWPlacehoder=false;
+  $scope.isRedLangPlacehoder=false;
 
   $scope.fullnamePlaceholder="";
   $scope.emailPlaceholder="";
@@ -176,7 +180,7 @@ $scope.passwordChange=function(){
 
       if($scope.fullname=='' )
       {
-
+        $scope.isRedFNPlacehoder=true;
         $scope.requiedStyleFullname={
           "border-color": "red",
           "border-style": "solid",
@@ -185,13 +189,14 @@ $scope.passwordChange=function(){
         $scope.fullnamePlaceholder="Fullname is required";
       }
       else {
+        $scope.isRedFNPlacehoder=false;
         $scope.requiedStyleFullname='';
         $scope.fullnamePlaceholder="";
       }
 
       if($scope.email=='' )
       {
-
+        $scope.isRedEmailPlacehoder=true;
         $scope.requiedStyleEmail={
           "border-color": "red",
           "border-style": "solid",
@@ -203,6 +208,7 @@ $scope.passwordChange=function(){
       else {
         $scope.requiedStyleEmail='';
         $scope.emailPlaceholder="";
+        $scope.isRedEmailPlacehoder=false;
       }
 
       if( $scope.selectedCity=="" )
@@ -227,7 +233,7 @@ $scope.passwordChange=function(){
 
       if($scope.password=='' )
       {
-
+        $scope.isRedPWPlacehoder=true;
         $scope.requiedStylePassword={
           "border-color": "red",
           "border-style": "solid",
@@ -239,6 +245,7 @@ $scope.passwordChange=function(){
       else {
         $scope.requiedStylePassword='';
         $scope.passwordPlaceholder="";
+        $scope.isRedPWPlacehoder=false;
       }
 
       if(!$scope.checkboxValue){
@@ -458,6 +465,7 @@ $scope.passwordChange=function(){
     isValidationComplete=false;
     if($scope.langToAdd.name==''&& $scope.langToAdd.profeciency!='')
     {
+      $scope.isRedLangPlacehoder=true;
       $scope.langPlaceholder="This field is required";
       $scope.requiedStyleLang={
       "border-color": "red",
@@ -466,9 +474,11 @@ $scope.passwordChange=function(){
       }
     }
     else if($scope.langToAdd.name!=''&& $scope.langToAdd.profeciency==''){
+      $scope.isRedLangPlacehoder=false;
       $scope.langProfErrorShow=true;
     }
     else if ($scope.langToAdd.name!=''&& $scope.langToAdd.profeciency!=''){
+      $scope.isRedLangPlacehoder=false;
       $scope.langProfErrorShow=false;
       $scope.langPlaceholder="English";
       $scope.requiedStyleLang="";
@@ -485,6 +495,7 @@ $scope.passwordChange=function(){
     if(langToAdd.name!="English"){
       if(langToAdd.profeciency==''){$scope.langProfErrorShow=true;}
       if(langToAdd.name==''){
+        $scope.isRedLangPlacehoder=false;
         $scope.langPlaceholder="This field is required";
         $scope.requiedStyleLang={
         "border-color": "red",
@@ -501,6 +512,7 @@ $scope.passwordChange=function(){
       $scope.langProfErrorShow=false;
       $scope.langPlaceholder="English";
       $scope.requiedStyleLang="";
+      $scope.isRedLangPlacehoder=false;
     }
   }
 

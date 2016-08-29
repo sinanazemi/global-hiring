@@ -145,6 +145,11 @@
 
 }
 
+input[type='text']{
+  font-family: Helvetica;
+  font-size: 15px;
+}
+
 .textbox-style{
   float: left;
   border-radius:0px;
@@ -416,6 +421,25 @@ input[type=checkbox]:checked+.custom-check::before {
   border:1px solid red;
   background: #f9f9f9 url('../images/combo-red.png') no-repeat 97% 50%;
   background-size: 15px;
+}
+
+.red-Placeholder::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: red;
+}
+.red-Placeholder:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: red;
+    opacity: 1;
+}
+.red-Placeholder::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: red;
+    opacity: 1;
+}
+.red-Placeholder:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: red;
 }
 
 .skill-div {
