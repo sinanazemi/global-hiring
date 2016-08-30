@@ -125,7 +125,8 @@ $scope.cityChange=function(){
       "border-width" : "1px",
       "background-image":"url('../images/combo-red.png')",
       "background-color":"#f9f9f9",
-      "background-repeat":"no-repeat"
+      "background-repeat":"no-repeat",
+      "color":"red"
     }
 
     $scope.cityPlaceholder="City is required";
@@ -219,7 +220,8 @@ $scope.passwordChange=function(){
           "border-width" : "1px",
           "background-image":"url('../images/combo-red.png')",
           "background-color":"#f9f9f9",
-          "background-repeat":"no-repeat"
+          "background-repeat":"no-repeat",
+          "color":"red"
         }
 
         $scope.cityPlaceholder="City is required";

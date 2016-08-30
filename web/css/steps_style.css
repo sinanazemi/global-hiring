@@ -421,6 +421,7 @@ input[type=checkbox]:checked+.custom-check::before {
   border:1px solid red;
   background: #f9f9f9 url('../images/combo-red.png') no-repeat 97% 50%;
   background-size: 15px;
+  color:red;
 }
 
 .red-Placeholder::-webkit-input-placeholder {

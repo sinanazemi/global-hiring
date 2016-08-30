@@ -62,8 +62,12 @@
           <div class="col-sm-8 ">
             <input id="phoneInput" name="phoneInput" type="text" class="form-control textbox-style" placeholder="0912 1234567" ng-pattern="phoneRegex" ng-model="phone" />
           </div>
-          <div>
-          <span  class="col-sm-12 red-thin-label" style="text-align:center; padding-left: 85px;" ng-show="step1Form.phoneInput.$invalid"> Please Enter a valid phone number </span>
+          <div class="row col-sm-12 ">
+            <div  class="col-sm-4">
+            </div>
+            <div  class="col-sm-8">
+              <span  class="col-sm-12 red-thin-label" style="text-align:left;" ng-show="step1Form.phoneInput.$invalid"> Please Enter a valid phone number </span>
+            </div>
           </div>
         </div>
         <div class="col-sm-12 field-div" style="margin-bottom: 30px;">
@@ -81,9 +85,13 @@
           <div class="col-sm-3 " style="padding-left:0;">
             <label class= "radio-inline radio-button-text" >  <input type="radio" id="isStudent" name="isStudent" value="no" ng-model="isStudent" ng-style="requiedStyleisStudent" ng-required="!isStudent"> No </label>
           </div>
-          </div>
-          <div>
-          <span  class="col-sm-12 red-thin-label" style="text-align:center; padding-left: 85px;" ng-show="isStudentShow"> Please answer this question </span>
+        </div>
+          <div class="row col-sm-12 ">
+            <div  class="col-sm-4">
+            </div>
+            <div  class="col-sm-8">
+                <span class="col-sm-12 red-thin-label" style="text-align:left;" ng-show="isStudentShow"> Please answer this question </span>
+            </div>
           </div>
         </div>
         <div class="col-sm-12 field-div" >
