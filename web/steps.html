@@ -161,10 +161,10 @@
         </div>
       </div>
       <div class="row" style="margin-top:28px;">
-      <div class="col-sm-6 btn-div-c" style="text-align:right;" >
+      <div class="col-sm-6 btn-prev-div"  >
         <button type="button" class="next-button btn-prev-c " ng-click="langPreClick()" ng-disabled="langPrevBtn" >Previous</button>
       </div>
-      <div class="col-sm-6 btn-div-c" style="text-align:left;" >
+      <div class="col-sm-6 btn-next-div" >
         <button type="button" class="next-button btn-next-c " ng-click="langNextClick()" >Next Step</button>
       </div>
     </div>
@@ -233,10 +233,10 @@
         </div>
       </div>
       <div class="row" style="margin-top:28px;">
-        <div class="col-sm-6 btn-div-c" style="text-align:right;">
+        <div class="col-sm-6 btn-prev-div" >
           <button type="button" class="next-button btn-prev-c " ng-click="eduPreClick()" >Previous</button>
         </div>
-        <div class="col-sm-6 btn-div-c" style="text-align:left;" >
+        <div class="col-sm-6 btn-next-div"  >
           <button type="button" class="next-button btn-next-c " ng-click="eduNextClick()" >{{eduBTNLabel}}</button>
         </div>
     </div>
@@ -252,10 +252,10 @@
       <img ng-src={{mainSRVBarImage}} class="img-responsive bar-image" alt="Main service Step">
     </div >
       <form class="form-horizontal step-form" role="form" name="stepMainSrvForm">
-        <div class="form-group field-div" >
+        <div class="form-group field-div-right-left" >
           <label class="control-label col-sm-12 field-Bold-label" style="text-align:left; margin-top:60px;padding-left:0" >What are the main services you offer?<span style="font-weight:200;">(Please select all that you're open to)</span></label>
         </div>
-        <div class="form-group service-div" >
+        <div class="form-group field-div-right-left" >
           <div class="serviceContainer"  >
             <div class="item" ng-repeat='service in mainServices' ng-click='toggleSelectedSRV(service)' ng-class="{ selected: service.isselected  }">
               <input type="checkbox" ng-attr-id="{{'c' + service.id}}" ng-model="service.isselected" />
@@ -279,10 +279,10 @@
       </form><!--form finish -->
 
 <div class="footer ">
-  <div class="col-sm-6 btn-div-c" style="text-align:right;">
+  <div class="col-sm-6 btn-prev-div" >
     <button type="button" class="next-button btn-prev-c " ng-click="mainSRVPreClick()" ng-disabled="mainSrvPrevBtn" >Previous</button>
   </div>
-  <div class="col-sm-6 btn-div-c" style="text-align:left;" >
+  <div class="col-sm-6 btn-next-div" >
     <button type="button" class="next-button btn-next-c " ng-click="mainSRVNextClick()" >Next Step</button>
   </div>
 </div>
@@ -320,10 +320,10 @@
     </form><!--form finish -->
 
     <div class="footer ">
-      <div class="col-sm-6 btn-div-c" style="text-align:right;">
+      <div class="col-sm-6 btn-prev-div" >
         <button type="button" class="next-button btn-prev-c " ng-click="skillPreClick()" >Previous</button>
       </div>
-      <div class="col-sm-6 btn-div-c" style="text-align:left;" >
+      <div class="col-sm-6 btn-next-div" >
         <button type="button"  class="next-button btn-next-c " ng-click="skillNextClick()" >{{skillsBTNLabel}}</button>
       </div>
     </div>

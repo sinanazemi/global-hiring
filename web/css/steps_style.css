@@ -15,6 +15,8 @@
       border-radius: 3px;
       min-height: 580px;
     }
+    .btn-prev-div{text-align: right;}
+    .btn-next-div{text-align: left;}
   }
 
   @media only screen and (min-width: 600px) and (max-width: 767px) {
@@ -33,6 +35,8 @@
         width: 100%;
         min-height: 831px;
         }
+        .btn-prev-div{text-align: center;}
+        .btn-next-div{text-align: center;}
       }
 
 .body-c {
