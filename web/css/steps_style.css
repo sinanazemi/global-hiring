@@ -523,7 +523,7 @@ li { padding: 2px 0; }
   display: inline-block;
   max-width: 94%;
   white-space: nowrap;
-  overflow: hidden;
+  /*overflow: hidden;*/
   -ms-text-overflow: ellipsis;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
