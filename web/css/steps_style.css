@@ -24,15 +24,18 @@
     .step-div{
       margin-right: auto;
       margin-left: auto;
-      width: 540px;
+      min-width:640px;
+      min-height: 831px;
       }
+      .btn-prev-div{text-align: center;}
+      .btn-next-div{text-align: center;}
     }
     @media only screen and (max-width: 599px) {
       /* For phones: */
       .step-div{
         margin-right: 0px;
         margin-left: 0px;
-        width: 100%;
+        min-width:640px;
         min-height: 831px;
         }
         .btn-prev-div{text-align: center;}
