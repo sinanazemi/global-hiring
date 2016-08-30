@@ -497,7 +497,7 @@ $scope.passwordChange=function(){
     if(langToAdd.name!="English"){
       if(langToAdd.profeciency==''){$scope.langProfErrorShow=true;}
       if(langToAdd.name==''){
-        $scope.isRedLangPlacehoder=false;
+        $scope.isRedLangPlacehoder=true;
         $scope.langPlaceholder="This field is required";
         $scope.requiedStyleLang={
         "border-color": "red",
