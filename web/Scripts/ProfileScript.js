@@ -177,13 +177,21 @@ myapp.controller("controller",
         // language
         //**************************
         $scope.lblLgName = false;
+        $scope.lgInvalid = false;
+        $scope.lgPrfInvalid = false;
 
         $scope.addLanguage = function () {
             cleanLanguageInputs();
         }
         var saveLgRes = $resource("/saveLanguage")
         function saveLg() {
-            if (!checkExist()) {
+            if (!checkLgExist()) {
+                $scope.lgInvalid = false;
+                if ($scope.lgProfeciency == "") {
+                    $scope.lgPrfInvalid = true;
+                    return false;
+                }
+                $scope.lgPrfInvalid = false;
                 var saveLg = new saveLgRes();
                 saveLg.id = $scope.lgId;
                 saveLg.name = $scope.lgName;
@@ -202,6 +210,8 @@ myapp.controller("controller",
                 });
                 return true;
             }
+            else
+                $scope.lgInvalid = true;
             return false;
         }
         $scope.saveLanguage = function () {
@@ -238,9 +248,9 @@ myapp.controller("controller",
             $scope.lblLgName = false;
         }
 
-        function checkExist() {
+        function checkLgExist() {
             var data = $scope.account.languages;
-            for (var i; i < data.length; i++) {
+            for (var i=0; i < data.length; i++) {
                 if (angular.lowercase(data[i].name) == angular.lowercase($scope.lgName))
                     return true;
             }
@@ -248,6 +258,20 @@ myapp.controller("controller",
             return false;
         }
 
+        $scope.lgChange = function () {
+            if (checkLgExist())
+                $scope.lgInvalid = true;
+            else
+                $scope.lgInvalid = false;
+        }
+        $scope.lgPrfChg = function()
+        {
+            if ($scope.lgProfeciency == "")
+                $scope.lgPrfInvalid = true;
+            else
+                $scope.lgPrfInvalid = false;
+
+        }
         // ************* for highlight and show the edit and delete buttons
         $scope.lgMouseOver = function (context) {
             context.popoverRemove = true;

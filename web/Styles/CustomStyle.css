@@ -7,14 +7,15 @@
 }
 
 .max-fram-c{
-    max-width:1300px;
+    max-width:1280px;
+    padding-left:30px;
 }
 /*-----------------------
     navbar
 -----------------------*/
 .nav-container-c{
     width:100%;
-    background-color: rgba(255,255,255,0.88);
+    background-color: rgba(255,255,255,1);
     /*opacity: 0.88;*/
 }
 .logo-img-c{
@@ -77,7 +78,7 @@
 }
 .txt-skill-c{    
     color: #4A4A4A;
-    padding-left:80px;
+    /*padding-left:50px;*/
     margin-top:95px;
     
 }
@@ -452,10 +453,11 @@
   
         .txt-skill-c{
             position:relative;
-            
+            /*padding-left:80px;*/
             text-align:left;
             margin:auto;
             z-index:5;
+            padding-left:50px;
         }
         .txt-skill-c h2 {
             font-size: 22px; 

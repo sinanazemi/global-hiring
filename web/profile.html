@@ -31,11 +31,6 @@
         <nav class="navbar navbar-fixed-top prf-nav-c ">
             <div class="container nav-container-c max-fram-c">
                 <div class="navbar-header">
-                    <!--<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>-->
                     <a class="navbar-brand" href="/HomePage.html">
                         <img class="logo-img-c" src="images/logo.png" />
                     </a>
@@ -55,35 +50,18 @@
                 <div class="menu-mo-c">
                     <img class="small-profile-img-c img-circle" src="images/Chrysanthemum.jpg" />
                     <a href="#login" class="acc_name-c" popover-template="'popover.html'" popover-placement="bottom" popover-trigger="focus">{{account.name}}<span class="glyphicon glyphicon-chevron-down pf_icon-c"></span></a>
-                    <!--<div class="logout-div-c" id="signOut" ng-show="logoutShow">
-                <span class="glyphicon glyphicon-log-out logout-btn-c"></span><a href="#" ng-click="btnLogout()">Logout</a>
-                <p class="logout-email-c">{{account.email}}</p>
-            </div>-->
                     <script type="text/ng-template" id="popover.html">
-                        <!--<div class="logout-div-c">
-                            <span style="display:inline-block" class="glyphicon glyphicon-log-out logout-btn-c"></span>
-                            <a style="display:inline-block" href="#" ng-click="btnLogout()">Logout</a>
-                            <p style="display:inline-block;padding-left:20px;">{{account.email}}</p>
-                        </div>-->
-                        
-                            <label class="logout-txt-c">
-                                <span class="glyphicon glyphicon-log-out logout-btn-c"></span>
-                                &nbsp;&nbsp;<a href="#" ng-click="btnLogout()" class="logout-txt-c">Logout</a>
-                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="logout-email-c"> {{account.email}}</span>
-                            </label>
-                        
+                        <label class="logout-txt-c">
+                            <span class="glyphicon glyphicon-log-out logout-btn-c"></span>
+                            &nbsp;&nbsp;<a href="#" ng-click="btnLogout()" class="logout-txt-c">Logout</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="logout-email-c"> {{account.email}}</span>
+                        </label>
                     </script>
-
             </div>
             </div>
         </nav>
-        <!--<div class="logout-div-c" id="signOut" ng-show="logoutShow">
-            <span class="glyphicon glyphicon-log-out logout-btn-c"></span><a href="#" ng-click="btnLogout()">Logout</a>
-            <p class="logout-email-c">{{account.email}}</p>
-        </div>-->
-        <!--<button type="button" class="glyphicon glyphicon-chevron-down pf_icon-c"id="logout"></button>-->
 
-        <!-- My Profile -->
+        <!-- Main Container -->
         <div class="container-fluid myProfile-cn-c">
             <div>
                 <h2>My Profile</h2>
@@ -997,9 +975,9 @@
                                 </a>
                             </p>
                         </div>
+                        <!-- Add Language Modal -->
                         <div id="addLanguage" class="modal fade modal-c" role="dialog">
                             <div class="modal-dialog">
-
                                 <!-- Modal content-->
                                 <div class="modal-content">
                                     <div class="modal-header modal-h-c">
@@ -1007,13 +985,13 @@
                                         <h4 class="modal-title m-title-c">Add Language</h4>
                                     </div>
                                     <div class="modal-body modal-b-c">
-                                        <form name="whForm" role="form">
+                                        <form name="lgForm" role="form">
                                             <input class="form-control" type="text" ng-model="lgId" ng-hide="true">
                                             <div class="form-group field-div zero-margin">
                                                 <label class="control-label col-sm-12 field-Bold-label">Language</label>
                                                 <div class="col-sm-12" style="margin-top:10px;">
-                                                    <input type="text" class="form-control input-sm input-style" ng-model="lgName" ng-show="!lblLgName">
-                                                    <label ng-model="lgName" ng-show="lblLgName" style="font-weight: normal;">{{lgName}}</label>
+                                                    <input type="text" class="form-control input-sm input-style" ng-model="lgName" ng-show="!lblLgName" ng-change="lgChange()">
+                                                    <label ng-model="lgName" ng-show="lblLgName" style="font-weight: normal;" >{{lgName}}</label>
                                                 </div>
                                             </div>
                                             <div class="form-group field-div">
@@ -1022,38 +1000,40 @@
                                             <div class="row radio-langPro-position">
                                                 <div class="col-sm-12 form-group field-div zero-margin">
                                                     <div class="radio">
-                                                        <label class="radio-button-text"><input type="radio" name="level" value="E" ng-model="lgProfeciency">Elementry <br /><span class="black-thin-label">I am only able to understand written text in it.</span></label>
+                                                        <label class="radio-button-text"><input type="radio" name="level" value="E" ng-model="lgProfeciency" ng-change="lgPrfChg()">Elementry <br /><span class="black-thin-label">I am only able to understand written text in it.</span></label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row radio-langPro-position">
                                                 <div class="col-sm-12 form-group field-div zero-margin">
                                                     <div class="radio ">
-                                                        <label class="radio-button-text"><input type="radio" name="level" value="B" ng-model="lgProfeciency">Basic <br /><span class="black-thin-label">I am only able to communicate with it through written communication.</span></label>
+                                                        <label class="radio-button-text"><input type="radio" name="level" value="B" ng-model="lgProfeciency" ng-change="lgPrfChg()">Basic <br /><span class="black-thin-label">I am only able to communicate with it through written communication.</span></label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row radio-langPro-position">
                                                 <div class="col-sm-12 form-group field-div zero-margin">
                                                     <div class="radio ">
-                                                        <label class="radio-button-text"><input type="radio" name="level" value="C" ng-model="lgProfeciency">Conversational <br /><span class="black-thin-label">I know it well enough to verbally discuss project details with a client.</span></label>
+                                                        <label class="radio-button-text"><input type="radio" name="level" value="C" ng-model="lgProfeciency" ng-change="lgPrfChg()">Conversational <br /><span class="black-thin-label">I know it well enough to verbally discuss project details with a client.</span></label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row radio-langPro-position">
                                                 <div class="col-sm-12 form-group field-div zero-margin">
                                                     <div class="radio">
-                                                        <label class="radio-button-text"><input type="radio" name="level" value="F" ng-model="lgProfeciency">Fluent <br /><span class="black-thin-label">I have complete command of it with perfect grammer.</span></label>
+                                                        <label class="radio-button-text"><input type="radio" name="level" value="F" ng-model="lgProfeciency" ng-change="lgPrfChg()">Fluent <br /><span class="black-thin-label">I have complete command of it with perfect grammer.</span></label>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row radio-langPro-position">
                                                 <div class="col-sm-12 form-group field-div zero-margin">
                                                     <div class="radio">
-                                                        <label class="radio-button-text"><input type="radio" name="level" value="N" ng-model="lgProfeciency">Native or Bollingual <br /><span class="black-thin-label">I have complete command of it, including breadth of vocabulary, idioms.</span></label>
+                                                        <label class="radio-button-text"><input type="radio" name="level" value="N" ng-model="lgProfeciency" ng-change="lgPrfChg()">Native or Bollingual <br /><span class="black-thin-label">I have complete command of it, including breadth of vocabulary, idioms.</span></label>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <p ng-show="lgInvalid" style="color:red;">This language is currently exist!</p>
+                                            <p ng-show="lgPrfInvalid" style="color:red">You must select the profeciency!</p>
                                         </form>
                                     </div>
                                     <div class="modal-footer m-footer-c">
