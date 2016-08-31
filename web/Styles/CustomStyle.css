@@ -61,6 +61,13 @@
 /*-----------------------
     second skill work
 -----------------------*/
+.skill-div-c{
+    background-image: url(../images/table_background.png); 
+    background-repeat: no-repeat; 
+    background-size: 90%; 
+    background-position: right top; 
+    background-color: #F5EEE8;
+}
 .skill-2{
     display:none;
 }
