@@ -180,40 +180,45 @@
     <img ng-src="{{eduBarImage}}" class="img-responsive bar-image" alt="Education Step">
   </div >
     <form class="form-horizontal step-form" role="form" name="stepEduForm">
-        <div class="form-group field-div zero-margin" >
-          <label class="control-label col-sm-12 field-Bold-label" style="text-align:left; margin-top:60px;" >School</label>
-          <div class="col-sm-12" style="margin-top:10px;">
-            <input type="text" class="form-control input-sm input-style"  placeholder="School Name" rows="1" ng-model="educationToAdd.school" >
-          </div>
+        <div class="col-sm-12 field-div-right-left" style="margin-bottom:10px;margin-left: 5px;">
+          <label class="control-label field-Bold-label" style="text-align:left; padding:0;" >School</label>
         </div>
-        <div class="form-group field-div zero-margin" >
-          <label class="control-label col-sm-12 field-Bold-label" style="text-align:left;" >Date Attended</label>
+        <div class="col-sm-12 field-div-Edu" >
+          <input type="text" class="form-control textbox-style" placeholder="School Name" ng-model="educationToAdd.school">
+        </div>
 
-          <div class="col-sm-6 " style="margin-top:10px;">
-            <select class="form-control input-sm input-style select-style" ng-model="educationToAdd.fromdate" placeholder="From"   ng-options="opt as opt for opt in dates" ></select>
+
+        <div class="col-sm-12 field-div-right-left" >
+          <label class="control-label field-Bold-label" style="text-align:left;padding:0;" >Date Attended</label>
+        </div>
+        <div class="col-sm-12 field-div-Edu" style="margin-top:10px;">
+          <div class="col-sm-6 " style="padding-left:0;" >
+            <select  class="form-control  select-style" ng-model="educationToAdd.fromdate" placeholder="From"   ng-options="opt as opt for opt in dates" ></select>
           </div>
-          <div class="col-sm-6 " style="margin-top:10px;">
-            <select class="form-control input-sm input-style select-style"  ng-model="educationToAdd.todate" placeholder="To(or expected graduation year)"   ng-options="opt as opt for opt in dates" ></select>
+          <div class="col-sm-6 " style="padding-right:0;" >
+            <select  class="form-control  select-style"  ng-model="educationToAdd.todate" placeholder="To(or expected graduation year)"   ng-options="opt as opt for opt in dates" ></select>
           </div>
         </div>
-        <div class="form-group field-div zero-margin" >
-          <label class="control-label col-sm-12 field-Bold-label" style="text-align:left;" >Degree</label>
-          <div class="col-sm-12" style="margin-top:10px;">
-            <select class="form-control input-sm input-style select-style" ng-value="educationToAdd.degree" ng-model="educationToAdd.degree" ng-options="degree as degree.name for degree in degrees"></select>
-          </div>
+        <div class="col-sm-12 field-div-right-left " >
+          <label class="control-label field-Bold-label" style="text-align:left;padding:0;" >Degree</label>
         </div>
-        <div class="form-group field-div zero-margin" >
-          <label class="control-label col-sm-12 field-Bold-label" style="text-align:left;" >Field Of Study</label>
-          <div class="col-sm-12" style="margin-top:10px;">
-            <input type="text" class="form-control input-sm input-style" rows="1" ng-model="educationToAdd.field" >
+          <div class="col-sm-12 field-div-Edu">
+            <select class="form-control  select-style" ng-value="educationToAdd.degree" ng-model="educationToAdd.degree" ng-options="degree as degree.name for degree in degrees"></select>
           </div>
+        <div class="col-sm-12 field-div-right-left" >
+          <label class="control-label field-Bold-label" style="text-align:left;padding:0;" >Field Of Study</label>
         </div>
-        <div class="form-group field-div" >
-          <label class="control-label col-sm-12 field-Bold-label" style="text-align:left;" >Grade</label>
-          <div class="col-sm-12" style="margin-top:10px;">
-            <input type="text" class="form-control input-sm input-style" rows="1" ng-model="educationToAdd.grade" >
+          <div class="col-sm-12 field-div-Edu" style="margin-top:10px;">
+            <input type="text" class="form-control textbox-style"  ng-model="educationToAdd.field" >
           </div>
+
+        <div class="col-sm-12 field-div-right-left" >
+          <label class="control-label field-Bold-label" style="text-align:left;padding:0;" >Grade</label>
         </div>
+        <div class="col-sm-12 field-div-Edu" style="margin-top:10px;">
+          <input type="text" class="form-control textbox-style"  ng-model="educationToAdd.grade" >
+        </div>
+
 
 <!--          <div class="row">
             <div class="col-sm-6 btn-div-c" >
