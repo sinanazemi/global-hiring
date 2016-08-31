@@ -185,35 +185,34 @@ myapp.controller("controller",
         }
         var saveLgRes = $resource("/saveLanguage")
         function saveLg() {
-            if (!checkLgExist()) {
-                $scope.lgInvalid = false;
-                if ($scope.lgProfeciency == "") {
-                    $scope.lgPrfInvalid = true;
-                    return false;
-                }
-                $scope.lgPrfInvalid = false;
-                var saveLg = new saveLgRes();
-                saveLg.id = $scope.lgId;
-                saveLg.name = $scope.lgName;
-                saveLg.profeciency = $scope.lgProfeciency;
-                $scope.lblLgName = false;
-                var index;
-                $scope.account.languages.some(function (elem, i) {
-                    return elem.id === $scope.lgId ? (index = i, true) : false;
-                });
-                saveLg.$save(function (lg) {
-                    if (index >= 0)
-                        $scope.account.languages[index] = lg;
-                    else
-                        $scope.account.languages.push(lg);
+            if (checkLgValidation()) {
+                if (!checkLgExist()) {
+                    var saveLg = new saveLgRes();
+                    saveLg.id = $scope.lgId;
+                    saveLg.name = $scope.lgName;
+                    saveLg.profeciency = $scope.lgProfeciency;
+                    $scope.lblLgName = false;
+                    var index;
+                    $scope.account.languages.some(function (elem, i) {
+                        return elem.id === $scope.lgId ? (index = i, true) : false;
+                    });
+                    saveLg.$save(function (lg) {
+                        if (index >= 0)
+                            $scope.account.languages[index] = lg;
+                        else
+                            $scope.account.languages.push(lg);
 
-                });
+                    });
+                    return true;
+                }
+                else
+                    $scope.lgInvalid = true;
                 return true;
             }
             else
-                $scope.lgInvalid = true;
-            return false;
+                return false;
         }
+
         $scope.saveLanguage = function () {
             if (saveLg())
                 $('#addLanguage').modal('hide');
@@ -239,7 +238,24 @@ myapp.controller("controller",
                 //cleanHistoryInputs();
             });
         }
+        function checkLgValidation() {
+            var isValid = true;
+            
+            if ($scope.lgProfeciency == "") {
+                isValid = false;
+                $scope.lgPrfInvalid = true;                
+            }
+           
+            if ($scope.lgName == "" || $scope.lgName == null) {
+                isValid = false;
+                $scope.vlgNameShow = true;
+            }
 
+            if (isValid)
+                return true;
+            else
+                return false;
+        }
 
         function cleanLanguageInputs() {
             $scope.lgId = '';
@@ -258,7 +274,9 @@ myapp.controller("controller",
             return false;
         }
 
-        $scope.lgChange = function () {
+        $scope.lgNameChg = function () {
+            if ($scope.lgName != "")
+                $scope.vlgNameShow = false;
             if (checkLgExist())
                 $scope.lgInvalid = true;
             else
