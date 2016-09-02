@@ -1,10 +1,11 @@
 ﻿// new dependency: ngResource is included just above
-var myapp = new angular.module("app", ['ngAnimate', 'ui.bootstrap', 'selectize', 'ngResource']);
+var myapp = new angular.module("app", ['ngAnimate', 'ui.bootstrap', 'selectize', 'ngResource', 'ngFileUpload', 'ngImgCrop']);
 
 // inject the $resource dependency here
 myapp.controller("controller",
   ["$scope", "$window", "$resource","$document",
     function ($scope, $window, $resource,$document) {
+
 
         $scope.shAddOverview = true;
         var accountRes = $resource("/account")
@@ -15,6 +16,21 @@ myapp.controller("controller",
                   $scope.shAddOverview = false;
           }
         );
+
+        $scope.userImage = "images/Chrysanthemum.jpg";
+        //$scope.ngfDataUrl = "images/Chrysanthemum.jpg";
+        //$scope.initPrfShow = false;
+        //if ($scope.prfImgUrl == null)
+        //{
+        //    $scope.prfImgUrl = "images/Chrysanthemum.jpg";
+        //    $scope.initPrfShow = true;
+        //}
+
+            $scope.savePrfPic = function () {
+                $scope.userImage = $scope.prfImgUrl;
+            }
+
+
 
         $scope.getSkills = function () {
             $scope.skills = $scope.selectedService.skills;

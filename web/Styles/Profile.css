@@ -1,6 +1,12 @@
 ﻿body {
     font-family: Helvetica;
 }
+.cropArea {
+  background: #E4E4E4;
+  overflow: hidden;
+  width:500px;
+  height:350px;
+}
 
 .max-fram-c{
     max-width: 1300px;
