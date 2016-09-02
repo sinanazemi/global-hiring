@@ -44,19 +44,22 @@ myapp.controller("controller",
         }
 
         var volCauses = $resource("/volunteeringCauses")
-        volCauses.query(
-         function (data) {
-             $scope.volCauses = data;
-         } // function(data)
-       ) // service.query
+        function setVolCauses() {
+            volCauses.query(
+                 function (data) {
+                 $scope.volCauses = data;
+                 } // function(data)
+            ) // service.query
+        }
 
-        //$scope.occupations = ["occupation 1", "occupation 2", "occupation 3"];
         var occupations = $resource("/occupations")
-        occupations.query(
-          function (data) {
-              $scope.occupations = data;
-          } // function(data)
-        )
+        function setOccupations() {
+            occupations.query(
+              function (data) {
+                  $scope.occupations = data;
+              } // function(data)
+            )
+        }
 
         function checkInvDate(fMonth, fYear, tMonth, tYear) {
             if (tYear < fYear)
@@ -68,6 +71,7 @@ myapp.controller("controller",
             return false;
         }
 
+        /*    logout     */
         $scope.logoutShow = false;
         $scope.accPrfClick = function () {
             $scope.logoutShow = !$scope.logoutShow
@@ -89,6 +93,16 @@ myapp.controller("controller",
             maxItems: 1,
             maxOptions: 5,
         };
+
+        $scope.nameConfig2 = {
+            valueField: 'name',
+            labelField: 'name',
+            searchField: 'name',
+            maxItems: 1,
+            maxOptions: 5,
+            create: 'true',
+        };
+        
 
         $scope.idConfig = {
             valueField: 'id',
@@ -543,14 +557,25 @@ myapp.controller("controller",
             context.whHoverStyle = {};
         }
 
-        // *********** for auto suggestion ***************
 
         //*************************
         // education
         //*************************
-        $scope.addEducation = function () {
-            if ($scope.degrees == null || $scope.degrees.length==0)
+        //function setEduFiels() {
+        //    $scope.eduFields = [{ id: 1, name: "Computer science" }, { id: 2, name: "Biology" }, { id: 3, name: "Medical" }, { id: 4, name: "Architecture" }, { id: 5, name: "Civil engineering" }, { id: 6, name: "Linguistic" }, { id: 7, name: "Physics" }];
+        //}
+        function setEduFiels() {
+            $scope.eduFields = [{ name: "Computer science" }, { name: "Biology" }, { name: "Medical" }, { name: "Architecture" }, { name: "Civil engineering" }, { name: "Linguistic" }, { name: "Physics" }];
+        }
+
+        function setEduItems() {
+            if ($scope.degrees == null || $scope.degrees.length == 0)
                 setDegrees();
+            if ($scope.eduFields == null || $scope.eduFields.length == 0)
+                setEduFiels();
+        }
+        $scope.addEducation = function () {
+            setEduItems();
             cleanEducationInputs();
         }
 
@@ -569,7 +594,7 @@ myapp.controller("controller",
                 saveEdu.school = $scope.eduSchool;
                 saveEdu.fromdate = $scope.eduFromDate;
                 saveEdu.todate = $scope.eduToDate;
-                saveEdu.degree = $scope.eduDegree;
+                saveEdu.degree = parseInt($scope.eduDegree);
                 saveEdu.field = $scope.eduField;
                 saveEdu.grade = $scope.eduGrade;
                 //saveEdu.desc = $scope.eduDesc;
@@ -592,16 +617,25 @@ myapp.controller("controller",
         }
 
         $scope.editEducation = function (edu) {
-            if ($scope.degrees == null)
-                setDegrees();
+            setEduItems();
             $scope.eduId = edu.id;
             $scope.eduSchool = edu.school;
             $scope.eduFromDate = edu.fromdate;
             $scope.eduToDate = edu.todate;
-            $scope.eduDegree = edu.degree;
-            $scope.eduField = edu.field;
+            $scope.eduDegree = edu.degree.id;
+            checkNewEduField(edu.field);
+            $scope.eduField = edu.field;            
             $scope.eduGrade = edu.grade;
             //$scpoe.eduDesc = edu.desc;
+        }
+
+        function checkNewEduField(field) {
+            for(var i=0; i< $scope.eduFields.length;i++)
+            {
+                if (field == $scope.eduFields[i])
+                    return;
+            }
+            $scope.eduFields.push({ name: field });
         }
 
         function cleanEducationInputs() {
@@ -698,6 +732,10 @@ myapp.controller("controller",
         //*************************
         // Volunteering 
         //*************************
+        function setVolItems(){
+            if($scope.volCauses == null || $scope.volCauses.length==0)
+                setVolCauses();
+        }
         var saveVolRes = $resource("/saveVolunteering")
         $scope.saveVolunteering = function () {
             if (saveVol())
@@ -709,7 +747,7 @@ myapp.controller("controller",
                 saveVol.id = $scope.volId;
                 saveVol.organization = $scope.volOrganization;
                 saveVol.role = $scope.volRole;
-                saveVol.cause = $scope.volCause;
+                saveVol.cause = parseInt($scope.volCause);
                 saveVol.frommonth = $scope.volFromMonth;
                 saveVol.fromyear = $scope.volFromYear;
                 saveVol.tomonth = $scope.volToMonth;
@@ -737,10 +775,11 @@ myapp.controller("controller",
         }
 
         $scope.editVolunteering = function (vol) {
+            setVolItems();
             $scope.volId = vol.id;
             $scope.volOrganization = vol.organization;
             $scope.volRole = vol.role;
-            $scope.volCause = vol.cause;
+            $scope.volCause = vol.cause.id;
             $scope.volFromMonth = vol.frommonth;
             $scope.volFromYear = vol.fromyear;
             $scope.volToMonth = vol.tomonth;
@@ -778,6 +817,7 @@ myapp.controller("controller",
         }
 
         $scope.cleanVolInputs = function () {
+            setVolItems();
             cleanVolunteeringInputs();
         }
 
@@ -886,6 +926,11 @@ myapp.controller("controller",
         //*************************
         // Test Scores 
         //*************************
+        function setTcItems()
+        {
+            if ($scope.occupations == null || $scope.occupations.length == 0)
+                setOccupations();
+        }
         var saveTcRes = $resource("/saveTest")
         $scope.saveTestScores = function () {
             if (saveTc())
@@ -899,7 +944,7 @@ myapp.controller("controller",
                 var saveTc = new saveTcRes();
                 saveTc.id = $scope.tcId;
                 saveTc.name = $scope.tcName;
-                saveTc.occupation = $scope.tcOccupation;
+                saveTc.occupation = parseInt($scope.tcOccupation);
                 saveTc.month = $scope.tcFromMonth;
                 saveTc.year = $scope.tcFromYear;
                 saveTc.score = $scope.tcScore;
@@ -924,14 +969,10 @@ myapp.controller("controller",
         }
 
         $scope.editTestScore = function (tc) {
-            occupations.query(
-            function (data) {
-                $scope.occupations = data;
-            } // function(data)
-            );
+            setTcItems();
             $scope.tcId = tc.id;
             $scope.tcName = tc.name;
-            $scope.tcOccupation = tc.occupation;
+            $scope.tcOccupation = tc.occupation.id;
             $scope.tcFromMonth = tc.month;
             $scope.tcFromYear = tc.year;
             $scope.tcScore = tc.score;
@@ -950,11 +991,7 @@ myapp.controller("controller",
 
         function cleanScoresInputs() {
             isValid = true;
-            occupations.query(
-            function (data) {
-                $scope.occupations = data;
-            } // function(data)
-            );
+            setTcItems();
             $scope.tcForm.$setUntouched();
             $scope.vtcNameShow = false;
             $scope.vtcOccupationShow = false;
@@ -1048,6 +1085,10 @@ myapp.controller("controller",
         //*************************
         // Projects 
         //*************************
+        function setPrjItems(){
+            if ($scope.occupations == null || $scope.occupations.length == 0)
+                setOccupations();
+        }
         var savePrjRes = $resource("/saveProject")
         $scope.saveProjects = function () {
             if (SavePrj())
@@ -1061,7 +1102,7 @@ myapp.controller("controller",
                 var savePrj = new savePrjRes();
                 savePrj.id = $scope.prjId;
                 savePrj.name = $scope.prjName;
-                savePrj.occupation = $scope.prjOccupation;
+                savePrj.occupation = parseInt($scope.prjOccupation);
                 savePrj.month = $scope.prjMonth;
                 savePrj.year = $scope.prjYear;
                 savePrj.url = $scope.prjUrl;
@@ -1093,7 +1134,7 @@ myapp.controller("controller",
            );
             $scope.prjId = prj.id;
             $scope.prjName = prj.name;
-            $scope.prjOccupation = prj.occupation;
+            $scope.prjOccupation = prj.occupation.id;
             $scope.prjMonth = prj.month;
             $scope.prjYear = prj.year;
             $scope.prjUrl = prj.url;
@@ -1161,7 +1202,6 @@ myapp.controller("controller",
             $scope.vprjOccupationShow = false;
         }
 
-
         // *********** for highlight and show the edit and delete buttons
         $scope.prjMouseOver = function (context) {
             context.popoverRemove = true;
@@ -1177,6 +1217,10 @@ myapp.controller("controller",
         //*************************
         //  Honors & Awards 
         //*************************
+        function setHaItems() {
+            if ($scope.occupations == null || $scope.occupations.length == 0)
+                setOccupations();
+        }
         var saveHaRes = $resource("/saveHonor")
         $scope.saveAwards = function () {
             if (SaveHa())
@@ -1190,7 +1234,7 @@ myapp.controller("controller",
                 var saveHa = new saveHaRes();
                 saveHa.id = $scope.haId;
                 saveHa.title = $scope.haTitle;
-                saveHa.occupation = $scope.haOccupation;
+                saveHa.occupation = parseInt($scope.haOccupation);
                 saveHa.month = $scope.haMonth;
                 saveHa.year = $scope.haYear;
                 saveHa.description = $scope.haDesc;
@@ -1214,14 +1258,10 @@ myapp.controller("controller",
         }
 
         $scope.editAward = function (ha) {
-            occupations.query(
-            function (data) {
-                $scope.occupations = data;
-            } // function(data)
-            );
+            setHaItems();
             $scope.haId = ha.id;
             $scope.haTitle = ha.title;
-            $scope.haOccupation = ha.occupation;
+            $scope.haOccupation = ha.occupation.id;
             $scope.haMonth = ha.month;
             $scope.haYear = ha.year;
             $scope.haDesc = ha.description;
@@ -1238,11 +1278,7 @@ myapp.controller("controller",
         }
 
         function cleanAwardsInputs() {
-            occupations.query(
-            function (data) {
-                $scope.occupations = data;
-            } // function(data)
-            );
+            setHaItems();
             isValid = true;
             $scope.haForm.$setUntouched();
             $scope.vhaTitleShow = false;
@@ -1326,6 +1362,10 @@ myapp.controller("controller",
         //*************************
         //  Courses 
         //*************************
+        function setCrItems() {
+            if ($scope.occupations == null || $scope.occupations.length == 0)
+                setOccupations();
+        }
         var saveCrRes = $resource("/saveCourse")
         $scope.saveCourses = function () {
             if (SaveCr())
@@ -1339,7 +1379,7 @@ myapp.controller("controller",
                 var saveCr = new saveCrRes();
                 saveCr.id = $scope.crId;
                 saveCr.name = $scope.crName;
-                saveCr.occupation = $scope.crOccupation;
+                saveCr.occupation = parseInt($scope.crOccupation);
                 saveCr.number = $scope.crNumber;
                 saveCr.description = $scope.crDesc;
 
@@ -1362,14 +1402,10 @@ myapp.controller("controller",
         }
 
         $scope.editCourse = function (cr) {
-            occupations.query(
-            function (data) {
-                $scope.occupations = data;
-            } // function(data)
-            );
+            setCrItems();
             $scope.crId = cr.id;
             $scope.crName = cr.name;
-            $scope.crOccupation = cr.occupation;
+            $scope.crOccupation = cr.occupation.id;
             $scope.crNumber = cr.number;
             $scope.crDesc = cr.description;
         }
@@ -1385,11 +1421,7 @@ myapp.controller("controller",
         }
 
         function cleanCoursesInputs() {
-            occupations.query(
-            function (data) {
-                $scope.occupations = data;
-            } // function(data)
-            );
+            setCrItems();
             //isValid = true;
             $scope.crForm.$setUntouched();
             $scope.vcrNameShow = false;
