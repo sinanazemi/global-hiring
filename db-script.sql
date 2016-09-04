@@ -839,3 +839,18 @@ OIDS=FALSE
 );
 ALTER TABLE AccountProject
 OWNER TO globeAdmin;
+
+-- Table: image
+
+-- DROP TABLE image;
+
+CREATE TABLE image (
+
+  id serial,
+  category character varying(5) NOT NULL,
+  type character varying(20) NOT NULL,
+  parentID integer,
+  image bytea NOT NULL
+);
+ALTER TABLE image
+OWNER TO globeAdmin;

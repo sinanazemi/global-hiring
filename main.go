@@ -98,6 +98,9 @@ func main() {
 	http.Handle("/saveProject", util.Handler(model.SaveProject))
 	http.Handle("/deleteProject", util.Handler(model.DeleteProject))
 
+	// system images
+	http.HandleFunc(util.ImageService, util.ImageHandler)
+
 	log.Printf("Running on port %d\n", *port)
 
 	addr := fmt.Sprintf("0.0.0.0:%d", *port)
