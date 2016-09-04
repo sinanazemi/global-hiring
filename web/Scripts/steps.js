@@ -32,6 +32,7 @@ $scope.init = function () {
         }
       );
     }
+
 }
 // finish initializing
 
@@ -49,6 +50,7 @@ $scope.init = function () {
   $scope.stepSkillHide=true;
   $scope.isStudent=true;
   $scope.isStudentShow=false;
+  $scope.srvShouldSelect=false;
 
   $scope.fullname='';
   $scope.termsOfServiceShow= false;
@@ -344,17 +346,27 @@ $scope.passwordChange=function(){
 
   };
   $scope.mainSRVNextClick = function(){
+    serviceIsSelected=false;
+    for(i=0;i<$scope.mainServices.length;i++)
+    {
+      if($scope.mainServices[i].isselected)
+        {serviceIsSelected=true;}
 
-    $scope.stepMainSRVHide=true;
-    if($scope.isStudent){
-      $scope.stepSkillHide=false;
-      $scope.skillsBTNLabel="Finish";
-      $scope.skillBarImage="images/step_5_bar.png";
     }
+    if(!serviceIsSelected){$scope.srvShouldSelect=true;}
     else{
-      $scope.stepSkillHide=false;
-      $scope.skillsBTNLabel="Next Step";
-      $scope.skillBarImage="images/step_3_bar.png";
+      $scope.srvShouldSelect=false;
+      $scope.stepMainSRVHide=true;
+      if($scope.isStudent){
+        $scope.stepSkillHide=false;
+        $scope.skillsBTNLabel="Finish";
+        $scope.skillBarImage="images/step_5_bar.png";
+      }
+      else{
+        $scope.stepSkillHide=false;
+        $scope.skillsBTNLabel="Next Step";
+        $scope.skillBarImage="images/step_3_bar.png";
+      }
     }
   };
 
@@ -405,10 +417,10 @@ $scope.passwordChange=function(){
     $scope.stepMainSRVHide=false;
     $scope.stepSkillHide=true;
     if($scope.isStudent){
-      $scope.mainSRVBarImage="images/step_5_bar.png";
+      $scope.mainSRVBarImage="images/step_4_bar.png";
     }
     else {
-      $scope.mainSRVBarImage="images/step_3_bar.png";
+      $scope.mainSRVBarImage="images/step_2_bar.png";
     }
   }
 
@@ -595,10 +607,12 @@ $scope.removeLanguage=function(lang){
   };
 
   $scope.getIcon = function(serviceSelect){
-    if (serviceSelect.icon) {
-      if (serviceSelect.isChecked) return serviceSelect.icon.on;
-      else return serviceSelect.icon.off;
-    }
+    /* TODO: uncomment this part
+      if (serviceSelect.isselected) return serviceSelect.selectimageurl;
+      else return serviceSelect.unselectimageurl;
+    */
+    if(serviceSelect.isselected) return "images/admin_support_select.png";
+    else return "images/admin_support.png"
   }
 
   $scope.skillProfeciencies = [

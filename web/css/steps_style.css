@@ -140,6 +140,18 @@
     margin-bottom: 25px;
 
 }
+.field-div-MainSrv {
+
+    display:block;
+    text-align:left;
+
+    padding-top: 0px;
+    padding-left: 35px;
+    padding-right: 21px;
+    margin-bottom: 0px;
+
+}
+
 
 
 .zero-margin{margin: 0;}
@@ -403,28 +415,58 @@ input[type=checkbox]:checked+.custom-check::before {
   padding: 0 0 10px 10px;
 }
 
+
+.srv-image {
+    position: absolute;
+
+      max-height: 70px;
+      margin-left: 31px;
+      margin-right: 31px;
+      margin-top: 15px;
+}
+
+
 .item {
-  background: rgb(255, 255, 255);
+  background-color: #f9f9f9;
   float:left;
   display: inline-block;
-  margin: 10px 10px 0 0;
-  height: 108px;
-  width: 108px;
-  padding-top: 66px;
+  margin: 0;
+  margin-right: 14px;
+  margin-bottom: 14px;
+  height: 132px;
+  width: 132px;
+  /*padding-top: 66px;*/
   border: solid 0.5px #979797;
+  border-radius: 2px;
 
-  font-size: 9px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-style: bold;
-  color:#616161;
-  font-weight: 300;
+  font-family: Helvetica;
+  font-size: 14px;
   text-align: center;
+  color: #616161;
+  font-weight: normal;
+}
+
+.skill-lbl{
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: Helvetica;
+  font-size: 14px;
+  text-align: center;
+  color: #616161;
+  font-weight: normal;
+}
+
+.skill-lbl.selected{
+  font-weight: bold;
+  text-align: center;
+  color: #23b46c;
 }
 
 .item.selected {
   /*background-color: rgb(3, 186, 109);*/
-  color: rgb(3, 186, 109);
-  border: solid 1.4px #03ba6d;
+  border: solid 2px #23b46c;
+
+
 }
 
 
