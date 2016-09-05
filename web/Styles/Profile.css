@@ -7,7 +7,6 @@
   width:500px;
   height:350px;
 }
-
 .max-fram-c{
     max-width: 1300px;
 }
@@ -206,6 +205,45 @@
     display:none;
 }
 
+/*** add skill ****/
+.serviceContainer {
+  display: block;
+  padding: 0 0 10px 10px;
+}
+.field-div-right-left {
+
+    display:block;
+    text-align:left;
+
+    padding-top: 0px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-bottom: 0px;
+
+}
+.item {
+  background: rgb(255, 255, 255);
+  float:left;
+  display: inline-block;
+  margin: 10px 10px 0 0;
+  height: 108px;
+  width: 108px;
+  padding-top: 66px;
+  border: solid 0.5px #979797;
+
+  font-size: 9px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-style: bold;
+  color:#616161;
+  font-weight: 300;
+  text-align: center;
+}
+
+.item.selected {
+  /*background-color: rgb(3, 186, 109);*/
+  color: rgb(3, 186, 109);
+  border: solid 1.4px #03ba6d;
+}
 /*----------------------------
     Languages
     ----------------------------*/

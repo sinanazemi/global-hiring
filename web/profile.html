@@ -25,10 +25,9 @@
 
     <!-- for profile image cropp-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.0.4/ng-file-upload.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-img-crop/0.3.2/ng-img-crop.js"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-img-crop/0.3.2/ng-img-crop.js"></script>    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/ng-img-crop/0.3.2/ng-img-crop.css" rel="stylesheet" />
-    <link href="Styles/testi.css" rel="stylesheet" />
+    
 
     <link href="Styles/Profile.css" rel="stylesheet" />
     <script src="Scripts/ProfileScript.js"></script>
@@ -78,16 +77,12 @@
                 <h2>My Profile</h2>
                 <div class="row" style="max-width:100%;">
                     <div class="col-sm-9 panels-c">
-                        <!-- Overview -->
+                        <!-- First Part -->
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-sm-2">
-                                        <!--<img src="images/Chrysanthemum.jpg" class="img-circle prf-img-c" ng-show="initPrfShow" >-->
-                                        <!--<div ng-init="prfImgUrl = 'images/Chrysanthemum.jpg'">-->
-
-                                            <img ng-src="{{userImage}}" class="img-circle prf-img-c" />
-                                        <!--</div>-->
+                                        <img ng-src="{{userImage}}" class="img-circle prf-img-c" />                                        
                                         <br/>
                                         <br />
                                         <button data-toggle="modal" data-target="#chgPrfPic">Set Profile Photo</button>
@@ -177,7 +172,46 @@
                                                 {{x.degree.name}}, {{x.field}} | {{x.school}}<br />
                                             </span>
                                         </p>
-                                        <a href="#">Add Skills</a>
+                                        <a href="#" data-toggle="modal" data-target="#addSkill" ng-click="getMainServices()">Add Skills</a>
+                                        <!-- Modal Add Skill -->
+                                        <div id="addSkill" class="modal fade modal-c" role="dialog">
+                                            <div class="modal-dialog">
+
+                                                <!-- Modal content-->
+                                                <div class="modal-content">
+                                                    <div class="modal-header modal-h-c">
+                                                        <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                                        <h4 class="modal-title m-title-c">Add Skill</h4>
+                                                    </div>
+                                                    <div class="modal-body modal-b-c">
+                                                        <form name="skForm" role="form">
+                                                            <div class="form-group field-div-right-left">
+                                                                <label class="control-label col-sm-12 field-Bold-label" style="text-align:left; padding-left:0">What are the main services you offer?<span style="font-weight:200;">(Please select all that you're open to)</span></label>
+                                                            </div>
+                                                            <div class="form-group field-div-right-left">
+                                                                <div class="serviceContainer">
+                                                                    <div class="item" ng-repeat='service in mainServices' ng-click='toggleSelectedSRV(service)' ng-class="{ selected: service.isselected  }">
+                                                                        
+                                                                        <input type="checkbox" ng-attr-id="{{'c' + service.id}}" ng-model="service.isselected" />
+                                                                        <!--   <img src="images/sample_main_service.png" class="img-responsive" style="padding-top:0px" alt="main Service Img"> -->
+                                                                        <label ng-attr-for="{{'c' +service.id}}" ng-class="{ selected: service.isselected  }">
+                                                                            {{service.name}}
+                                                                            <!--  <img ng-src="{{getIcon(service)}}">
+                    -->
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>                                                            
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer m-footer-c">
+                                                        <button type="button" class="btn btn-save-c" ng-click="nextSkill()">Next</button>
+                                                        <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div ng-mouseleave="ovMouseLeave(this)" ng-mouseover="ovMouseOver(this)">
@@ -355,6 +389,109 @@
                                         <button type="button" class="btn btn-save-c" ng-click="saveWorkHistory()">Save</button>
                                         <button type="button" class="btn btn-save-more-c" ng-click="saveWorkHistoryMore()">Save And Add More</button>
                                         <button type="button" class="btn btn-cancel btn-cancel-c" ng-click="cleanWhInputs()" data-dismiss="modal" style="border:none;">Cancel</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Projects -->
+                        <div class="panel panel-default panel-projects-c">
+                            <div class="panel-body">
+                                <h4>
+                                    Projects
+                                    &nbsp;<a class="btn-add-c add-projects-c" data-toggle="modal" data-target="#addProjects" ng-click="cleanPrjInputs()"><span class=" glyphicon glyphicon-plus-sign"></span></a>
+                                </h4>
+                                <div ng-repeat="x in account.projects" ng-mouseleave="prjMouseLeave(this)" ng-mouseover="prjMouseOver(this)">
+                                    <h5>
+                                        <span class="projects-txt-c" ng-style="prjHoverStyle">
+                                            {{x.name}}
+                                        </span>
+                                        &nbsp;<a href="#" class="a-btn-c edit-projects-c" data-toggle="modal" data-target="#addProjects" ng-click="editProject(x)" ng-show="popoverRemove" ng-style="prjHoverStyle">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </a>
+                                        &nbsp;<a href="#" class=" a-btn-c delete-projects-c" ng-click="deleteProject(x)" ng-show="popoverRemove" ng-style="prjHoverStyle">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </a>
+                                    </h5>
+                                    <p>
+                                        <span class="projects-txt-c" ng-style="prjHoverStyle" ng-mouseleave="prjMouseLeave(this)" ng-mouseover="prjMouseOver(this)">
+                                            {{x.year}} - {{x.month.name}}
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal Projects -->
+                        <div id="addProjects" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content modal-c">
+                                    <div class="modal-header modal-h-c">
+                                        <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                        <h4 class="modal-title m-title-c">My Project</h4>
+                                    </div>
+                                    <div class="modal-body modal-b-c">
+                                        <form role="form" name="prjForm">
+                                            <div class="form-group form-g-c" ng-class="{ 'has-error': vprjNameShow || (prjForm.prjName.$touched && prjForm.prjName.$invalid) }">
+                                                <label class="control-label" for="name">Name</label>
+                                                <input class="form-control" id="name" name="prjName" type="text" ng-model="prjName" ng-change="prjNameChg()" required>
+                                                <div ng-messages="prjForm.prjName" ng-if=" vprjNameShow || (prjForm.prjName.$touched && prjForm.prjName.$invalid)">
+                                                    <p ng-message="required" style="color:red;">Name is required.</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" ng-class="{ 'has-error': vprjOccupationShow || (prjForm.prjOccupation.$touched && prjForm.prjOccupation.$invalid) }">
+                                                <label class="control-label" for="occupation">Occupation</label>
+                                                <!--<select class="form-control" id="occupation" ng-model="prjOccupation" ng-options="ocu.name for ocu in occupations track by ocu.id" ng-change="prjOccupationChg()" required></select>-->
+                                                <selectize id="occupation" ng-model="prjOccupation" options="occupations" config="idConfig" ng-change="prjOccupationChg()" required></selectize>
+                                                <div ng-messages="prjForm.prjOccupation.$error" ng-if=" vprjOccupationShow || (prjForm.prjOccupation.$touched && prjForm.prjOccupation.$invalid)">
+                                                    <p ng-message="required" style="color:red;">Occupation is required.</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="dates_completion">Completion Date (optional)</label>
+                                                <div class="row">
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control" id="fMonth" ng-model="prjMonth" ng-options="month as month.name for month in months track by month.value"><option value="" disabled selected>Month</option></select>
+                                                    </div>
+                                                    <div class="col-sm-2"></div>
+                                                    <div class="col-sm-5">
+                                                        <select class="form-control" id="fDate" ng-model="prjYear" ng-options="opt as opt for opt in dates"><option value="" disabled selected>Year</option></select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="url">Project URL</label>
+                                                <input class="form-control" id="url" name="prjUrl" ng-model="prjUrl" type="text">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="control-label" for="description">Description (optional)</label>
+                                                <textarea class="form-control" rows="5" id="description" name="prjDesc" ng-model="prjDesc"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-sm-5">
+                                                        <label class="control-label" for="thumbnail">Thumbnail Image</label>
+                                                        <div class="form-control prj-tmb-txt-c"><a>drag or <span>upload</span> project thumbnail</a></div>
+                                                    </div>
+                                                    <div class="col-sm-2"></div>
+                                                    <div class="col-sm-5">
+                                                        <label class="control-label" for="file">Project Files</label>
+                                                        <div class="form-control prj-tmb-txt-c">
+                                                            <a>drag or <span>upload</span> project files</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer m-footer-c">
+                                        <button type="button" class="btn btn-save-c" ng-click="saveProjects()">Save</button>
+                                        <button type="button" class="btn btn-save-more-c" ng-click="saveProjectsMore()">Save And Add More</button>
+                                        <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
                                     </div>
                                 </div>
 
@@ -713,109 +850,6 @@
                                     <div class="modal-footer m-footer-c">
                                         <button type="button" class="btn btn-save-c" ng-click="saveTestScores()">Save</button>
                                         <button type="button" class="btn btn-save-more-c" ng-click="saveTestScoresMore()">Save And Add More</button>
-                                        <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <!-- Projects -->
-                        <div class="panel panel-default panel-projects-c">
-                            <div class="panel-body">
-                                <h4>
-                                    Projects
-                                    &nbsp;<a class="btn-add-c add-projects-c" data-toggle="modal" data-target="#addProjects" ng-click="cleanPrjInputs()"><span class=" glyphicon glyphicon-plus-sign"></span></a>
-                                </h4>
-                                <div ng-repeat="x in account.projects" ng-mouseleave="prjMouseLeave(this)" ng-mouseover="prjMouseOver(this)">
-                                    <h5>
-                                        <span class="projects-txt-c" ng-style="prjHoverStyle">
-                                            {{x.name}}
-                                        </span>
-                                        &nbsp;<a href="#" class="a-btn-c edit-projects-c" data-toggle="modal" data-target="#addProjects" ng-click="editProject(x)" ng-show="popoverRemove" ng-style="prjHoverStyle">
-                                            <span class="glyphicon glyphicon-pencil"></span>
-                                        </a>
-                                        &nbsp;<a href="#" class=" a-btn-c delete-projects-c" ng-click="deleteProject(x)" ng-show="popoverRemove" ng-style="prjHoverStyle">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </a>
-                                    </h5>
-                                    <p>
-                                        <span class="projects-txt-c" ng-style="prjHoverStyle" ng-mouseleave="prjMouseLeave(this)" ng-mouseover="prjMouseOver(this)">
-                                            {{x.year}} - {{x.month.name}}
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Modal Projects -->
-                        <div id="addProjects" class="modal fade" role="dialog">
-                            <div class="modal-dialog">
-
-                                <!-- Modal content-->
-                                <div class="modal-content modal-c">
-                                    <div class="modal-header modal-h-c">
-                                        <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
-                                        <h4 class="modal-title m-title-c">My Project</h4>
-                                    </div>
-                                    <div class="modal-body modal-b-c">
-                                        <form role="form" name="prjForm">
-                                            <div class="form-group form-g-c" ng-class="{ 'has-error': vprjNameShow || (prjForm.prjName.$touched && prjForm.prjName.$invalid) }">
-                                                <label class="control-label" for="name">Name</label>
-                                                <input class="form-control" id="name" name="prjName" type="text" ng-model="prjName" ng-change="prjNameChg()" required>
-                                                <div ng-messages="prjForm.prjName" ng-if=" vprjNameShow || (prjForm.prjName.$touched && prjForm.prjName.$invalid)">
-                                                    <p ng-message="required" style="color:red;">Name is required.</p>
-                                                </div>
-                                            </div>
-                                            <div class="form-group" ng-class="{ 'has-error': vprjOccupationShow || (prjForm.prjOccupation.$touched && prjForm.prjOccupation.$invalid) }">
-                                                <label class="control-label" for="occupation">Occupation</label>
-                                                <!--<select class="form-control" id="occupation" ng-model="prjOccupation" ng-options="ocu.name for ocu in occupations track by ocu.id" ng-change="prjOccupationChg()" required></select>-->
-                                                <selectize id="occupation" ng-model="prjOccupation" options="occupations" config="idConfig" ng-change="prjOccupationChg()" required></selectize>
-                                                <div ng-messages="prjForm.prjOccupation.$error" ng-if=" vprjOccupationShow || (prjForm.prjOccupation.$touched && prjForm.prjOccupation.$invalid)">
-                                                    <p ng-message="required" style="color:red;">Occupation is required.</p>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label" for="dates_completion">Completion Date (optional)</label>
-                                                <div class="row">
-                                                    <div class="col-sm-5">
-                                                        <select class="form-control" id="fMonth" ng-model="prjMonth" ng-options="month as month.name for month in months track by month.value"><option value="" disabled selected>Month</option></select>
-                                                    </div>
-                                                    <div class="col-sm-2"></div>
-                                                    <div class="col-sm-5">
-                                                        <select class="form-control" id="fDate" ng-model="prjYear" ng-options="opt as opt for opt in dates"><option value="" disabled selected>Year</option></select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label" for="url">Project URL</label>
-                                                <input class="form-control" id="url" name="prjUrl" ng-model="prjUrl" type="text">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="control-label" for="description">Description (optional)</label>
-                                                <textarea class="form-control" rows="5" id="description" name="prjDesc" ng-model="prjDesc"></textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <div class="col-sm-5">
-                                                        <label class="control-label" for="thumbnail">Thumbnail Image</label>
-                                                        <div class="form-control prj-tmb-txt-c"><a>drag or <span>upload</span> project thumbnail</a></div>
-                                                    </div>
-                                                    <div class="col-sm-2"></div>
-                                                    <div class="col-sm-5">
-                                                        <label class="control-label" for="file">Project Files</label>
-                                                        <div class="form-control prj-tmb-txt-c">
-                                                            <a>drag or <span>upload</span> project files</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer m-footer-c">
-                                        <button type="button" class="btn btn-save-c" ng-click="saveProjects()">Save</button>
-                                        <button type="button" class="btn btn-save-more-c" ng-click="saveProjectsMore()">Save And Add More</button>
                                         <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
                                     </div>
                                 </div>
