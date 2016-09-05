@@ -447,6 +447,14 @@ input[type=checkbox]:checked+.custom-check::before {
   font-weight: normal;
 }
 
+.srv-image-skill {
+    position: relative;;
+    max-height: 55px;
+    max-width: 65px;
+    margin: 0px;
+    padding: 0;
+}
+
 .skill-lbl{
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-family: Helvetica;
@@ -604,14 +612,6 @@ li { padding: 2px 0; }
   top: 0;
 }
 
-
-
-
-
-
-.black-border-label.selected {
-  background-color: rgb(3, 186, 109);
-}
 .red{
   border-color: red;
   border-style:solid;
@@ -858,20 +858,24 @@ input[type=checkbox] + label {
 }
 
 .black-border-label {
-    font-size: 11px;
+    font-size: 15px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-style:normal;
-    font-weight: 400;
-    color: rgb(97, 97, 97);
-    padding:5px;
-    border: 1px solid lightgray;
-    background-color: lightgrey;
-    border-radius: 3px;
+    font-weight: normal;
+    color: #625f5f;
+    padding-left:15px;
+    padding-right: 15px;
+    padding-top: 8px;
+    padding-bottom: 9px;
+    background-color: #d8d8d8;
+    border-radius: 8px;
 }
 
 
-
-
+.black-border-label.selected {
+  background-color: #03ba6d;
+  color: #ffffff;
+}
 
 .add-more-text {
     width: 358px;
@@ -964,6 +968,4 @@ input[type=checkbox] + label {
 
 #skilldList li {
   display: inline-block;
-  margin-left: 5px;
-  margin-right: 5px;
 }

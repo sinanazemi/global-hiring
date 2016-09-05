@@ -607,12 +607,8 @@ $scope.removeLanguage=function(lang){
   };
 
   $scope.getIcon = function(serviceSelect){
-    /* TODO: uncomment this part */
       if (serviceSelect.isselected) return serviceSelect.selectimageurl;
       else return serviceSelect.unselectimageurl;
-
-    /*if(serviceSelect.isselected) return "images/admin_support_select.png";
-    else return "images/admin_support.png"*/
   }
 
   $scope.skillProfeciencies = [

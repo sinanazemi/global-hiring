@@ -291,28 +291,28 @@
     <h4 class="step-title">Skills</h4>
   </div>
   <div >
-    <img ng-src={{skillBarImage}}  class="img-responsive bar-image" alt="Skill bar Step">
+    <img ng-src={{skillBarImage}} class="img-responsive bar-image" alt="Skill step">
   </div >
     <form class="form-horizontal step-form" role="form" name="stepSkillsForm">
-        <div class="form-group field-div" style="overflow-y: scroll; margin-bottom:50px;" >
-          <div id="skilldList" style="text-align:left; margin-top:60px;" >
-            <ul ng-repeat="service in mainServices | filter: {isselected: true } " style="text-align:left; padding-left:2px;" >
-              <p class="black-bold-label" style="text-align:left; padding-left:2px; font-size:16px; font-weight:250"> {{service.name}} <br/> <span style="font-size:12px; font-weight:350">{{service.question}}</span></p>
-              <li ng-repeat="skillOfSRV in service.skills " style="list-style-type:none;">
-                <p class="black-border-label"  ng-click="skillClick(skillOfSRV)" ng-class="{ selected: skillOfSRV.isselected }" >{{skillOfSRV.name}}</p>
+        <div class="field-div" style="overflow-y: scroll; margin-bottom:74px; padding-right:40px;" >
+          <div id="skilldList" style="text-align:left;" >
+            <ul ng-repeat="service in mainServices | filter: {isselected: true } " style="text-align:left;margin-bottom:80px;padding:0;" >
+              <div class="row field-div-right-left" style="padding:0;margin-bottom:24px;" >
+                <div class="col-sm-2" style="padding:0;padding-left:12px;">
+                  <img ng-src="{{service.unselectimageurl}}" class="img-responsive srv-image-skill" alt="Service image"  >
+                </div>
+                <div class="col-sm-10" style="padding:0; margin-top:20px;">
+                  <label class="field-Bold-label" style="margin-bottom:10px; font-weight:normal; ">What type of <span style="font-weight:bold;">{{service.name}}</span> <span style="font-weight:normal;">do you do?</span></label>
+                </div>
+               </div>
+               <div>
+              <li ng-repeat="skillOfSRV in service.skills " style="list-style-type:none;margin:0; margin-right:10px;" >
+                <label class="black-border-label"  ng-click="skillClick(skillOfSRV)" ng-class="{ selected: skillOfSRV.isselected }" >{{skillOfSRV.name}}</label>
               </li>
+            </div>
             </ul>
           </div>
         </div>
-<!--        <div class="row">
-          <div class="col-sm-6 btn-div-c" >
-            <button type="button" class="next-button btn-prev-c " ng-click="skillPreClick()" style="margin-left:40px;">Previous</button>
-          </div>
-          <div class="col-sm-6 btn-div-c" >
-            <button type="button"  class="next-button btn-next-c " ng-click="finishClick()" style="margin-right:40px;">Finish</button>
-          </div>
-        </div>
--->
     </form><!--form finish -->
 
     <div class="footer ">
