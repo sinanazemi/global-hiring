@@ -15,6 +15,12 @@
       border-radius: 3px;
       min-height: 580px;
     }
+    .app-skill-modal-window .modal-dialog {
+      width: 640px;
+      border-radius: 3px;
+      min-height: 480px;
+      background-color: #f9f9f9;
+    }
     .btn-prev-div{text-align: right;}
     .btn-next-div{text-align: left;}
   }

@@ -1,5 +1,5 @@
 var globalHiring = angular.module('globalHiring',['ngResource','ngAnimate', 'ui.bootstrap']);
-globalHiring.controller('stepsController',['$scope', '$resource','$uibModal','$location', function($scope, $resource,$uibModal,$location, $http, $window, $log) {
+globalHiring.controller('stepsController',['$scope', '$resource','$uibModal','$location','$parse', function($scope, $resource,$uibModal,$location,$parse, $http, $window, $log) {
 //initializing page
 var accountUser = $resource("/account")
 $scope.init = function () {
@@ -76,6 +76,8 @@ $scope.init = function () {
   $scope.langPlaceholder="English";
   $scope.requiedStyleLang="";
   $scope.langProfErrorShow=false;
+
+  $scope.skillModalProfErrorShow=false;
 
   $scope.errorMsg='';
 
@@ -357,6 +359,7 @@ $scope.passwordChange=function(){
     else{
       $scope.srvShouldSelect=false;
       $scope.stepMainSRVHide=true;
+      $scope.setErrorLabel();
       if($scope.isStudent){
         $scope.stepSkillHide=false;
         $scope.skillsBTNLabel="Finish";
@@ -371,6 +374,8 @@ $scope.passwordChange=function(){
   };
 
   $scope.skillNextClick=function(){
+    if(!$scope.chkIFNotSelected())
+    {
     if($scope.isStudent){
       $scope.finishClick();
     }
@@ -380,6 +385,7 @@ $scope.passwordChange=function(){
       $scope.langBarImage="images/step_4_bar.png";
 
     }
+  }
   }
 
   // Previous buttons click
@@ -626,6 +632,9 @@ $scope.removeLanguage=function(lang){
       animation: $scope.animationsEnabled,
       templateUrl: 'myModalContent.html',
       controller: 'ModalInstanceCtrl',
+      windowClass: 'app-skill-modal-window',
+      backdrop  : 'static',
+      keyboard  : false,
       resolve: {
         skillProfeciencies: function () {
           return $scope.skillProfeciencies;
@@ -652,7 +661,52 @@ $scope.removeLanguage=function(lang){
       $scope.openSkillProf(selectedSkill);
 
     }
+    else {
+      selectedSkill.profeciency="";
+    }
   }
+
+$scope.setErrorLabel=function(){
+ for(i=0;i<$scope.mainServices.length;i++)
+  {
+    if($scope.mainServices[i].isselected)
+      {
+        var showSrvlbl='errorshow'+$scope.mainServices[i].id;
+        $parse(showSrvlbl).assign($scope, false);
+      }
+  }
+}
+
+$scope.setChkedErrorLabel=function(mainSRV,value){
+  if(mainSRV.isselected)
+    {
+      var showSrvlbl='errorshow'+ mainSRV.id;
+      $parse(showSrvlbl).assign($scope, value);
+    }
+
+}
+
+$scope.chkIFNotSelected=function(){
+  skillNotSelected=false;
+  for(i=0;i<$scope.mainServices.length;i++)
+   {
+     if($scope.mainServices[i].isselected)
+     {
+       isSelected=false;
+       for(j=0;j<$scope.mainServices[i].skills.length;j++){
+         if($scope.mainServices[i].skills[j].profeciency!=""){
+           isSelected=true;
+         }
+       }
+       if(!isSelected){
+         $scope.setChkedErrorLabel($scope.mainServices[i],true);
+         skillNotSelected=true;
+       }
+       else{$scope.setChkedErrorLabel($scope.mainServices[i],false);}
+     }
+   }
+   return skillNotSelected;
+}
 
   //ErrorMsg Modal
 
