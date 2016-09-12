@@ -51,22 +51,40 @@
                         <li>
                             <img class="small-profile-img-c img-circle" ng-src="{{userImage}}" />
                         </li>
-                        <li>
-                            <a href="#" class="acc_name-c" popover-template="'popover.html'" popover-placement="bottom" popover-trigger="focus">{{account.name}}<span class="glyphicon glyphicon-chevron-down pf_icon-c"></span></a>
+                        <!--<li>
+                            <a href="#" class="acc_name-c" popover-template="'popover.html'" popover-placement="bottom" popover-trigger="focus">{{account.name}}&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-menu-down pf_icon-c"></span></a>
 
+                        </li>-->
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{account.name}} <span class="glyphicon glyphicon-menu-down pf_icon-c"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" ng-click="btnLogout()" class="logout-txt-c"><span class="glyphicon glyphicon-log-out logout-btn-c"></span>   Logout   <span class="logout-email-c pull-right"> {{account.email}}</span></a></li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
                 <div class="menu-mo-c">
-                    <img class="small-profile-img-c img-circle" src="images/Chrysanthemum.jpg" />
-                    <a href="#login" class="acc_name-c" popover-template="'popover.html'" popover-placement="bottom" popover-trigger="focus">{{account.name}}<span class="glyphicon glyphicon-chevron-down pf_icon-c"></span></a>
+                    <!--<img class="small-profile-img-c img-circle" src="images/Chrysanthemum.jpg" />-->
+                    <!--<img class="small-profile-img-c img-circle" ng-src="{{userImage}}" />
+                    <a href="#login" class="acc_name-c" popover-template="'popover.html'" popover-placement="bottom" popover-trigger="focus">{{account.name}}   <span class="glyphicon glyphicon-menu-down pf_icon-c"></span></a>
                     <script type="text/ng-template" id="popover.html">
                         <label class="logout-txt-c">
                             <span class="glyphicon glyphicon-log-out logout-btn-c"></span>
                             &nbsp;&nbsp;<a href="#" ng-click="btnLogout()" class="logout-txt-c">Logout</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;<span class="logout-email-c"> {{account.email}}</span>
                         </label>
-                    </script>
+                    </script>-->
+                    
+                            <img class="small-profile-img-c img-circle" ng-src="{{userImage}}" />
+                        
+                    <div class="dropdown acc_name-c " >
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{account.name}} <span class="glyphicon glyphicon-menu-down pf_icon-c"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" ng-click="btnLogout()" class="logout-txt-c"><span class="glyphicon glyphicon-log-out logout-btn-c"></span>   Logout   <span class="logout-email-c pull-right"> {{account.email}}</span></a></li>
+                            </ul>                        
+                    </div>
+                   
+                   
                 </div>
             </div>
         </nav>
@@ -185,7 +203,7 @@
                                                     </div>
                                                     <div class="modal-body modal-b-c">
                                                         <form name="skForm" role="form">
-                                                            <div class="form-group field-div-right-left">
+                                                            <!--<div class="form-group field-div-right-left">
                                                                 <label class="control-label col-sm-12 field-Bold-label" style="text-align:left; padding-left:0">What are the main services you offer?<span style="font-weight:200;">(Please select all that you're open to)</span></label>
                                                             </div>
                                                             <div class="form-group field-div-right-left">
@@ -193,15 +211,41 @@
                                                                     <div class="item" ng-repeat='service in mainServices' ng-click='toggleSelectedSRV(service)' ng-class="{ selected: service.isselected  }">
                                                                         
                                                                         <input type="checkbox" ng-attr-id="{{'c' + service.id}}" ng-model="service.isselected" />
-                                                                        <!--   <img src="images/sample_main_service.png" class="img-responsive" style="padding-top:0px" alt="main Service Img"> -->
                                                                         <label ng-attr-for="{{'c' +service.id}}" ng-class="{ selected: service.isselected  }">
                                                                             {{service.name}}
-                                                                            <!--  <img ng-src="{{getIcon(service)}}">
-                    -->
+                   
                                                                         </label>
                                                                     </div>
                                                                 </div>
-                                                            </div>                                                            
+                                                            </div>-->    
+                                                            
+                                                            <div class="col-sm-12 field-div">
+                                                                <div class="col-sm-12" style="padding:0;">
+                                                                    <label class="control-label  field-Bold-label" style="text-align:left;padding:0;">What are the main services you offer?<span style="font-size: 14px;font-weight:normal;">(Please select all that you are open to)</span></label>
+                                                                </div>
+                                                                <div class="col-sm-12" style="padding:0;">
+                                                                    <label class="error-label" ng-show="srvShouldSelect" style="font-size:15px;">Please at least select one</label>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-sm-12 field-div-MainSrv">
+                                                                 <!--<div class="serviceContainer"  >--> 
+                                                                <div class="item" ng-repeat='service in mainServices' ng-click='toggleSelectedSRV(service)' ng-class="{ selected: service.isselected  }">
+                                                                    <input type="checkbox" ng-attr-id="{{'c' + service.id}}" ng-model="service.isselected" />
+                                                                    <!--   <img src="images/sample_main_service.png" class="img-responsive" style="padding-top:0px" alt="main Service Img"> -->
+                                                                    <div>
+                                                                        <img ng-src="{{getIcon(service)}}" class="img-responsive srv-image" alt="Service image">
+                                                                    </div>
+                                                                    <div class="col-sm-12" style="margin-top:85px;margin-bottom:10px; text-align:center; padding:0;">
+                                                                        <label class="skill-lbl" ng-attr-for="{{'c' +service.id}}" ng-class="{ selected: service.isselected  }" style="margin:0;"> {{service.name}}
+                                                                    </div>
+                                                                    <!--  <img ng-src="{{getIcon(service)}}">
+            -->
+                                                                    </label>
+                                                                </div>
+
+                                                                  <!--</div>--> 
+                                                            </div>                                                        
                                                         </form>
                                                     </div>
                                                     <div class="modal-footer m-footer-c">
@@ -394,6 +438,107 @@
 
                             </div>
                         </div>
+                                                
+                        <!-- Education -->
+                        <div class="panel panel-default panel-education-c">
+                            <div class="panel-body">
+                                <h4>
+                                    Education
+                                    &nbsp;<a class="btn-add-c add-education-c" data-toggle="modal" data-target="#addEducation" ng-click="addEducation()"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                                </h4>
+                                <div ng-repeat="x in account.educations" ng-mouseleave="eduMouseLeave(this)" ng-mouseover="eduMouseOver(this)">
+                                    <h5>
+                                        <span class="education-txt-c" ng-style="eduHoverStyle">
+                                            <!--Bachelor of Science (B.S.), Computer science | BIHE-->
+                                            {{x.degree.name}}, {{x.field}} | {{x.school}}
+                                        </span>
+                                        &nbsp;<a href="#" class="a-btn-c edit-education-c" data-toggle="modal" data-target="#addEducation" ng-click="editEducation(x)" ng-show="popoverRemove" ng-style="eduHoverStyle">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </a>
+                                        &nbsp;<a href="#" class=" a-btn-c delete-education-c" ng-click="deleteEducation(x)" ng-show="popoverRemove" ng-style="eduHoverStyle">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </a>
+                                    </h5>
+
+                                    <!--<p><span class="education-txt-c">2007 - 2012</span></p>-->
+                                    <p>
+                                        <span class="education-txt-c" ng-style="eduHoverStyle" ng-mouseleave="eduMouseLeave(this)" ng-mouseover="eduMouseOver(this)">
+                                            {{x.fromdate}} - {{x.todate}}
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal Education -->
+                        <div id="addEducation" class="modal fade modal-c" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header modal-h-c">
+                                        <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                        <h4 class="modal-title m-title-c">Add Education</h4>
+                                    </div>
+                                    <div class="modal-body modal-b-c">
+                                        <form name="eduForm" role="form">
+                                            <input ng-model="eduId" ng-hide="true" />
+                                            <div class="form-group form-g-c" ng-class="{ 'has-error': veduSchoolShow || (eduForm.eduSchool.$touched && eduForm.eduSchool.$invalid) }">
+                                                <label class="control-label" for="school">School</label>
+                                                <input class="form-control" id="school" name="eduSchool" type="text" ng-model="eduSchool" ng-change="eduSchoolChg()" required>
+                                                <div ng-messages="eduForm.eduSchool" ng-if=" veduSchoolShow || (eduForm.eduSchool.$touched && eduForm.eduSchool.$invalid)">
+                                                    <p ng-message="required" style="color:red;">School is required.</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="dates_attended">Dates Attended</label>
+                                                <div class="row">
+                                                    <div class="col-sm-6" ng-class="{ 'has-error': veduFromDateShow || (eduForm.eduFromDate.$touched && eduForm.eduFromDate.$invalid) }">
+                                                        <select class="form-control" id="fDate" ng-model="eduFromDate" ng-options="opt as opt for opt in dates" ng-click="eduFromDateChg()" ng-change="eduFromDateChg()" required><option value="" disabled selected>From</option></select>
+                                                        <div ng-messages="eduForm.eduFromDate.$error" ng-if=" veduFromDateShow || (eduForm.eduFromDate.$touched && eduForm.eduFromDate.$invalid)">
+                                                            <p ng-message="required" style="color:red;">From year is required.</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6" ng-class="{ 'has-error': veduToDateShow || (eduForm.eduToDate.$touched && eduForm.eduToDate.$invalid) }">
+                                                        <select class="form-control" id="tDate" ng-model="eduToDate" ng-options="opt as opt for opt in dates" ng-click="eduToDateChg()" ng-change="eduToDateChg()" required><option value="" disabled selected>To (or expected graducation year)</option></select>
+                                                        <div ng-messages="eduForm.eduToDate.$error" ng-if=" veduToDateShow || (eduForm.eduToDate.$touched && eduForm.eduToDate.$invalid)">
+                                                            <p ng-message="required" style="color:red;">To year is required.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" ng-class="{ 'has-error': veduDegreeShow || (eduForm.eduDegree.$touched && eduForm.eduDegree.$invalid) }">
+                                                <label class="control-label" for="degree">Degree</label>
+                                                <!--<input class="form-control" id="degree" name="degree" type="text" required>-->
+                                                <!--<select class="form-control" id="degree" ng-model="eduDegree" ng-options="degree.name for degree in degrees track by degree.id" ng-click="eduDegreeChg()" ng-change="eduDegreeChg()" required></select>-->
+                                                <selectize id="degree" ng-model="eduDegree" options='degrees' config="idConfig" ng-click="eduDegreeChg()" ng-change="eduDegreeChg()" required></selectize>
+                                                <div ng-messages="eduForm.eduDegree.$error" ng-if=" veduDegreeShow || (eduForm.eduDegree.$touched && eduForm.eduDegree.$invalid)">
+                                                    <p ng-message="required" style="color:red;">Degree is required.</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="area">Area of study (optional)</label>
+                                                <!--<input class="form-control" id="area" name="area" type="text" ng-model="eduField">-->
+                                                <selectize options="eduFields" config="nameConfig2" ng-model="eduField" autocomplete="off"></selectize>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="grade">Grade</label>
+                                                <input class="form-control" id="grade" name="grade" type="number" ng-model="eduGrade" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label" for="description">Description (optional)</label>
+                                                <textarea class="form-control" rows="5" id="description" name="description" ng-model="eduDesc"></textarea>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer m-footer-c">
+                                        <button type="button" class="btn btn-save-c" ng-click="saveEducation()">Save</button>
+                                        <button type="button" class="btn btn-save-more-c" ng-click="saveEducationMore()">Save And Add More</button>
+                                        <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
 
                         <!-- Projects -->
                         <div class="panel panel-default panel-projects-c">
@@ -491,107 +636,6 @@
                                     <div class="modal-footer m-footer-c">
                                         <button type="button" class="btn btn-save-c" ng-click="saveProjects()">Save</button>
                                         <button type="button" class="btn btn-save-more-c" ng-click="saveProjectsMore()">Save And Add More</button>
-                                        <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <!-- Education -->
-                        <div class="panel panel-default panel-education-c">
-                            <div class="panel-body">
-                                <h4>
-                                    Education
-                                    &nbsp;<a class="btn-add-c add-education-c" data-toggle="modal" data-target="#addEducation" ng-click="addEducation()"><span class="glyphicon glyphicon-plus-sign"></span></a>
-                                </h4>
-                                <div ng-repeat="x in account.educations" ng-mouseleave="eduMouseLeave(this)" ng-mouseover="eduMouseOver(this)">
-                                    <h5>
-                                        <span class="education-txt-c" ng-style="eduHoverStyle">
-                                            <!--Bachelor of Science (B.S.), Computer science | BIHE-->
-                                            {{x.degree.name}}, {{x.field}} | {{x.school}}
-                                        </span>
-                                        &nbsp;<a href="#" class="a-btn-c edit-education-c" data-toggle="modal" data-target="#addEducation" ng-click="editEducation(x)" ng-show="popoverRemove" ng-style="eduHoverStyle">
-                                            <span class="glyphicon glyphicon-pencil"></span>
-                                        </a>
-                                        &nbsp;<a href="#" class=" a-btn-c delete-education-c" ng-click="deleteEducation(x)" ng-show="popoverRemove" ng-style="eduHoverStyle">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </a>
-                                    </h5>
-
-                                    <!--<p><span class="education-txt-c">2007 - 2012</span></p>-->
-                                    <p>
-                                        <span class="education-txt-c" ng-style="eduHoverStyle" ng-mouseleave="eduMouseLeave(this)" ng-mouseover="eduMouseOver(this)">
-                                            {{x.fromdate}} - {{x.todate}}
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Modal Education -->
-                        <div id="addEducation" class="modal fade modal-c" role="dialog">
-                            <div class="modal-dialog">
-
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="modal-header modal-h-c">
-                                        <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
-                                        <h4 class="modal-title m-title-c">Add Education</h4>
-                                    </div>
-                                    <div class="modal-body modal-b-c">
-                                        <form name="eduForm" role="form">
-                                            <input ng-model="eduId" ng-hide="true" />
-                                            <div class="form-group form-g-c" ng-class="{ 'has-error': veduSchoolShow || (eduForm.eduSchool.$touched && eduForm.eduSchool.$invalid) }">
-                                                <label class="control-label" for="school">School</label>
-                                                <input class="form-control" id="school" name="eduSchool" type="text" ng-model="eduSchool" ng-change="eduSchoolChg()" required>
-                                                <div ng-messages="eduForm.eduSchool" ng-if=" veduSchoolShow || (eduForm.eduSchool.$touched && eduForm.eduSchool.$invalid)">
-                                                    <p ng-message="required" style="color:red;">School is required.</p>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label" for="dates_attended">Dates Attended</label>
-                                                <div class="row">
-                                                    <div class="col-sm-6" ng-class="{ 'has-error': veduFromDateShow || (eduForm.eduFromDate.$touched && eduForm.eduFromDate.$invalid) }">
-                                                        <select class="form-control" id="fDate" ng-model="eduFromDate" ng-options="opt as opt for opt in dates" ng-click="eduFromDateChg()" ng-change="eduFromDateChg()" required><option value="" disabled selected>From</option></select>
-                                                        <div ng-messages="eduForm.eduFromDate.$error" ng-if=" veduFromDateShow || (eduForm.eduFromDate.$touched && eduForm.eduFromDate.$invalid)">
-                                                            <p ng-message="required" style="color:red;">From year is required.</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-6" ng-class="{ 'has-error': veduToDateShow || (eduForm.eduToDate.$touched && eduForm.eduToDate.$invalid) }">
-                                                        <select class="form-control" id="tDate" ng-model="eduToDate" ng-options="opt as opt for opt in dates" ng-click="eduToDateChg()" ng-change="eduToDateChg()" required><option value="" disabled selected>To (or expected graducation year)</option></select>
-                                                        <div ng-messages="eduForm.eduToDate.$error" ng-if=" veduToDateShow || (eduForm.eduToDate.$touched && eduForm.eduToDate.$invalid)">
-                                                            <p ng-message="required" style="color:red;">To year is required.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group" ng-class="{ 'has-error': veduDegreeShow || (eduForm.eduDegree.$touched && eduForm.eduDegree.$invalid) }">
-                                                <label class="control-label" for="degree">Degree</label>
-                                                <!--<input class="form-control" id="degree" name="degree" type="text" required>-->
-                                                <!--<select class="form-control" id="degree" ng-model="eduDegree" ng-options="degree.name for degree in degrees track by degree.id" ng-click="eduDegreeChg()" ng-change="eduDegreeChg()" required></select>-->
-                                                <selectize id="degree" ng-model="eduDegree" options='degrees' config="idConfig" ng-click="eduDegreeChg()" ng-change="eduDegreeChg()" required></selectize>
-                                                <div ng-messages="eduForm.eduDegree.$error" ng-if=" veduDegreeShow || (eduForm.eduDegree.$touched && eduForm.eduDegree.$invalid)">
-                                                    <p ng-message="required" style="color:red;">Degree is required.</p>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label" for="area">Area of study (optional)</label>
-                                                <!--<input class="form-control" id="area" name="area" type="text" ng-model="eduField">-->
-                                                <selectize options="eduFields" config="nameConfig2" ng-model="eduField" autocomplete="off"></selectize>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label" for="grade">Grade</label>
-                                                <input class="form-control" id="grade" name="grade" type="number" ng-model="eduGrade" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label" for="description">Description (optional)</label>
-                                                <textarea class="form-control" rows="5" id="description" name="description" ng-model="eduDesc"></textarea>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer m-footer-c">
-                                        <button type="button" class="btn btn-save-c" ng-click="saveEducation()">Save</button>
-                                        <button type="button" class="btn btn-save-more-c" ng-click="saveEducationMore()">Save And Add More</button>
                                         <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
                                     </div>
                                 </div>

@@ -19,7 +19,7 @@
     /*opacity: 0.88;*/
 }
 .logo-img-c{
-    /*margin-top:-5px;*/
+    margin-top:10px;
     /*height:33.6px;
     width:96.8px;*/
     width:290px;
@@ -28,6 +28,11 @@
     margin-right:-60px;
 }
 
+.prf-nav-c{
+    height:81.3px;
+    border-bottom:solid 0.5px #979797;
+    background-color: rgba(255,255,255,0.88);
+}
 .menu-mo-c{
     display:none;
 }
@@ -39,7 +44,7 @@
     letter-spacing:0.8px;  
 }
 .popover{
-    max-width:100px;
+    max-width:250px;
     margin-left:10px;
 }
 .popover-content {
@@ -52,21 +57,11 @@
     margin-right:-10px;
 }
 .logout-div-c{
-    /*height: 47px; 
-    width: 313px; 
-    border: 1px solid #979797;*/ 
-    /*position: relative;*/ 
-    /*right: 0px; 
-    top: 63px;*/
     display:block;
     width:300px;
     border: 1px solid #979797;
 }
 .logout-btn-c{
-    /*margin-top:15px;
-    margin-bottom:auto;
-    margin-left:30px;
-    display:inline-block;*/ 
     color: #4a4a4a;   
 }
 .logout-txt-c{
@@ -88,27 +83,65 @@
     /*right:10px;
     display:inline-block;*/
 }
-
-
-.prf-nav-c{
-    border-bottom:solid 0.5px #979797;
-    background-color: rgba(255,255,255,0.88);
+/********************************************/
+/******************* start  *************************/
+/********************************************/
+.dropdown {    
+    margin-top:15px;
 }
+.dropdown-menu{
+    height:47px;
+}
+.dropdown-menu>li>a {
+    color:#4a4a4a;
+}
+.dropdown ul.dropdown-menu {
+    border-radius:4px;
+    box-shadow:none;
+    margin-top:15px;
+    width:300px;
+}
+.dropdown ul.dropdown-menu:before {
+    content: "";
+    border-bottom: 10px solid #fff;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    position: absolute;
+    top: -10px;
+    right: 16px;
+    z-index: 10;
+}
+.dropdown ul.dropdown-menu:after {
+    content: "";    
+    border-bottom: 12px solid #ccc;
+    border-right: 12px solid transparent;
+    border-left: 12px solid transparent;
+    position: absolute;
+    top: -12px;
+    right: 14px;
+    z-index: 9;
+}
+/********************************************/
+/********************* finish ***********************/
+/********************************************/
 .main-cnt-c{
     background-color:#f3f3f3;
 }
 .small-profile-img-c {
-    width: 64px;
-    height: 63px;
-    /*height:auto;
-    margin-top:10px;*/
+    width: 65px;
+    height: 65px;
+    /*height:auto;*/
+    margin-top:7px;
 }
 
 .pf_icon-c {
     /*width: 5.3px;
     height: 9.7px;*/
-    font-size:small;
+    font-size:12px;
     color: #03ba6d;
+    font-weight:100;
+        /*content: '\e259';
+        font-family: "Glyphicons Halflings";*/
 }
 
 .myProfile-cn-c{
@@ -243,6 +276,18 @@
   /*background-color: rgb(3, 186, 109);*/
   color: rgb(3, 186, 109);
   border: solid 1.4px #03ba6d;
+}
+
+.field-div-MainSrv {
+
+    display:block;
+    text-align:left;
+
+    padding-top: 0px;
+    padding-left: 35px;
+    padding-right: 21px;
+    margin-bottom: 0px;
+
 }
 /*----------------------------
     Languages
@@ -608,6 +653,9 @@ input[type=checkbox]:checked+.custom-check::before {
         /*-----------------------
         navbar
         -----------------------*/
+        .prf-nav-c {
+        height: 52px;
+    }
         .nav-container-c{
             /*background-color:lightblue;*/
            /*position:relative;*/
@@ -616,6 +664,7 @@ input[type=checkbox]:checked+.custom-check::before {
            /*margin-right:50px;*/
            /*align-content:center;*/
        }
+    
         .logo-img-c {
             position:absolute;
             width: 75px;
@@ -652,7 +701,23 @@ input[type=checkbox]:checked+.custom-check::before {
         }
     .pf_icon-c {
         font-size:10px;
+        
     }
+
+    .dropdown ul.dropdown-menu {    
+    margin-left:-20px;
+    width:180px;
+    height:35px;
+}
+    .dropdown ul.dropdown-menu:before {
+    right:auto;
+    left: 16px;
+    }
+    .dropdown ul.dropdown-menu:after {
+        right:auto;
+        left: 15px;
+    }
+
     .popover-content {
         max-width: 175px;
     }
@@ -671,13 +736,14 @@ input[type=checkbox]:checked+.custom-check::before {
         }
 
         .logout-btn-c{
-            margin-top:7px;
+            /*margin-top:7px;*/
             margin-bottom:auto;
             /*margin-left:10px;*/
 
         }
         .logout-txt-c {
         font-size:10px;
+        margin-top:auto;
     }
     .logout-email-c{
         font-family: Helvetica; 
