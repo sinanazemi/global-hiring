@@ -12,25 +12,25 @@ myapp.controller("controller",
         accountRes.get(
           function (data) {
               $scope.account = data;
+              if ($scope.account == null) {
+                  window.location = "/HomePage.html";
+              }
               if ($scope.account.description != "")
                   $scope.shAddOverview = false;
+          }, function (err) {
+              if ($scope.account == null) {
+                  window.location = "/HomePage.html";
+              }
           }
         );
+       
 
-        $scope.userImage = "images/Chrysanthemum.jpg";
-        //$scope.ngfDataUrl = "images/Chrysanthemum.jpg";
-        //$scope.initPrfShow = false;
-        //if ($scope.prfImgUrl == null)
-        //{
-        //    $scope.prfImgUrl = "images/Chrysanthemum.jpg";
-        //    $scope.initPrfShow = true;
-        //}
 
-            $scope.savePrfPic = function () {
+        $scope.userImage = "images/Chrysanthemum.jpg";        
+
+        $scope.savePrfPic = function () {
                 $scope.userImage = $scope.prfImgUrl;
             }
-
-
 
         $scope.getSkills = function () {
             $scope.skills = $scope.selectedService.skills;
@@ -166,6 +166,39 @@ myapp.controller("controller",
             context.jtPopoverRemove = false;
             context.jtHoverStyle = {};
         }
+
+
+
+        //**********************************
+        // Add Skill
+        //**********************************
+        // Main Services
+        $scope.toggleSelectedSRV = function (service) {
+            service.isselected = !service.isselected;
+        };
+
+        var service = $resource("/mainServices")
+        $scope.getMainServices = function () {
+            service.query(
+              function (data) {
+                  $scope.mainServices = data;
+              } // function(data)
+            ) // service.query
+        };
+
+        $scope.getIcon = function (serviceSelect) {
+            if (serviceSelect.icon) {
+                if (serviceSelect.isChecked) return serviceSelect.icon.on;
+                else return serviceSelect.icon.off;
+            }
+        }
+
+        $scope.skillProfeciencies = [
+          { text: "Student/Fresh Graduate", value: "S" },
+          { text: "Junior Professional", value: "J" },
+          { text: "Experienced Professional", value: "E" },
+          { text: "Manager", value: "M" }
+        ]
 
         //******************************
         // Overview
@@ -574,6 +607,7 @@ myapp.controller("controller",
         }
 
 
+        
         //*************************
         // education
         //*************************
@@ -743,6 +777,137 @@ myapp.controller("controller",
         $scope.eduMouseLeave = function (context) {
             context.popoverRemove = false;
             context.eduHoverStyle = {};
+        }
+
+        //*************************
+        // Projects 
+        //*************************
+        function setPrjItems() {
+            if ($scope.occupations == null || $scope.occupations.length == 0)
+                setOccupations();
+        }
+        var savePrjRes = $resource("/saveProject")
+        $scope.saveProjects = function () {
+            if (SavePrj())
+                $('#addProjects').modal('hide');
+        }
+        $scope.saveProjectsMore = function () {
+            SavePrj();
+        }
+        function SavePrj() {
+            if (checkPrjValidation()) {
+                var savePrj = new savePrjRes();
+                savePrj.id = $scope.prjId;
+                savePrj.name = $scope.prjName;
+                savePrj.occupation = parseInt($scope.prjOccupation);
+                savePrj.month = $scope.prjMonth;
+                savePrj.year = $scope.prjYear;
+                savePrj.url = $scope.prjUrl;
+                savePrj.description = $scope.prjDesc;
+
+                var index;
+                $scope.account.projects.some(function (elem, i) {
+                    return elem.id === $scope.prjId ? (index = i, true) : false;
+                });
+
+                savePrj.$save(function (prj) {
+                    if (index >= 0)
+                        $scope.account.projects[index] = prj;
+                    else
+                        $scope.account.projects.push(prj);
+
+                });
+                cleanProjectsInputs();
+                return true;
+            }
+            return false;
+        }
+
+        $scope.editProject = function (prj) {
+            occupations.query(
+           function (data) {
+               $scope.occupations = data;
+           } // function(data)
+           );
+            $scope.prjId = prj.id;
+            $scope.prjName = prj.name;
+            $scope.prjOccupation = prj.occupation.id;
+            $scope.prjMonth = prj.month;
+            $scope.prjYear = prj.year;
+            $scope.prjUrl = prj.url;
+            $scope.prjDesc = prj.description;
+        }
+
+        var delPrjRes = $resource("/deleteProject")
+        $scope.deleteProject = function (prj) {
+            var delPrj = new delPrjRes();
+            delPrj.id = prj.id;
+            delPrj.$save(function (dprj) {
+                $scope.account.projects.splice($scope.account.projects.indexOf(dprj), 1);
+                //cleanHistoryInputs();
+            });
+        }
+
+        function cleanProjectsInputs() {
+            occupations.query(
+           function (data) {
+               $scope.occupations = data;
+           } // function(data)
+           );
+            //isValid = true;
+            $scope.prjForm.$setUntouched();
+            $scope.vprjNameShow = false;
+            $scope.vprjOccupationShow = false;
+
+            $scope.prjId = "";
+            $scope.prjName = "";
+            $scope.prjOccupation = [];
+            $scope.prjMonth = [];
+            $scope.prjYear = [];
+            $scope.prjUrl = "";
+            $scope.prjDesc = "";
+        }
+
+        $scope.cleanPrjInputs = function () {
+            cleanProjectsInputs();
+        }
+
+        // ********** check validation ****************
+        $scope.vprjNameShow = false;
+        $scope.vprjOccupationShow = false;
+
+        function checkPrjValidation() {
+            var isValid = true;
+            if ($scope.prjName == "") {
+                isValid = false;
+                $scope.vprjNameShow = true;
+            }
+            if ($scope.prjOccupation == "") {
+                isValid = false;
+                $scope.vprjOccupationShow = true;
+            }
+
+            if (isValid)
+                return true;
+            else
+                return false;
+        }
+        $scope.prjNameChg = function () {
+            $scope.vprjNameShow = false;
+        }
+        $scope.prjOccupationChg = function () {
+            $scope.vprjOccupationShow = false;
+        }
+
+        // *********** for highlight and show the edit and delete buttons
+        $scope.prjMouseOver = function (context) {
+            context.popoverRemove = true;
+            context.prjHoverStyle = { 'background-color': '#b8e986' };
+        }
+
+        $scope.prjMouseLeave = function (context) {
+            context.popoverRemove = false;
+            context.prjHoverStyle = {};
         }
 
         //*************************
@@ -1095,138 +1260,6 @@ myapp.controller("controller",
         $scope.tcMouseLeave = function (context) {
             context.popoverRemove = false;
             context.tcHoverStyle = {};
-        }
-
-
-        //*************************
-        // Projects 
-        //*************************
-        function setPrjItems(){
-            if ($scope.occupations == null || $scope.occupations.length == 0)
-                setOccupations();
-        }
-        var savePrjRes = $resource("/saveProject")
-        $scope.saveProjects = function () {
-            if (SavePrj())
-                $('#addProjects').modal('hide');
-        }
-        $scope.saveProjectsMore = function () {
-            SavePrj();
-        }
-        function SavePrj() {
-            if (checkPrjValidation()) {
-                var savePrj = new savePrjRes();
-                savePrj.id = $scope.prjId;
-                savePrj.name = $scope.prjName;
-                savePrj.occupation = parseInt($scope.prjOccupation);
-                savePrj.month = $scope.prjMonth;
-                savePrj.year = $scope.prjYear;
-                savePrj.url = $scope.prjUrl;
-                savePrj.description = $scope.prjDesc;
-
-                var index;
-                $scope.account.projects.some(function (elem, i) {
-                    return elem.id === $scope.prjId ? (index = i, true) : false;
-                });
-
-                savePrj.$save(function (prj) {
-                    if (index >= 0)
-                        $scope.account.projects[index] = prj;
-                    else
-                        $scope.account.projects.push(prj);
-
-                });
-                cleanProjectsInputs();
-                return true;
-            }
-            return false;
-        }
-
-        $scope.editProject = function (prj) {
-            occupations.query(
-           function (data) {
-               $scope.occupations = data;
-           } // function(data)
-           );
-            $scope.prjId = prj.id;
-            $scope.prjName = prj.name;
-            $scope.prjOccupation = prj.occupation.id;
-            $scope.prjMonth = prj.month;
-            $scope.prjYear = prj.year;
-            $scope.prjUrl = prj.url;
-            $scope.prjDesc = prj.description;
-        }
-
-        var delPrjRes = $resource("/deleteProject")
-        $scope.deleteProject = function (prj) {
-            var delPrj = new delPrjRes();
-            delPrj.id = prj.id;
-            delPrj.$save(function (dprj) {
-                $scope.account.projects.splice($scope.account.projects.indexOf(dprj), 1);
-                //cleanHistoryInputs();
-            });
-        }
-
-        function cleanProjectsInputs() {
-            occupations.query(
-           function (data) {
-               $scope.occupations = data;
-           } // function(data)
-           );
-            //isValid = true;
-            $scope.prjForm.$setUntouched();
-            $scope.vprjNameShow = false;
-            $scope.vprjOccupationShow = false;
-
-            $scope.prjId = "";
-            $scope.prjName = "";
-            $scope.prjOccupation = [];
-            $scope.prjMonth = [];
-            $scope.prjYear = [];
-            $scope.prjUrl = "";
-            $scope.prjDesc = "";
-        }
-
-        $scope.cleanPrjInputs = function () {
-            cleanProjectsInputs();
-        }
-
-        // ********** check validation ****************
-        $scope.vprjNameShow = false;
-        $scope.vprjOccupationShow = false;
-
-        function checkPrjValidation() {
-            var isValid = true;
-            if ($scope.prjName == "") {
-                isValid = false;
-                $scope.vprjNameShow = true;
-            }
-            if ($scope.prjOccupation == "") {
-                isValid = false;
-                $scope.vprjOccupationShow = true;
-            }
-
-            if (isValid)
-                return true;
-            else
-                return false;
-        }
-        $scope.prjNameChg = function () {
-            $scope.vprjNameShow = false;
-        }
-        $scope.prjOccupationChg = function () {
-            $scope.vprjOccupationShow = false;
-        }
-
-        // *********** for highlight and show the edit and delete buttons
-        $scope.prjMouseOver = function (context) {
-            context.popoverRemove = true;
-            context.prjHoverStyle = { 'background-color': '#b8e986' };
-        }
-
-        $scope.prjMouseLeave = function (context) {
-            context.popoverRemove = false;
-            context.prjHoverStyle = {};
         }
 
 

@@ -15,6 +15,12 @@
       border-radius: 3px;
       min-height: 580px;
     }
+    .app-skill-modal-window .modal-dialog {
+      width: 640px;
+      border-radius: 3px;
+      min-height: 480px;
+      background-color: #f9f9f9;
+    }
     .btn-prev-div{text-align: right;}
     .btn-next-div{text-align: left;}
   }
@@ -140,6 +146,18 @@
     margin-bottom: 25px;
 
 }
+.field-div-MainSrv {
+
+    display:block;
+    text-align:left;
+
+    padding-top: 0px;
+    padding-left: 35px;
+    padding-right: 21px;
+    margin-bottom: 0px;
+
+}
+
 
 
 .zero-margin{margin: 0;}
@@ -403,28 +421,66 @@ input[type=checkbox]:checked+.custom-check::before {
   padding: 0 0 10px 10px;
 }
 
+
+.srv-image {
+    position: absolute;
+
+      max-height: 70px;
+      margin-left: 31px;
+      margin-right: 31px;
+      margin-top: 15px;
+}
+
+
 .item {
-  background: rgb(255, 255, 255);
+  background-color: #f9f9f9;
   float:left;
   display: inline-block;
-  margin: 10px 10px 0 0;
-  height: 108px;
-  width: 108px;
-  padding-top: 66px;
+  margin: 0;
+  margin-right: 14px;
+  margin-bottom: 14px;
+  height: 132px;
+  width: 132px;
+  /*padding-top: 66px;*/
   border: solid 0.5px #979797;
+  border-radius: 2px;
 
-  font-size: 9px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-style: bold;
-  color:#616161;
-  font-weight: 300;
+  font-family: Helvetica;
+  font-size: 14px;
   text-align: center;
+  color: #616161;
+  font-weight: normal;
+}
+
+.srv-image-skill {
+    position: relative;;
+    max-height: 55px;
+    max-width: 65px;
+    margin: 0px;
+    padding: 0;
+}
+
+.skill-lbl{
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: Helvetica;
+  font-size: 14px;
+  text-align: center;
+  color: #616161;
+  font-weight: normal;
+}
+
+.skill-lbl.selected{
+  font-weight: bold;
+  text-align: center;
+  color: #23b46c;
 }
 
 .item.selected {
   /*background-color: rgb(3, 186, 109);*/
-  color: rgb(3, 186, 109);
-  border: solid 1.4px #03ba6d;
+  border: solid 2px #23b46c;
+
+
 }
 
 
@@ -562,14 +618,6 @@ li { padding: 2px 0; }
   top: 0;
 }
 
-
-
-
-
-
-.black-border-label.selected {
-  background-color: rgb(3, 186, 109);
-}
 .red{
   border-color: red;
   border-style:solid;
@@ -816,20 +864,24 @@ input[type=checkbox] + label {
 }
 
 .black-border-label {
-    font-size: 11px;
+    font-size: 15px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-style:normal;
-    font-weight: 400;
-    color: rgb(97, 97, 97);
-    padding:5px;
-    border: 1px solid lightgray;
-    background-color: lightgrey;
-    border-radius: 3px;
+    font-weight: normal;
+    color: #625f5f;
+    padding-left:15px;
+    padding-right: 15px;
+    padding-top: 8px;
+    padding-bottom: 9px;
+    background-color: #d8d8d8;
+    border-radius: 8px;
 }
 
 
-
-
+.black-border-label.selected {
+  background-color: #03ba6d;
+  color: #ffffff;
+}
 
 .add-more-text {
     width: 358px;
@@ -922,6 +974,4 @@ input[type=checkbox] + label {
 
 #skilldList li {
   display: inline-block;
-  margin-left: 5px;
-  margin-right: 5px;
 }
