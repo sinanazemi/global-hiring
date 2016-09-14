@@ -1,4 +1,4 @@
-var globalHiring = angular.module('globalHiring',['ngResource','ngAnimate', 'ui.bootstrap']);
+var globalHiring = angular.module('globalHiring',['ngResource','ngAnimate', 'ui.bootstrap','selectize']);
 globalHiring.controller('stepsController',['$scope', '$resource','$uibModal','$location','$parse', function($scope, $resource,$uibModal,$location,$parse, $http, $window, $log) {
 //initializing page
 var accountUser = $resource("/account")
@@ -444,6 +444,15 @@ $scope.passwordChange=function(){
       } // function(data)
     ) // service.query
 
+    $scope.cityConfig = {
+        valueField: 'name',
+        labelField: 'name',
+        searchField: 'name',
+        closeAfterSelect:true,
+        sortField: 'text',
+        maxItems: 1,
+        maxOptions: 5,
+    };
     var degrees = $resource("/degrees")
     degrees.query(
       function(data){

@@ -9,12 +9,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
+    <link href="Styles/selectize.css" rel="stylesheet" />
+    <script src="http://code.jquery.com/jquery-1.10.2.js" type="text/javascript"></script>
+    <script src="Scripts/selectize.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="Scripts/angular-selectize.js"></script>
+
+
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
     <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.0.1.js"></script>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-resource.min.js"></script>
+
+
     <link href="css/steps_style.css" rel="stylesheet">
 
     <script src="Scripts/steps.js"></script>
@@ -52,10 +63,14 @@
         <div class="col-sm-12 field-div" >
           <label class="control-label col-sm-4 field-label" style="text-align:left;" >Select City<img src="images/location.png" class="location-image" alt="Location"></label>
           <div class="col-sm-8" style="text-align:center;">
-            <select id="citySelect" name="citySelect" class="form-control  select-style" style="text-align:center;" ng-model="selectedCity" ng-style="requiedSelectedCity" ng-change="cityChange()" ng-options="city as city.name for city in cities" required>
+<!--            <select id="citySelect" name="citySelect" class="form-control  select-style" style="text-align:center;" ng-model="selectedCity" ng-style="requiedSelectedCity" ng-change="cityChange()" ng-options="city as city.name for city in cities" required>
               <option value="" ng-style="selectColorStyle" selected="selected">{{cityPlaceholder}}</option>
             </select>
+-->
+            <selectize id="citySelect" name="citySelect" placeholder='Enter or select your city name' options='cities' config="cityConfig" ng-model="selectedCity" ng-style="requiedSelectedCity"  required></selectize>
           </div>
+
+
         </div>
         <div class="col-sm-12 field-div" >
           <label class="control-label col-sm-4 field-label" style="text-align:left;" >Phone <span style="font-weight: 500;"> (optional) </span></label>
@@ -256,7 +271,7 @@
 
         <div class="col-sm-12 field-div-MainSrv" >
           <!-- <div class="serviceContainer"  > -->
-            <div class="item" ng-repeat='service in mainServices' ng-click='toggleSelectedSRV(service)' ng-class="{ selected: service.isselected  }">
+            <div class="SRVitem" ng-repeat='service in mainServices' ng-click='toggleSelectedSRV(service)' ng-class="{ selected: service.isselected  }">
               <input type="checkbox" ng-attr-id="{{'c' + service.id}}" ng-model="service.isselected" />
             <!--   <img src="images/sample_main_service.png" class="img-responsive" style="padding-top:0px" alt="main Service Img"> -->
               <div>
