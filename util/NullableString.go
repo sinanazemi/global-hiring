@@ -11,6 +11,7 @@ type NullableString struct{
 
 // Scan - Implement the database/sql scanner interface
 func (nstr *NullableString) Scan(value interface{}) error {
+
 	// if value is nil
 	if value == nil {
 		*((*nstr).Str) = ""
@@ -19,14 +20,17 @@ func (nstr *NullableString) Scan(value interface{}) error {
 
   sv, err := driver.String.ConvertValue(value);
   if err == nil {
-		// if this is a bool type
+
+		*((*nstr).Str) = "" // default
+
     s, ok := sv.(string);
-		if  ok {
-			// set the value of the pointer yne to YesNoEnum(v)
+		if ok {
 			*((*nstr).Str) = s
-			return nil
 		}
+
+		return nil
 	}
+
 	// otherwise, return an error
 	return errors.New("failed to scan NullableString")
 }
