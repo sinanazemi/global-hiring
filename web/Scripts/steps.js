@@ -14,9 +14,9 @@ $scope.init = function () {
             {
               $scope.step1Hide=true;
               if($scope.userAccount.isstudent){
-                $scope.stepLangHide=false;
-                $scope.langBarImage="images/step_2_bar.png";
-                $scope.langPrevBtn=true;
+                $scope.stepEduHide=false;
+                $scope.eduBarImage="images/step_2_bar.png";
+                $scope.eduPrevBtn=true;
               }
               else {
                 $scope.stepMainSRVHide=false;
@@ -39,7 +39,8 @@ $scope.init = function () {
   $scope.phoneRegex='[0-9 ]+';
   $scope.userAccount='';
 
-  $scope.langPrevBtn=false;
+  //$scope.langPrevBtn=false;
+  $scope.eduPrevBtn=false;
   $scope.mainSrvPrevBtn=false;
   // Steps controller
   //$scope.authenticateHide=false;
@@ -268,7 +269,7 @@ $scope.passwordChange=function(){
       if($scope.isStudent=="yes"){$scope.isStudent=true;}else{$scope.isStudent=false;}
 
       if($scope.isStudent){
-        $scope.stepLangHide=false;
+        $scope.stepEduHide=false;
         $scope.langBarImage="images/step_2_bar.png";
       }
       else {
@@ -308,24 +309,26 @@ $scope.passwordChange=function(){
       $scope.forceEnglishModal();
     }
 
-    if(isValidationComplete)
+    if(isValidationComplete && $scope.langs.length!=0)
     {
       $scope.langProfErrorShow=false;
       $scope.langPlaceholder="English";
       $scope.requiedStyleLang="";
 
-    $scope.stepLangHide=true;
-    if($scope.isStudent){
-      $scope.stepEduHide=false;
-      $scope.eduBTNLabel="Next Step";
-      $scope.eduBarImage="images/step_3_bar.png";
-    }
-    else{
-      $scope.stepEduHide=false;
-      $scope.eduBTNLabel="Finish";
-      $scope.eduBarImage="images/step_5_bar.png";
+    //$scope.stepLangHide=true;
+    //if($scope.isStudent){
+    //  $scope.stepEduHide=false;
+    //  $scope.eduBTNLabel="Next Step";
+    //  $scope.eduBarImage="images/step_3_bar.png";
+  //  $scope.finishClick();
+  //  }
+  //  else{
+    //  $scope.stepEduHide=false;
+    //  $scope.eduBTNLabel="Finish";
+    //  $scope.eduBarImage="images/step_5_bar.png";
+    $scope.finishClick();
 
-    }
+  //  }
     }
   };
   $scope.eduNextClick = function(){
@@ -338,12 +341,14 @@ $scope.passwordChange=function(){
       $scope.stepEduHide=true;
     if($scope.isStudent){
       $scope.stepMainSRVHide=false;
-      $scope.mainSRVBarImage="images/step_4_bar.png";
+      $scope.mainSRVBarImage="images/step_3_bar.png";
       $scope.getMainServices();
     }
     else{
       //$scope.stepSkillHide=false;
-      $scope.finishClick();
+      $scope.stepLangHide=false;
+      $scope.langBarImage="images/step_5_bar.png";
+      //$scope.finishClick();
     }
 
   };
@@ -362,12 +367,12 @@ $scope.passwordChange=function(){
       $scope.setErrorLabel();
       if($scope.isStudent){
         $scope.stepSkillHide=false;
-        $scope.skillsBTNLabel="Finish";
-        $scope.skillBarImage="images/step_5_bar.png";
+        //$scope.skillsBTNLabel="Finish";
+        $scope.skillBarImage="images/step_4_bar.png";
       }
       else{
         $scope.stepSkillHide=false;
-        $scope.skillsBTNLabel="Next Step";
+      //  $scope.skillsBTNLabel="Next Step";
         $scope.skillBarImage="images/step_3_bar.png";
       }
     }
@@ -377,12 +382,15 @@ $scope.passwordChange=function(){
     if(!$scope.chkIFNotSelected())
     {
     if($scope.isStudent){
-      $scope.finishClick();
+      //$scope.finishClick();
+      $scope.stepSkillHide=true;
+      $scope.stepLangHide=false;
+      $scope.langBarImage="images/step_5_bar.png";
     }
     else{
       $scope.stepSkillHide=true;
-      $scope.stepLangHide=false;
-      $scope.langBarImage="images/step_4_bar.png";
+      $scope.stepEduHide=false;
+      $scope.langEduImage="images/step_4_bar.png";
 
     }
   }
@@ -392,6 +400,19 @@ $scope.passwordChange=function(){
   $scope.langPreClick=function(){
     $scope.stepLangHide=true;
     if($scope.isStudent){
+      $scope.stepSkillHide=false;
+      $scope.skillBarImage="images/step_4_bar.png"
+    }
+    else {
+      $scope.stepEduHide=false;
+      $scope.eduBarImage="images/step_4_bar.png";
+    }
+  }
+  $scope.eduPreClick=function(){
+    $scope.stepEduHide=true;
+    //$scope.stepLangHide=false;
+    if($scope.isStudent){
+      //$scope.langBarImage="images/step_2_bar.png";
       $scope.step1Hide=false;
     }
     else {
@@ -399,21 +420,11 @@ $scope.passwordChange=function(){
       $scope.skillBarImage="images/step_3_bar.png";
     }
   }
-  $scope.eduPreClick=function(){
-    $scope.stepEduHide=true;
-    $scope.stepLangHide=false;
-    if($scope.isStudent){
-      $scope.langBarImage="images/step_2_bar.png";
-    }
-    else {
-      $scope.langBarImage="images/step_4_bar.png";
-    }
-  }
   $scope.mainSRVPreClick=function(){
     $scope.stepMainSRVHide=true;
     if($scope.isStudent){
       $scope.stepEduHide=false;
-      $scope.eduBarImage="images/step_3_bar.png";
+      $scope.eduBarImage="images/step_2_bar.png";
     }
     else {
       $scope.step1Hide=false;
@@ -423,7 +434,7 @@ $scope.passwordChange=function(){
     $scope.stepMainSRVHide=false;
     $scope.stepSkillHide=true;
     if($scope.isStudent){
-      $scope.mainSRVBarImage="images/step_4_bar.png";
+      $scope.mainSRVBarImage="images/step_3_bar.png";
     }
     else {
       $scope.mainSRVBarImage="images/step_2_bar.png";
@@ -445,7 +456,7 @@ $scope.passwordChange=function(){
     ) // service.query
 
     $scope.cityConfig = {
-        valueField: 'name',
+        valueField: 'id',
         labelField: 'name',
         searchField: 'name',
         closeAfterSelect:true,
@@ -748,7 +759,8 @@ $scope.createNewAccount=function(){
       var newAccount = new saveAccount();
       newAccount.name = $scope.fullname;
       newAccount.email = $scope.email;
-      newAccount.city = $scope.selectedCity;
+    //  newAccount.city = $scope.selectedCity;
+      newAccount.city = $scope.cities[0];
       newAccount.phone = $scope.phone;
       newAccount.password = $scope.password;
       if($scope.isStudent){
@@ -766,10 +778,14 @@ $scope.createNewAccount=function(){
           //window.location = "/profile.html"; // save and move to profile page
           if($scope.userAccount.isstudent)
           {
-            $scope.langPrevBtn=true;
+            //$scope.langPrevBtn=true;
+            $scope.eduPrevBtn=true;
+            $scope.eduBarImage="images/step_2_bar.png";
+
           }
           else {
             $scope.mainSrvPrevBtn=true;
+            $scope.mainSRVBarImage="images/step_2_bar.png"
           }
         },
         function(errorMsg){

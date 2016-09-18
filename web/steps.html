@@ -92,8 +92,8 @@
           </div>
         </div>
         <div class="col-sm-12 field-div" style="margin-bottom: 32px;" >
-          <label class="control-label col-sm-4 field-label" style="text-align:left;" >Are you a student?</label>
-          <div class="col-sm-8 ">
+          <label class="control-label col-sm-6 field-label" style="text-align:left;" >Have you been into university?</label>
+          <div class="col-sm-6 ">
           <div class="col-sm-3 " style="padding-left:0;">
             <label class= "radio-inline radio-button-text" >  <input type="radio" id="isStudent" name="isStudent" value="yes" ng-model="isStudent" ng-style="requiedStyleisStudent" ng-required="!isStudent"> Yes </label>
           </div>
@@ -177,10 +177,10 @@
       </div>
       <div class="row" style="margin-top:28px;">
       <div class="col-sm-6 btn-prev-div"  >
-        <button type="button" class="next-button btn-prev-c " ng-click="langPreClick()" ng-disabled="langPrevBtn" >Previous</button>
+        <button type="button" class="next-button btn-prev-c " ng-click="langPreClick()"  >Previous</button>
       </div>
       <div class="col-sm-6 btn-next-div" >
-        <button type="button" class="next-button btn-next-c " ng-click="langNextClick()" >Next Step</button>
+        <button type="button" class="next-button btn-next-c " ng-click="langNextClick()" >Finish</button>
       </div>
     </div>
   </div>
@@ -243,10 +243,10 @@
       </div>
       <div class="row" style="margin-top:28px;">
         <div class="col-sm-6 btn-prev-div" >
-          <button type="button" class="next-button btn-prev-c " ng-click="eduPreClick()" >Previous</button>
+          <button type="button" class="next-button btn-prev-c " ng-click="eduPreClick()" ng-disabled="eduPrevBtn">Previous</button>
         </div>
         <div class="col-sm-6 btn-next-div"  >
-          <button type="button" class="next-button btn-next-c " ng-click="eduNextClick()" >{{eduBTNLabel}}</button>
+          <button type="button" class="next-button btn-next-c " ng-click="eduNextClick()" >Next Step</button>
         </div>
     </div>
   </div>
@@ -339,7 +339,7 @@
         <button type="button" class="next-button btn-prev-c " ng-click="skillPreClick()" >Previous</button>
       </div>
       <div class="col-sm-6 btn-next-div" >
-        <button type="button"  class="next-button btn-next-c " ng-click="skillNextClick()" >{{skillsBTNLabel}}</button>
+        <button type="button"  class="next-button btn-next-c " ng-click="skillNextClick()" >Next Step</button>
       </div>
     </div>
   </div><!--Skill step finish -->
