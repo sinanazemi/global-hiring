@@ -129,7 +129,7 @@
 }
 .selectize-input,
 .selectize-control.single .selectize-input.input-active {
-  background: #ffffff;
+  background: #f9f9f9;
   cursor: text;
   display: inline-block;
 }
@@ -154,7 +154,7 @@
   padding: 6px 8px 3px;
 }
 .selectize-input.full {
-  background-color: #ffffff;
+  background-color: #f9f9f9;
 }
 .selectize-input.disabled,
 .selectize-input.disabled * {
@@ -192,8 +192,8 @@
 .selectize-control.multi .selectize-input.disabled > div,
 .selectize-control.multi .selectize-input.disabled > div.active {
   color: #7d7d7d;
-  background: #ffffff;
-  border: 0 solid #ffffff;
+  background: #f9f9f9;
+  border: 0 solid #f9f9f9;
 }
 .selectize-input > input {
   display: inline-block !important;
@@ -235,7 +235,7 @@
   position: absolute;
   z-index: 10;
   border: 1px solid #d0d0d0;
-  background: #ffffff;
+  background: #f9f9f9;
   margin: -1px 0 0 0;
   border-top: 0 none;
   -webkit-box-sizing: border-box;
@@ -266,7 +266,7 @@
 }
 .selectize-dropdown .optgroup-header {
   color: #303030;
-  background: #ffffff;
+  background: #f9f9f9;
   cursor: default;
 }
 .selectize-dropdown .active {
@@ -287,47 +287,50 @@
 }
 .selectize-control.single .selectize-input,
 .selectize-control.single .selectize-input input {
-  cursor: pointer;
+    cursor: pointer;
+
+    background: #f9f9f9 url('../images/combo.png') no-repeat 97% 50%;
+    background-size: 15px;
+    line-height: 2;
+
+
+    font-size: 15px;
+    font-weight: 400;
+    color: #8a8888;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+    padding: 0px 10px;
+
+    float: left;
+    border-radius: 0px;
+    /*height: 42px;*/
+    border: solid 1.2px #cdcdcd;
+
 }
 .selectize-control.single .selectize-input.input-active,
 .selectize-control.single .selectize-input.input-active input {
-  cursor: text;
-}
-.selectize-control.single .selectize-input:after {
-  /*content: ' ';*/
-  content: '\e259'; /*This will draw the icon*/
-        font-family: "Glyphicons Halflings";
-        line-height: 2;
-        display: block;
-        position: absolute;
-        top: 3px;
-        right: 15px;
-        background-color: white;
-        padding-right: 2px;
-        
-  border-radius: 0.3px;
-  color: #03ba6d;
+    cursor: text;
 
-  /*display: block;
-  position: absolute;
-  top: 50%;
-  right: 15px;
-  margin-top: -3px;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 5px 5px 0 5px;
-  border-color: #808080 transparent transparent transparent;*/
-}
-.selectize-control.single .selectize-input.dropdown-active:after {
-    content: '\e259'; /*This will draw the icon*/
-  font-family: "Glyphicons Halflings";
-  color: #03ba6d;
+    background: #f9f9f9 url('../images/combo.png') no-repeat 97% 50%;
+    background-size: 15px;
+    line-height: 2;
 
-  /*margin-top: -4px;
-  border-width: 0 5px 5px 5px;
-  border-color: transparent transparent #808080 transparent;*/
+
+    font-size: 15px;
+    font-weight: 400;
+    color: #8a8888;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+    padding: 0px 10px;
+
+    float: left;
+    border-radius: 0px;
+    /*height: 42px;*/
+    border: solid 1.2px #cdcdcd;
+
 }
+
+
 .selectize-control.rtl.single .selectize-input:after {
   left: 15px;
   right: auto;
