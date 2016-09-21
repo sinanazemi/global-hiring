@@ -89,6 +89,9 @@
 
 .step-form{
     margin-top:169px;
+    height: 600px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .bar-image {
