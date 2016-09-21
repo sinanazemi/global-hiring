@@ -294,7 +294,7 @@ $scope.passwordChange=function(){
       hasEnglish=false;
       for(i=0;i<$scope.langs.length;i++)
       {
-        if($scope.langs[i].name=="English")
+        if($scope.langs[i].name.toLowerCase()=="English")
         {
           hasEnglish=true;
         }
@@ -494,7 +494,7 @@ $scope.passwordChange=function(){
       haslang=false;
       for(i=0;i<$scope.langs.length;i++)
       {
-        if($scope.langs[i].name==$scope.langToAdd.name)
+        if($scope.langs[i].name.toLowerCase()==$scope.langToAdd.name.toLowerCase())
         {
           haslang=true;
         }
@@ -546,9 +546,19 @@ $scope.passwordChange=function(){
         }
       }
     }
-    if(isValidationComplete && langToAdd.name!='')
+    if(isValidationComplete && langToAdd.name!='' && !$scope.checkIfHasLang())
     {
+      langToAdd.name=langToAdd.name.toLowerCase();
       $scope.langs.push(angular.copy(langToAdd));
+      $scope.langToAdd.name='';
+      $scope.langToAdd.profeciency='';
+      $scope.langProfErrorShow=false;
+      $scope.langPlaceholder="English";
+      $scope.requiedStyleLang="";
+      $scope.isRedLangPlacehoder=false;
+    }
+
+    if($scope.checkIfHasLang()){
       $scope.langToAdd.name='';
       $scope.langToAdd.profeciency='';
       $scope.langProfErrorShow=false;
