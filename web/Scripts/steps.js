@@ -761,8 +761,8 @@ $scope.createNewAccount=function(){
       var newAccount = new saveAccount();
       newAccount.name = $scope.fullname;
       newAccount.email = $scope.email;
-    //  newAccount.city = $scope.selectedCity;
-      newAccount.city = $scope.cities[0];
+      newAccount.city = $scope.selectedCity;
+      //newAccount.city = $scope.cities[0];
       newAccount.phone = $scope.phone;
       newAccount.password = $scope.password;
       if($scope.isStudent=="no"){
