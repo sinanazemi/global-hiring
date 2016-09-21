@@ -301,7 +301,7 @@ $scope.passwordChange=function(){
       hasEnglish=false;
       for(i=0;i<$scope.langs.length;i++)
       {
-        if($scope.langs[i].name.toLowerCase()=="English")
+        if($scope.langs[i].name.toLowerCase()=="english")
         {
           hasEnglish=true;
         }
@@ -311,6 +311,12 @@ $scope.passwordChange=function(){
         $scope.errorMsg="NO ENGLISH"
         $scope.forceEnglishModal();
       }
+      if(hasEnglish){
+        $scope.langProfErrorShow=false;
+        $scope.langPlaceholder="English";
+        $scope.requiedStyleLang="";
+        $scope.finishClick();
+      }
     }
     if(isValidationComplete && $scope.langs.length==0)
     {
@@ -318,27 +324,6 @@ $scope.passwordChange=function(){
       $scope.forceEnglishModal();
     }
 
-    if(isValidationComplete && $scope.langs.length!=0)
-    {
-      $scope.langProfErrorShow=false;
-      $scope.langPlaceholder="English";
-      $scope.requiedStyleLang="";
-
-    //$scope.stepLangHide=true;
-    //if($scope.isStudent){
-    //  $scope.stepEduHide=false;
-    //  $scope.eduBTNLabel="Next Step";
-    //  $scope.eduBarImage="images/step_3_bar.png";
-  //  $scope.finishClick();
-  //  }
-  //  else{
-    //  $scope.stepEduHide=false;
-    //  $scope.eduBTNLabel="Finish";
-    //  $scope.eduBarImage="images/step_5_bar.png";
-    $scope.finishClick();
-
-  //  }
-    }
   };
   $scope.eduNextClick = function(){
 
@@ -541,7 +526,7 @@ $scope.passwordChange=function(){
   var index =0;
   $scope.addMoreLangClick=function(langToAdd){
     isValidationComplete=$scope.validateLang();
-    if(langToAdd.name!="English"){
+    if(langToAdd.name.toLowerCase()!="english"){
       if(langToAdd.profeciency==''){$scope.langProfErrorShow=true;}
       if(langToAdd.name==''){
         $scope.isRedLangPlacehoder=true;
@@ -605,7 +590,9 @@ $scope.removeLanguage=function(lang){
     });
 
     modalInstance.result.then(function (langToAdd) {
-      $scope.addMoreLangClick(langToAdd);
+      //$scope.addMoreLangClick(langToAdd);
+      langToAdd.name=langToAdd.name.toLowerCase();
+      $scope.langs.push(angular.copy(langToAdd));
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
     });
@@ -887,7 +874,7 @@ angular.module('globalHiring').controller('ForceEnglishModalInstanceCtrl', funct
   $scope.langToAdd = langToAdd;
   $scope.LanguageProfeciencies=LanguageProfeciencies;
   $scope.langToAdd = {
-    name:"English",
+    name:"english",
     //profeciency: $scope.LanguageProfeciencies[0].value
     profeciency:''
   };
