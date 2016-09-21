@@ -52,7 +52,7 @@
       <div class="row">
         <div class="col-sm-4 "></div>
         <div class="col-sm-4 ">
-          <input type="email" class="form-control input-style" placeholder="{{emailPlaceholder}}"   ng-model="email" ng-style="requiedStyleEmail"  required autofocus/>
+          <input type="email" class="form-control input-style" placeholder="{{emailPlaceholder}}" ng-keydown="$event.which === 13 && login()"  ng-model="email" ng-style="requiedStyleEmail"  required autofocus/>
         </div>
         <div class="col-sm-4 "></div>
       </div>
@@ -61,7 +61,7 @@
       <div class="row" style="margin-top:30px">
         <div class="col-sm-4 "></div>
         <div class="col-sm-4 ">
-          <input type="password" class="form-control input-style"  placeholder="{{passwordPlaceholder}}"  ng-model="password" ng-style="requiedStylePassword"  required/>
+          <input type="password" class="form-control input-style"  placeholder="{{passwordPlaceholder}}" ng-keydown="$event.which === 13 && login()" ng-model="password" ng-style="requiedStylePassword"  required/>
         </div>
         <div class="col-sm-4 "></div>
       </div>
@@ -70,7 +70,7 @@
   <div class="col-sm-4 "></div>
   <div class="col-sm-4 ">
     <div class="col-sm-4" style="float:left;padding-left:0;">
-      <button type="button" class="btn-login-c" ng-click="login()">Login</button>
+      <button type="button" class="btn-login-c" ng-click="login()" >Login</button>
     </div>
     <div class="col-sm-8 checkbox checkbox-remember">
         <label class="control-label checkbox-label" style="text-align:center;"><input type="checkbox" ng-model="checkboxValue"><span class="custom-check-Login" style="margin:0; text-align:center;"></span>&nbsp; Remember me next time</label>
@@ -102,8 +102,8 @@
 
 <script>
 var myAppLogin = angular.module('myAppLogin',['ngResource']);
-myAppLogin.controller('loginController',['$scope', '$resource', function($scope, $resource,$http, $window, $log) {
 
+myAppLogin.controller('loginController',['$scope', '$resource', function($scope, $resource,$http, $window, $log) {
   $scope.notLoginMsg=false;
   $scope.email='';
   $scope.password='';
