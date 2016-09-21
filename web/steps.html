@@ -194,24 +194,27 @@
   <div >
     <img ng-src="{{eduBarImage}}" class="img-responsive bar-image" alt="Education Step">
   </div >
-    <form class="form-horizontal step-form" role="form" name="stepEduForm">
+    <!-- -Student Education Form -->
+    <form class="form-horizontal step-form" role="form" name="stepStdEduForm" ng-show="isStudent">
         <div class="col-sm-12 field-div-right-left" style="margin-bottom:10px;margin-left: 5px;">
-          <label class="control-label field-Bold-label" style="text-align:left; padding:0;" >School</label>
+          <label class="control-label field-Bold-label" style="text-align:left; padding:0;" >Your Last University</label>
         </div>
         <div class="col-sm-12 field-div-Edu" >
-          <input type="text" class="form-control textbox-style" placeholder="School Name" ng-model="educationToAdd.school">
+          <input type="text" class="form-control textbox-style" ng-model="educationToAdd.school">
         </div>
-
-
         <div class="col-sm-12 field-div-right-left" >
-          <label class="control-label field-Bold-label" style="text-align:left;padding:0;" >Date Attended</label>
+          <label class="control-label field-Bold-label" style="text-align:left;padding:0;" >Dates Attended</label>
         </div>
         <div class="col-sm-12 field-div-Edu" style="margin-top:10px;">
           <div class="col-sm-6 " style="padding-left:0;" >
-            <select  class="form-control  select-style" ng-model="educationToAdd.fromdate" placeholder="From"   ng-options="opt as opt for opt in dates" ></select>
+            <select  class="form-control  select-style" ng-model="educationToAdd.fromdate" placeholder="From"   ng-options="opt as opt for opt in dates" >
+              <option value="" selected="selected">From</option>
+            </select>
           </div>
           <div class="col-sm-6 " style="padding-right:0;" >
-            <select  class="form-control  select-style"  ng-model="educationToAdd.todate" placeholder="To(or expected graduation year)"   ng-options="opt as opt for opt in dates" ></select>
+            <select  class="form-control  select-style"  ng-model="educationToAdd.todate" placeholder="To(or expected graduation year)"   ng-options="opt as opt for opt in dates" >
+              <option value="" selected="selected">To(or expected graduation year)</option>
+            </select>
           </div>
         </div>
         <div class="col-sm-12 field-div-right-left " >
@@ -228,17 +231,50 @@
           </div>
 
         <div class="col-sm-12 field-div-right-left" >
-          <label class="control-label field-Bold-label" style="text-align:left;padding:0;" >Grade</label>
+          <label class="control-label field-Bold-label" style="text-align:left;padding:0;" >Grade (optional)</label>
         </div>
         <div class="col-sm-12 field-div-Edu" style="margin-top:10px;">
           <input type="text" class="form-control textbox-style"  ng-model="educationToAdd.grade" >
+        </div>
+    </form> <!--form finish -->
+    <!-- NonStudent Education Form -->
+    <form class="form-horizontal step-form" role="form" name="stepEduForm" ng-hide="isStudent">
+        <div class="col-sm-12 field-div-right-left" style="margin-bottom:10px;margin-left: 5px;">
+          <label class="control-label field-Bold-label" style="text-align:left; padding:0;" >Your Last School Name</label>
+        </div>
+        <div class="col-sm-12 field-div-Edu" >
+          <input type="text" class="form-control textbox-style" ng-model="educationToAdd.school">
+        </div>
+
+
+        <div class="col-sm-12 field-div-right-left" >
+          <label class="control-label field-Bold-label" style="text-align:left;padding:0;" >Dates Attended</label>
+        </div>
+        <div class="col-sm-12 field-div-Edu" style="margin-top:10px;">
+          <div class="col-sm-6 " style="padding-left:0;" >
+            <select  class="form-control  select-style" ng-model="educationToAdd.fromdate" placeholder="From"   ng-options="opt as opt for opt in dates" >
+              <option value="" selected="selected">From</option>
+            </select>
+          </div>
+          <div class="col-sm-6 " style="padding-right:0;" >
+            <select  class="form-control  select-style"  ng-model="educationToAdd.todate" placeholder="To(or expected graduation year)"   ng-options="opt as opt for opt in dates" >
+              <option value="" selected="selected">To(or expected graduation year)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-sm-12 field-div-right-left" >
+          <label class="control-label field-Bold-label" style="text-align:left;padding:0;" >More Info (optional)</label>
+        </div>
+        <div class="col-sm-12 field-div-Edu" style="margin-top:10px;">
+          <textarea type="text" class="form-control textbox-style" style="min-height:126px;"  ng-model="educationToAdd.moreInfo" placeholder="Tell us about your grades, degrees and field of study if aplicable"></textarea>
         </div>
     </form> <!--form finish -->
 
     <div class="footer-AddBTN field-div-right-left">
       <div class="row" >
         <div class="col-sm-12 field-div-right-left btn-div-c">
-          <div class="btn-add-new" ng-click="addMoreEduClick(educationToAdd)" style="padding-top:10px;" >Sava and Add More Education</div>
+          <div class="btn-add-new" ng-click="addMoreEduClick(educationToAdd)" style="padding-top:10px;" >Sava and Add Other Education</div>
         </div>
       </div>
       <div class="row" style="margin-top:28px;">
@@ -309,7 +345,7 @@
     <img ng-src={{skillBarImage}} class="img-responsive bar-image" alt="Skill step">
   </div >
     <form class="form-horizontal step-form" role="form" name="stepSkillsForm">
-        <div class="field-div" style="overflow-y: scroll; margin-bottom:74px; padding-right:40px;" >
+        <div class="field-div" style="overflow-y: scroll;margin-bottom:74px; padding-right:40px;" >
           <div id="skilldList" style="text-align:left;" >
             <ul ng-repeat="service in mainServices | filter: {isselected: true } " style="text-align:left;margin-bottom:80px;padding:0;" >
               <div class="row field-div-right-left" style="padding:0;margin-bottom:24px;" >

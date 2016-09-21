@@ -14,11 +14,13 @@ $scope.init = function () {
             {
               $scope.step1Hide=true;
               if($scope.userAccount.isstudent){
+                $scope.isStudent=true;
                 $scope.stepEduHide=false;
                 $scope.eduBarImage="images/step_2_bar.png";
                 $scope.eduPrevBtn=true;
               }
               else {
+                $scope.isStudent=false;
                 $scope.stepMainSRVHide=false;
                 $scope.mainSRVBarImage="images/step_2_bar.png";
                 $scope.mainSrvPrevBtn=true;
@@ -270,7 +272,7 @@ $scope.passwordChange=function(){
 
       if($scope.isStudent){
         $scope.stepEduHide=false;
-        $scope.langBarImage="images/step_2_bar.png";
+        $scope.eduBarImage="images/step_2_bar.png";
       }
       else {
         $scope.stepMainSRVHide=false;
@@ -390,7 +392,7 @@ $scope.passwordChange=function(){
     else{
       $scope.stepSkillHide=true;
       $scope.stepEduHide=false;
-      $scope.langEduImage="images/step_4_bar.png";
+      $scope.eduBarImage="images/step_4_bar.png";
 
     }
   }
@@ -413,7 +415,7 @@ $scope.passwordChange=function(){
     //$scope.stepLangHide=false;
     if($scope.isStudent){
       //$scope.langBarImage="images/step_2_bar.png";
-      $scope.step1Hide=false;
+      //$scope.step1Hide=false;
     }
     else {
       $scope.stepSkillHide=false;
@@ -427,7 +429,7 @@ $scope.passwordChange=function(){
       $scope.eduBarImage="images/step_2_bar.png";
     }
     else {
-      $scope.step1Hide=false;
+      //$scope.step1Hide=false;
     }
   }
   $scope.skillPreClick=function(){
@@ -759,10 +761,14 @@ $scope.createNewAccount=function(){
       var newAccount = new saveAccount();
       newAccount.name = $scope.fullname;
       newAccount.email = $scope.email;
-      newAccount.city = $scope.selectedCity;
+    //  newAccount.city = $scope.selectedCity;
+      newAccount.city = $scope.cities[0];
       newAccount.phone = $scope.phone;
       newAccount.password = $scope.password;
-      if($scope.isStudent){
+      if($scope.isStudent=="no"){
+          newAccount.isstudent = false;
+      }
+      else if($scope.isStudent=="yes"){
         newAccount.isstudent = true;
       }
       else {
@@ -778,11 +784,13 @@ $scope.createNewAccount=function(){
           if($scope.userAccount.isstudent)
           {
             //$scope.langPrevBtn=true;
+            $scope.isStudent=true;
             $scope.eduPrevBtn=true;
             $scope.eduBarImage="images/step_2_bar.png";
 
           }
           else {
+            $scope.isStudent=false;
             $scope.mainSrvPrevBtn=true;
             $scope.mainSRVBarImage="images/step_2_bar.png"
           }
