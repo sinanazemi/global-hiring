@@ -159,7 +159,7 @@
         <ul ng-repeat="lang in langs" class="list-inline" style="margin:0; padding:0; margin-bottom:10px;display: inline-block;">
           <li style="padding:0;">
             <span class="tag label tag-label">
-              <span>{{lang.name}}</span>
+              <span>{{lang.name | capitalize}}</span>
               <a ng-click="removeLanguage(lang)"><i class="remove glyphicon glyphicon-remove" style="color:#ffffff"></i></a>
             </span>
           </li>

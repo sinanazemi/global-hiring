@@ -1,4 +1,11 @@
 var globalHiring = angular.module('globalHiring',['ngResource','ngAnimate', 'ui.bootstrap','selectize']);
+
+globalHiring.filter('capitalize', function() {
+    return function(input) {
+      return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+    }
+});
+
 globalHiring.controller('stepsController',['$scope', '$resource','$uibModal','$location','$parse', function($scope, $resource,$uibModal,$location,$parse, $http, $window, $log) {
 //initializing page
 var accountUser = $resource("/account")
