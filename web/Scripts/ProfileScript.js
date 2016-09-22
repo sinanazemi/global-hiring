@@ -3,8 +3,8 @@ var myapp = new angular.module("app", ['ngAnimate', 'ui.bootstrap', 'selectize',
 
 // inject the $resource dependency here
 myapp.controller("controller",
-  ["$scope", "$window", "$resource","$document",
-    function ($scope, $window, $resource,$document) {
+  ["$scope", "$window", "$resource", "$document", 
+    function ($scope, $window, $resource, $document) {
 
 
         $scope.shAddOverview = true;
@@ -23,18 +23,13 @@ myapp.controller("controller",
               }
           }
         );
-       
 
 
         $scope.userImage = "images/Chrysanthemum.jpg";        
 
         $scope.savePrfPic = function () {
                 $scope.userImage = $scope.prfImgUrl;
-            }
-
-        $scope.getSkills = function () {
-            $scope.skills = $scope.selectedService.skills;
-        }; // function()
+            }        
 
         $scope.dates = [];
         for (var i = 1970; i <= 2020; i++) {
@@ -87,17 +82,12 @@ myapp.controller("controller",
             return false;
         }
 
-        /*    logout     */
-        $scope.logoutShow = false;
-        $scope.accPrfClick = function () {
-            $scope.logoutShow = !$scope.logoutShow
-        };
+        /*    logout     */       
         var logout = $resource("/logout");
         $scope.btnLogout = function () {
             logout.get(function (data) {
                 window.location = "/HomePage.html"; // Logout and move to home page
             })
-
         };
 
         //********************** Auto Suggestion ************************
@@ -182,23 +172,89 @@ myapp.controller("controller",
             service.query(
               function (data) {
                   $scope.mainServices = data;
+                  for(var i=0;i<$scope.account.skills.length;i++)
+                  {
+                      for(var j=0;j<$scope.mainServices.length;j++)
+                      {
+                          if ($scope.account.skills[i].mainserviceid == $scope.mainServices[j].id) {
+                              $scope.mainServices[j].isselected = true;
+                              for (var z = 0; z < $scope.mainServices[j].skills.length; z++)
+                              {
+                                  if ($scope.mainServices[j].skills[z].id == $scope.account.skills[i].id) {
+                                      $scope.mainServices[j].skills[z].isselected = true;
+                                      break;
+                                  }
+                              }
+                              break;
+                          }
+                      }
+                  }
               } // function(data)
             ) // service.query
         };
 
         $scope.getIcon = function (serviceSelect) {
-            if (serviceSelect.icon) {
-                if (serviceSelect.isChecked) return serviceSelect.icon.on;
-                else return serviceSelect.icon.off;
+            if (serviceSelect.isselected) return serviceSelect.selectimageurl;
+            else return serviceSelect.unselectimageurl;
+        }
+
+        // Skill        
+        $scope.skillClick = function (selectedSkill) {
+            selectedSkill.isselected = !selectedSkill.isselected;
+            if (selectedSkill.isselected) {
+                $scope.selSkill = selectedSkill;
+                $("#addSkillPrf").modal("show");
+            }
+            else
+            {
+                selectedSkill.profeciency = "";
+            }
+        }
+        
+
+        $scope.skillProfeciencies = [
+           { text: "Student/Fresh Graduate", value: "S" },
+           { text: "Junior Professional", value: "J" },
+           { text: "Experienced Professional", value: "E" },
+           { text: "Manager", value: "M" }
+        ]
+        
+       
+        var saveSkillRes = $resource("/saveSkill")
+        $scope.saveSkill=function()
+        {
+            var saveSk = new saveSkillRes();
+            for (var i = 0; i < $scope.mainServices.length; i++)
+            {
+                if($scope.mainServices[i].isselected)
+                {
+                    for(var j=0; j<$scope.mainServices[i].skills.length;j++)
+                    {
+                        if ($scope.mainServices[i].skills[j].isselected) {
+                            saveSk.skillid = $scope.mainServices[i].skills[j].id;
+                            saveSk.profeciency = $scope.mainServices[i].skills[j].profeciency;
+                            saveSk.$save();
+                            $('#addSkill').modal('hide');
+                        }
+                    }
+                }
+
             }
         }
 
-        $scope.skillProfeciencies = [
-          { text: "Student/Fresh Graduate", value: "S" },
-          { text: "Junior Professional", value: "J" },
-          { text: "Experienced Professional", value: "E" },
-          { text: "Manager", value: "M" }
-        ]
+        var delSkillRes = $resource("/deleteSkill")
+        $scope.removeSkill = function (skill) {
+            var delSkill = new delSkillRes();
+            delSkill.id = skill.id;
+            delSkill.$save(function (dsk) {
+                $scope.account.skills.splice($scope.account.skills.indexOf(dsk), 1);
+                //cleanHistoryInputs();
+            });
+        }
+
+        $scope.getSkills = function () {
+            $scope.skills = $scope.selectedService.skills;
+        }; // function()
 
         //******************************
         // Overview
@@ -1540,13 +1596,5 @@ myapp.controller("controller",
   ]
 )
 
-$(document).ready(function () {
-    $('#logout').popover({ content: "<div style=\"height: 40px; width: 313px;display:inline-block\"> <button style=\"display:black\" class=\"glyphicon glyphicon-log-out\" ng-click=\"btnLogout()\">Logout</button><p style=\"display:black;font-family: Helvetica; font-size: 10px; font-weight: 400; letter-spacing: 0.5px; color: #7e7d7e;\">{{account.email}}</p></div>", html: true, placement: "bottom" })
-        .click(function (ev) {
-        //this is workaround needed in order to make ng-click work inside of popover
-            $compile($('#logout').contents())($scope);
-        });
 
-    
-});
 

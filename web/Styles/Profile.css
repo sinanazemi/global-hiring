@@ -8,7 +8,42 @@
   height:350px;
 }
 .max-fram-c{
-    max-width: 1300px;
+    max-width: 1280px;
+}
+.btn-c{
+    color: white;
+    border-radius: 2px;
+    background-color: #03ba6d;
+}
+.img-icon-c{
+    width: 18px;
+    height: 18px;
+}
+
+.panel-body{
+    padding-left:35px;
+}
+.hr-c{
+    margin-right: 30px; 
+    height: 1px; 
+    background-color: #d8d8d8;
+}
+.item-rp-c{
+    justify-content: center; 
+    /*height:25px;*/ 
+    margin-top: 5px; 
+    margin-left: 5px;  
+    padding:3px 10px;
+}
+/*.caption-c{
+    font-size:15px;
+    font-weight:bold;
+}*/
+.repeat-c{
+    display: block;
+}
+.subject-c{
+    padding-left:10px;
 }
 /*-----------------------
     navbar
@@ -20,16 +55,15 @@
 }
 .logo-img-c{
     margin-top:10px;
-    /*height:33.6px;
-    width:96.8px;*/
-    width:290px;
+    width:305px;
+    height:33.6px;
 }
 .nav-right-c{
     margin-right:-60px;
 }
 
 .prf-nav-c{
-    height:81.3px;
+    height:80px;
     border-bottom:solid 0.5px #979797;
     background-color: rgba(255,255,255,0.88);
 }
@@ -43,24 +77,7 @@
     font-size:16px;
     letter-spacing:0.8px;  
 }
-.popover{
-    max-width:250px;
-    margin-left:10px;
-}
-.popover-content {
-    max-width: 800px; /* optional max width */
-    width: intrinsic; /* Safari/WebKit uses a non-standard name */
-    width: -moz-max-content; /* Firefox/Gecko */
-    width: -webkit-max-content; /* Chrome */
-    height:40px;
-    margin-left:-10px;
-    margin-right:-10px;
-}
-.logout-div-c{
-    display:block;
-    width:300px;
-    border: 1px solid #979797;
-}
+
 .logout-btn-c{
     color: #4a4a4a;   
 }
@@ -77,14 +94,9 @@
     font-weight: 400; 
     letter-spacing: 0.5px; 
     color: #7e7d7e;
-    /*position:absolute; 
-    top:15px;*/
-    /*right:0px;*/
-    /*right:10px;
-    display:inline-block;*/
 }
 /********************************************/
-/******************* start  *************************/
+/******************* start logout menu *************************/
 /********************************************/
 .dropdown {    
     margin-top:15px;
@@ -122,16 +134,15 @@
     z-index: 9;
 }
 /********************************************/
-/********************* finish ***********************/
+/********************* finish logout menu ***********************/
 /********************************************/
 .main-cnt-c{
     background-color:#f3f3f3;
 }
 .small-profile-img-c {
-    width: 65px;
-    height: 65px;
-    /*height:auto;*/
-    margin-top:7px;
+    width: 74px;
+    height: 72.8px;
+    /*margin-top:7px;*/
 }
 
 .pf_icon-c {
@@ -144,37 +155,41 @@
         font-family: "Glyphicons Halflings";*/
 }
 
-.myProfile-cn-c{
-    margin-top:65px;
-  background-color:#f3f3f3;
-  max-width: 1300px; 
-  margin-left: auto; 
-  margin-right: auto;
-  
+.main-cn-c{
+    margin-top:80px;
+    background-color:#f3f3f3;
+    max-width: 1300px; 
+    margin-left: auto; 
+    margin-right: auto;  
 }
 
-.myProfile-cn-c h2{
+.myPrf-h2-c{
+    margin-top:34.8px;
     padding-left:15px;
-    padding-right:87px;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    color: #616161;
 }
 .prf-img-c {
     margin-top:30px;
     /*padding-right:20px;*/
     margin-left:20px;
-    width: 90px;
-    height: 90px;
+    width: 103px;
+    height: 105.3px;
 }
 
 .prf-info-c{
-    padding-left:50px;
+    padding-left:0px;
 }
     .prf-info-c h4 {
         font-size: 18px;
         font-weight: bold;
         letter-spacing: 0.9px;
         color: #616161;
+        font-style: normal;
+        font-stretch: normal;
     }
     .prf-info-c h5 {
         font-size: 16px;
@@ -194,15 +209,10 @@
         font-weight: normal;
         letter-spacing: 0.7px;
         color: #03ba6d;
+        font-style: normal;
+        font-stretch: normal;
+        /*font-family: LucidaGrande;*/
     }
-
-/*.add-overview-c{
-    display:none;
-}
-.overview-c:hover .add-overview-c{
-    color:#b8e986;
-    display:inline-block;
-}*/
 
 .prf-edu-c {
     font-size: 10px;
@@ -210,6 +220,10 @@
     letter-spacing: 0.5px;
     color: #8d8b8b;
 }
+.prf-edu-info-c{
+    margin-left:23px;
+}
+
 
 .panels-c h4 {
     font-size: 18px;
@@ -237,8 +251,9 @@
 .btn-add-c, .btn-edit-c, .btn-delete-c{
     display:none;
 }
-
-/*** add skill ****/
+/************************/
+/*** add main service ****/
+/************************/
 .serviceContainer {
   display: block;
   padding: 0 0 10px 10px;
@@ -254,30 +269,72 @@
     margin-bottom: 0px;
 
 }
-.item {
-  background: rgb(255, 255, 255);
+
+.srv-item {
+  background-color: #f9f9f9;
   float:left;
   display: inline-block;
-  margin: 10px 10px 0 0;
-  height: 108px;
-  width: 108px;
-  padding-top: 66px;
+  margin: 0;
+  margin-right: 14px;
+  margin-bottom: 14px;
+  height: 132px;
+  width: 132px;
+  /*padding-top: 66px;*/
   border: solid 0.5px #979797;
+  border-radius: 2px;
 
-  font-size: 9px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-style: bold;
-  color:#616161;
-  font-weight: 300;
+  font-family: Helvetica;
+  font-size: 14px;
   text-align: center;
+  color: #616161;
+  font-weight: normal;
+}
+.srv-image {
+    position: absolute;
+
+      max-height: 70px;
+      margin-left: 31px;
+      margin-right: 31px;
+      margin-top: 15px;
 }
 
-.item.selected {
-  /*background-color: rgb(3, 186, 109);*/
-  color: rgb(3, 186, 109);
-  border: solid 1.4px #03ba6d;
+.srv-image-skill {
+    position: relative;
+    max-height: 55px;
+    max-width: 65px;
+    margin: 0px;
+    padding: 0;
 }
 
+.skill-lbl{
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: Helvetica;
+  font-size: 14px;
+  text-align: center;
+  color: #616161;
+  font-weight: normal;
+}
+
+.skill-lbl.selected{
+  font-weight: bold;
+  text-align: center;
+  color: #23b46c;
+}
+.srv-item.selected {
+ border: solid 2px #23b46c;
+}
+.field-div {
+
+    display:block;
+    text-align:left;
+
+    padding-top: 0px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-bottom: 40px;
+
+}
 .field-div-MainSrv {
 
     display:block;
@@ -289,6 +346,133 @@
     margin-bottom: 0px;
 
 }
+/*******/
+/* add skill */
+/******/
+.field-div-right-left {
+
+    display:block;
+    text-align:left;
+
+    padding-top: 0px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin-bottom: 0px;
+
+}
+.black-border-label {
+    font-size: 15px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-style:normal;
+    font-weight: normal;
+    color: #625f5f;
+    padding-left:15px;
+    padding-right: 15px;
+    padding-top: 8px;
+    padding-bottom: 9px;
+    background-color: #d8d8d8;
+    border-radius: 8px;
+}
+
+
+.black-border-label.selected {
+  background-color: #03ba6d;
+  color: #ffffff;
+}
+
+.app-skill-modal-window .modal-dialog {
+      width: 640px;
+      border-radius: 3px;
+      min-height: 480px;
+      background-color: #f9f9f9;      
+    }
+.radio-button-text {
+    float: left;
+    font-size: 16px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #616161;
+}
+input[type='radio'] {
+  -webkit-appearance:none;
+  width:16px;
+  height:16px;
+  border:1px solid #979797;
+  border-radius:50%;
+  outline:none;
+  box-shadow:0 0 0px 0px gray inset;
+}
+
+input[type='radio']:hover {
+  box-shadow:0 0 5px 0px rgb(3, 186, 109) inset;
+}
+
+input[type='radio']:before {
+  content:'';
+  display:block;
+  width:60%;
+  height:60%;
+  margin: 20% auto;
+  border-radius:50%;
+}
+
+input[type='radio']:checked:before {
+  background:rgb(3, 186, 109);
+}
+ul { list-style: none; }
+li { padding: 2px 0; }
+/*  tag  */
+.tag-skill-c {
+  font-family: Helvetica;
+  font-size: 15px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  text-align: center;
+  color: #ffffff;
+
+  padding: 0.5em 1em 0.5em;
+  margin: 2px 1px !important;
+  display: inline-block;
+  max-width: 100%;
+
+  border-radius: 8px;
+  background-color: #03ba6d;
+  height: 35px;
+}
+
+.tag-skill-c > span {
+  display: inline-block;
+  max-width: 94%;
+  white-space: nowrap;
+  /*overflow: hidden;*/
+  -ms-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
+
+.tag-skill-c a {
+  display: inline-block;
+  color: #bbb;
+  cursor: pointer;
+  opacity: 0.3;
+  margin: 0 0 0 0.3em;
+}
+
+.tag-skill-c a:hover {
+  opacity: 1.0;
+}
+
+.tag-skill-c a .glyphicon-white {
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.tag-skill-c .remove {
+  vertical-align: bottom;
+  top: 0;
+}
+
+
 /*----------------------------
     Languages
     ----------------------------*/
@@ -319,6 +503,9 @@ input[type='radio']:checked:before {
     color:#b8e986;
     display:inline;
 }
+/*.history-txt-c{
+    height:25px;
+}*/
 
 /*-------------------------------
     Education
@@ -471,20 +658,20 @@ input[type=checkbox]:checked+.custom-check::before {
 }
 .btn-save-c {
     width: 80px;
-    height: 25px;
+    height: 35px;
     color: white;
     border-radius: 2px;
     background-color: #03ba6d;
-    font-size:10px;
+    font-size:15px;
     /*margin-left: 32px;*/    
 }
 .btn-save-more-c {    
-    font-size: 10px;
+    font-size: 12px;
     font-weight: bold;
     text-align: center;
     color: #03ba6d;
-    width: 120px;
-  height: 25px;
+    width: 140px;
+  height: 35px;
   border-radius: 2px;
   border: solid 1px #cccccc;
   background-color:white;
@@ -492,7 +679,7 @@ input[type=checkbox]:checked+.custom-check::before {
 .btn-cancel-c {
     padding-left:50px;
     text-decoration: none;
-    font-size: 10px;
+    font-size: 15px;
     font-weight: normal;
     text-align: center;
     color: #03ba6d;
@@ -667,15 +854,14 @@ input[type=checkbox]:checked+.custom-check::before {
     
         .logo-img-c {
             position:absolute;
-            width: 75px;
-            height: 10px;
+            width: 125px;
+            height: 15px;
             /*margin:auto;*/
             /*margin-left:50%;
             margin-right:50%;*/
-            right:50%;
-            left:50%;
+            right:40%;
+            left:40%;
             margin-left:-20px;
-
         }
     
         #myNavbar{
@@ -757,9 +943,9 @@ input[type=checkbox]:checked+.custom-check::before {
     }
 
 
-    .myProfile-cn-c {
+    .main-cn-c {
         text-align:center;        
-    margin-top:50px;
+        margin-top:50px;
     }
         .panels-c{
             width:100%;
@@ -773,9 +959,9 @@ input[type=checkbox]:checked+.custom-check::before {
     margin-right:auto;
 }
 
-        .myProfile-cn-c h2{
+        .main-cn-c h2{
             margin-top:30px;
-    padding:inherit;
+    /*padding:inherit;*/
     font-size: 28px;
     font-weight: normal;
 }

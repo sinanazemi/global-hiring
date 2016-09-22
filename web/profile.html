@@ -2,25 +2,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>My Profile</title>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="Styles/selectize.css" rel="stylesheet" />
+
     <script src="http://code.jquery.com/jquery-1.10.2.js" type="text/javascript"></script>
-    <script src="Scripts/selectize.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="Scripts/angular-selectize.js"></script>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <link href="Styles/selectize.css" rel="stylesheet" />
+    <script src="Scripts/selectize.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-resource.min.js"></script>
-    
-    <!-- for logout popover -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>    
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.js"></script>
-    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.4.js"></script>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-
+            
+    <script src="Scripts/angular-selectize.js"></script>
+        
+    <!-- bootstrap -->    
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.0.1.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     
 
     <!-- for profile image cropp-->
@@ -31,12 +34,10 @@
 
     <link href="Styles/Profile.css" rel="stylesheet" />
     <script src="Scripts/ProfileScript.js"></script>
-
-    
     
 </head>
-<body>
-    <div ng-app="app" ng-controller="controller" class="main-cnt-c">
+<body >
+    <div class="main-cnt-c" ng-app="app" ng-controller="controller">
         <!-- navigation bar -->
         <nav class="navbar navbar-fixed-top prf-nav-c ">
             <div class="container nav-container-c max-fram-c">
@@ -46,15 +47,10 @@
                     </a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
-
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <img class="small-profile-img-c img-circle" ng-src="{{userImage}}" />
                         </li>
-                        <!--<li>
-                            <a href="#" class="acc_name-c" popover-template="'popover.html'" popover-placement="bottom" popover-trigger="focus">{{account.name}}&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-menu-down pf_icon-c"></span></a>
-
-                        </li>-->
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{account.name}} <span class="glyphicon glyphicon-menu-down pf_icon-c"></span></a>
                             <ul class="dropdown-menu">
@@ -64,47 +60,31 @@
                     </ul>
                 </div>
                 <div class="menu-mo-c">
-                    <!--<img class="small-profile-img-c img-circle" src="images/Chrysanthemum.jpg" />-->
-                    <!--<img class="small-profile-img-c img-circle" ng-src="{{userImage}}" />
-                    <a href="#login" class="acc_name-c" popover-template="'popover.html'" popover-placement="bottom" popover-trigger="focus">{{account.name}}   <span class="glyphicon glyphicon-menu-down pf_icon-c"></span></a>
-                    <script type="text/ng-template" id="popover.html">
-                        <label class="logout-txt-c">
-                            <span class="glyphicon glyphicon-log-out logout-btn-c"></span>
-                            &nbsp;&nbsp;<a href="#" ng-click="btnLogout()" class="logout-txt-c">Logout</a>
-                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="logout-email-c"> {{account.email}}</span>
-                        </label>
-                    </script>-->
-                    
-                            <img class="small-profile-img-c img-circle" ng-src="{{userImage}}" />
-                        
-                    <div class="dropdown acc_name-c " >
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{account.name}} <span class="glyphicon glyphicon-menu-down pf_icon-c"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#" ng-click="btnLogout()" class="logout-txt-c"><span class="glyphicon glyphicon-log-out logout-btn-c"></span>   Logout   <span class="logout-email-c pull-right"> {{account.email}}</span></a></li>
-                            </ul>                        
+                    <img class="small-profile-img-c img-circle" ng-src="{{userImage}}" />
+                    <div class="dropdown acc_name-c ">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{account.name}} <span class="glyphicon glyphicon-menu-down pf_icon-c"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" ng-click="btnLogout()" class="logout-txt-c"><span class="glyphicon glyphicon-log-out logout-btn-c"></span>   Logout   <span class="logout-email-c pull-right"> {{account.email}}</span></a></li>
+                        </ul>
                     </div>
-                   
-                   
                 </div>
             </div>
         </nav>
 
         <!-- Main Container -->
-        <div class="container-fluid myProfile-cn-c">
+        <div class="container-fluid main-cn-c">
             <div>
-                <h2>My Profile</h2>
+                <h2 class="myPrf-h2-c">My Profile</h2>
                 <div class="row" style="max-width:100%;">
                     <div class="col-sm-9 panels-c">
-                        <!-- First Part -->
+
+                        <!-- ****** First Part ****** -->
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div class="row">
+                                    <!-- ********* Profile Picture ******** -->
                                     <div class="col-sm-2">
-                                        <img ng-src="{{userImage}}" class="img-circle prf-img-c" />                                        
-                                        <br/>
-                                        <br />
-                                        <button data-toggle="modal" data-target="#chgPrfPic">Set Profile Photo</button>
-                                        
+                                        <a data-toggle="modal" data-target="#chgPrfPic"><img ng-src="{{userImage}}" class="img-circle prf-img-c" /></a>
                                         <!-- Modal Change Profile Picture -->
                                         <div id="chgPrfPic" class="modal fade modal-c" role="dialog">
                                             <div class="modal-dialog">
@@ -117,11 +97,11 @@
                                                     </div>
                                                     <div class="modal-body modal-b-c">
                                                         <form name="prfPicForm" role="form">
-                                                            <button ngf-select ng-model="picFile" accept="image/*">
+                                                            <button ngf-select class="btn btn-c" ng-model="picFile" accept="image/*">
                                                                 Select Picture
                                                             </button>
-                                                            <br/>
-                                                            <br/>
+                                                            <br />
+                                                            <br />
                                                             <div ngf-drop ng-model="picFile" ngf-patten="image/*"
                                                                  class="cropArea">
                                                                 <img-crop image="picFile  | ngfDataUrl  "
@@ -139,16 +119,19 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- **************** profile info ****************** -->
                                     <div class="col-sm-10 prf-info-c">
                                         <h4>{{account.name}}</h4>
-                                        <!-- Job Titil -->
+                                        <!-- Job Title -->
                                         <div ng-mouseleave="jtMouseLeave(this)" ng-mouseover="jtMouseOver(this)">
                                             <h5>
                                                 {{account.jobtitle}}
                                                 &nbsp;
                                                 <a href="#" class="a-btn-c " data-toggle="modal" data-target="#addJobtitle" ng-click="editJobtitle()" ng-show="jtPopoverRemove" ng-style="jtHoverStyle">
-                                                    <span class="glyphicon glyphicon-pencil" style="color:black;"></span>
+                                                    <!--<span class="glyphicon glyphicon-pencil" style="color:black;"></span>-->
+                                                    <img src="images/edit.png" class="img-icon-c" />
                                                 </a>
+                                                
                                             </h5>
                                         </div>
                                         <!-- Modal Add Job Title -->
@@ -182,151 +165,250 @@
                                             </div>
                                         </div>
 
-                                        <p><span class="glyphicon glyphicon-map-marker"></span>  {{account.city.name}}, Iran</p>
-                                        <p>
-                                            <span class="prf-edu-c">Education</span>
-                                            <!--&nbsp;B.S., Computer Science BIHE-->
-                                            <span ng-repeat="x in account.educations">
-                                                {{x.degree.name}}, {{x.field}} | {{x.school}}<br />
-                                            </span>
-                                        </p>
-                                        <a href="#" data-toggle="modal" data-target="#addSkill" ng-click="getMainServices()">Add Skills</a>
-                                        <!-- Modal Add Skill -->
-                                        <div id="addSkill" class="modal fade modal-c" role="dialog">
-                                            <div class="modal-dialog">
+                                        <!-- Education -->
+                                        <div>
+                                            <p><span class="glyphicon glyphicon-map-marker"></span>  {{account.city.name}}, Iran</p>
+                                            <p>
+                                                <span class="prf-edu-c">Education</span>
+                                                <!--&nbsp;B.S., Computer Science BIHE-->
+                                                <span class="prf-edu-info-c" ng-repeat="x in account.educations">
+                                                    {{x.degree.name}}, {{x.field}} | {{x.school}}<br />
+                                                </span>
+                                            </p>
+                                        </div>
 
-                                                <!-- Modal content-->
-                                                <div class="modal-content">
+                                        <!-- Skill -->
+                                        <div>
+                                            <!-- Skills tags -->
+                                            <div class="col-sm-12" style=" margin-top: 20px; margin-left: -15px;">
+                                                <ul ng-repeat=" skill in account.skills" class="list-inline" style="padding:5px;display: inline-block;">
+                                                <li style="padding: 0; margin-top: -20px;">
+                                                    <span class="tag-skill-c">
+                                                        <span>{{skill.name}}</span>
+                                                        <!--<a ng-click="removeSkill(skill)"><i class="remove glyphicon glyphicon-remove" style="color:#ffffff"></i></a>-->
+                                                    </span>
+                                                </li>                                                    
+                                                </ul>
+                                                <a href="#addMS" data-toggle="modal" ng-click="getMainServices()">Edit Skills</a>
+                                            </div>
+                                            
+                                            <!-- Modal Add Main Service -->
+                                            <div id="addMS" class="modal fade modal-c" role="dialog">
+                                                <div class="modal-dialog">
+
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+                                                        <div class="modal-header modal-h-c">
+                                                            <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                                            <h4 class="modal-title m-title-c">Add Main Service</h4>
+                                                        </div>
+                                                        <div class="modal-body modal-b-c">
+                                                            <form name="skForm" role="form">
+                                                                <div class="col-sm-12 field-div">
+                                                                    <div class=" col-sm-12" style="padding:0;">
+                                                                    <label class="control-label field-Bold-label" style="text-align:left;padding:0;">What are the main services you offer?<span style="font-size: 14px;font-weight:normal;">(Please select all that you are open to)</span></label>
+                                                                </div>
+                                                                    <div class="col-sm-12" style="padding:0;">
+                                                                        <label class="error-label" ng-show="srvShouldSelect" style="font-size:15px;">Please at least select one</label>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-sm-12 field-div-MainSrv">
+                                                                    <!-- <div class="serviceContainer"  > -->
+                                                                    <div class="srv-item" ng-repeat='service in mainServices' ng-click='toggleSelectedSRV(service)' ng-class="{ selected: service.isselected  }">
+                                                                        <input type="checkbox" ng-attr-id="{{'c' + service.id}}" ng-model="service.isselected" />
+                                                                        <!--   <img src="images/sample_main_service.png" class="img-responsive" style="padding-top:0px" alt="main Service Img"> -->
+                                                                        <div>
+                                                                            <img ng-src="{{getIcon(service)}}" class="img-responsive srv-image" alt="Service image">
+                                                                        </div>
+                                                                        <div class="col-sm-12" style="margin-top:85px;margin-bottom:10px; text-align:center; padding:0;">
+                                                                            <label class="skill-lbl" ng-attr-for="{{'c' +service.id}}" ng-class="{ selected: service.isselected  }" style="margin:0;"> {{service.name}}
+                                                                        </div>
+                                                                        <!--  <img ng-src="{{getIcon(service)}}">
+                                    -->
+                                                                        </label>
+                                                                    </div>
+
+                                                                    <!--  </div> -->
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                        <div class="modal-footer m-footer-c">
+                                                            <button type="button" class="btn btn-save-c" data-dismiss="modal" data-toggle="modal" data-target="#addSkill">Next</button>
+                                                            <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <!-- Modal Add Skill -->
+                                            <div id="addSkill" class="modal fade modal-c" role="dialog">
+                                                <div class="modal-dialog">
+
+                                                    <!-- Modal content-->
+                                                    <div class=" modal-content">
                                                     <div class="modal-header modal-h-c">
                                                         <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
                                                         <h4 class="modal-title m-title-c">Add Skill</h4>
                                                     </div>
                                                     <div class="modal-body modal-b-c">
-                                                        <form name="skForm" role="form">
-                                                            <!--<div class="form-group field-div-right-left">
-                                                                <label class="control-label col-sm-12 field-Bold-label" style="text-align:left; padding-left:0">What are the main services you offer?<span style="font-weight:200;">(Please select all that you're open to)</span></label>
-                                                            </div>
-                                                            <div class="form-group field-div-right-left">
-                                                                <div class="serviceContainer">
-                                                                    <div class="item" ng-repeat='service in mainServices' ng-click='toggleSelectedSRV(service)' ng-class="{ selected: service.isselected  }">
-                                                                        
-                                                                        <input type="checkbox" ng-attr-id="{{'c' + service.id}}" ng-model="service.isselected" />
-                                                                        <label ng-attr-for="{{'c' +service.id}}" ng-class="{ selected: service.isselected  }">
-                                                                            {{service.name}}
-                   
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>-->    
-                                                            
-                                                            <div class="col-sm-12 field-div">
-                                                                <div class="col-sm-12" style="padding:0;">
-                                                                    <label class="control-label  field-Bold-label" style="text-align:left;padding:0;">What are the main services you offer?<span style="font-size: 14px;font-weight:normal;">(Please select all that you are open to)</span></label>
-                                                                </div>
-                                                                <div class="col-sm-12" style="padding:0;">
-                                                                    <label class="error-label" ng-show="srvShouldSelect" style="font-size:15px;">Please at least select one</label>
-                                                                </div>
-                                                            </div>
+                                                        <form name="skForm2" role="form">
+                                                            <div class="col-sm-12 field-div" style="overflow-y: scroll; margin-bottom:74px; padding-right:40px;">
+                                                                <div id="skilldList" style="text-align:left;">
+                                                                    <ul ng-repeat="service in mainServices | filter: {isselected: true } " style="text-align:left;margin-bottom:80px;padding:0;">
+                                                                        <div class="row field-div-right-left" style="padding:0;margin-bottom:24px;">
+                                                                            <div class="col-sm-2" style="padding:0;padding-left:12px;">
+                                                                                <img ng-src="{{service.unselectimageurl}}" class="img-responsive srv-image-skill" alt="Service image">
+                                                                            </div>
+                                                                            <div class="col-sm-10" style="padding:0; margin-top:20px;">
+                                                                                <label class="field-Bold-label" style="font-weight:normal; ">What type of <span style="font-weight:bold;">{{service.name}}</span> <span style="font-weight:normal;">do you do?</span></label>
+                                                                                <div class="col-sm-12" style="padding:0;">
+                                                                                    <label id="{{service.id + '-error-id'}}" class="error-label" ng-show="{{'errorshow' + service.id }}" style="font-size:15px;margin:0;">Please at least select one</label>
+                                                                                </div>
+                                                                            </div>
 
-                                                            <div class="col-sm-12 field-div-MainSrv">
-                                                                 <!--<div class="serviceContainer"  >--> 
-                                                                <div class="item" ng-repeat='service in mainServices' ng-click='toggleSelectedSRV(service)' ng-class="{ selected: service.isselected  }">
-                                                                    <input type="checkbox" ng-attr-id="{{'c' + service.id}}" ng-model="service.isselected" />
-                                                                    <!--   <img src="images/sample_main_service.png" class="img-responsive" style="padding-top:0px" alt="main Service Img"> -->
-                                                                    <div>
-                                                                        <img ng-src="{{getIcon(service)}}" class="img-responsive srv-image" alt="Service image">
-                                                                    </div>
-                                                                    <div class="col-sm-12" style="margin-top:85px;margin-bottom:10px; text-align:center; padding:0;">
-                                                                        <label class="skill-lbl" ng-attr-for="{{'c' +service.id}}" ng-class="{ selected: service.isselected  }" style="margin:0;"> {{service.name}}
-                                                                    </div>
-                                                                    <!--  <img ng-src="{{getIcon(service)}}">
-            -->
-                                                                    </label>
+                                                                        </div>
+                                                                        <div>
+                                                                            <li ng-repeat="skillOfSRV in service.skills " style="list-style-type:none;margin:0; margin-right:10px;padding:0;">
+                                                                                <label class="black-border-label" ng-click="skillClick(skillOfSRV)" ng-class="{ selected: skillOfSRV.isselected }" data-toggle="modal">{{skillOfSRV.name}}</label>
+                                                                            </li>
+                                                                        </div>
+                                                                    </ul>
                                                                 </div>
-
-                                                                  <!--</div>--> 
-                                                            </div>                                                        
+                                                            </div>
                                                         </form>
                                                     </div>
                                                     <div class="modal-footer m-footer-c">
-                                                        <button type="button" class="btn btn-save-c" ng-click="nextSkill()">Next</button>
+                                                        <button type="button" class="btn btn-save-c" ng-click="saveSkill()">Save</button>
                                                         <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
                                                     </div>
                                                 </div>
 
+                                                </div>
+                                            </div>
+
+                                            <!-- Modal Add Proficiency-->
+                                            <div id="addSkillPrf" class="modal fade modal-c" role="dialog" tabindex="-1">
+                                                <div class="modal-dialog">
+
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content">
+                                                        <div class="modal-header modal-h-c">
+                                                            <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                                            <h4 class="modal-title m-title-c">{{selSkill.name}}</h4>
+                                                        </div>
+                                                        <div class="modal-body modal-b-c" style="width:1000px;height:300px;">
+                                                            <form name="skPrfForm" role="form">
+                                                                <div class="col-sm-12 " style="margin-top:30px; margin-left:5px;padding:0;">
+                                                                    <label class="control-label col-sm-12 field-Bold-label" style="text-align:left;padding:0;">How would you describe your level of profeciency?</label>
+                                                                </div>
+                                                                <div class="col-sm-12 " style="padding:0;margin-top:30px;margin-bottom:42px">
+                                                                    <ul ng-repeat="SkillProf in skillProfeciencies" style="padding: 0;padding-left: 20px;">
+                                                                        <li>
+                                                                            <div class="row">
+                                                                                <div class="radio" style="margin:0;">
+                                                                                    <label class="radio-button-text"><input type="radio" name="level" ng-value="SkillProf" ng-click="selSkill.profeciency = SkillProf; close()" data-dismiss="modal" style="border-color:#03ba6d"><span class="radio-button-text-lang">{{ SkillProf.text }}</span></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                    <div style="margin-left:20px;">
+                                                                        <label ng-show="skillModalProfErrorShow" class="error-label" style="font-size:15px;">This Field is required</label>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Overview -->
+                                <div>
+                                    <div ng-mouseleave="ovMouseLeave(this)" ng-mouseover="ovMouseOver(this)">
+                                        <h5>
+                                            Overview
+                                            &nbsp;<a ng-show="ovAddSign" data-toggle="modal" data-target="#addOverview">
+                                                <span class="glyphicon glyphicon-plus-sign" style="color: #b8e986;" ng-show="ovAddSign"></span>
+                                            </a>
+                                        </h5>
+                                        <p>
+                                            <!--Over 6 years of experience in designing and developing Mobile applications
+                Have multiple Android applicaitons available on Google Play.-->
+                                            {{account.description}}
+                                            &nbsp;
+                                            <a href="#" class="a-btn-c " data-toggle="modal" data-target="#addOverview" ng-click="editOverview()" ng-show="ovPopoverRemove" ng-style="ovHoverStyle">
+                                                <!--<span class="glyphicon glyphicon-pencil" style="color:black;"></span>-->
+                                                <img src="images/edit.png" class="img-icon-c" />
+                                            </a>
+                                        </p>
+                                    </div>
+
+                                    <!-- Modal Add Overview -->
+                                    <div id="addOverview" class="modal fade modal-c" role="dialog">
+                                        <div class="modal-dialog">
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header modal-h-c">
+                                                    <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                                    <h4 class="modal-title m-title-c">Add or Edit Overview</h4>
+                                                </div>
+                                                <div class="modal-body modal-b-c">
+                                                    <form name="ovForm" role="form">
+                                                        <div class="form-group form-g-c" ng-class="{ 'has-error': ovForm.ovTitle.$touched && ovForm.ovTitle.$invalid }">
+                                                            <label class="control-label" for="overview">Overview</label>
+                                                            <textarea class="form-control" id="overview" name="ovOverview" row="5" ng-model="ovOverview"></textarea>
+                                                            <div ng-messages="ovForm.ovOverview.$error" ng-if=" ovForm.ovOverview.$touched && ovForm.ovOverview.$invalid">
+                                                                <p ng-message="required" style="color:red;">Overview is required.</p>
+                                                            </div>
+
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="modal-footer m-footer-c">
+                                                    <button type="button" class="btn btn-save-c" ng-click="saveOverview()">Save</button>
+                                                    <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div ng-mouseleave="ovMouseLeave(this)" ng-mouseover="ovMouseOver(this)">
-                                    <h5 class="overview-c">
-                                        Overview
-                                        &nbsp;<a ng-show="ovAddSign" data-toggle="modal" data-target="#addOverview">
-                                            <span class="glyphicon glyphicon-plus-sign" style="color: #b8e986;" ng-show="ovAddSign"></span>
-                                        </a>
-                                    </h5>
-                                    <p>
-                                        <!--Over 6 years of experience in designing and developing Mobile applications
-                                        Have multiple Android applicaitons available on Google Play.-->
-                                        {{account.description}}
-                                        &nbsp;
-                                        <a href="#" class="a-btn-c " data-toggle="modal" data-target="#addOverview" ng-click="editOverview()" ng-show="ovPopoverRemove" ng-style="ovHoverStyle">
-                                            <span class="glyphicon glyphicon-pencil" style="color:black;"></span>
-                                        </a>
-                                    </p>
-                                </div>
                             </div>
                         </div>
-                        <!-- Modal Add Overview -->
-                        <div id="addOverview" class="modal fade modal-c" role="dialog">
-                            <div class="modal-dialog">
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="modal-header modal-h-c">
-                                        <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
-                                        <h4 class="modal-title m-title-c">Add or Edit Overview</h4>
-                                    </div>
-                                    <div class="modal-body modal-b-c">
-                                        <form name="ovForm" role="form">
-                                            <div class="form-group form-g-c" ng-class="{ 'has-error': ovForm.ovTitle.$touched && ovForm.ovTitle.$invalid }">
-                                                <label class="control-label" for="overview">Overview</label>
-                                                <textarea class="form-control" id="overview" name="ovOverview" row="5" ng-model="ovOverview"></textarea>
-                                                <div ng-messages="ovForm.ovOverview.$error" ng-if=" ovForm.ovOverview.$touched && ovForm.ovOverview.$invalid">
-                                                    <p ng-message="required" style="color:red;">Overview is required.</p>
-                                                </div>
-
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="modal-footer m-footer-c">
-                                        <button type="button" class="btn btn-save-c" ng-click="saveOverview()">Save</button>
-                                        <button type="button" class="btn btn-cancel btn-cancel-c" data-dismiss="modal" style="border:none;">Cancel</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
 
                         <!-- Work History -->
                         <div class="panel panel-default">
                             <div class="panel-body panel-history-c">
-                                <h4>
+                                <h4 class="subject-c">
                                     Work History
-                                    &nbsp;<a class="btn-add-c add-history-c" data-toggle="modal" data-target="#addHistory" ng-click="addWorkHistory()"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                                    &nbsp;<a href="#" class="btn-add-c add-history-c" data-toggle="modal" data-target="#addHistory" ng-click="addWorkHistory()"><span class="glyphicon glyphicon-plus-sign"></span></a>
                                 </h4>
-                                <div class="wh-item-c" ng-repeat="x in account.works" ng-mouseleave="whMouseLeave(this)" ng-mouseover="whMouseOver(this)">
-                                    <h5>
-                                        <span class="history-txt-c" ng-style="whHoverStyle">{{x.title}} | {{x.location}} <!--Software Engineer | Meltwater--></span>
-                                        &nbsp;
-                                        <a href="#" class="a-btn-c edit-history-c" data-toggle="modal" data-target="#addHistory" ng-click="editWorkHistory(x)" ng-show="popoverRemove" ng-style="whHoverStyle">
-                                            <span class="glyphicon glyphicon-pencil"></span>
-                                        </a>
-                                        &nbsp;
-                                        <a href="#" class=" a-btn-c delete-history-c" ng-click="deleteWorkHistory(x)" ng-show="popoverRemove" ng-style="whHoverStyle">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </a>
-                                    </h5>
-                                    <p><span class="history-txt-c" ng-style="whHoverStyle" ng-mouseleave="whMouseLeave(this)" ng-mouseover="whMouseOver(this)">{{x.frommonth.name}} {{x.fromyear}} - {{x.tomonth.name}} {{x.toyear}}<!--February 2015 - March 2016--></span></p>
+                                <br/>
+                                
+                                <div class="repeat-c" ng-repeat="x in account.works" ng-mouseleave="whMouseLeave(this)" ng-mouseover="whMouseOver(this)">
+                                    <div>
+                                        <hr ng-if="$index>0" class="hr-c" />
+                                        <h5 class="item-rp-c" ng-style="whHoverStyle" style="display:inline;">
+                                            {{x.title}} | {{x.location}}
+                                        </h5>
+                                        <a href="#" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addHistory" ng-click="editWorkHistory(x)" ng-show="popoverRemove" ng-style="whHoverStyle"><img src="images/edit.png" class="img-icon-c"/></a>                                       
+                                        <a href="#" class="a-btn-c item-rp-c" ng-click="deleteWorkHistory(x)" ng-show="popoverRemove" ng-style="whHoverStyle"><img src="images/delete.png" class="img-icon-c" /></a>                                        
+                                    </div>
+                                    <div>
+                                        <span class="item-rp-c" ng-style="whHoverStyle" style="display:inline-block;">
+                                            {{x.frommonth.name}} {{x.fromyear}} - {{x.tomonth.name}} {{x.toyear}}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <p class="item-rp-c " ng-style="whHoverStyle" style="display:inline-block;" ng-if="x.description != '' ">{{x.description}}</p>
+                                    </div>
                                 </div>
+                                
                             </div>
                         </div>
                         <!-- Modal Add History -->
@@ -438,27 +520,25 @@
 
                             </div>
                         </div>
-                                                
+
                         <!-- Education -->
                         <div class="panel panel-default panel-education-c">
                             <div class="panel-body">
-                                <h4>
+                                <h4 class="subject-c">
                                     Education
                                     &nbsp;<a class="btn-add-c add-education-c" data-toggle="modal" data-target="#addEducation" ng-click="addEducation()"><span class="glyphicon glyphicon-plus-sign"></span></a>
                                 </h4>
-                                <div ng-repeat="x in account.educations" ng-mouseleave="eduMouseLeave(this)" ng-mouseover="eduMouseOver(this)">
-                                    <h5>
-                                        <span class="education-txt-c" ng-style="eduHoverStyle">
-                                            <!--Bachelor of Science (B.S.), Computer science | BIHE-->
-                                            {{x.degree.name}}, {{x.field}} | {{x.school}}
-                                        </span>
-                                        &nbsp;<a href="#" class="a-btn-c edit-education-c" data-toggle="modal" data-target="#addEducation" ng-click="editEducation(x)" ng-show="popoverRemove" ng-style="eduHoverStyle">
-                                            <span class="glyphicon glyphicon-pencil"></span>
-                                        </a>
-                                        &nbsp;<a href="#" class=" a-btn-c delete-education-c" ng-click="deleteEducation(x)" ng-show="popoverRemove" ng-style="eduHoverStyle">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </a>
+                                <br/>
+                                <div class="repeat-c" ng-repeat="x in account.educations" ng-mouseleave="eduMouseLeave(this)" ng-mouseover="eduMouseOver(this)">
+                                    <hr ng-if="$index>0" class="hr-c" />
+                                    <h5 class="item-rp-c" ng-style="eduHoverStyle" style="display:inline;">
+                                        {{x.degree.name}}, {{x.field}} | {{x.school}}
                                     </h5>
+                                    &nbsp;
+                                    <a href="#" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addEducation" ng-click="editEducation(x)" ng-show="popoverRemove" ng-style="eduHoverStyle"><img src="images/edit.png" class="img-icon-c" /></a>
+                                    &nbsp;
+                                    <a href="#" class="a-btn-c item-rp-c" ng-click="deleteEducation(x)" ng-show="popoverRemove" ng-style="eduHoverStyle"><img src="images/delete.png" class="img-icon-c" /></a>
+                                    
 
                                     <!--<p><span class="education-txt-c">2007 - 2012</span></p>-->
                                     <p>
@@ -548,15 +628,18 @@
                                     &nbsp;<a class="btn-add-c add-projects-c" data-toggle="modal" data-target="#addProjects" ng-click="cleanPrjInputs()"><span class=" glyphicon glyphicon-plus-sign"></span></a>
                                 </h4>
                                 <div ng-repeat="x in account.projects" ng-mouseleave="prjMouseLeave(this)" ng-mouseover="prjMouseOver(this)">
+                                    <hr ng-if="$index>0" class="hr-c" />
                                     <h5>
                                         <span class="projects-txt-c" ng-style="prjHoverStyle">
                                             {{x.name}}
                                         </span>
                                         &nbsp;<a href="#" class="a-btn-c edit-projects-c" data-toggle="modal" data-target="#addProjects" ng-click="editProject(x)" ng-show="popoverRemove" ng-style="prjHoverStyle">
-                                            <span class="glyphicon glyphicon-pencil"></span>
+                                            <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                            <img src="images/edit.png" class="img-icon-c" />
                                         </a>
                                         &nbsp;<a href="#" class=" a-btn-c delete-projects-c" ng-click="deleteProject(x)" ng-show="popoverRemove" ng-style="prjHoverStyle">
-                                            <span class="glyphicon glyphicon-trash"></span>
+                                            <!--<span class="glyphicon glyphicon-trash"></span>-->
+                                            <img src="images/delete.png" class="img-icon-c" />
                                         </a>
                                     </h5>
                                     <p>
@@ -651,15 +734,18 @@
                                     &nbsp;<a class="btn-add-c add-volunteering-c" data-toggle="modal" data-target="#addVolunteering" ng-click="cleanVolInputs()"><span class=" glyphicon glyphicon-plus-sign"></span></a>
                                 </h4>
                                 <div ng-repeat="x in account.volunteerings" ng-mouseleave="volMouseLeave(this)" ng-mouseover="volMouseOver(this)">
+                                    <hr ng-if="$index>0" class="hr-c" />
                                     <h5>
                                         <span class="volunteering-txt-c" ng-style="volHoverStyle">
                                             {{x.organization}} | {{x.role}} | {{x.cause.name}}
                                         </span>
                                         &nbsp;<a href="#" class="a-btn-c edit-volunteering-c" data-toggle="modal" data-target="#addVolunteering" ng-click="editVolunteering(x)" ng-show="popoverRemove" ng-style="volHoverStyle">
-                                            <span class="glyphicon glyphicon-pencil"></span>
+                                            <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                            <img src="images/edit.png" class="img-icon-c" />
                                         </a>
                                         &nbsp;<a href="#" class=" a-btn-c delete-volunteering-c" ng-click="deleteVolunteering(x)" ng-show="popoverRemove" ng-style="volHoverStyle">
-                                            <span class="glyphicon glyphicon-trash"></span>
+                                            <!--<span class="glyphicon glyphicon-trash"></span>-->
+                                            <img src="images/delete.png" class="img-icon-c" />
                                         </a>
                                     </h5>
                                     <p>
@@ -779,9 +865,11 @@
                                                                                <span class="certifications-txt-c" ng-style="crfHoverStyle"></span>
                                                                                &nbsp;<a href="#" class="a-btn-c edit-certifications-c" data-toggle="modal" data-target="#addHistory" ng-show="popoverRemove" ng-style="crfHoverStyle">
                                         <span class="glyphicon glyphicon-pencil"></span>
+                                        <img src="images/edit.png" class="img-icon-c" />
                                     </a>
                                                                                &nbsp;<a href="#" class=" a-btn-c delete-certifications-c" ng-show="popoverRemove" ng-style="crfHoverStyle">
                                         <span class="glyphicon glyphicon-trash"></span>
+                                        <img src="images/delete.png" class="img-icon-c" />
                                     </a>
                                                                            </h5>-->
                                     <p><span class="certifications-txt-c">No items to display.</span> </p>
@@ -808,15 +896,18 @@
                                     &nbsp;<a class="btn-add-c add-scores-c" data-toggle="modal" data-target="#addScores" ng-click="cleanTcInputs()"><span class="glyphicon glyphicon-plus-sign"></span></a>
                                 </h4>
                                 <div ng-repeat="x in account.tests" ng-mouseleave="tcMouseLeave(this)" ng-mouseover="tcMouseOver(this)">
+                                    <hr ng-if="$index>0" class="hr-c" />
                                     <h5>
                                         <span class="scores-txt-c" ng-style="tcHoverStyle">
                                             {{x.name}} | {{x.occupation.name}} | {{x.score}}
                                         </span>
                                         &nbsp;<a href="#" class="a-btn-c edit-scores-c" data-toggle="modal" data-target="#addScores" ng-click="editTestScore(x)" ng-show="popoverRemove" ng-style="tcHoverStyle">
-                                            <span class="glyphicon glyphicon-pencil"></span>
+                                            <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                            <img src="images/edit.png" class="img-icon-c" />
                                         </a>
                                         &nbsp;<a href="#" class=" a-btn-c delete-scores-c" ng-click="deleteTestScore(x)" ng-show="popoverRemove" ng-style="tcHoverStyle">
-                                            <span class="glyphicon glyphicon-trash"></span>
+                                            <!--<span class="glyphicon glyphicon-trash"></span>-->
+                                                  <img src="images/delete.png" class="img-icon-c" />
                                         </a>
                                     </h5>
                                     <span class="scores-txt-c" ng-style="tcHoverStyle" ng-mouseleave="tcMouseLeave(this)" ng-mouseover="tcMouseOver(this)">
@@ -909,15 +1000,18 @@
                                     &nbsp;<a class="btn-add-c add-awards-c" data-toggle="modal" data-target="#addAwards" ng-click="cleanHaInputs()"><span class="glyphicon glyphicon-plus-sign"></span></a>
                                 </h4>
                                 <div ng-repeat="x in account.honors" ng-mouseleave="haMouseLeave(this)" ng-mouseover="haMouseOver(this)">
+                                    <hr ng-if="$index>0" class="hr-c" />
                                     <h5>
                                         <span class="awards-txt-c" ng-style="haHoverStyle">
                                             {{x.title}} | {{x.occupation.name}}
                                         </span>
                                         &nbsp;<a href="#" class="a-btn-c edit-awards-c" data-toggle="modal" data-target="#addAwards" ng-click="editAward(x)" ng-show="popoverRemove" ng-style="haHoverStyle">
-                                            <span class="glyphicon glyphicon-pencil"></span>
+                                            <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                            <img src="images/edit.png" class="img-icon-c" />
                                         </a>
                                         &nbsp;<a href="#" class=" a-btn-c delete-awards-c" ng-click="deleteAward(x)" ng-show="popoverRemove" ng-style="haHoverStyle">
-                                            <span class="glyphicon glyphicon-trash"></span>
+                                            <!--<span class="glyphicon glyphicon-trash"></span>-->
+                                                  <img src="images/delete.png" class="img-icon-c" />
                                         </a>
                                     </h5>
                                     <p>
@@ -1004,15 +1098,18 @@
                                     &nbsp;<a class="btn-add-c add-courses-c" data-toggle="modal" data-target="#addCourses" ng-click="cleanCrInputs()"><span class="glyphicon glyphicon-plus-sign"></span></a>
                                 </h4>
                                 <div ng-repeat="x in account.courses" ng-mouseleave="crMouseLeave(this)" ng-mouseover="crMouseOver(this)">
+                                    <hr ng-if="$index>0" class="hr-c" />
                                     <h5>
                                         <span class="courses-txt-c" ng-style="crHoverStyle">
                                             {{x.name}} | {{x.occupation.name}} | {{x.number}}
                                         </span>
                                         &nbsp;<a href="#" class="a-btn-c edit-courses-c" data-toggle="modal" data-target="#addCourses" ng-click="editCourse(x)" ng-show="popoverRemove" ng-style="crHoverStyle">
-                                            <span class="glyphicon glyphicon-pencil"></span>
+                                            <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                            <img src="images/edit.png" class="img-icon-c" />
                                         </a>
-                                        &nbsp;<a href="#" class=" a-btn-c delete-courses-c" ng-click="deleteCourse(x)" ng-show="popoverRemove" ng-style="crHoverStyle">
-                                            <span class="glyphicon glyphicon-trash"></span>
+                                        &nbsp;<a href="#" class="a-btn-c delete-courses-c" ng-click="deleteCourse(x)" ng-show="popoverRemove" ng-style="crHoverStyle">
+                                            <!--<span class="glyphicon glyphicon-trash"></span>-->
+                                                  <img src="images/delete.png" class="img-icon-c" />
                                         </a>
                                     </h5>
                                     <!--<p>
@@ -1104,11 +1201,13 @@
                                 {{x.name}}: <span>{{x.profeciency.name}}</span>
                                 &nbsp;
                                 <a href="#" class="a-btn-c edit-language-c" data-toggle="modal" data-target="#addLanguage" ng-click="editLanguage(x)" ng-show="popoverRemove" ng-style="lgHoverStyle">
-                                    <span class="glyphicon glyphicon-pencil"></span>
+                                    <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                    <img src="images/edit.png" class="img-icon-c" />
                                 </a>
                                 &nbsp;
                                 <a href="#" class=" a-btn-c delete-language-c" ng-click="deleteLanguage(x)" ng-show="popoverRemove && (x.name!='English')" ng-style="lgHoverStyle">
-                                    <span class="glyphicon glyphicon-trash"></span>
+                                    <!--<span class="glyphicon glyphicon-trash"></span>-->
+                                    <img src="images/delete.png" class="img-icon-c" />
                                 </a>
                             </p>
                         </div>
@@ -1238,7 +1337,5 @@
 
         </div>
     </div>
-    
-
 </body>
 </html>
