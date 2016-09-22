@@ -48,15 +48,15 @@ func main() {
 
 	// Editting Accounts
 	http.Handle("/account", util.Handler(model.GetAccount))
+	http.HandleFunc("/profilePicture", model.GetProfilePicture)
 	http.Handle("/accountStrength", util.Handler(model.GetAccountStrength))
 	http.Handle("/saveAccount", util.Handler(model.SaveAccount))
 	http.Handle("/completeAccount", util.Handler(model.CompleteAccount))
 
-	// Editting Description
+	// Editting Account Details
 	http.Handle("/saveDescription", util.Handler(model.SaveDescription))
-
-	// Editting Job Title
 	http.Handle("/saveJobTitle", util.Handler(model.SaveJobTitle))
+	http.Handle("/saveProfilePicture", util.Handler(model.SaveProfilePicture))
 
 	// Editting Skills
 	http.Handle("/saveSkill", util.Handler(model.SaveSkill))

@@ -1,6 +1,7 @@
 package model
 
 import(
+  "strconv"
   "errors"
   "database/sql"
   "net/http"
@@ -14,9 +15,18 @@ type City struct{
 
 func parseCity(data interface{}) (City, error) {
 
-  id, ok := data.(float64)
+  idStr, ok := data.(string)
   if (ok) {
-    return loadCity(int(id)), nil
+    print("idStr = '" + idStr + "'\n")
+    id, _ := strconv.Atoi(idStr)
+    if (id > 0) {
+      return loadCity(id)
+    }
+  }
+
+  idF, ok := data.(float64)
+  if (ok) {
+    return loadCity(int(idF))
   }
 
   result := City{}
@@ -32,14 +42,14 @@ func parseCity(data interface{}) (City, error) {
   return result, nil
 }
 
-func loadCities(where string, args ...interface{}) []City {
+func loadCities(where string, args ...interface{}) ([]City, error) {
 
 	var result = make([]City, 0)
 
   cities, err := util.Select(readCity, "select * from City where " + where, args...)
 
   if err != nil {
-    return result
+    return result, err
   }
 
   for _, dummyCity := range cities {
@@ -47,15 +57,24 @@ func loadCities(where string, args ...interface{}) []City {
     result = append(result, city)
   }
 
-  return result
+  return result, nil
 }
 
-func loadCity(cityID int) City {
+func loadCity(cityID int) (City, error) {
 
-	return loadCities("ID = $1", cityID)[0]
+  print("Load city = ")
+  print(cityID)
+  print("\n")
+
+  cities, err := loadCities("ID = $1", cityID)
+  if(err != nil) {
+    return City{}, err
+  }
+
+	return cities[0], nil
 }
 
-func getCities() []City {
+func getCities() ([]City, error) {
 
 	return loadCities("1=1")
 }
@@ -72,5 +91,6 @@ func readCity(rows *sql.Rows) (interface{}, error) {
 
 func GetCities(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
 
-  return getCities(), nil
+  cities, _ := getCities()
+  return cities, nil
 }

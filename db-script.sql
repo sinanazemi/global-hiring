@@ -498,6 +498,7 @@ CREATE TABLE Account
   Description character varying(2000),
   JobTitle character varying(2000),
   isStudent BOOLEAN DEFAULT FALSE NOT NULL,
+  image bytea NOT NULL,
   CONSTRAINT account_pk PRIMARY KEY (id),
   CONSTRAINT account_city_fk FOREIGN KEY (cityID)
       REFERENCES city (id) MATCH SIMPLE
@@ -850,7 +851,8 @@ CREATE TABLE image (
   category character varying(5) NOT NULL,
   type character varying(20) NOT NULL,
   parentID integer,
-  image bytea NOT NULL
+  image bytea NOT NULL,
+  CONSTRAINT image_pk PRIMARY KEY (id)
 );
 ALTER TABLE image
 OWNER TO globeAdmin;

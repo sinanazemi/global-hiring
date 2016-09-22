@@ -83,9 +83,13 @@ func loadAccount(session *util.Session) (Account, error) {
     return Account{}, err
   }
 
+  if (len(accArr) == 0) {
+    return Account{}, errors.New("No Account")
+  }
+
   account := accArr[0].(Account)
 
-  account.City = loadCity(account.City.Id)
+  account.City, _ = loadCity(account.City.Id)
 
   account.Languages, _ = loadAccountLanguages(session)
   account.Educations, _ = loadAccountEducations(session)
@@ -250,6 +254,41 @@ func (acc *Account) updateJobTitle (session *util.Session, dataMap map[string]in
   return nil
 }
 
+func (acc *Account) getProfilePicture() ([]byte, error) {
+
+  query := "Select image From account where id = $1";
+  return util.SelectByteArr(query, acc.Id)
+}
+
+func (acc *Account) updateProfilePicture (session *util.Session, dataMap map[string]interface{}) error {
+
+  if session.GetAccountID() != acc.Id {
+    return errors.New("It seems that this account is not authenticated in this session")
+  }
+
+  err := util.CheckString(dataMap, "profilepicture")
+  if err != nil {
+    return err
+  }
+
+  profilePictureStr := util.ParseString(dataMap, "profilepicture")
+  profilePictureBytes, err := util.DecodeBase64(profilePictureStr)
+  if err != nil {
+    print(err.Error())
+    return err
+  }
+
+  print(profilePictureBytes)
+
+  query :=
+  "UPDATE Account " +
+  "SET image = $1 " +
+  "WHERE ID = $2 "
+
+  err = util.Update(query, profilePictureBytes, acc.Id)
+  return err
+}
+
 func (acc *Account) getStrength() int {
   var result int = 0
 
@@ -389,6 +428,55 @@ func SaveJobTitle(w http.ResponseWriter, r *http.Request) (interface{}, *util.Ha
   err = account.updateJobTitle(session, jobMap)
   if err != nil {
     return nil, &util.HandlerError{err, "Problem while saving account Job Title", http.StatusBadRequest}
+  }
+
+  return account, nil
+}
+
+func GetProfilePicture(w http.ResponseWriter, r *http.Request) {
+
+  session, err := util.GetSession(w, r)
+  if err != nil {
+    util.DefaultProfilePicture(w)
+    return
+  }
+
+  account, err := loadAccount(session)
+  if err != nil {
+    util.DefaultProfilePicture(w)
+    return
+  }
+
+  bytes, err := account.getProfilePicture()
+  if err != nil {
+    util.DefaultProfilePicture(w)
+    return
+  }
+
+  w.Header().Set("Content-Typee", "image/png")
+  w.Write(bytes)
+}
+
+func SaveProfilePicture(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
+
+  session, err := util.GetSession(w, r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Problems in session", http.StatusBadRequest}
+  }
+
+  picMap, err := util.ParseJsonRequest(r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Invalid JSON Account", http.StatusBadRequest}
+  }
+
+  account, err := loadAccount(session)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Invalid Account in this session", http.StatusBadRequest}
+  }
+
+  err = account.updateProfilePicture(session, picMap)
+  if err != nil {
+    return nil, &util.HandlerError{err, "Problem while saving account Profile Picture", http.StatusBadRequest}
   }
 
   return account, nil

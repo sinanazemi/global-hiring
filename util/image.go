@@ -1,12 +1,13 @@
 package util
 
 import (
-  //"os"
-  //"bufio"
+  "os"
+  "bufio"
   "fmt"
   "strconv"
   "net/http"
   "database/sql"
+  "encoding/base64"
 )
 
 const ImageService = "/image"
@@ -53,12 +54,44 @@ func ImageHandler(w http.ResponseWriter, r *http.Request) {
   w.Write(image.Buffer)
 }
 
-
 func readImage(rows *sql.Rows) (interface{}, error) {
   var image Image = Image{}
 
   err := rows.Scan(&image.Id, &image.Category, &image.Type, &image.ParentId, &image.Buffer)
   return image, err
+}
+
+func DecodeBase64(str string) ([]byte, error) {
+
+  prefix := "data:image/png;base64,"
+  str = str[len(prefix):]
+  return base64.StdEncoding.DecodeString(str)
+
+}
+
+func DefaultProfilePicture(w http.ResponseWriter) {
+
+  fileName := "web/images/profile.png"
+  imgFile, err := os.Open(fileName)
+
+  if err != nil {
+    fmt.Fprintln(w, err)
+    return
+  }
+
+  // create a new buffer base on file size
+  fInfo, _ := imgFile.Stat()
+  var size int64 = fInfo.Size()
+  buf := make([]byte, size)
+
+  // read file content into buffer
+  fReader := bufio.NewReader(imgFile)
+  fReader.Read(buf)
+
+  imgFile.Close()
+
+  w.Header().Set("Content-Typee", "image/png")
+  w.Write(buf)
 }
 
 
