@@ -3,7 +3,7 @@ var myapp = new angular.module("app", ['ngAnimate', 'ui.bootstrap', 'selectize',
 
 // inject the $resource dependency here
 myapp.controller("controller",
-  ["$scope", "$window", "$resource", "$document", 
+  ["$scope", "$window", "$resource", "$document",
     function ($scope, $window, $resource, $document) {
 
 
@@ -25,17 +25,27 @@ myapp.controller("controller",
         );
 
 
-        $scope.userImage = "images/Chrysanthemum.jpg";        
+        $scope.userImage = "/profilePicture";//"images/Chrysanthemum.jpg";
 
+        var profilePictureRes = $resource("/saveProfilePicture")
         $scope.savePrfPic = function () {
-                $scope.userImage = $scope.prfImgUrl;
-            }        
+
+          var profilePicture = new profilePictureRes();
+          profilePicture.profilepicture = $scope.prfImgUrl;
+
+          profilePicture.$save(
+            function (data) {
+              $scope.userImage = $scope.prfImgUrl;
+            } // function(data)
+          ); // profilePicture.$save
+        } // $scope.savePrfPic = function ()
+
 
         $scope.dates = [];
         for (var i = 1970; i <= 2020; i++) {
             $scope.dates.push(i);
         }
-        
+
         $scope.months = [{ value: 1, name: "January" }, { value: 2, name: "February" }, { value: 3, name: "March" }, { value: 4, name: "April" }, { value: 5, name: "May" }, { value: 6, name: "June" }, { value: 7, name: "July" }
             , { value: 8, name: "August" }, { value: 9, name: "September" }, { value: 10, name: "October" }, { value: 11, name: "November" }, { value: 12, name: "December" }];
         //var months = $resource("/month")
@@ -82,7 +92,7 @@ myapp.controller("controller",
             return false;
         }
 
-        /*    logout     */       
+        /*    logout     */
         var logout = $resource("/logout");
         $scope.btnLogout = function () {
             logout.get(function (data) {
@@ -91,7 +101,7 @@ myapp.controller("controller",
         };
 
         //********************** Auto Suggestion ************************
-        //************************************   
+        //************************************
         $scope.nameConfig = {
             valueField: 'name',
             labelField: 'name',
@@ -108,14 +118,14 @@ myapp.controller("controller",
             maxOptions: 5,
             create: 'true',
         };
-        
+
 
         $scope.idConfig = {
             valueField: 'id',
             labelField: 'name',
             searchField: 'name',
             maxItems: 1,
-            maxOptions: 5,         
+            maxOptions: 5,
         };
 
         $scope.valueConfig = {
@@ -198,7 +208,7 @@ myapp.controller("controller",
             else return serviceSelect.unselectimageurl;
         }
 
-        // Skill        
+        // Skill
         $scope.skillClick = function (selectedSkill) {
             selectedSkill.isselected = !selectedSkill.isselected;
             if (selectedSkill.isselected) {
@@ -210,7 +220,7 @@ myapp.controller("controller",
                 selectedSkill.profeciency = "";
             }
         }
-        
+
 
         $scope.skillProfeciencies = [
            { text: "Student/Fresh Graduate", value: "S" },
@@ -218,8 +228,8 @@ myapp.controller("controller",
            { text: "Experienced Professional", value: "E" },
            { text: "Manager", value: "M" }
         ]
-        
-       
+
+
         var saveSkillRes = $resource("/saveSkill")
         $scope.saveSkill=function()
         {
@@ -260,7 +270,7 @@ myapp.controller("controller",
         // Overview
         //******************************
         //$scope.jtTitle = "Experienced Web and Mobile Developer";
-        
+
         $scope.editOverview = function () {
             $scope.ovOverview = $scope.account.description;
         }
@@ -359,12 +369,12 @@ myapp.controller("controller",
         }
         function checkLgValidation() {
             var isValid = true;
-            
+
             if ($scope.lgProfeciency == "") {
                 isValid = false;
-                $scope.lgPrfInvalid = true;                
+                $scope.lgPrfInvalid = true;
             }
-           
+
             if ($scope.lgName == "" || $scope.lgName == null) {
                 isValid = false;
                 $scope.vlgNameShow = true;
@@ -432,7 +442,7 @@ myapp.controller("controller",
         function setRoles() {
             $scope.roles = [{ value: "I", name: "Intern" }, { value: "C", name: "Individual Contributor" }, { value: "L", name: "Lead" }, { value: "M", name: "Manager" }, { value: "E", name: "Executive" }, { value: "O", name: "Owner" }];
         }
-        
+
         $scope.addWorkHistory = function () {
             if ($scope.locations == null || $scope.locations.length==0) {
                 setLocation();
@@ -459,7 +469,7 @@ myapp.controller("controller",
                 saveWh.company = $scope.whCompany;
                 saveWh.location = $scope.whLocation;
                 saveWh.title = $scope.whTitle;
-                saveWh.role = $scope.whRole; 
+                saveWh.role = $scope.whRole;
                 saveWh.frommonth = $scope.whFromMonth;/*$scope.months.indexOf($scope.whFromMonth)+1;*/
                 saveWh.fromyear = $scope.whFromYear;
                 saveWh.tomonth = $scope.whToMonth;/*$scope.months.indexOf($scope.whToMonth)+1;*/
@@ -663,7 +673,7 @@ myapp.controller("controller",
         }
 
 
-        
+
         //*************************
         // education
         //*************************
@@ -730,7 +740,7 @@ myapp.controller("controller",
             $scope.eduToDate = edu.todate;
             $scope.eduDegree = edu.degree.id;
             checkNewEduField(edu.field);
-            $scope.eduField = edu.field;            
+            $scope.eduField = edu.field;
             $scope.eduGrade = edu.grade;
             //$scpoe.eduDesc = edu.desc;
         }
@@ -836,7 +846,7 @@ myapp.controller("controller",
         }
 
         //*************************
-        // Projects 
+        // Projects
         //*************************
         function setPrjItems() {
             if ($scope.occupations == null || $scope.occupations.length == 0)
@@ -967,7 +977,7 @@ myapp.controller("controller",
         }
 
         //*************************
-        // Volunteering 
+        // Volunteering
         //*************************
         function setVolItems(){
             if($scope.volCauses == null || $scope.volCauses.length==0)
@@ -1147,7 +1157,7 @@ myapp.controller("controller",
         }
 
         //*************************
-        // Certifications 
+        // Certifications
         //*************************
         // **************** for highlight and show the edit and delete buttons
         $scope.crfMouseOver = function (context) {
@@ -1161,7 +1171,7 @@ myapp.controller("controller",
         }
 
         //*************************
-        // Test Scores 
+        // Test Scores
         //*************************
         function setTcItems()
         {
@@ -1320,7 +1330,7 @@ myapp.controller("controller",
 
 
         //*************************
-        //  Honors & Awards 
+        //  Honors & Awards
         //*************************
         function setHaItems() {
             if ($scope.occupations == null || $scope.occupations.length == 0)
@@ -1465,7 +1475,7 @@ myapp.controller("controller",
 
 
         //*************************
-        //  Courses 
+        //  Courses
         //*************************
         function setCrItems() {
             if ($scope.occupations == null || $scope.occupations.length == 0)
@@ -1595,6 +1605,3 @@ myapp.controller("controller",
 
   ]
 )
-
-
-
