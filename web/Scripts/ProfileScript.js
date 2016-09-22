@@ -25,7 +25,7 @@ myapp.controller("controller",
         );
 
 
-        $scope.userImage = "/profilePicture";//"images/Chrysanthemum.jpg";
+        $scope.userImage = "/profilePicture"; //"images/Chrysanthemum.jpg";
 
         var profilePictureRes = $resource("/saveProfilePicture")
         $scope.savePrfPic = function () {
