@@ -48,19 +48,19 @@
         <div class="col-sm-12" style="text-align: center; margin-bottom:40px;">
           <label class="field-center-label " style="text-align:center;margin-bottom:40;" >You can also sign up with <span style="color: rgb(3, 186, 109)"> Facebook </span>, <span style="color: rgb(3, 186, 109)"> LinkedIn </span> or <span style="color: rgb(3, 186, 109)"> Google</span>.</label>
         </div>
-        <div class="col-sm-12 field-div" >
+        <div class="row field-div" >
           <label class="control-label col-sm-4 field-label" style="text-align:left;" >Fullname</label>
           <div class="col-sm-8">
             <input type="text" class="form-control textbox-style" ng-class="{ 'red-Placeholder' :  isRedFNPlacehoder }"  placeholder="{{fullnamePlaceholder}}" rows="1" ng-model="fullname" ng-style="requiedStyleFullname" ng-change="fullNameChange()"  required>
           </div>
         </div>
-        <div class="col-sm-12 field-div" >
+        <div class="row field-div" >
           <label class="control-label col-sm-4 field-label" style="text-align:left;" >Email</label>
           <div class="col-sm-8">
             <input type="email" class="form-control textbox-style" ng-class="{ 'red-Placeholder' :  isRedEmailPlacehoder }" placeholder="{{emailPlaceholder}}"    ng-model="email" ng-style="requiedStyleEmail" ng-change="emailChange()"  required/>
           </div>
         </div>
-        <div class="col-sm-12 field-div" >
+        <div class="row field-div" >
           <label class="control-label col-sm-4 field-label" style="text-align:left;" >Select City<img src="images/location.png" class="location-image" alt="Location"></label>
           <div class="col-sm-8" style="text-align:center;">
 <!--            <select id="citySelect" name="citySelect" class="form-control  select-style" style="text-align:center;" ng-model="selectedCity" ng-style="requiedSelectedCity" ng-change="cityChange()" ng-options="city as city.name for city in cities" required>
@@ -72,7 +72,7 @@
 
 
         </div>
-        <div class="col-sm-12 field-div" >
+        <div class="row field-div" >
           <label class="control-label col-sm-4 field-label" style="text-align:left;" >Phone <span style="font-weight: 500;"> (optional) </span></label>
           <div class="col-sm-8 ">
             <input id="phoneInput" name="phoneInput" type="text" class="form-control textbox-style" placeholder="0912 1234567" ng-pattern="phoneRegex" ng-model="phone" />
@@ -85,13 +85,13 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-12 field-div" style="margin-bottom: 30px;">
+        <div class="row field-div" style="margin-bottom: 30px;">
           <label class="control-label col-sm-4 field-label" style="text-align:left;" >Password</label>
           <div class="col-sm-8 ">
             <input type="password" name="password" class="form-control textbox-style" ng-class="{ 'red-Placeholder' :  isRedPWPlacehoder }"  placeholder="{{passwordPlaceholder}}" ng-minlength="6"  ng-model="password" ng-style="requiedStylePassword" ng-change="passwordChange()" required/>
           </div>
         </div>
-        <div class="col-sm-12 field-div" style="margin-bottom: 32px;" >
+        <div class="row field-div" style="margin-bottom: 32px;" >
           <label class="control-label col-sm-6 field-label" style="text-align:left;" >Have you been into university?</label>
           <div class="col-sm-6 ">
           <div class="col-sm-3 " style="padding-left:0;">
@@ -109,7 +109,7 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-12 field-div" >
+        <div class="row field-div" >
           <div class="checkbox" style="padding:0; min-height: 17px;">
             <label class="control-label" style="text-align:left; font-size:14px; padding:0; font-weight: 700; color: #616161;"><input type="checkbox" ng-model="checkboxValue"><span class="custom-check"></span>&nbsp; Yes, I understand and agree to the <span style="color: rgb(3, 186, 109)">Global Hiring Platform Terms of Service</span>.</label>
           </div>
