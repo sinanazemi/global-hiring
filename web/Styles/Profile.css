@@ -45,6 +45,34 @@
 .subject-c{
     padding-left:10px;
 }
+.modal-close-btn-c{
+    color: #03ba6d;
+    margin-top:30px; 
+    margin-right:30px;
+}
+.select-style-c {
+        -webkit-appearance: none;
+     -moz-appearance: none;
+     appearance: none;
+
+    cursor: pointer;
+
+    background: #f9f9f9 url('../images/combo.png') no-repeat 97% 50%;
+    background-size: 15px;
+
+
+    font-size: 15px;
+    font-weight: 400;
+    color: #8a8888;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+    padding: 0px 10px;
+
+    float: left;
+    border-radius: 0px;
+    height: 32px;
+    border: solid 1.2px #cdcdcd;
+}
 /*-----------------------
     navbar
 -----------------------*/
@@ -614,6 +642,13 @@ input[type='radio']:checked:before {
 .form-g-c{
     padding-top:50px;
 }
+.fg-c{
+    margin-top:20px;
+}
+.modal-item-c{
+    margin-top:20px;
+}
+
 .through-txt-c {
     font-size: 12px;
     font-weight: 300;

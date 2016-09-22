@@ -92,7 +92,7 @@
                                                 <!-- Modal content-->
                                                 <div class="modal-content">
                                                     <div class="modal-header modal-h-c">
-                                                        <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                                        <button type="button" class="close modal-close-btn-c" data-dismiss="modal">&times;</button>
                                                         <h4 class="modal-title m-title-c">Set Profile Photo</h4>
                                                     </div>
                                                     <div class="modal-body modal-b-c">
@@ -141,7 +141,7 @@
                                                 <!-- Modal content-->
                                                 <div class="modal-content">
                                                     <div class="modal-header modal-h-c">
-                                                        <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                                        <button type="button" class="close modal-close-btn-c" data-dismiss="modal">&times;</button>
                                                         <h4 class="modal-title m-title-c">Edit Job Title</h4>
                                                     </div>
                                                     <div class="modal-body modal-b-c">
@@ -199,7 +199,7 @@
                                                     <!-- Modal content-->
                                                     <div class="modal-content">
                                                         <div class="modal-header modal-h-c">
-                                                            <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                                            <button type="button" class="close modal-close-btn-c" data-dismiss="modal">&times;</button>
                                                             <h4 class="modal-title m-title-c">Add Main Service</h4>
                                                         </div>
                                                         <div class="modal-body modal-b-c">
@@ -249,7 +249,7 @@
                                                     <!-- Modal content-->
                                                     <div class=" modal-content">
                                                     <div class="modal-header modal-h-c">
-                                                        <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                                        <button type="button" class="close modal-close-btn-c" data-dismiss="modal">&times;</button>
                                                         <h4 class="modal-title m-title-c">Add Skill</h4>
                                                     </div>
                                                     <div class="modal-body modal-b-c">
@@ -295,7 +295,7 @@
                                                     <!-- Modal content-->
                                                     <div class="modal-content">
                                                         <div class="modal-header modal-h-c">
-                                                            <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                                            <button type="button" class="close modal-close-btn-c" data-dismiss="modal">&times;</button>
                                                             <h4 class="modal-title m-title-c">{{selSkill.name}}</h4>
                                                         </div>
                                                         <div class="modal-body modal-b-c" style="width:1000px;height:300px;">
@@ -330,22 +330,24 @@
                                 <!-- Overview -->
                                 <div>
                                     <div ng-mouseleave="ovMouseLeave(this)" ng-mouseover="ovMouseOver(this)">
-                                        <h5>
+                                        <h5 class="subject-c" style="display:inline;">
                                             Overview
                                             &nbsp;<a ng-show="ovAddSign" data-toggle="modal" data-target="#addOverview">
                                                 <span class="glyphicon glyphicon-plus-sign" style="color: #b8e986;" ng-show="ovAddSign"></span>
                                             </a>
                                         </h5>
-                                        <p>
+                                        &nbsp;
+                                        <a href="#" class="a-btn-c " data-toggle="modal" data-target="#addOverview" ng-click="editOverview()" ng-show="ovPopoverRemove" ng-style="ovHoverStyle">
+                                            <!--<span class="glyphicon glyphicon-pencil" style="color:black;"></span>-->
+                                            <img src="images/edit.png" class="img-icon-c" />
+                                        </a>
+                                        <p class="item-rp-c" ng-style="ovHoverStyle" style="display:inline-block;">
                                             <!--Over 6 years of experience in designing and developing Mobile applications
-                Have multiple Android applicaitons available on Google Play.-->
+        Have multiple Android applicaitons available on Google Play.-->
                                             {{account.description}}
-                                            &nbsp;
-                                            <a href="#" class="a-btn-c " data-toggle="modal" data-target="#addOverview" ng-click="editOverview()" ng-show="ovPopoverRemove" ng-style="ovHoverStyle">
-                                                <!--<span class="glyphicon glyphicon-pencil" style="color:black;"></span>-->
-                                                <img src="images/edit.png" class="img-icon-c" />
-                                            </a>
                                         </p>
+                                           
+                                        
                                     </div>
 
                                     <!-- Modal Add Overview -->
@@ -354,7 +356,7 @@
                                             <!-- Modal content-->
                                             <div class="modal-content">
                                                 <div class="modal-header modal-h-c">
-                                                    <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                                    <button type="button" class="close modal-close-btn-c" data-dismiss="modal">&times;</button>
                                                     <h4 class="modal-title m-title-c">Add or Edit Overview</h4>
                                                 </div>
                                                 <div class="modal-body modal-b-c">
@@ -418,7 +420,7 @@
                                 <!-- Modal content-->
                                 <div class="modal-content">
                                     <div class="modal-header modal-h-c">
-                                        <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                        <button type="button" class="close modal-close-btn-c" data-dismiss="modal">&times;</button>
                                         <h4 class="modal-title m-title-c">Add Work History</h4>
                                     </div>
                                     <div class="modal-body modal-b-c">
@@ -432,25 +434,24 @@
                                                 </div>
 
                                             </div>
-                                            <div class="form-group fg-autocmb-c" ng-class="{ 'has-error': vwhLocationShow || (whForm.whLocation.$touched && whForm.whLocation.$invalid) }">
+                                            <div class="form-group fg-c" ng-class="{ 'has-error': vwhLocationShow || (whForm.whLocation.$touched && whForm.whLocation.$invalid) }">
                                                 <label class="control-label" for="city">Location</label>
                                                 <!--<select class="form-control" id="location" ng-model="whLocation" ng-options="opt as opt for opt in locations" ng-change="whLocationChg()" required></select>-->
                                                 <selectize options='locations' config="nameConfig" ng-model="whLocation" required></selectize>
                                                 <div ng-messages="whForm.whLocation.$error" ng-if=" vwhLocationShow || (whForm.whLocation.$touched && whForm.whLocation.$invalid)">
                                                     <p ng-message="required" style="color:red;">Location is required.</p>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <div class="col-sm-5" ng-class="{ 'has-error': vwhTitleShow || (whForm.whTitle.$touched && whForm.whTitle.$invalid) }">
+                                            </div>                                            
+                                            <div class="form-group ">
+                                                <div class="row ">
+                                                    <div class="col-sm-6 modal-item-c" ng-class="{ 'has-error': vwhTitleShow || (whForm.whTitle.$touched && whForm.whTitle.$invalid) }">
                                                         <label class="control-label" for="title">Title</label>
                                                         <input class="form-control" id="title" name="title" type="text" ng-model="whTitle" ng-change="whTitleChg()" required>
                                                         <div ng-messages="whForm.whTitle.$error" ng-if=" vwhTitleShow || (whForm.whTitle.$touched && whForm.whTitle.$invalid)">
                                                             <p ng-message="required" style="color:red;">Title is required.</p>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-2"></div>
-                                                    <div class="col-sm-5 fg-autocmb-c col-sm-c" ng-class="{ 'has-error': vwhRoleShow || (whForm.whRole.$touched && whForm.whRole.$invalid) }">
+                                                    <div class="col-sm-6 modal-item-c" ng-class="{ 'has-error': vwhRoleShow || (whForm.whRole.$touched && whForm.whRole.$invalid) }">
                                                         <label class="control-label" for="role">Role</label>
                                                         <!--<select class="form-control" id="role" ng-model="whRole" ng-options="item.value as item.name for item in roles" ng-change="whRoleChg()" required><option value="" disabled selected>Please Select...</option></select>-->
 
@@ -464,15 +465,14 @@
                                             <div class="form-group">
                                                 <label class="control-label" for="role">Role</label>
                                                 <div class="row">
-                                                    <div class="col-sm-5" ng-class="{ 'has-error': vwhFromMonthShow || (whForm.whFromMonth.$touched && whForm.whFromMonth.$invalid) }">
-                                                        <select class="form-control" id="fMonth" ng-model="whFromMonth" ng-options="month as month.name for month in months track by month.value" ng-click="whFromMonthChg()" ng-change="whFromMonthChg()" required><option value="" disabled selected>Month</option></select>
+                                                    <div class="col-sm-6" ng-class="{ 'has-error': vwhFromMonthShow || (whForm.whFromMonth.$touched && whForm.whFromMonth.$invalid) }">
+                                                        <select class="form-control select-style-c" id="fMonth" ng-model="whFromMonth" ng-options="month as month.name for month in months track by month.value" ng-click="whFromMonthChg()" ng-change="whFromMonthChg()" required><option value="" disabled selected>Month</option></select>
                                                         <div ng-messages="whForm.whFromMonth.$error" ng-if=" vwhFromMonthShow || (whForm.whFromMonth.$touched && whForm.whFromMonth.$invalid)">
                                                             <p ng-message="required" style="color:red;">From month is required.</p>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-2"></div>
-                                                    <div class="col-sm-5" ng-class="{ 'has-error': vwhFromYearShow || (whForm.whFromYear.$touched && whForm.whFromYear.$invalid) }">
-                                                        <select class="form-control" id="fDate" ng-model="whFromYear" ng-options="opt as opt for opt in dates" ng-click="whFromYearChg()" ng-change="whFromYearChg()" required><option value="" disabled selected>Year</option></select>
+                                                    <div class="col-sm-6" ng-class="{ 'has-error': vwhFromYearShow || (whForm.whFromYear.$touched && whForm.whFromYear.$invalid) }">
+                                                        <select class="form-control select-style-c" id="fDate" ng-model="whFromYear" ng-options="opt as opt for opt in dates" ng-click="whFromYearChg()" ng-change="whFromYearChg()" required><option value="" disabled selected>Year</option></select>
                                                         <div ng-messages="whForm.whFromYear.$error" ng-if=" vwhFromYearShow || (whForm.whFromYear.$touched && whForm.whFromYear.$invalid)">
                                                             <p ng-message="required" style="color:red;">From year is required.</p>
                                                         </div>
@@ -485,14 +485,14 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-sm-5" ng-class="{ 'has-error': vwhToMonthShow || (whForm.whToMonth.$touched && whForm.whToMonth.$invalid) }">
-                                                        <select class="form-control" id="tMonth" ng-model="whToMonth" ng-options="month as month.name for month in months track by month.value" ng-hide="whCurrently" ng-click="whToMonthChg()" ng-change="whToMonthChg()" required><option value="" disabled selected>Month</option></select>
+                                                        <select class="form-control select-style-c" id="tMonth" ng-model="whToMonth" ng-options="month as month.name for month in months track by month.value" ng-hide="whCurrently" ng-click="whToMonthChg()" ng-change="whToMonthChg()" required><option value="" disabled selected>Month</option></select>
                                                         <div ng-messages="whForm.whToMonth.$error" ng-if=" vwhToMonthShow || (whForm.whToMonth.$touched && whForm.whToMonth.$invalid)">
                                                             <p ng-message="required" style="color:red;">To month is required or select "I currently work here".</p>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-2"></div>
                                                     <div class="col-sm-5" ng-class="{ 'has-error': vwhToYearShow || (whForm.whToYear.$touched && whForm.whToYear.$invalid) }">
-                                                        <select class="form-control" id="tDate" ng-model="whToYear" ng-options="opt as opt for opt in dates" ng-hide="whCurrently" ng-click="whToYearChg()" ng-change="whToYearChg()" required><option value="" disabled selected>Year</option></select>
+                                                        <select class="form-control select-style-c" id="tDate" ng-model="whToYear" ng-options="opt as opt for opt in dates" ng-hide="whCurrently" ng-click="whToYearChg()" ng-change="whToYearChg()" required><option value="" disabled selected>Year</option></select>
                                                         <div ng-messages="whForm.whToYear.$error" ng-if=" vwhToYearShow || (whForm.whToYear.$touched && whForm.whToYear.$invalid)">
                                                             <p ng-message="required" style="color:red;">To year is required or select "I currently work here".</p>
                                                         </div>
@@ -534,18 +534,13 @@
                                     <h5 class="item-rp-c" ng-style="eduHoverStyle" style="display:inline;">
                                         {{x.degree.name}}, {{x.field}} | {{x.school}}
                                     </h5>
-                                    &nbsp;
-                                    <a href="#" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addEducation" ng-click="editEducation(x)" ng-show="popoverRemove" ng-style="eduHoverStyle"><img src="images/edit.png" class="img-icon-c" /></a>
-                                    &nbsp;
+                                    <a href="#" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addEducation" ng-click="editEducation(x)" ng-show="popoverRemove" ng-style="eduHoverStyle"><img src="images/edit.png" class="img-icon-c" /></a>                                    
                                     <a href="#" class="a-btn-c item-rp-c" ng-click="deleteEducation(x)" ng-show="popoverRemove" ng-style="eduHoverStyle"><img src="images/delete.png" class="img-icon-c" /></a>
-                                    
-
-                                    <!--<p><span class="education-txt-c">2007 - 2012</span></p>-->
-                                    <p>
-                                        <span class="education-txt-c" ng-style="eduHoverStyle" ng-mouseleave="eduMouseLeave(this)" ng-mouseover="eduMouseOver(this)">
+                                    <div>
+                                        <span class="item-rp-c" ng-style="eduHoverStyle" style="display:inline-block;">
                                             {{x.fromdate}} - {{x.todate}}
                                         </span>
-                                    </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -556,7 +551,7 @@
                                 <!-- Modal content-->
                                 <div class="modal-content">
                                     <div class="modal-header modal-h-c">
-                                        <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                        <button type="button" class="close modal-close-btn-c" data-dismiss="modal">&times;</button>
                                         <h4 class="modal-title m-title-c">Add Education</h4>
                                     </div>
                                     <div class="modal-body modal-b-c">
@@ -573,13 +568,13 @@
                                                 <label class="control-label" for="dates_attended">Dates Attended</label>
                                                 <div class="row">
                                                     <div class="col-sm-6" ng-class="{ 'has-error': veduFromDateShow || (eduForm.eduFromDate.$touched && eduForm.eduFromDate.$invalid) }">
-                                                        <select class="form-control" id="fDate" ng-model="eduFromDate" ng-options="opt as opt for opt in dates" ng-click="eduFromDateChg()" ng-change="eduFromDateChg()" required><option value="" disabled selected>From</option></select>
+                                                        <select class="form-control select-style-c" id="fDate" ng-model="eduFromDate" ng-options="opt as opt for opt in dates" ng-click="eduFromDateChg()" ng-change="eduFromDateChg()" required><option value="" disabled selected>From</option></select>
                                                         <div ng-messages="eduForm.eduFromDate.$error" ng-if=" veduFromDateShow || (eduForm.eduFromDate.$touched && eduForm.eduFromDate.$invalid)">
                                                             <p ng-message="required" style="color:red;">From year is required.</p>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6" ng-class="{ 'has-error': veduToDateShow || (eduForm.eduToDate.$touched && eduForm.eduToDate.$invalid) }">
-                                                        <select class="form-control" id="tDate" ng-model="eduToDate" ng-options="opt as opt for opt in dates" ng-click="eduToDateChg()" ng-change="eduToDateChg()" required><option value="" disabled selected>To (or expected graducation year)</option></select>
+                                                        <select class="form-control select-style-c" id="tDate" ng-model="eduToDate" ng-options="opt as opt for opt in dates" ng-click="eduToDateChg()" ng-change="eduToDateChg()" required><option value="" disabled selected>To (or expected graducation year)</option></select>
                                                         <div ng-messages="eduForm.eduToDate.$error" ng-if=" veduToDateShow || (eduForm.eduToDate.$touched && eduForm.eduToDate.$invalid)">
                                                             <p ng-message="required" style="color:red;">To year is required.</p>
                                                         </div>
@@ -623,30 +618,24 @@
                         <!-- Projects -->
                         <div class="panel panel-default panel-projects-c">
                             <div class="panel-body">
-                                <h4>
+                                <h4 class="subject-c">
                                     Projects
                                     &nbsp;<a class="btn-add-c add-projects-c" data-toggle="modal" data-target="#addProjects" ng-click="cleanPrjInputs()"><span class=" glyphicon glyphicon-plus-sign"></span></a>
                                 </h4>
-                                <div ng-repeat="x in account.projects" ng-mouseleave="prjMouseLeave(this)" ng-mouseover="prjMouseOver(this)">
+                                <br/>
+                                <div class="repeat-c" ng-repeat="x in account.projects" ng-mouseleave="prjMouseLeave(this)" ng-mouseover="prjMouseOver(this)">
                                     <hr ng-if="$index>0" class="hr-c" />
-                                    <h5>
-                                        <span class="projects-txt-c" ng-style="prjHoverStyle">
-                                            {{x.name}}
-                                        </span>
-                                        &nbsp;<a href="#" class="a-btn-c edit-projects-c" data-toggle="modal" data-target="#addProjects" ng-click="editProject(x)" ng-show="popoverRemove" ng-style="prjHoverStyle">
-                                            <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                                            <img src="images/edit.png" class="img-icon-c" />
-                                        </a>
-                                        &nbsp;<a href="#" class=" a-btn-c delete-projects-c" ng-click="deleteProject(x)" ng-show="popoverRemove" ng-style="prjHoverStyle">
-                                            <!--<span class="glyphicon glyphicon-trash"></span>-->
-                                            <img src="images/delete.png" class="img-icon-c" />
-                                        </a>
+                                    <h5 class="item-rp-c" ng-style="prjHoverStyle" style="display:inline;">
+                                        {{x.name}}
                                     </h5>
-                                    <p>
-                                        <span class="projects-txt-c" ng-style="prjHoverStyle" ng-mouseleave="prjMouseLeave(this)" ng-mouseover="prjMouseOver(this)">
+                                    <a href="#" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addProjects" ng-click="editProject(x)" ng-show="popoverRemove" ng-style="prjHoverStyle"><img src="images/edit.png" class="img-icon-c" /></a>
+                                    <a href="#" class=" a-btn-c item-rp-c" ng-click="deleteProject(x)" ng-show="popoverRemove" ng-style="prjHoverStyle"><img src="images/delete.png" class="img-icon-c" /></a>
+                                    
+                                    <div>
+                                        <span class="item-rp-c" ng-style="prjHoverStyle" style="display:inline-block;">
                                             {{x.year}} - {{x.month.name}}
                                         </span>
-                                    </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -657,7 +646,7 @@
                                 <!-- Modal content-->
                                 <div class="modal-content modal-c">
                                     <div class="modal-header modal-h-c">
-                                        <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                        <button type="button" class="close modal-close-btn-c" data-dismiss="modal">&times;</button>
                                         <h4 class="modal-title m-title-c">My Project</h4>
                                     </div>
                                     <div class="modal-body modal-b-c">
@@ -681,11 +670,11 @@
                                                 <label class="control-label" for="dates_completion">Completion Date (optional)</label>
                                                 <div class="row">
                                                     <div class="col-sm-5">
-                                                        <select class="form-control" id="fMonth" ng-model="prjMonth" ng-options="month as month.name for month in months track by month.value"><option value="" disabled selected>Month</option></select>
+                                                        <select class="form-control select-style-c" id="fMonth" ng-model="prjMonth" ng-options="month as month.name for month in months track by month.value"><option value="" disabled selected>Month</option></select>
                                                     </div>
                                                     <div class="col-sm-2"></div>
                                                     <div class="col-sm-5">
-                                                        <select class="form-control" id="fDate" ng-model="prjYear" ng-options="opt as opt for opt in dates"><option value="" disabled selected>Year</option></select>
+                                                        <select class="form-control select-style-c" id="fDate" ng-model="prjYear" ng-options="opt as opt for opt in dates"><option value="" disabled selected>Year</option></select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -729,30 +718,24 @@
                         <!-- Volunteering Experience -->
                         <div class="panel panel-default panel-volunteering-c">
                             <div class="panel-body">
-                                <h4>
+                                <h4 class="subject-c">
                                     Volunteering Experience
                                     &nbsp;<a class="btn-add-c add-volunteering-c" data-toggle="modal" data-target="#addVolunteering" ng-click="cleanVolInputs()"><span class=" glyphicon glyphicon-plus-sign"></span></a>
                                 </h4>
-                                <div ng-repeat="x in account.volunteerings" ng-mouseleave="volMouseLeave(this)" ng-mouseover="volMouseOver(this)">
+                                <br/>
+                                <div class="repeat-c" ng-repeat="x in account.volunteerings" ng-mouseleave="volMouseLeave(this)" ng-mouseover="volMouseOver(this)">
                                     <hr ng-if="$index>0" class="hr-c" />
-                                    <h5>
-                                        <span class="volunteering-txt-c" ng-style="volHoverStyle">
-                                            {{x.organization}} | {{x.role}} | {{x.cause.name}}
-                                        </span>
-                                        &nbsp;<a href="#" class="a-btn-c edit-volunteering-c" data-toggle="modal" data-target="#addVolunteering" ng-click="editVolunteering(x)" ng-show="popoverRemove" ng-style="volHoverStyle">
-                                            <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                                            <img src="images/edit.png" class="img-icon-c" />
-                                        </a>
-                                        &nbsp;<a href="#" class=" a-btn-c delete-volunteering-c" ng-click="deleteVolunteering(x)" ng-show="popoverRemove" ng-style="volHoverStyle">
-                                            <!--<span class="glyphicon glyphicon-trash"></span>-->
-                                            <img src="images/delete.png" class="img-icon-c" />
-                                        </a>
-                                    </h5>
-                                    <p>
-                                        <span class="volunteering-txt-c" ng-style="volHoverStyle" ng-mouseleave="volMouseLeave(this)" ng-mouseover="volMouseOver(this)">
+                                    <h5 class="item-rp-c" ng-style="volHoverStyle" style="display:inline;">
+                                        {{x.organization}} | {{x.role}} | {{x.cause.name}}
+                                    </h5> 
+                                    <a href="#" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addVolunteering" ng-click="editVolunteering(x)" ng-show="popoverRemove" ng-style="volHoverStyle"><img src="images/edit.png" class="img-icon-c" /></a>
+                                    <a href="#" class=" a-btn-c delete-volunteering-c" ng-click="deleteVolunteering(x)" ng-show="popoverRemove" ng-style="volHoverStyle"><img src="images/delete.png" class="img-icon-c" /></a>
+                                    
+                                    <div>
+                                        <span class="item-rp-c" ng-style="volHoverStyle" style="display:inline-block;">
                                             {{x.fromyear}} - {{x.toyear}}
                                         </span>
-                                    </p>
+                                    </div>
                                 </div>
                                 <!--<p>
                                     1 in 5 managers hired someone because of their
@@ -767,7 +750,7 @@
                                 <!-- Modal content-->
                                 <div class="modal-content">
                                     <div class="modal-header modal-h-c">
-                                        <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                        <button type="button" class="close modal-close-btn-c" data-dismiss="modal">&times;</button>
                                         <h4 class="modal-title m-title-c">Volunteering Experience</h4>
                                     </div>
                                     <div class="modal-body modal-b-c">
@@ -806,14 +789,14 @@
                                                 <label class="control-label" for="date">Date</label>
                                                 <div class="row">
                                                     <div class="col-sm-5" ng-class="{ 'has-error': vvolFromMonthShow || (volForm.volFromMonth.$touched && volForm.volFromMonth.$invalid) }">
-                                                        <select class="form-control" id="fMonth" ng-model="volFromMonth" ng-options="month as month.name for month in months track by month.value" ng-click="volFromMonthChg()" ng-change="volFromMonthChg()" required><option value="" disabled selected>Month</option></select>
+                                                        <select class="form-control select-style-c" id="fMonth" ng-model="volFromMonth" ng-options="month as month.name for month in months track by month.value" ng-click="volFromMonthChg()" ng-change="volFromMonthChg()" required><option value="" disabled selected>Month</option></select>
                                                         <div ng-messages="volForm.volFromMonth.$error" ng-if=" vvolFromMonthShow || (volForm.volFromMonth.$touched && volForm.volFromMonth.$invalid)">
                                                             <p ng-message="required" style="color:red;">From month is required.</p>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-2"></div>
                                                     <div class="col-sm-5" ng-class="{ 'has-error': vvolFromYearShow || (volForm.volFromYear.$touched && volForm.volFromYear.$invalid) }">
-                                                        <select class="form-control" id="fDate" ng-model="volFromYear" ng-options="opt as opt for opt in dates" ng-click="volFromYearChg()" ng-change="volFromYearChg()" required><option value="" disabled selected>Year</option></select>
+                                                        <select class="form-control select-style-c" id="fDate" ng-model="volFromYear" ng-options="opt as opt for opt in dates" ng-click="volFromYearChg()" ng-change="volFromYearChg()" required><option value="" disabled selected>Year</option></select>
                                                         <div ng-messages="volForm.volFromYear.$error" ng-if=" vvolFromYearShow || (volForm.volFromYear.$touched && volForm.volFromYear.$invalid)">
                                                             <p ng-message="required" style="color:red;">From year is required.</p>
                                                         </div>
@@ -826,11 +809,11 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-sm-5">
-                                                        <select class="form-control" id="tMonth" ng-model="volToMonth" ng-options="month as month.name for month in months track by month.value" ng-click="volToMonthChg()" ng-change="volToMonthChg()"><option value="" disabled selected>Month</option></select>
+                                                        <select class="form-control select-style-c" id="tMonth" ng-model="volToMonth" ng-options="month as month.name for month in months track by month.value" ng-click="volToMonthChg()" ng-change="volToMonthChg()"><option value="" disabled selected>Month</option></select>
                                                     </div>
                                                     <div class="col-sm-2"></div>
                                                     <div class="col-sm-5">
-                                                        <select class="form-control" id="tDate" ng-model="volToYear" ng-options="opt as opt for opt in dates" ng-click="volToYearChg()" ng-change="volToYearChg()"><option value="" disabled selected>Year</option></select>
+                                                        <select class="form-control select-style-c" id="tDate" ng-model="volToYear" ng-options="opt as opt for opt in dates" ng-click="volToYearChg()" ng-change="volToYearChg()"><option value="" disabled selected>Year</option></select>
                                                     </div>
                                                 </div>
                                                 <p ng-show="volInvalidDate" style="color:red;">to date is less than from date!</p>
@@ -856,10 +839,11 @@
                         <!-- Certifications -->
                         <div class="panel panel-default panel-certifications-c">
                             <div class="panel-body">
-                                <h4>
+                                <h4 class="subject-c">
                                     Certifications
                                     &nbsp;<a class="btn-add-c add-certifications-c" data-toggle="modal"><span class="glyphicon glyphicon-plus-sign"></span></a>
                                 </h4>
+                                <br/>
                                 <div>
                                     <!--<h5>
                                                                                <span class="certifications-txt-c" ng-style="crfHoverStyle"></span>
@@ -872,7 +856,7 @@
                                         <img src="images/delete.png" class="img-icon-c" />
                                     </a>
                                                                            </h5>-->
-                                    <p><span class="certifications-txt-c">No items to display.</span> </p>
+                                    <p class="item-rp-c"><span class="certifications-txt-c">No items to display.</span> </p>
                                 </div>
                             </div>
                         </div>
@@ -891,28 +875,24 @@
                         <!-- Test Scores -->
                         <div class="panel panel-default panel-scores-c">
                             <div class="panel-body">
-                                <h4>
+                                <h4 class="subject-c">
                                     Test Scores
                                     &nbsp;<a class="btn-add-c add-scores-c" data-toggle="modal" data-target="#addScores" ng-click="cleanTcInputs()"><span class="glyphicon glyphicon-plus-sign"></span></a>
                                 </h4>
-                                <div ng-repeat="x in account.tests" ng-mouseleave="tcMouseLeave(this)" ng-mouseover="tcMouseOver(this)">
+                                <br/>
+                                <div class="repeat-c" ng-repeat="x in account.tests" ng-mouseleave="tcMouseLeave(this)" ng-mouseover="tcMouseOver(this)">
                                     <hr ng-if="$index>0" class="hr-c" />
-                                    <h5>
-                                        <span class="scores-txt-c" ng-style="tcHoverStyle">
-                                            {{x.name}} | {{x.occupation.name}} | {{x.score}}
-                                        </span>
-                                        &nbsp;<a href="#" class="a-btn-c edit-scores-c" data-toggle="modal" data-target="#addScores" ng-click="editTestScore(x)" ng-show="popoverRemove" ng-style="tcHoverStyle">
-                                            <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                                            <img src="images/edit.png" class="img-icon-c" />
-                                        </a>
-                                        &nbsp;<a href="#" class=" a-btn-c delete-scores-c" ng-click="deleteTestScore(x)" ng-show="popoverRemove" ng-style="tcHoverStyle">
-                                            <!--<span class="glyphicon glyphicon-trash"></span>-->
-                                                  <img src="images/delete.png" class="img-icon-c" />
-                                        </a>
+                                    <h5 class="item-rp-c" ng-style="tcHoverStyle" style="display:inline;">
+                                        {{x.name}} | {{x.occupation.name}} | {{x.score}}
                                     </h5>
-                                    <span class="scores-txt-c" ng-style="tcHoverStyle" ng-mouseleave="tcMouseLeave(this)" ng-mouseover="tcMouseOver(this)">
-                                        {{x.month.name}} - {{x.year}}
-                                    </span>
+                                    <a href="#" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addScores" ng-click="editTestScore(x)" ng-show="popoverRemove" ng-style="tcHoverStyle"><img src="images/edit.png" class="img-icon-c" /></a>
+                                    <a href="#" class=" a-btn-c item-rp-c" ng-click="deleteTestScore(x)" ng-show="popoverRemove" ng-style="tcHoverStyle"><img src="images/delete.png" class="img-icon-c" /></a>
+                                    
+                                    <div>
+                                        <span class="item-rp-c" ng-style="tcHoverStyle" style="display:inline-block;">
+                                            {{x.month.name}} - {{x.year}}
+                                        </span>
+                                    </div>
                                 </div>
                                 <!--<p>No items to display. Here’s another way to show your accomplishments </p>-->
                             </div>
@@ -924,7 +904,7 @@
                                 <!-- Modal content-->
                                 <div class="modal-content">
                                     <div class="modal-header modal-h-c">
-                                        <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                        <button type="button" class="close modal-close-btn-c" data-dismiss="modal">&times;</button>
                                         <h4 class="modal-title m-title-c">Test Scores</h4>
                                     </div>
                                     <div class="modal-body modal-b-c">
@@ -954,14 +934,14 @@
                                                 <label class="control-label" for="dates_completion">Date</label>
                                                 <div class="row">
                                                     <div class="col-sm-5" ng-class="{ 'has-error': vtcFromMonthShow || (tcForm.tcFromMonth.$touched && tcForm.tcFromMonth.$invalid) }">
-                                                        <select class="form-control" id="fMonth" ng-model="tcFromMonth" ng-options="month as month.name for month in months track by month.value" ng-click="tcFromMonthChg()" ng-change="tcFromMonthChg()" required><option value="" disabled selected>Month</option></select>
+                                                        <select class="form-control select-style-c" id="fMonth" ng-model="tcFromMonth" ng-options="month as month.name for month in months track by month.value" ng-click="tcFromMonthChg()" ng-change="tcFromMonthChg()" required><option value="" disabled selected>Month</option></select>
                                                         <div ng-messages="tcForm.tcFromMonth.$error" ng-if=" vtcFromMonthShow || (tcForm.tcFromMonth.$touched && tcForm.tcFromMonth.$invalid)">
                                                             <p ng-message="required" style="color:red;">Month is required.</p>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-2"></div>
                                                     <div class="col-sm-5" ng-class="{ 'has-error': vtcFromYearShow || (tcForm.tcFromYear.$touched && tcForm.tcFromYear.$invalid) }">
-                                                        <select class="form-control" id="fDate" ng-model="tcFromYear" ng-options="opt as opt for opt in dates" ng-click="tcFromYearChg()" ng-change="tcFromYearChg()" required><option value="" disabled selected>Year</option></select>
+                                                        <select class="form-control select-style-c" id="fDate" ng-model="tcFromYear" ng-options="opt as opt for opt in dates" ng-click="tcFromYearChg()" ng-change="tcFromYearChg()" required><option value="" disabled selected>Year</option></select>
                                                         <div ng-messages="tcForm.tcFromYear.$error" ng-if=" vtcFromYearShow || (tcForm.tcFromYear.$touched && tcForm.tcFromYear.$invalid)">
                                                             <p ng-message="required" style="color:red;">Year is required.</p>
                                                         </div>
@@ -995,30 +975,24 @@
                         <!-- Honors & Awards -->
                         <div class="panel panel-default panel-awards-c">
                             <div class="panel-body">
-                                <h4>
+                                <h4 class="subject-c">
                                     Honors & Awards
                                     &nbsp;<a class="btn-add-c add-awards-c" data-toggle="modal" data-target="#addAwards" ng-click="cleanHaInputs()"><span class="glyphicon glyphicon-plus-sign"></span></a>
                                 </h4>
-                                <div ng-repeat="x in account.honors" ng-mouseleave="haMouseLeave(this)" ng-mouseover="haMouseOver(this)">
+                                <br/>
+                                <div class="repeat-c" ng-repeat="x in account.honors" ng-mouseleave="haMouseLeave(this)" ng-mouseover="haMouseOver(this)">
                                     <hr ng-if="$index>0" class="hr-c" />
-                                    <h5>
-                                        <span class="awards-txt-c" ng-style="haHoverStyle">
-                                            {{x.title}} | {{x.occupation.name}}
-                                        </span>
-                                        &nbsp;<a href="#" class="a-btn-c edit-awards-c" data-toggle="modal" data-target="#addAwards" ng-click="editAward(x)" ng-show="popoverRemove" ng-style="haHoverStyle">
-                                            <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                                            <img src="images/edit.png" class="img-icon-c" />
-                                        </a>
-                                        &nbsp;<a href="#" class=" a-btn-c delete-awards-c" ng-click="deleteAward(x)" ng-show="popoverRemove" ng-style="haHoverStyle">
-                                            <!--<span class="glyphicon glyphicon-trash"></span>-->
-                                                  <img src="images/delete.png" class="img-icon-c" />
-                                        </a>
-                                    </h5>
-                                    <p>
-                                        <span class="awards-txt-c" ng-style="haHoverStyle" ng-mouseleave="haMouseLeave(this)" ng-mouseover="haMouseOver(this)">
+                                    <h5 class="item-rp-c" ng-style="haHoverStyle" style="display:inline;">
+                                        {{x.title}} | {{x.occupation.name}}
+                                    </h5>   
+                                    <a href="#" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addAwards" ng-click="editAward(x)" ng-show="popoverRemove" ng-style="haHoverStyle"><img src="images/edit.png" class="img-icon-c" /></a>
+                                    <a href="#" class=" a-btn-c item-rp-c" ng-click="deleteAward(x)" ng-show="popoverRemove" ng-style="haHoverStyle"><img src="images/delete.png" class="img-icon-c" /></a>
+                                    
+                                    <div>
+                                        <span class="item-rp-c" ng-style="haHoverStyle" style="display:inline-block;">
                                             {{x.year}} - {{x.month.name}}
                                         </span>
-                                    </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1029,7 +1003,7 @@
                                 <!-- Modal content-->
                                 <div class="modal-content">
                                     <div class="modal-header modal-h-c">
-                                        <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                        <button type="button" class="close modal-close-btn-c" data-dismiss="modal">&times;</button>
                                         <h4 class="modal-title m-title-c">Honors & Awards</h4>
                                     </div>
                                     <div class="modal-body modal-b-c">
@@ -1059,14 +1033,14 @@
                                                 <label class="control-label" for="dates_completion">Date</label>
                                                 <div class="row">
                                                     <div class="col-sm-5" ng-class="{ 'has-error': vhaMonthShow || (haForm.haMonth.$touched && haForm.haMonth.$invalid) }">
-                                                        <select class="form-control" id="month" ng-model="haMonth" ng-options="month as month.name for month in months track by month.value" ng-click="haMonthChg()" ng-change="haMonthChg()" required><option value="" disabled selected>Month</option></select>
+                                                        <select class="form-control select-style-c" id="month" ng-model="haMonth" ng-options="month as month.name for month in months track by month.value" ng-click="haMonthChg()" ng-change="haMonthChg()" required><option value="" disabled selected>Month</option></select>
                                                         <div ng-messages="haForm.haMonth.$error" ng-if=" vhaMonthShow || (haForm.haMonth.$touched && haForm.haMonth.$invalid)">
                                                             <p ng-message="required" style="color:red;">Month is required.</p>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-2"></div>
                                                     <div class="col-sm-5" ng-class="{ 'has-error': vhaYearShow || (haForm.haYear.$touched && haForm.haYear.$invalid) }">
-                                                        <select class="form-control" id="date" ng-model="haYear" ng-options="opt as opt for opt in dates" ng-click="haYearChg()" ng-change="haYearChg()" required><option value="" disabled selected>Year</option></select>
+                                                        <select class="form-control select-style-c" id="date" ng-model="haYear" ng-options="opt as opt for opt in dates" ng-click="haYearChg()" ng-change="haYearChg()" required><option value="" disabled selected>Year</option></select>
                                                         <div ng-messages="haForm.haYear.$error" ng-if=" vhaYearShow || (haForm.haYear.$touched && haForm.haYear.$invalid)">
                                                             <p ng-message="required" style="color:red;">Year is required.</p>
                                                         </div>
@@ -1093,25 +1067,19 @@
                         <!-- Courses -->
                         <div class="panel panel-default panel-courses-c">
                             <div class="panel-body">
-                                <h4>
+                                <h4 class="subject-c">
                                     Courses
                                     &nbsp;<a class="btn-add-c add-courses-c" data-toggle="modal" data-target="#addCourses" ng-click="cleanCrInputs()"><span class="glyphicon glyphicon-plus-sign"></span></a>
                                 </h4>
-                                <div ng-repeat="x in account.courses" ng-mouseleave="crMouseLeave(this)" ng-mouseover="crMouseOver(this)">
+                                <br/>
+                                <div class="repeat-c" ng-repeat="x in account.courses" ng-mouseleave="crMouseLeave(this)" ng-mouseover="crMouseOver(this)">
                                     <hr ng-if="$index>0" class="hr-c" />
-                                    <h5>
-                                        <span class="courses-txt-c" ng-style="crHoverStyle">
-                                            {{x.name}} | {{x.occupation.name}} | {{x.number}}
-                                        </span>
-                                        &nbsp;<a href="#" class="a-btn-c edit-courses-c" data-toggle="modal" data-target="#addCourses" ng-click="editCourse(x)" ng-show="popoverRemove" ng-style="crHoverStyle">
-                                            <!--<span class="glyphicon glyphicon-pencil"></span>-->
-                                            <img src="images/edit.png" class="img-icon-c" />
-                                        </a>
-                                        &nbsp;<a href="#" class="a-btn-c delete-courses-c" ng-click="deleteCourse(x)" ng-show="popoverRemove" ng-style="crHoverStyle">
-                                            <!--<span class="glyphicon glyphicon-trash"></span>-->
-                                                  <img src="images/delete.png" class="img-icon-c" />
-                                        </a>
+                                    <h5 class="item-rp-c" ng-style="crHoverStyle" style="display:inline;">
+                                        {{x.name}} | {{x.occupation.name}} | {{x.number}}
                                     </h5>
+                                    <a href="#" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addCourses" ng-click="editCourse(x)" ng-show="popoverRemove" ng-style="crHoverStyle"><img src="images/edit.png" class="img-icon-c" /></a>
+                                    <a href="#" class="a-btn-c item-rp-c" ng-click="deleteCourse(x)" ng-show="popoverRemove" ng-style="crHoverStyle"><img src="images/delete.png" class="img-icon-c" /></a>
+                                    
                                     <!--<p>
                                         <span class="courses-txt-c">
                                         </span>
@@ -1126,7 +1094,7 @@
                                 <!-- Modal content-->
                                 <div class="modal-content">
                                     <div class="modal-header modal-h-c">
-                                        <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                        <button type="button" class="close modal-close-btn-c" data-dismiss="modal">&times;</button>
                                         <h4 class="modal-title m-title-c">Courses</h4>
                                     </div>
                                     <div class="modal-body modal-b-c">
@@ -1217,7 +1185,7 @@
                                 <!-- Modal content-->
                                 <div class="modal-content">
                                     <div class="modal-header modal-h-c">
-                                        <button type="button" class="close" data-dismiss="modal" style="color: #03ba6d;">&times;</button>
+                                        <button type="button" class="close modal-close-btn-c" data-dismiss="modal">&times;</button>
                                         <h4 class="modal-title m-title-c">Add Language</h4>
                                     </div>
                                     <div class="modal-body modal-b-c">
