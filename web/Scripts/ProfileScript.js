@@ -13,6 +13,7 @@ myapp.controller("controller",
         accountRes.get(
           function (data) {
               $scope.account = data;
+              setPrfStrength();
               if ($scope.account == null) {
                   window.location = "/HomePage.html";
               }
@@ -27,6 +28,8 @@ myapp.controller("controller",
 
 
         $scope.userImage = "/profilePicture"; //"images/Chrysanthemum.jpg";
+        //if ($scope.userImage == null)
+        //    $scope.userImage = "/images/profileDef.png";
 
         var profilePictureRes = $resource("/saveProfilePicture")
         $scope.savePrfPic = function () {
@@ -44,25 +47,26 @@ myapp.controller("controller",
         
             var prfStrengthNum = 0;
             var prfStrengthRes = $resource("/accountStrength");
-            //prfStrengthRes.query(
-            prfStrengthRes.get(
-               function (data) {
-                   prfStrengthNum = data.value;
-                   if (prfStrengthNum < 20) {
-                       $scope.prfStrengthImg = "/images/beginner.png";
-                   }
-                   else if (prfStrengthNum < 40)
-                       $scope.prfStrengthImg = "/images/Intermediate.png";
-                   else if (prfStrengthNum < 60)
-                       $scope.prfStrengthImg = "/images/Advanced.png";
-                   else if (prfStrengthNum < 80)
-                       $scope.prfStrengthImg = "/images/Expert.png";
-                   else
-                       $scope.prfStrengthImg = "/images/AllStar.png";
-               }, function (err) {
-                   prfStrengthNum = 0;
-               })
-       
+        //prfStrengthRes.query(
+            function setPrfStrength() {
+                prfStrengthRes.get(
+                   function (data) {
+                       prfStrengthNum = data.value;
+                       if (prfStrengthNum < 20) {
+                           $scope.prfStrengthImg = "/images/beginner.png";
+                       }
+                       else if (prfStrengthNum < 40)
+                           $scope.prfStrengthImg = "/images/Intermediate.png";
+                       else if (prfStrengthNum < 60)
+                           $scope.prfStrengthImg = "/images/Advanced.png";
+                       else if (prfStrengthNum < 80)
+                           $scope.prfStrengthImg = "/images/Expert.png";
+                       else
+                           $scope.prfStrengthImg = "/images/AllStar.png";
+                   }, function (err) {
+                       prfStrengthNum = 0;
+                   })
+            }
        
 
         $scope.dates = [];
@@ -354,8 +358,9 @@ myapp.controller("controller",
                             $scope.account.languages[index] = lg;
                         else
                             $scope.account.languages.push(lg);
-
+                        setPrfStrength();
                     });
+                    
                     return true;
                 }
                 else
@@ -389,6 +394,7 @@ myapp.controller("controller",
             delLg.$save(function (dlg) {
                 $scope.account.languages.splice($scope.account.languages.indexOf(dlg), 1);
                 //cleanHistoryInputs();
+                setPrfStrength();
             });
         }
         function checkLgValidation() {
@@ -517,9 +523,10 @@ myapp.controller("controller",
                         $scope.account.works[index] = wh;
                     else
                         $scope.account.works.push(wh);
-
+                    setPrfStrength();
                 });
                 cleanHistoryInputs();
+                
                 return true;
             }
             return false;
@@ -552,6 +559,7 @@ myapp.controller("controller",
             delWh.id = wh.id;
             delWh.$save(function (dwr) {
                 $scope.account.works.splice($scope.account.works.indexOf(dwr), 1);
+                setPrfStrength();
                 //cleanHistoryInputs();
             });
         }
@@ -755,8 +763,10 @@ myapp.controller("controller",
                         $scope.account.educations[index] = edu;
                     else
                         $scope.account.educations.push(edu);
+                    setPrfStrength();
                 });
                 cleanEducationInputs();
+                
                 return true;
             }
             return false;
@@ -810,6 +820,7 @@ myapp.controller("controller",
             delEdu.$save(function (dEdu) {
                 $scope.account.educations.splice($scope.account.educations.indexOf(dEdu), 1);
                 //cleanEducationInputs();
+                setPrfStrength();
             });
         }
 
@@ -911,9 +922,10 @@ myapp.controller("controller",
                         $scope.account.projects[index] = prj;
                     else
                         $scope.account.projects.push(prj);
-
+                    setPrfStrength();
                 });
                 cleanProjectsInputs();
+                
                 return true;
             }
             return false;
@@ -941,6 +953,7 @@ myapp.controller("controller",
             delPrj.$save(function (dprj) {
                 $scope.account.projects.splice($scope.account.projects.indexOf(dprj), 1);
                 //cleanHistoryInputs();
+                setPrfStrength();
             });
         }
 
@@ -1043,9 +1056,10 @@ myapp.controller("controller",
                     else
                         $scope.account.volunteerings.push(vol);
 
-
+                    setPrfStrength();
                 });
                 cleanVolunteeringInputs();
+                
                 return true;
             }
             return false;
@@ -1070,6 +1084,7 @@ myapp.controller("controller",
             delVol.id = vol.id;
             delVol.$save(function (dv) {
                 $scope.account.volunteerings.splice($scope.account.volunteerings.indexOf(dv), 1);
+                setPrfStrength();
                 //cleanHistoryInputs();
             });
         }
@@ -1237,9 +1252,10 @@ myapp.controller("controller",
                         $scope.account.tests[index] = tc;
                     else
                         $scope.account.tests.push(tc);
-
+                    setPrfStrength();
                 });
                 cleanScoresInputs();
+                
                 return true;
             }
             return false;
@@ -1262,6 +1278,7 @@ myapp.controller("controller",
             delTc.id = tc.id;
             delTc.$save(function (dtc) {
                 $scope.account.tests.splice($scope.account.tests.indexOf(dtc), 1);
+                setPrfStrength();
                 //cleanHistoryInputs();
             });
         }
@@ -1394,9 +1411,10 @@ myapp.controller("controller",
                         $scope.account.honors[index] = ha;
                     else
                         $scope.account.honors.push(ha);
-
+                    setPrfStrength();
                 });
                 cleanAwardsInputs();
+                
                 return true;
             }
             return false;
@@ -1418,6 +1436,7 @@ myapp.controller("controller",
             delHa.id = ha.id;
             delHa.$save(function (dha) {
                 $scope.account.honors.splice($scope.account.honors.indexOf(dha), 1);
+                setPrfStrength();
                 //cleanHistoryInputs();
             });
         }
@@ -1538,9 +1557,10 @@ myapp.controller("controller",
                         $scope.account.courses[index] = cr;
                     else
                         $scope.account.courses.push(cr);
-
+                    setPrfStrength();
                 });
                 cleanCoursesInputs();
+                
                 return true;
             }
             return false;
@@ -1561,6 +1581,7 @@ myapp.controller("controller",
             delCr.id = cr.id;
             delCr.$save(function (dcr) {
                 $scope.account.courses.splice($scope.account.courses.indexOf(dcr), 1);
+                setPrfStrength();
                 //cleanHistoryInputs();
             });
         }
