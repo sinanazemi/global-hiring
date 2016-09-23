@@ -298,18 +298,17 @@ myapp.controller("controller",
             //}
             saveSk.$save($scope.myMsSkill);
             $('#addSkill').modal('hide');
-            $scope.skills = $scope.selSkills
         }
 
-        var delSkillRes = $resource("/deleteSkill")
-        $scope.removeSkill = function (skill) {
-            var delSkill = new delSkillRes();
-            delSkill.id = skill.id;
-            delSkill.$save(function (dsk) {
-                $scope.account.skills.splice($scope.account.skills.indexOf(dsk), 1);
-                //cleanHistoryInputs();
-            });
-        }
+        //var delSkillRes = $resource("/deleteSkill")
+        //$scope.removeSkill = function (skill) {
+        //    var delSkill = new delSkillRes();
+        //    delSkill.id = skill.id;
+        //    delSkill.$save(function (dsk) {
+        //        $scope.account.skills.splice($scope.account.skills.indexOf(dsk), 1);
+        //        //cleanHistoryInputs();
+        //    });
+        //}
 
         $scope.getSkills = function () {
             $scope.skills = $scope.selectedService.skills;
