@@ -76,6 +76,14 @@
 .modal-skill-c{
     overflow-y: scroll;
 }
+.f-items-c{
+    text-decoration:none !important;
+    margin-top: -8px;
+    font-size: 14px;
+    /*padding-left: 79px;*/
+    line-height: 2.1;
+    color: #818181;
+}
 /*-----------------------
     navbar
 -----------------------*/
