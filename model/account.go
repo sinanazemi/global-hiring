@@ -369,18 +369,26 @@ func CompleteAccount(w http.ResponseWriter, r *http.Request) (interface{}, *util
   return GetAccount(w, r)
 }
 
+type AccountStrength struct {
+  Value int `json:"value"`
+}
+
 func GetAccountStrength(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
+
+  result := AccountStrength{-1}
 
   session, err := util.GetSession(w, r)
   if err != nil {
-      return -1, &util.HandlerError{err, "Problems in session", http.StatusBadRequest}
+      return result, &util.HandlerError{err, "Problems in session", http.StatusBadRequest}
   }
 
   account, err := loadAccount(session)
   if err != nil {
-    return -1, &util.HandlerError{err, "Problem while loading account", http.StatusBadRequest}
+    return result, &util.HandlerError{err, "Problem while loading account", http.StatusBadRequest}
   }
-  return account.getStrength(), nil
+
+  result.Value = account.getStrength()
+  return result, nil
 }
 
 func SaveDescription(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
