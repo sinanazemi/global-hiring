@@ -205,11 +205,26 @@ myapp.controller("controller",
             service.isselected = !service.isselected;
         };
 
+        function setMyMsSkill() {
+            // {msID,msName,msIsSel,sId,sName,sIsSel,proficiency}
+            //$scope.myMsSkill = [{ msID: -1, msName: "", msIsSel: false, sId: -1, sName: "", sIsSel: false, proficiency: "" }]            
+            $scope.myMsSkill = [];
+            for (var i = 0; i < $scope.mainServices.length; i++) {
+                for (var j = 0; j < $scope.mainServices[i].skills.length; j++) {
+                    if ($scope.mainServices[i].skills[j].isselected) {
+                        var s = { msID: $scope.mainServices[i].id, msName: $scope.mainServices[i].name, msIsSel: $scope.mainServices[i].isselected, sId: $scope.mainServices[i].skills[j].id, sName: $scope.mainServices[i].skills[j].name, sIsSel: $scope.mainServices[i].skills[j].isselected, profeciency: $scope.mainServices[i].skills[j].profeciency };
+                        $scope.myMsSkill.push(s);
+                    }
+                }
+            }
+
+        }
+
         var service = $resource("/mainServices")
         $scope.getMainServices = function () {
             service.query(
               function (data) {
-                  $scope.mainServices = data;
+                  $scope.mainServices = data;                  
                   for(var i=0;i<$scope.account.skills.length;i++)
                   {
                       for(var j=0;j<$scope.mainServices.length;j++)
@@ -227,6 +242,7 @@ myapp.controller("controller",
                           }
                       }
                   }
+                  
               } // function(data)
             ) // service.query
         };
@@ -262,24 +278,25 @@ myapp.controller("controller",
         $scope.saveSkill=function()
         {
             var saveSk = new saveSkillRes();
-            for (var i = 0; i < $scope.mainServices.length; i++)
-            {
-                if($scope.mainServices[i].isselected)
-                {
-                    for(var j=0; j<$scope.mainServices[i].skills.length;j++)
-                    {
-                        if ($scope.mainServices[i].skills[j].isselected) {
-                            //saveSk.skillid = $scope.mainServices[i].skills[j].id;
-                            //saveSk.profeciency = $scope.mainServices[i].skills[j].profeciency;
-                            //saveSk.$save();
-                            //$('#addSkill').modal('hide');
-                            //$scope.account.skills
-                        }
-                    }
-                }
+            setMyMsSkill();
+            //for (var i = 0; i < $scope.mainServices.length; i++)
+            //{
+            //    if($scope.mainServices[i].isselected)
+            //    {
+            //        for(var j=0; j<$scope.mainServices[i].skills.length;j++)
+            //        {
+            //            if ($scope.mainServices[i].skills[j].isselected) {
+            //                //saveSk.skillid = $scope.mainServices[i].skills[j].id;
+            //                //saveSk.profeciency = $scope.mainServices[i].skills[j].profeciency;
+            //                //saveSk.$save();
+            //                //$('#addSkill').modal('hide');
+            //                //$scope.account.skills
+            //            }
+            //        }
+            //    }
 
-            }
-            saveSk.$save($scope.selSkills);
+            //}
+            saveSk.$save($scope.myMsSkill);
             $('#addSkill').modal('hide');
             $scope.skills = $scope.selSkills
         }
