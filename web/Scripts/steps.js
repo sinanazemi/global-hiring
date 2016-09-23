@@ -179,8 +179,9 @@ $scope.passwordChange=function(){
     $scope.requiedStyleEmail='';
 
 
-    if($scope.fullname=='' || $scope.email=='' || !$scope.checkboxValue || $scope.password=='' || $scope.selectedCity=='' || (!($scope.isStudent=="yes" || $scope.isStudent=="no"))  )
+    if($scope.fullname=='' || $scope.email=='' || !$scope.checkboxValue || ($scope.password=='' || $scope.password.length<6) || $scope.selectedCity=='' || (!($scope.isStudent=="yes" || $scope.isStudent=="no"))  )
     {
+
       if(!($scope.isStudent=="yes" || $scope.isStudent=="no"))
       {
         $scope.requiedStyleisStudent={
@@ -247,7 +248,7 @@ $scope.passwordChange=function(){
         $scope.selectColorStyle={"color":"#8a8888"};
       }
 
-      if($scope.password=='' )
+      if($scope.password=='' || $scope.password.length<6 )
       {
         $scope.isRedPWPlacehoder=true;
         $scope.requiedStylePassword={
