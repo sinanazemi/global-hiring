@@ -169,21 +169,21 @@
                                         <div>
                                             <p><span class="glyphicon glyphicon-map-marker"></span>  {{account.city.name}}, Iran</p>
                                             
-                                                <p style="display:inline-block;float:left;"><span class="prf-edu-c">Education</span></p>
-                                                <p style="display:inline-block;">
+                                            <p class="edu-title-c"><span class="prf-edu-c">Education</span></p>
+                                            <p class="prf-edu-info-c">
 
-                                                    <!--&nbsp;B.S., Computer Science BIHE-->
-                                                    <span class="prf-edu-info-c" ng-repeat="x in account.educations">
-                                                        {{x.degree.name}}, {{x.field}} | {{x.school}}<br />
-                                                    </span>
-                                                </p>
+                                                <!--&nbsp;B.S., Computer Science BIHE-->
+                                                <span ng-repeat="x in account.educations">
+                                                    {{x.degree.name}}, {{x.field}} | {{x.school}}<br />
+                                                </span>
+                                            </p>
                                             
                                         </div>
 
                                         <!-- Skill -->
                                         <div>
                                             <!-- Skills tags -->
-                                            <div class="col-sm-12" style=" margin-top: 20px; margin-left: -15px;">
+                                            <div class="col-sm-12 skills-tag-c">
                                                 <ul ng-repeat=" skill in account.skills" class="list-inline" style="padding:5px;display: inline-block;">
                                                 <li style="padding: 0; margin-top: -20px;">
                                                     <span class="tag-skill-c">

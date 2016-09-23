@@ -253,8 +253,12 @@
 }
 .prf-edu-info-c{
     margin-left:15px;
+    display:inline-block;
 }
-
+.edu-title-c{
+    display:inline-block;
+    float:left;
+}
 
 .panels-c h4 {
     font-size: 18px;
@@ -281,6 +285,11 @@
 }
 .btn-add-c, .btn-edit-c, .btn-delete-c{
     display:none;
+}
+
+.skills-tag-c{
+    margin-top: 20px; 
+    margin-left: -15px;
 }
 /************************/
 /*** add main service ****/
@@ -980,7 +989,13 @@ input[type=checkbox]:checked+.custom-check::before {
     margin-left:auto;
     margin-right:auto;
 }
-
+        /*.modal-b-c{
+    margin-left:0px;
+    margin-right:0px;
+}*/
+        .panel-body{
+    padding-left:0px;
+}
         .main-cn-c h2{
             margin-top:30px;
     /*padding:inherit;*/
@@ -992,6 +1007,19 @@ input[type=checkbox]:checked+.custom-check::before {
             margin-left:15px;
             margin-right:15px;
         }
+
+        .edu-title-c{
+    display:block;
+    float:none;
+}
+        .prf-edu-info-c{
+    padding-left:15px;
+    display:block;
+}
+        .skills-tag-c{
+    margin-top: 20px; 
+    margin-left: 15px;
+}
         /*-----------------------
         forth footer
         -----------------------*/
