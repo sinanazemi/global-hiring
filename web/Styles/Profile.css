@@ -252,7 +252,7 @@
     color: #8d8b8b;
 }
 .prf-edu-info-c{
-    margin-left:23px;
+    margin-left:15px;
 }
 
 
@@ -942,22 +942,6 @@ input[type=checkbox]:checked+.custom-check::before {
         left: 15px;
     }
 
-    .popover-content {
-        max-width: 175px;
-    }
-        .logout-div-c{
-            /*position:absolute;
-            top:50px*/;
-            /*right:0px;*/
-            /*left:0px;
-            width:150px;
-            height:30px;
-            font-size: 10px;
-            letter-spacing: 0.5px;*/
-            width:100px;
-            font-size:10px;
-            margin-left:-5px;            
-        }
 
         .logout-btn-c{
             /*margin-top:7px;*/

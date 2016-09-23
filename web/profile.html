@@ -168,13 +168,16 @@
                                         <!-- Education -->
                                         <div>
                                             <p><span class="glyphicon glyphicon-map-marker"></span>  {{account.city.name}}, Iran</p>
-                                            <p>
-                                                <span class="prf-edu-c">Education</span>
-                                                <!--&nbsp;B.S., Computer Science BIHE-->
-                                                <span class="prf-edu-info-c" ng-repeat="x in account.educations">
-                                                    {{x.degree.name}}, {{x.field}} | {{x.school}}<br />
-                                                </span>
-                                            </p>
+                                            
+                                                <p style="display:inline-block;float:left;"><span class="prf-edu-c">Education</span></p>
+                                                <p style="display:inline-block;">
+
+                                                    <!--&nbsp;B.S., Computer Science BIHE-->
+                                                    <span class="prf-edu-info-c" ng-repeat="x in account.educations">
+                                                        {{x.degree.name}}, {{x.field}} | {{x.school}}<br />
+                                                    </span>
+                                                </p>
+                                            
                                         </div>
 
                                         <!-- Skill -->

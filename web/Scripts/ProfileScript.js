@@ -8,6 +8,7 @@ myapp.controller("controller",
 
 
         $scope.shAddOverview = true;
+
         var accountRes = $resource("/account")
         accountRes.get(
           function (data) {

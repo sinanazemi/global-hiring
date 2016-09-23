@@ -1,4 +1,4 @@
-﻿var app = angular.module("myApp", ["ngRoute"]);
+﻿var app = angular.module("myApp", ['ngRoute', 'ngResource', 'ui.bootstrap']);
 app.config(function ($routeProvider) {
     $routeProvider
     .when("/", {
@@ -15,3 +15,31 @@ app.config(function ($routeProvider) {
     //})
 
 });
+
+app.controller("controller", ["$scope", "$resource",
+    function ($scope, $resource) {
+        var accountRes = $resource("/account")
+        accountRes.get(
+          function (data) {
+              $scope.account = data;
+              
+          }, function (err) {
+              if ($scope.account == null) {
+                  ;
+              }
+          }
+        );
+
+
+        $scope.userImage = "/profilePicture"; //"images/Chrysanthemum.jpg";
+
+        /*    logout     */
+        var logout = $resource("/logout");
+        $scope.btnLogout = function () {
+            logout.get(function (data) {
+                window.location = "/HomePage.html"; // Logout and move to home page
+            })
+        };
+    }
+]
+)

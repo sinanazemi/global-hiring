@@ -57,6 +57,70 @@
     height:19px;
     margin-bottom:8.3px;
 }
+/************** use info *****************/
+.small-profile-img-c {
+    width: 74px;
+    height: 72.8px;
+    /*margin-top:7px;*/
+}
+.logout-btn-c{
+    color: #4a4a4a;   
+}
+.logout-txt-c{
+  font-family: Helvetica;
+  font-size: 14px;
+  letter-spacing: 0.7px;
+  color: #4a4a4a;
+  text-decoration:none;
+}
+.logout-email-c{
+    font-family: Helvetica; 
+    font-size: 10px; 
+    font-weight: 400; 
+    letter-spacing: 0.5px; 
+    color: #7e7d7e;
+}
+/********************************************/
+/******************* start logout menu *************************/
+/********************************************/
+.dropdown {    
+    margin-top:8px;
+}
+.dropdown-menu{
+    height:60px;
+}
+.dropdown-menu>li>a {
+    color:#4a4a4a;
+}
+.dropdown ul.dropdown-menu {
+    border-radius:4px;
+    box-shadow:none;
+    margin-top:15px;
+    width:300px;
+}
+.dropdown ul.dropdown-menu:before {
+    content: "";
+    border-bottom: 10px solid #fff;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    position: absolute;
+    top: -10px;
+    right: 16px;
+    z-index: 10;
+}
+.dropdown ul.dropdown-menu:after {
+    content: "";    
+    border-bottom: 12px solid #ccc;
+    border-right: 12px solid transparent;
+    border-left: 12px solid transparent;
+    position: absolute;
+    top: -12px;
+    right: 14px;
+    z-index: 9;
+}
+/********************************************/
+/********************* finish logout menu ***********************/
+/********************************************/
 
 /*-----------------------
     second skill work
@@ -418,6 +482,26 @@
         .menu-mo-c{
             display:block;
         }
+        .small-profile-img-c{
+            left:10px;
+            position:absolute;
+            top:8px;
+            /*right:0px;*/
+            width:30px;
+            height:30px;
+        }
+        .acc_name-c{
+            position:absolute;
+            top:8px;
+            /*right:0px;*/
+            left:50px;
+            font-size: 10px;
+            letter-spacing: 0.5px;
+        }
+    .pf_icon-c {
+        font-size:10px;
+        
+    }
         .login-link-c{
             position:absolute;
             top:8px;
@@ -439,6 +523,43 @@
             font-size: 8px;
             letter-spacing: 0.4px;            
         }
+
+        /********* logout *********/
+         .dropdown ul.dropdown-menu {    
+    margin-left:-20px;
+    width:180px;
+    height:45px;
+}
+    .dropdown ul.dropdown-menu:before {
+    right:auto;
+    left: 16px;
+    }
+    .dropdown ul.dropdown-menu:after {
+        right:auto;
+        left: 15px;
+    }
+
+
+        .logout-btn-c{
+            /*margin-top:7px;*/
+            margin-bottom:auto;
+            /*margin-left:10px;*/
+
+        }
+        .logout-txt-c {
+        font-size:10px;
+        margin-top:auto;
+    }
+    .logout-email-c{
+        font-family: Helvetica; 
+        font-size: 10px; 
+        font-weight: 400; 
+        letter-spacing: 0.5px; 
+        color: #7e7d7e;
+        /*position:absolute; 
+        top:7px;
+        right:5px;/*0px;*/*/
+    }
         
         /*-----------------------
         second skill work

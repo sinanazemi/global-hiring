@@ -6,19 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" />
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <script src="bootstrap/js/bootstrap.js"></script>
+    
+    <script src="http://code.jquery.com/jquery-1.10.2.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-resource.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.js"></script>
+
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.0.1.js"></script>
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <!--<script src="bootstrap/js/bootstrap.js"></script>-->
 
     <link href="Styles/CustomStyle.css" rel="stylesheet" />
     <script src="Scripts/HomeScript.js"></script>
 
 </head>
-<body ng-app="myApp">
+<body ng-app="myApp" ng-controller="controller">
     <!-- navigation bar -->
     <nav class="navbar navbar-fixed-top nav-container-c">
         <div class="container nav-container-c max-fram-c">
@@ -34,7 +40,7 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
 
-                <ul class="nav navbar-nav navbar-right nav-right-c">
+                <ul ng-if="account == null" class="nav navbar-nav navbar-right nav-right-c">
                     <li><a href="/login.html" class="login-link-c">LOGIN</a></li>
                     <li>
                         <a href="#/About" class="btn btn-hire-c" role="button">
@@ -42,12 +48,36 @@
                         </a>
                     </li>
                 </ul>
+                <!-- user info -->
+                <ul ng-if="account != null" class="nav navbar-nav navbar-right">
+                    <li>
+                        <img class="small-profile-img-c img-circle" ng-src="{{userImage}}" />
+                    </li>
+                    <li class="dropdown">
+                        <a  class="dropdown-toggle" data-toggle="dropdown">{{account.name}} <span class="glyphicon glyphicon-menu-down pf_icon-c"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" ng-click="btnLogout()" class="logout-txt-c"><span class="glyphicon glyphicon-log-out logout-btn-c"></span>   Logout   <span class="logout-email-c pull-right"> {{account.email}}</span></a></li>
+                            <li><a href="/profile.html"><span class="glyphicon glyphicon-user logout-btn-c"></span>   My profile </a></li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-            <div class="menu-mo-c">
+            <div ng-if="account == null" class="menu-mo-c">
                 <a href="/login.html" class="login-link-c">LOGIN</a>
                 <a href="#/About" class="btn btn-hire-c" role="button">
                     <div class="txt-hire-c">Hiring Manager?</div>
                 </a>
+            </div>
+            <!-- user info -->
+            <div ng-if="account != null" class="menu-mo-c">
+                <img class="small-profile-img-c img-circle" ng-src="{{userImage}}" />
+                <div class="dropdown acc_name-c ">
+                    <a class="dropdown-toggle" data-toggle="dropdown">{{account.name}} <span class="glyphicon glyphicon-menu-down pf_icon-c"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#" ng-click="btnLogout()" class="logout-txt-c"><span class="glyphicon glyphicon-log-out logout-btn-c"></span>   Logout   <span class="logout-email-c pull-right"> {{account.email}}</span></a></li>
+                        <li><a href="/profile.html" class="logout-txt-c"><span class="glyphicon glyphicon-user logout-btn-c"></span>   My profile </a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
@@ -93,7 +123,7 @@
                 </div>
             </div>
 
-           
+
             <!--</footer>-->
         </div>
         <!-- Copyright etc -->
