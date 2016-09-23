@@ -5,7 +5,40 @@ globalHiring.filter('capitalize', function() {
       return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
     }
 });
+globalHiring.directive('upperThan', [
+  function() {
 
+    var link = function($scope, $element, $attrs, ctrl) {
+
+      var validate = function(viewValue) {
+        var comparisonModel = $attrs.upperThan;
+
+        if(!viewValue || !comparisonModel){
+          // It's valid because we have nothing to compare against
+          ctrl.$setValidity('upperThan', true);
+        }
+
+        // It's valid if model is lower than the model we're comparing against
+        ctrl.$setValidity('upperThan', parseInt(viewValue, 10) > parseInt(comparisonModel, 10) );
+        return viewValue;
+      };
+
+      ctrl.$parsers.unshift(validate);
+      ctrl.$formatters.push(validate);
+
+      $attrs.$observe('upperThan', function(comparisonModel){
+        return validate(ctrl.$viewValue);
+      });
+
+    };
+
+    return {
+      require: 'ngModel',
+      link: link
+    };
+
+  }
+]);
 globalHiring.controller('stepsController',['$scope', '$resource','$uibModal','$location','$parse', function($scope, $resource,$uibModal,$location,$parse, $http, $window, $log) {
 //initializing page
 var accountUser = $resource("/account")
