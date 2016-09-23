@@ -466,6 +466,25 @@ $scope.passwordChange=function(){
       } // function(data)
     ) // service.query
 
+    //Captalize fullName
+    $scope.captalizeFullName=function(){
+      if ($scope.fullname) {
+      var name = $scope.fullname.split(" ");
+      firstname='';
+      lastname='';
+        if (name.length > 0) {
+          firstname = name[0].charAt(0).toUpperCase() +name[0].substr(1).toLowerCase(); // first name;
+          if(name.length>1) {
+            lastname = name[1].charAt(0).toUpperCase() +name[1].substr(1).toLowerCase(); // last name
+          } else {
+            lastname = '';
+          }
+
+          $scope.fullname=firstname+" "+lastname;
+        }
+      }
+    }
+
 
   //Add more Language
   $scope.LanguageProfeciencies = [
