@@ -25,7 +25,7 @@
 }
 .hr-c{
     margin-right: 30px; 
-    height: 1px; 
+    /*height: 1px;*/ 
     background-color: #d8d8d8;
 }
 .item-rp-c{
@@ -72,6 +72,9 @@
     border-radius: 0px;
     height: 32px;
     border: solid 1.2px #cdcdcd;
+}
+.modal-skill-c{
+    overflow-y: scroll;
 }
 /*-----------------------
     navbar
@@ -724,7 +727,7 @@ input[type=checkbox]:checked+.custom-check::before {
 
 /*-------  right info  ------------*/
 .prf-strength-img-c{
-    height:65px;
+    height:102px;
 }
 .strength-cnt-c h3 {
     font-size: 14px;

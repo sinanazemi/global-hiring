@@ -40,6 +40,29 @@ myapp.controller("controller",
           ); // profilePicture.$save
         } // $scope.savePrfPic = function ()
 
+        
+            var prfStrengthNum = 0;
+            var prfStrengthRes = $resource("/accountStrength");
+            //prfStrengthRes.query(
+            prfStrengthRes.get(
+               function (data) {
+                   prfStrengthNum = data.value;
+                   if (prfStrengthNum < 20) {
+                       $scope.prfStrengthImg = "/images/beginner.png";
+                   }
+                   else if (prfStrengthNum < 40)
+                       $scope.prfStrengthImg = "/images/Intermediate.png";
+                   else if (prfStrengthNum < 60)
+                       $scope.prfStrengthImg = "/images/Advanced.png";
+                   else if (prfStrengthNum < 80)
+                       $scope.prfStrengthImg = "/images/Expert.png";
+                   else
+                       $scope.prfStrengthImg = "/images/AllStar.png";
+               }, function (err) {
+                   prfStrengthNum = 0;
+               })
+       
+       
 
         $scope.dates = [];
         for (var i = 1970; i <= 2020; i++) {
@@ -436,8 +459,14 @@ myapp.controller("controller",
         // Work History
         //*************************
         function setLocation() {
-        $scope.locations = [{ id: 1, name: "location 1" }, { id: 2, name: "location 2" }, { id: 3, name: "location 3" }, { id: 4, name: "location 11" }, { id: 5, name: "location 12" }, { id: 6, name: "location 13" }
-        , { id: 7, name: "location 21" }, { id: 8, name: "location 22" }, { id: 9, name: "location 23" }, { id: 10, name: "location 31" }, { id: 11, name: "location 32" }, { id: 12, name: "location 33" }];
+            var cities = $resource("/cities");
+            cities.query(
+          function (data) {
+              $scope.locations = data;
+          } // function(data)
+        ) // service.query
+        //$scope.locations = [{ id: 1, name: "location 1" }, { id: 2, name: "location 2" }, { id: 3, name: "location 3" }, { id: 4, name: "location 11" }, { id: 5, name: "location 12" }, { id: 6, name: "location 13" }
+        //, { id: 7, name: "location 21" }, { id: 8, name: "location 22" }, { id: 9, name: "location 23" }, { id: 10, name: "location 31" }, { id: 11, name: "location 32" }, { id: 12, name: "location 33" }];
         }
         function setRoles() {
             $scope.roles = [{ value: "I", name: "Intern" }, { value: "C", name: "Individual Contributor" }, { value: "L", name: "Lead" }, { value: "M", name: "Manager" }, { value: "E", name: "Executive" }, { value: "O", name: "Owner" }];

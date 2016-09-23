@@ -243,7 +243,7 @@
                                             </div>
 
                                             <!-- Modal Add Skill -->
-                                            <div id="addSkill" class="modal fade modal-c" role="dialog">
+                                            <div id="addSkill" class="modal fade modal-c modal-skill-c" role="dialog" >
                                                 <div class="modal-dialog">
 
                                                     <!-- Modal content-->
@@ -1150,14 +1150,15 @@
                     <!-- right info -->
                     <div class="col-sm-3 strength-cnt-c">
                         <h3>Profile Strength</h3>
-                        <img class="prf-strength-img-c" src="images/beginner.png" />
+                        <!--<img class="prf-strength-img-c" src="images/beginner.png" />-->
+                        <img class="prf-strength-img-c" ng-src="{{prfStrengthImg}}" />
                         <br />
                         <br />
                         <br />
                         <a href="#">View my profile as others see it</a>
                         <br />
                         <br />
-                        <hr />
+                        <hr style="background-color: #d8d8d8;"/>
                         <br />
                         <div class="panel-body panel-language-c">
                             <h3>
