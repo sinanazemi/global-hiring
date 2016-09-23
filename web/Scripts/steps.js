@@ -613,8 +613,9 @@ $scope.removeLanguage=function(lang){
 
   var indexEdu =0;
   $scope.addMoreEduClick=function(educationToAdd){
-    if($scope.educationToAdd.school!='')
+    if($scope.educationToAdd.school!='' && !$scope.checkIfHasEdu())
     {
+      educationToAdd.school=educationToAdd.school.toLowerCase();
       $scope.educations.push(angular.copy(educationToAdd));
       $scope.educationToAdd.school='';
       $scope.educationToAdd.fromdate='';
@@ -622,7 +623,33 @@ $scope.removeLanguage=function(lang){
       $scope.educationToAdd.degree='';
       $scope.educationToAdd.field='';
       $scope.educationToAdd.grade='';
+      $scope.educationToAdd.moreInfo='';
     }
+    if($scope.checkIfHasEdu()){
+      $scope.educationToAdd.school='';
+      $scope.educationToAdd.fromdate='';
+      $scope.educationToAdd.todate='';
+      $scope.educationToAdd.degree='';
+      $scope.educationToAdd.field='';
+      $scope.educationToAdd.grade='';
+      $scope.educationToAdd.moreInfo='';
+    }
+  }
+
+  $scope.checkIfHasEdu=function(){
+    if($scope.educationToAdd.school!='')
+    {
+      hasEdu=false;
+      for(i=0;i<$scope.educations.length;i++)
+      {
+        if($scope.educations[i].school.toLowerCase()==$scope.educationToAdd.school.toLowerCase())
+        {
+          hasEdu=true;
+        }
+      }
+      return hasEdu;
+    }
+    else{return true;}
   }
 
   // Main Services
