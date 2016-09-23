@@ -167,6 +167,9 @@
 /********************************************/
 /********************* finish logout menu ***********************/
 /********************************************/
+.panel-first-c{
+    padding-bottom:30px;
+}
 .main-cnt-c{
     background-color:#f3f3f3;
 }
@@ -206,7 +209,7 @@
 .prf-img-c {
     margin-top:30px;
     /*padding-right:20px;*/
-    margin-left:20px;
+    /*margin-left:20px;*/
     width: 103px;
     height: 105.3px;
 }

@@ -53,16 +53,16 @@ myapp.controller("controller",
                    function (data) {
                        prfStrengthNum = data.value;
                        if (prfStrengthNum < 20) {
-                           $scope.prfStrengthImg = "/images/beginner.png";
+                           $scope.prfStrengthImg = "/images/beginner@5x.png";
                        }
                        else if (prfStrengthNum < 40)
-                           $scope.prfStrengthImg = "/images/Intermediate.png";
+                           $scope.prfStrengthImg = "/images/Intermediate@5x.png";
                        else if (prfStrengthNum < 60)
-                           $scope.prfStrengthImg = "/images/Advanced.png";
+                           $scope.prfStrengthImg = "/images/Advanced@5x.png";
                        else if (prfStrengthNum < 80)
-                           $scope.prfStrengthImg = "/images/Expert.png";
+                           $scope.prfStrengthImg = "/images/Expert@5x.png";
                        else
-                           $scope.prfStrengthImg = "/images/AllStar.png";
+                           $scope.prfStrengthImg = "/images/AllStar@5x.png";
                    }, function (err) {
                        prfStrengthNum = 0;
                    })
@@ -269,15 +269,19 @@ myapp.controller("controller",
                     for(var j=0; j<$scope.mainServices[i].skills.length;j++)
                     {
                         if ($scope.mainServices[i].skills[j].isselected) {
-                            saveSk.skillid = $scope.mainServices[i].skills[j].id;
-                            saveSk.profeciency = $scope.mainServices[i].skills[j].profeciency;
-                            saveSk.$save();
-                            $('#addSkill').modal('hide');
+                            //saveSk.skillid = $scope.mainServices[i].skills[j].id;
+                            //saveSk.profeciency = $scope.mainServices[i].skills[j].profeciency;
+                            //saveSk.$save();
+                            //$('#addSkill').modal('hide');
+                            //$scope.account.skills
                         }
                     }
                 }
 
             }
+            saveSk.$save($scope.selSkills);
+            $('#addSkill').modal('hide');
+            $scope.skills = $scope.selSkills
         }
 
         var delSkillRes = $resource("/deleteSkill")
