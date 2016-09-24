@@ -318,7 +318,11 @@ func (acc *Account) updateJobTitle (session *util.Session, dataMap map[string]in
 func (acc *Account) getProfilePicture() ([]byte, error) {
 
   query := "Select image From account where id = $1";
-  return util.SelectByteArr(query, acc.Id)
+  result , err := util.SelectByteArr(query, acc.Id)
+  if (len(result) <= 2 && err == nil) {
+    err = errors.New("Empty Profile Picture")
+  }
+  return result , err
 }
 
 func (acc *Account) updateProfilePicture (session *util.Session, dataMap map[string]interface{}) error {

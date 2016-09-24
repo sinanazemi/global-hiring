@@ -71,7 +71,7 @@ func DecodeBase64(str string) ([]byte, error) {
 
 func DefaultProfilePicture(w http.ResponseWriter) {
 
-  fileName := "web/images/profile.png"
+  fileName := "web/images/profileDef.png"
   imgFile, err := os.Open(fileName)
 
   if err != nil {
