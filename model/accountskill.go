@@ -7,18 +7,12 @@ import(
   "github.com/sinanazemi/global-hiring/util"
 )
 
-const SKILL_PROFECIENCY_STUDENT string = "S"
-const SKILL_PROFECIENCY_JUNIOR string = "J"
-const SKILL_PROFECIENCY_EXPERIENCED string = "E"
-const SKILL_PROFECIENCY_MANAGER string = "M"
-
 type AccountSkill struct {
-  Id int `json:"accountskillid"`
-  SkillID int `json:"id"`
+  Id int `json:"id"`
+  SkillID int `json:"skillid"`
   Name string `json:"name"`
   MainServiceID int `json:"mainserviceid"`
-  IsSelected bool `json:"isselected"`
-  Profeciency string `json:"profeciency"`
+  Profeciency SkillProfeciency `json:"profeciency"`
 }
 
 func parseAccountSkill(data interface{}) (AccountSkill, error) {
@@ -29,12 +23,11 @@ func parseAccountSkill(data interface{}) (AccountSkill, error) {
     return result, errors.New("looking for a 'map[string]interface{}' to parse an 'AccountSkill', but not found.\n")
   }
 
-  result.Id = util.ParseInteger(dataMap, "accountskillid")
-  result.SkillID = util.ParseInteger(dataMap, "id")
+  result.Id = util.ParseInteger(dataMap, "id")
+  result.SkillID = util.ParseInteger(dataMap, "skillid")
   result.Name = util.ParseString(dataMap, "name")
   result.MainServiceID = util.ParseInteger(dataMap, "mainserviceid")
-  result.IsSelected = util.ParseBool(dataMap, "isselected")
-  result.Profeciency = util.ParseString(dataMap, "profeciency")
+  result.Profeciency, _ = parseSkillProfeciency(dataMap["profeciency"])
 
   return result, nil
 }
@@ -68,13 +61,7 @@ func (acs *AccountSkill) dataValidation(session *util.Session) error {
     errStr = errStr + "AccountSkill.SkillID is not valid\n"
   }
 
-  profeciencyCheck := false
-  profeciencyCheck = profeciencyCheck || (acs.Profeciency == SKILL_PROFECIENCY_STUDENT)
-  profeciencyCheck = profeciencyCheck || (acs.Profeciency == SKILL_PROFECIENCY_JUNIOR)
-  profeciencyCheck = profeciencyCheck || (acs.Profeciency == SKILL_PROFECIENCY_EXPERIENCED)
-  profeciencyCheck = profeciencyCheck || (acs.Profeciency == SKILL_PROFECIENCY_MANAGER)
-
-  if (!profeciencyCheck) {
+  if (acs.Profeciency.isEmpty()) {
     errStr = errStr + "AccountSkill.Profeciency is not valid\n"
   }
 
@@ -118,6 +105,9 @@ func loadAccountSkills(session *util.Session) ([]AccountSkill, error) {
 
     for _, dummySkill := range skills {
       skill, _ := dummySkill.(AccountSkill)
+
+      skill.Profeciency = loadSkillProfeciency(skill.Profeciency.Value)
+
       result = append(result, skill)
     }
 
@@ -127,7 +117,7 @@ func loadAccountSkills(session *util.Session) ([]AccountSkill, error) {
 func readAccountSkill(rows *sql.Rows) (interface{}, error) {
 
   var skill AccountSkill = AccountSkill{}
-  err := rows.Scan(&skill.Id, &skill.SkillID, &skill.Name, &skill.MainServiceID, &skill.Profeciency)
+  err := rows.Scan(&skill.Id, &skill.SkillID, &skill.Name, &skill.MainServiceID, &skill.Profeciency.Value)
 
   return skill, err
 }
@@ -152,7 +142,7 @@ func (acs *AccountSkill) saveNew(session *util.Session) error {
     "VALUES($1, $2, $3) " +
     "returning ID"
 
-  id, err := util.Insert(query, session.GetAccountID(), acs.SkillID, acs.Profeciency)
+  id, err := util.Insert(query, session.GetAccountID(), acs.SkillID, acs.Profeciency.Value)
 
   if err != nil {
     return err
@@ -175,7 +165,7 @@ func (acs *AccountSkill) saveUpdate(session *util.Session) error {
     "Profeciency = $2 " +
     "WHERE ID = $3 "
 
-  err = util.Update(query, acs.SkillID, acs.Profeciency, acs.Id)
+  err = util.Update(query, acs.SkillID, acs.Profeciency.Value, acs.Id)
 
   return err
 
@@ -194,6 +184,17 @@ func (acs *AccountSkill) delete(session *util.Session) error {
   err = util.Update(query, acs.Id)
 
   return err
+}
+
+func createAccountSkill(skill Skill) AccountSkill {
+
+  return AccountSkill {
+    0,
+    skill.Id,
+    skill.Name,
+    skill.MainServiceID,
+    skill.Profeciency.clone()  }
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -1,6 +1,7 @@
 package model
 
 import(
+  "errors"
   "database/sql"
   "net/http"
   "github.com/sinanazemi/global-hiring/util"
@@ -10,11 +11,50 @@ type MainService struct{
   Id     int  `json:"id"`
   Name string `json:"name"`
   Question string `json:"question"`
-  IsSelected bool `json:"isselected"`
+  IsSelected bool `json:"isselected"` // dummy field, just for leva
   Skills []Skill `json:"skills"`
 
   UnselectImageURL string `json:"unselectimageurl"`
   SelectImageURL string `json:"selectimageurl"`
+}
+
+func parseMainService(data interface{}) (MainService, error) {
+  result := MainService{}
+
+  dataMap, ok := data.(map[string]interface{})
+  if (!ok) {
+    return result, errors.New("looking for a 'map[string]interface{}' to parse a 'MainService', but not found.\n")
+  }
+
+  result.Id = util.ParseInteger(dataMap, "id")
+  result.Name = util.ParseString(dataMap, "name")
+  result.Question = util.ParseString(dataMap, "question")
+  result.IsSelected = util.ParseBool(dataMap, "isselected")
+
+  result.Skills = parseSkills(dataMap["skills"])
+
+  result.UnselectImageURL = util.ParseString(dataMap, "unselectimageurl")
+  result.SelectImageURL = util.ParseString(dataMap, "selectimageurl")
+
+  return result, nil
+}
+
+func parseMainServices(data interface{}) []MainService {
+  result := make([]MainService, 0)
+
+  mArr, ok := data.([]interface{})
+  if (!ok) {
+    print("looking for a '[]interface{}' to parse an array of 'MainService's, but not found.\n")
+    return result
+  }
+
+  for _ , m := range mArr {
+    mainService, err := parseMainService(m)
+    if (err == nil) {
+      result = append(result, mainService)
+    }
+  }
+  return result
 }
 
 func getMainServices() []MainService {

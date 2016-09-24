@@ -61,6 +61,7 @@ func main() {
 	// Editting Skills
 	http.Handle("/saveSkill", util.Handler(model.SaveSkill))
 	http.Handle("/deleteSkill", util.Handler(model.DeleteSkill))
+	http.Handle("/updateSkills", util.Handler(model.UpdateSkills))
 
 	// Editting Certificates
 	http.Handle("/saveCertificate", util.Handler(model.SaveCertificate))

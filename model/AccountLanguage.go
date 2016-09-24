@@ -34,7 +34,7 @@ func parseAccountLanguages(data interface{}) []AccountLanguage {
 
   lArr, ok := data.([]interface{})
   if (!ok) {
-    print("looking for a 'm[]interface{}' to parse an array of 'AccountLanguage's, but not found.\n")
+    print("looking for a '[]interface{}' to parse an array of 'AccountLanguage's, but not found.\n")
     return result
   }
 

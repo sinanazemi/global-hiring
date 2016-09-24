@@ -40,6 +40,9 @@ type Account struct {
   Tests []AccountTest `json:"tests"`
 
   Projects []AccountProject `json:"projects"`
+
+  // A Dummy member
+  SelectedMainServices []MainService `json:"selectedmainservices"`
 }
 
 func parseAccount(dataMap map[string]interface{}) (Account, error) {
@@ -63,7 +66,9 @@ func parseAccount(dataMap map[string]interface{}) (Account, error) {
 
   result.Languages      = parseAccountLanguages(      dataMap["languages"])
   result.Educations     = parseAccountEducations(     dataMap["educations"])
+
   result.Skills         = parseAccountSkills(         dataMap["skills"])
+  result.SelectedMainServices = parseMainServices(          dataMap["selectedmainservices"])
 
   result.Certificates   = parseAccountCertificates(   dataMap["certificates"])
   result.Works          = parseAccountWorks(          dataMap["works"])
@@ -161,9 +166,7 @@ func (acc *Account) createComplete(session *util.Session) error {
       education.save(session)
     }
 
-    for _ , skill := range acc.Skills {
-      skill.save(session)
-    }
+    acc.saveSkills(session)
 
     for _ , certificate := range acc.Certificates {
       certificate.save(session)
@@ -194,6 +197,64 @@ func (acc *Account) createComplete(session *util.Session) error {
     }
 
     return nil
+}
+
+func (acc *Account) saveSkills(session *util.Session) error {
+
+  // Create a pure array of ui selected skills
+  uiSelectedSkills := make([]Skill, 0)
+  for _ , uiService := range acc.SelectedMainServices {
+    if !uiService.IsSelected {
+      continue
+    }
+    for _ , uiSkill := range uiService.Skills {
+      if uiSkill.IsSelected {
+        uiSelectedSkills = append(uiSelectedSkills, uiSkill)
+      }
+    }
+  }
+
+  // create a pure array of insert skill, which are newly selected in UI
+  insertSkills := make([]AccountSkill, 0)
+  for _ , uiSkill := range uiSelectedSkills {
+    found := false
+    for _ , accSkill := range acc.Skills {
+      if uiSkill.Id == accSkill.SkillID {
+        found = true
+        break
+      }
+    }
+    if !found {
+      insertSkills = append(insertSkills, createAccountSkill(uiSkill))
+    }
+  }
+
+  // create a pure array of delete skill, which are newly unselected in UI
+  deleteSkills := make([]AccountSkill, 0)
+  for _ , accSkill := range acc.Skills {
+    found := false
+    for _ , uiSkill := range uiSelectedSkills {
+      if uiSkill.Id == accSkill.SkillID {
+        found = true
+        break
+      }
+    }
+    if !found {
+      deleteSkills = append(insertSkills, accSkill)
+    }
+  }
+
+  for _ , accSkill := range insertSkills {
+    accSkill.save(session)
+  }
+
+  for _ , accSkill := range deleteSkills {
+    accSkill.delete(session)
+  }
+
+  acc.Skills, _ = loadAccountSkills(session)
+
+  return nil
 }
 
 func (acc *Account) updateDescription (session *util.Session, dataMap map[string]interface{}) error {
@@ -483,6 +544,32 @@ func SaveProfilePicture(w http.ResponseWriter, r *http.Request) (interface{}, *u
   }
 
   err = account.updateProfilePicture(session, picMap)
+  if err != nil {
+    return nil, &util.HandlerError{err, "Problem while saving account Profile Picture", http.StatusBadRequest}
+  }
+
+  return account, nil
+}
+
+func UpdateSkills(w http.ResponseWriter, r *http.Request) (interface{}, *util.HandlerError) {
+
+  session, err := util.GetSession(w, r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Problems in session", http.StatusBadRequest}
+  }
+
+  dataMap, err := util.ParseJsonRequest(r)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Invalid JSON Account", http.StatusBadRequest}
+  }
+
+  account, err := loadAccount(session)
+  if err != nil {
+      return nil, &util.HandlerError{err, "Invalid Account in this session", http.StatusBadRequest}
+  }
+
+  account.SelectedMainServices = parseMainServices(dataMap["selectedmainservices"])
+  err = account.saveSkills(session)
   if err != nil {
     return nil, &util.HandlerError{err, "Problem while saving account Profile Picture", http.StatusBadRequest}
   }

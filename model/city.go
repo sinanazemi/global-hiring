@@ -17,7 +17,6 @@ func parseCity(data interface{}) (City, error) {
 
   idStr, ok := data.(string)
   if (ok) {
-    print("idStr = '" + idStr + "'\n")
     id, _ := strconv.Atoi(idStr)
     if (id > 0) {
       return loadCity(id)
@@ -61,10 +60,6 @@ func loadCities(where string, args ...interface{}) ([]City, error) {
 }
 
 func loadCity(cityID int) (City, error) {
-
-  print("Load city = ")
-  print(cityID)
-  print("\n")
 
   cities, err := loadCities("ID = $1", cityID)
   if(err != nil) {
