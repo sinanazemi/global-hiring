@@ -39,8 +39,10 @@
   font-size: 15px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-style: normal;
-  font-weight: 400;
+  font-weight: normal;
   color: #616161;
+  padding-left: 0;
+  
 }
 
 .checkbox-remember{
@@ -55,7 +57,7 @@
 		display: inline-block;
 		width: 16px; height: 16px;
 		background: white;
-		border: 1px solid rgb(3, 186, 109);
+		border: 1px solid #00bb6d;
     font-family: 'Glyphicons Halflings';
 	}
 .custom-check-Login::before {
