@@ -895,12 +895,12 @@ $scope.createNewAccount=function(){
       finishAccount.languages = $scope.langs;
 
       finishAccount.educations = $scope.educations;
-
-      finishAccount.skills = $scope.mainServices;
-      finishAccount.isCompleted=true;
+      //finishAccount.skills = $scope.mainServices;
+      finishAccount.selectedmainservices = $scope.mainServices;
 
       finishAccount.$save(
         function(data){
+          finishAccount.isCompleted=true;
           $scope.userAccount=data;
           window.location = "/profile.html"; // save and move to profile page
         },
