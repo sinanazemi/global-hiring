@@ -512,8 +512,12 @@ $scope.passwordChange=function(){
           } else {
             lastname = '';
           }
-
-          $scope.fullname=firstname+" "+lastname;
+          if(name.length==1){
+            $scope.fullname=firstname;
+           }
+          if(name.length>1){
+            $scope.fullname=firstname+" "+lastname;
+          }
         }
       }
     }
