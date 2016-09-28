@@ -349,7 +349,7 @@
     position: absolute;
 
       max-height: 70px;
-      margin-left: 31px;
+      margin-left: 16px;/* .row{ margin-left:-15px;}*/
       margin-right: 31px;
       margin-top: 15px;
 }
@@ -398,7 +398,7 @@
     text-align:left;
 
     padding-top: 0px;
-    padding-left: 35px;
+    /*padding-left: 35px;*/
     padding-right: 21px;
     margin-bottom: 0px;
 
@@ -406,18 +406,7 @@
 /*******/
 /* add skill */
 /******/
-.field-div-right-left {
-
-    display:block;
-    text-align:left;
-
-    padding-top: 0px;
-    padding-left: 50px;
-    padding-right: 50px;
-    margin-bottom: 0px;
-
-}
-.black-border-label {
+.ms-skills-lbl-c {
     font-size: 15px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-style:normal;
@@ -429,26 +418,17 @@
     padding-bottom: 9px;
     background-color: #d8d8d8;
     border-radius: 8px;
+
+    margin-right:10px;
+    margin-bottom:10px;
 }
 
 
-.black-border-label.selected {
+.ms-skills-lbl-c.selected {
   background-color: #03ba6d;
   color: #ffffff;
 }
 
-.app-skill-modal-window .modal-dialog {
-      width: 640px;
-      border-radius: 3px;
-      min-height: 480px;
-      background-color: #f9f9f9;      
-    }
-/*.radio-button-text {
-    float: left;
-    font-size: 16px;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #616161;
-}*/
 input[type='radio'] {
   -webkit-appearance:none;
   width:16px;
