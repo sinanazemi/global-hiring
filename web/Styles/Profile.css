@@ -20,6 +20,11 @@
     height: 18px;
 }
 
+.img-icon-c2{
+    width: 14px;
+    height: 14px;
+}
+
 .panel-body{
     padding-left:35px;
 }
@@ -47,7 +52,6 @@
 }
 .modal-close-btn-c{
     color: #03ba6d;
-    margin-top:30px; 
     margin-right:30px;
 }
 .select-style-c {
@@ -366,6 +370,9 @@
   color: #616161;
   font-weight: normal;
 }
+.skill-chk-c{
+    display:none;
+}
 
 .skill-lbl.selected{
   font-weight: bold;
@@ -376,7 +383,6 @@
  border: solid 2px #23b46c;
 }
 .field-div {
-
     display:block;
     text-align:left;
 
@@ -437,20 +443,20 @@
       min-height: 480px;
       background-color: #f9f9f9;      
     }
-.radio-button-text {
+/*.radio-button-text {
     float: left;
     font-size: 16px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #616161;
-}
+}*/
 input[type='radio'] {
   -webkit-appearance:none;
   width:16px;
   height:16px;
-  border:1px solid #979797;
+  border:1px solid #03ba6d;  
   border-radius:50%;
   outline:none;
-  box-shadow:0 0 0px 0px gray inset;
+  box-shadow:0 0 0px 0px gray inset;  
 }
 
 input[type='radio']:hover {
@@ -640,33 +646,65 @@ input[type='radio']:checked:before {
 
 
 /*---------------
-    History Modal
+    Modal
     --------------*/
 .modal-c{
-    width:750px;
+    width:700px;
     margin-left:auto;
     margin-right:auto;
 }
 .modal-h-c{
     background-color: #f9f9f9;
-    height:70px;
+    height:78px;
+    padding: 30px;
 }
 .modal-b-c{
     margin-left:30px;
     margin-right:30px;
+    padding-top:40px;
 }
-.m-title-c {
+.m-title-c{
     font-size: 20px;
-    font-weight: 100;
-    padding-top:12px;
-    padding-left:32px;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    /*text-align: center;*/
+    /*padding-top:12px;*/
+    /*padding-left:32px;*/
     color: #494949;
 }
 .form-g-c{
-    padding-top:50px;
+    /*padding-top:40px;*/
 }
 .fg-c{
-    margin-top:20px;
+    margin-top:30px;
+}
+.fg-lbl-c{
+    /*font-family: Helvetica;*/
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    color: #616161;
+}
+.fg-in-c{
+    /*width: 600px;*/
+    height: 42px;
+    border: solid 1.2px #cdcdcd;
+    border-radius:0px;
+}
+.fg-rb-c{
+    display:block;
+}
+.selectize-input{
+    height:42px;
+}
+    .selectize-input input {
+        padding-top:5px;
+    }
+.selectize-control.single .selectize-input,
+.selectize-control.single .selectize-input input {
+    padding-top:5px;
 }
 .modal-item-c{
     margin-top:20px;
@@ -678,61 +716,74 @@ input[type='radio']:checked:before {
     text-align: center;
     color: #494949;
 }
-input[type="checkbox"] {
-  display: none;
+
+/*** check box ****/
+input[type=checkbox]:before { 
+    content:""; 
+    display:inline-block; 
+    width:15px; 
+    height:15px; 
+    border: solid 1px #03ba6d; 
+    background: white url('../images/unchecked.png') center center;
+}
+input[type=checkbox]:checked:before { 
+    background: white url('../images/checked.png') center center; 
+
 }
 
-.custom-check {
-		display: inline-block;
-		width: 15px; height: 15px;
-		background: white;
-		border: 1px solid #03ba6d;
-        font-family: 'Glyphicons Halflings';
-		font-size: 14px;
-		line-height: 1;
-	}
-.custom-check::before {
-  content: "\e013";
-  color: #424242;
-  display: none;
-}
 
-input[type=checkbox]:checked+.custom-check::before {
-  display: block;
-}
 .chk-lbl-c {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: bold;
-    text-align: center;
-    color: #494949;
+    font-style: normal;
+    font-stretch: normal;
+    color: #616161;
+    padding-left: 0px;
 }
 
+.desc-txt-c{
+    /*width: 600px;*/
+    height: 93.6px;
+    border: solid 1.2px #cdcdcd;
+    border-radius: 0px;
+    margin-right:50px;
+}
 /*------
     modal footer
     -----*/
 .m-footer-c{
     border:none;
     text-align:left;
+    margin-left:30px;
+    margin-right:30px;
+    padding-bottom:40px;
 }
 .btn-save-c {
-    width: 80px;
-    height: 35px;
+    width: 110px;
+    height: 42px;
     color: white;
     border-radius: 2px;
     background-color: #03ba6d;
     font-size:15px;
-    /*margin-left: 32px;*/    
+    /*margin-left: 32px;*/  
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    text-align: center;
+    color: #ffffff;  
 }
 .btn-save-more-c {    
-    font-size: 12px;
+    font-size: 15px;
     font-weight: bold;
     text-align: center;
     color: #03ba6d;
-    width: 140px;
-  height: 35px;
-  border-radius: 2px;
-  border: solid 1px #cccccc;
-  background-color:white;
+    width: 280px;
+    height: 42px;
+    border-radius: 2px;
+    border: solid 1px #cccccc;
+    background-color:white;
+    font-style: normal;
+    font-stretch: normal;
 }
 .btn-cancel-c {
     padding-left:50px;
@@ -1004,6 +1055,12 @@ input[type=checkbox]:checked+.custom-check::before {
     margin-left:0px;
     margin-right:0px;
 }*/
+    .m-footer-c {
+        text-align: center;
+    }
+    .btn-cancel-c {
+        padding-left: 0px;
+    }
         .panel-body{
     padding-left:0px;
 }

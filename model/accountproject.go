@@ -148,8 +148,8 @@ func (project *AccountProject) saveNew(session *util.Session) error {
 
   query :=
     "INSERT INTO AccountProject " +
-    "(Title, OccupationID, Month, Year, Url, Description, accountID) " +
-    "VALUES($1, $2, $3, $4, $5, $6) " +
+    "(Name, OccupationID, Month, Year, Url, Description, accountID) " +
+    "VALUES($1, $2, $3, $4, $5, $6, $7) " +
     "returning ID"
 
   id, err := util.Insert(query, project.Name, project.Occupation.Id, project.Month.Value, project.Year, project.Url, project.Description, session.GetAccountID())
