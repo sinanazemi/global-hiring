@@ -525,8 +525,8 @@ $scope.passwordChange=function(){
 
   //Add more Language
   $scope.LanguageProfeciencies = [
-    {text: "Elementary", value: "E", desc: "I am only able to understand written text in it."},
-    {text: "Basic", value: "B", desc: "I am only able to communicate with it through written communication."},
+    {text: "Elementary", value: "E", desc: "I can interact in a simple way provided the other person talks slowly and clearly and is prepared to help "},
+    {text: "Basic", value: "B", desc: "I can communicate routine terms and tasks requiring a simple and direct exchange of information on familiar and routin matters."},
     {text: "Conversational", value: "C", desc: "I know it well enough to verbally discuss project details with a client."},
     {text: "Fluent", value: "F", desc: "I have complete command of this language with perfect grammer."},
     {text: "Native", value: "N", desc: "I have complete command of this language, including breadth of vocabulary, idioms and colloquialisms."}
@@ -728,7 +728,7 @@ $scope.removeLanguage=function(lang){
   }
 
   $scope.skillProfeciencies = [
-    {text: "Student/Fresh Graduate", value: "S"},
+    {text: "Student/New Graduate", value: "S"},
     {text: "Junior Professional", value: "J"},
     {text: "Experienced Professional", value: "E"},
     {text: "Manager", value: "M"}

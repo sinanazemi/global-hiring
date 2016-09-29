@@ -49,7 +49,7 @@
           <label class="field-center-label " style="text-align:center;margin-bottom:40;" >You can also sign up with <span style="color: rgb(3, 186, 109)"> Facebook </span>, <span style="color: rgb(3, 186, 109)"> LinkedIn </span> or <span style="color: rgb(3, 186, 109)"> Google</span>.</label>
         </div>
         <div class="row field-div" >
-          <label class="control-label col-sm-4 field-label" style="text-align:left;" >Fullname</label>
+          <label class="control-label col-sm-4 field-label" style="text-align:left;" >Full Name</label>
           <div class="col-sm-8">
             <input type="text" class="form-control textbox-style" ng-class="{ 'red-Placeholder' :  isRedFNPlacehoder }"  placeholder="{{fullnamePlaceholder}}" rows="1" ng-model="fullname" ng-style="requiedStyleFullname" ng-change="fullNameChange()" ng-blur="captalizeFullName()"   required>
           </div>
@@ -92,7 +92,7 @@
           </div>
         </div>
         <div class="row field-div" style="margin-bottom: 32px;" >
-          <label class="control-label col-sm-6 field-label" style="text-align:left;" >Have you been into university?</label>
+          <label class="control-label col-sm-6 field-label" style="text-align:left;" >Have you attended a college or university?</label>
           <div class="col-sm-6 ">
           <div class="col-sm-3 " style="padding-left:0;">
             <label class= "radio-inline radio-button-text" >  <input type="radio" id="isStudent" name="isStudent" value="yes" ng-model="isStudent" ng-style="requiedStyleisStudent" ng-required="!isStudent"> Yes </label>
@@ -180,7 +180,7 @@
         <button type="button" class="next-button btn-prev-c " ng-click="langPreClick()"  >Previous</button>
       </div>
       <div class="col-sm-6 btn-next-div" >
-        <button type="button" class="next-button btn-next-c " ng-click="langNextClick()" >Finish</button>
+        <button type="button" class="next-button btn-next-c between2Cols" ng-click="langNextClick()" >Finish</button>
       </div>
     </div>
   </div>
@@ -196,96 +196,120 @@
   </div >
     <!-- -Student Education Form -->
     <form class="form-horizontal step-form" role="form" name="stepStdEduForm" ng-show="isStudent">
-        <div class="col-sm-12 field-div-right-left" style="margin-bottom:10px;margin-left: 5px;">
-          <label class="control-label field-Bold-label" style="text-align:left; padding:0;" >Your Last University</label>
-        </div>
-        <div class="col-sm-12 field-div-Edu" >
+      <div class="row field-div-right-left">
+          <label class="control-label col-sm-12 field-Bold-label" style="text-align:left;margin-bottom:10px;" >School Most Recently Attended</label>
+      </div>
+      <div class="row field-div-Edu" >
           <input type="text" class="form-control textbox-style" ng-model="educationToAdd.school">
-        </div>
+      </div>
+      <div class="row marginTopBetweenRows ">
         <div class="col-sm-12 field-div-right-left" >
           <label class="control-label field-Bold-label" style="text-align:left;padding:0;" >Dates Attended</label>
         </div>
-        <div class="col-sm-12 field-div-Edu" style="margin-top:10px;">
-          <div class="col-sm-6 " style="padding-left:0;" >
+      </div>
+        <div class="row field-div-Edu" style="margin-top:10px;">
+          <div class="col-sm-6 rowWith2Cols" style="padding-left:0;" >
             <select  class="form-control  select-style" ng-model="educationToAdd.fromdate" placeholder="From"   ng-options="opt as opt for opt in dates" >
               <option value="" selected="selected">From</option>
             </select>
           </div>
-          <div class="col-sm-6 " style="padding-right:0;" >
-            <select id="toDate1" name="toDate1"  class="form-control  select-style"  ng-model="educationToAdd.todate" placeholder="To(or expected graduation year)" upper-than="{{educationToAdd.fromdate}}"   ng-options="opt as opt for opt in dates" >
+          <div class="col-sm-6 rowWith2Cols " style="padding-right:0;" >
+            <select id="toDate1" name="toDate1"  class="form-control  select-style between2Cols"  ng-model="educationToAdd.todate" placeholder="To(or expected graduation year)" upper-than="{{educationToAdd.fromdate}}"   ng-options="opt as opt for opt in dates" >
               <option value="" selected="selected">To (or expected graduation year)</option>
             </select>
           </div>
         </div>
-        <div class="col-sm-12 field-div-right-left " >
-          <label class="control-label field-Bold-label" style="text-align:left;padding:0;" >Degree</label>
+        <div class="row marginTopBetweenRows">
+          <div class="col-sm-12 field-div-right-left " >
+            <label class="control-label field-Bold-label" style="text-align:left;padding:0;" >Degree</label>
+          </div>
         </div>
+        <div class="row">
           <div class="col-sm-12 field-div-Edu">
             <select class="form-control  select-style" ng-value="educationToAdd.degree" ng-model="educationToAdd.degree" ng-options="degree as degree.name for degree in degrees"></select>
           </div>
-        <div class="col-sm-12 field-div-right-left" >
-          <label class="control-label field-Bold-label" style="text-align:left;padding:0;" >Field Of Study</label>
         </div>
+        <div class="row marginTopBetweenRows" >
+          <div class="col-sm-12 field-div-right-left" >
+            <label class="control-label field-Bold-label" style="text-align:left;padding:0;" >Field Of Study</label>
+          </div>
+      </div>
+        <div class="row">
           <div class="col-sm-12 field-div-Edu" style="margin-top:10px;">
             <input type="text" class="form-control textbox-style"  ng-model="educationToAdd.field" >
           </div>
-
-        <div class="col-sm-12 field-div-right-left" >
-          <label class="control-label field-Bold-label" style="text-align:left;padding:0;" >GPA (optional)</label>
         </div>
-        <div class="col-sm-12 field-div-Edu" style="margin-top:10px;">
-          <input type="text" class="form-control textbox-style"  ng-model="educationToAdd.grade" >
+        <div class="row marginTopBetweenRows">
+          <div class="col-sm-12 field-div-right-left" >
+            <label class="control-label field-Bold-label" style="text-align:left;padding:0;" >GPA (optional)</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 field-div-Edu" style="margin-top:10px;">
+            <input type="text" class="form-control textbox-style"  ng-model="educationToAdd.grade" >
+          </div>
         </div>
     </form> <!--form finish -->
     <!-- NonStudent Education Form -->
     <form class="form-horizontal step-form" role="form" name="stepEduForm" ng-hide="isStudent">
+      <div class="row">
         <div class="col-sm-12 field-div-right-left" style="margin-bottom:10px;margin-left: 5px;">
-          <label class="control-label field-Bold-label" style="text-align:left; padding:0;" >Your Last School Name</label>
+          <label class="control-label field-Bold-label" style="text-align:left; padding:0;" >School Most Recently Attended</label>
         </div>
+      </div>
+      <div class="row">
         <div class="col-sm-12 field-div-Edu" >
           <input type="text" class="form-control textbox-style" ng-model="educationToAdd.school">
         </div>
+      </div>
 
-
+      <div class="row marginTopBetweenRows">
         <div class="col-sm-12 field-div-right-left" >
           <label class="control-label field-Bold-label" style="text-align:left;padding:0;" >Dates Attended</label>
         </div>
-        <div class="col-sm-12 field-div-Edu" style="margin-top:10px;">
-          <div class="col-sm-6 " style="padding-left:0;" >
+      </div>
+        <div class="row field-div-Edu" style="margin-top:10px;">
+          <div class="col-sm-6 rowWith2Cols" style="padding-left:0;" >
             <select  class="form-control  select-style" ng-model="educationToAdd.fromdate" placeholder="From"   ng-options="opt as opt for opt in dates" >
               <option value="" selected="selected">From</option>
             </select>
           </div>
-          <div class="col-sm-6 " style="padding-right:0;" >
-            <select id="toDate2" name="toDate2" class="form-control  select-style"  ng-model="educationToAdd.todate" placeholder="To(or expected graduation year)" upper-than="{{educationToAdd.fromdate}}"  ng-options="opt as opt for opt in dates" >
+          <div class="col-sm-6 rowWith2Cols" style="padding-right:0;" >
+            <select id="toDate2" name="toDate2" class="form-control  select-style between2Cols"  ng-model="educationToAdd.todate" placeholder="To(or expected graduation year)" upper-than="{{educationToAdd.fromdate}}"  ng-options="opt as opt for opt in dates" >
               <option value="" selected="selected">To (or expected graduation year)</option>
             </select>
           </div>
         </div>
 
+        <div class="row marginTopBetweenRows">
         <div class="col-sm-12 field-div-right-left" >
           <label class="control-label field-Bold-label" style="text-align:left;padding:0;" >More Info (optional)</label>
         </div>
+      </div>
+      <div class="row">
         <div class="col-sm-12 field-div-Edu" style="margin-top:10px;">
-          <textarea type="text" class="form-control textbox-style" style="min-height:126px;"  ng-model="educationToAdd.moreInfo" placeholder="Tell us about your grades, degrees and field of study if aplicable"></textarea>
+          <textarea type="text" class="form-control textbox-style" style="min-height:126px;"  ng-model="educationToAdd.moreInfo" placeholder="Tell us about your grades, degrees and field of study if applicable"></textarea>
         </div>
+      </div>
     </form> <!--form finish -->
 
     <div class="footer-AddBTN field-div-right-left">
       <div class="row" >
         <div class="col-sm-12 field-div-right-left btn-div-c">
-          <div class="btn-add-new" ng-click="addMoreEduClick(educationToAdd)" style="padding-top:10px;" >Sava and Add Other Education</div>
+          <div class="btn-add-new" ng-click="addMoreEduClick(educationToAdd)" style="padding-top:10px;" >Sava and Add Additional Education</div>
         </div>
       </div>
+
       <div class="row" style="margin-top:28px;">
         <div class="col-sm-6 btn-prev-div" >
           <button type="button" class="next-button btn-prev-c " ng-click="eduPreClick()" ng-disabled="eduPrevBtn">Previous</button>
         </div>
         <div class="col-sm-6 btn-next-div"  >
-          <button type="button" class="next-button btn-next-c " ng-click="eduNextClick()" >Next Step</button>
+          <button type="button" class="next-button btn-next-c between2Cols " ng-click="eduNextClick()" >Next Step</button>
         </div>
     </div>
   </div>
+
 
   </div><!-- education step finish -->
   <div id="stepMainSRV" class="container step-div " ng-hide="stepMainSRVHide" >
@@ -298,7 +322,7 @@
       <form class="form-horizontal step-form" role="form" name="stepMainSrvForm">
         <div class="col-sm-12 field-div" >
           <div class="col-sm-12" style="padding:0;">
-            <label class="control-label  field-Bold-label" style="text-align:left;padding:0;" >What are the main services you offer?<span style="font-size: 14px;font-weight:normal;">(Please select all that you are open to)</span></label>
+            <label class="control-label  field-Bold-label" style="text-align:left;padding:0;" >What are the main services you offer?<span style="font-size: 14px;font-weight:normal;"> (Please select all that you would be open to providing)</span></label>
           </div>
           <div class="col-sm-12" style="padding:0;">
             <label class="error-label" ng-show="srvShouldSelect" style="font-size:15px;">Please at least select one</label>
@@ -330,7 +354,7 @@
     <button type="button" class="next-button btn-prev-c " ng-click="mainSRVPreClick()" ng-disabled="mainSrvPrevBtn" >Previous</button>
   </div>
   <div class="col-sm-6 btn-next-div" >
-    <button type="button" class="next-button btn-next-c " ng-click="mainSRVNextClick()" >Next Step</button>
+    <button type="button" class="next-button btn-next-c between2Cols" ng-click="mainSRVNextClick()" >Next Step</button>
   </div>
 </div>
 
@@ -345,7 +369,7 @@
     <img ng-src={{skillBarImage}} class="img-responsive bar-image" alt="Skill step">
   </div >
     <form class="form-horizontal step-form" role="form" name="stepSkillsForm">
-        <div class="field-div" style="margin-bottom:74px; padding-right:40px;" >
+        <div class="field-div skillPadding" style="margin-bottom:74px;" >
           <div id="skilldList" style="text-align:left;" >
             <ul ng-repeat="service in mainServices | filter: {isselected: true } " style="text-align:left;margin-bottom:80px;padding:0;" >
               <div class="row field-div-right-left" style="padding:0;margin-bottom:24px;" >
@@ -375,7 +399,7 @@
         <button type="button" class="next-button btn-prev-c " ng-click="skillPreClick()" >Previous</button>
       </div>
       <div class="col-sm-6 btn-next-div" >
-        <button type="button"  class="next-button btn-next-c " ng-click="skillNextClick()" >Next Step</button>
+        <button type="button"  class="next-button btn-next-c between2Cols " ng-click="skillNextClick()" >Next Step</button>
       </div>
     </div>
   </div><!--Skill step finish -->

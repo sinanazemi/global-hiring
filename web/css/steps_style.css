@@ -48,6 +48,17 @@
 
     }
 
+    .field-div-Edu {
+
+        display:block;
+        text-align:left;
+
+        padding-top: 0px;
+        padding-left: 50px;
+        padding-right: 50px;
+        margin-bottom: 25px;
+
+    }
     .field-label {
 
         text-align:left;
@@ -66,6 +77,26 @@
         overflow-y: auto;
         overflow-x: hidden;
     }
+    .skillPadding{
+
+      padding-right: 40px;
+    }
+    .footer {
+        bottom: 0;
+        text-align: center !important;
+        height: 74px;
+        position:absolute;
+        width:100%;
+     }
+
+     .footer-AddBTN {
+         bottom: 0;
+         text-align: center !important;
+         height: 144px;
+         position:absolute;
+         width:100%;
+      }
+
   }
 
   @media only screen and (min-width: 600px) and (max-width: 767px) {
@@ -103,6 +134,17 @@
 
       }
 
+      .field-div-Edu {
+
+          display:block;
+          text-align:left;
+
+          padding-top: 0px;
+          padding-left: 50px;
+          padding-right: 50px;
+          margin-bottom: 25px;
+
+      }
       .field-label {
 
           text-align:left;
@@ -122,6 +164,25 @@
           overflow-y: auto;
           overflow-x: hidden;
       }
+      .between2Cols{
+        margin-top: 5px;
+      }
+      .footer {
+          bottom: 0;
+          text-align: center !important;
+          height: 74px;
+          position:absolute;
+          width:100%;
+       }
+
+       .footer-AddBTN {
+           bottom: 0;
+           text-align: center !important;
+           height: 144px;
+           position:absolute;
+           width:100%;
+        }
+
     }
     @media only screen and (max-width: 599px) {
       /* For phones: */
@@ -158,6 +219,22 @@
 
         }
 
+        .field-div-Edu {
+
+            display:block;
+            text-align:left;
+
+            padding-top: 0px;
+            padding-left: 5px;
+            padding-right: 5px;
+            margin-bottom: 2.5px;
+
+        }
+
+        .row{
+          margin: 0px;
+        }
+
         .field-label {
 
             text-align:left;
@@ -173,10 +250,42 @@
         }
         .step-form{
             margin-top:169px;
-            height: 720px;
+            height: 710px;
             overflow-y: auto;
             overflow-x: hidden;
         }
+
+        .rowWith2Cols{
+          padding:0;
+        }
+        .between2Cols{
+          margin-top: 5px;
+        }
+        .marginTopBetweenRows{
+          margin-top: 10px;
+        }
+
+        .skillPadding{
+          padding: 0;
+        }
+
+        .footer {
+            bottom: 0;
+            text-align: center !important;
+            height: 90px;
+            position:absolute;
+            width:100%;
+         }
+
+         .footer-AddBTN {
+             bottom: 0;
+             text-align: center !important;
+             height: 160px;
+             position:absolute;
+             width:100%;
+          }
+
+
       }
 
 /* The  styles */
@@ -244,17 +353,6 @@
 }
 
 
-.field-div-Edu {
-
-    display:block;
-    text-align:left;
-
-    padding-top: 0px;
-    padding-left: 50px;
-    padding-right: 50px;
-    margin-bottom: 25px;
-
-}
 .field-div-MainSrv {
 
     display:block;
@@ -443,22 +541,6 @@ input[type=checkbox]:checked+.custom-check::before {
     color: #cdcdcd;
 }
 
-.footer {
-    bottom: 0;
-    text-align: center !important;
-    height: 74px;
-    position:absolute;
-    width:100%;
- }
-
- .footer-AddBTN {
-     bottom: 0;
-     text-align: center !important;
-     height: 144px;
-     position:absolute;
-     width:100%;
-  }
-
 
 .btn-add-new {
     width: 260px;
@@ -509,6 +591,8 @@ input[type=checkbox]:checked+.custom-check::before {
     font-size: 16px;
     font-weight: bold;
     color: #616161;
+
+    padding: 0;
 }
 
 
