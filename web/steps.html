@@ -92,25 +92,25 @@
           </div>
         </div>
         <div class="row field-div" style="margin-bottom: 32px;" >
-          <label class="control-label col-sm-6 field-label" style="text-align:left;" >Have you attended a college or university?</label>
-          <div class="col-sm-6 ">
-          <div class="col-sm-3 " style="padding-left:0;">
-            <label class= "radio-inline radio-button-text" >  <input type="radio" id="isStudent" name="isStudent" value="yes" ng-model="isStudent" ng-style="requiedStyleisStudent" ng-required="!isStudent"> Yes </label>
+          <label class="control-label col-sm-8 field-label" style="text-align:left;" >Have you attended a college or university?</label>
+          <div class="col-sm-4 " style="padding:0;padding-top:7px;">
+          <div class="col-sm-4 chkboxPadding">
+            <input type="radio" id="isStudentYes" name="isStudent" value="yes" ng-model="isStudent" ng-style="requiedStyleisStudent" ng-required="!isStudent" ><span class= " radio-button-text"> Yes </span>
           </div>
-          <div class="col-sm-3 " style="padding-left:0;">
-            <label class= "radio-inline radio-button-text" >  <input type="radio" id="isStudent" name="isStudent" value="no" ng-model="isStudent" ng-style="requiedStyleisStudent" ng-required="!isStudent"> No </label>
+          <div class="col-sm-4 chkboxPadding" >
+            <input type="radio" id="isStudent" name="isStudentNo" value="no" ng-model="isStudent" ng-style="requiedStyleisStudent" ng-required="!isStudent" ><span class= " radio-button-text"> No </span>
           </div>
         </div>
-          <div class="row col-sm-12 ">
-            <div  class="col-sm-4">
+          <div class="row  ">
+            <div  class="col-sm-8" style="padding:0;">
             </div>
-            <div  class="col-sm-8">
-                <span class="col-sm-12 red-thin-label" style="text-align:left;" ng-show="isStudentShow && (!(isStudent=='yes' || isStudent=='no'))"> Please answer this question </span>
+            <div  class="col-sm-4" style="padding:0;">
+                <span class="col-sm-12 red-thin-label" style="text-align:left;padding:0;" ng-show="isStudentShow && (!(isStudent=='yes' || isStudent=='no'))"> Please answer this question </span>
             </div>
           </div>
         </div>
         <div class="row field-div" >
-          <div class="checkbox" style="padding:0; min-height: 17px;">
+          <div class="checkbox chkboxPadding" style=" min-height: 17px;">
             <label class="control-label" style="text-align:left; font-size:14px; padding:0; font-weight: 700; color: #616161;"><input type="checkbox" ng-model="checkboxValue"><span class="custom-check"></span>&nbsp; Yes, I understand and agree to the <span style="color: rgb(3, 186, 109)">Global Hiring Platform Terms of Service</span>.</label>
           </div>
           <label  ng-show="termsOfServiceShow && !checkboxValue" class="red-thin-label" style="padding-left: 25px;"  > Please accept the global hiring platform terms of service before continuing </label>

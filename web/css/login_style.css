@@ -1,31 +1,116 @@
+@import url('http://maxcdn.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css');
+@import url('http://maxcdn.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css');
+
+
+@media only screen and (min-width: 768px) {
+  .div-right-left-margin{
+    display:block;
+    text-align:left;
+
+    padding-top: 0px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-bottom: 0px;
+  }
+
+  .bottomMargin{
+    margin-bottom: 5px;
+  }
+  .marginTop{
+      margin-top: 10px;
+  }
+
+
+}
+
+@media only screen and (min-width: 600px) and (max-width: 767px) {
+  .div-right-left-margin{
+    display:block;
+    text-align:left;
+
+    padding-top: 0px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-bottom: 0px;
+
+  }
+  .bottomMargin{
+    margin-bottom: 5px;
+  }
+  .marginTop{
+      margin-top: 10px;
+  }
+}
+
+@media only screen and (max-width: 599px) {
+  .div-right-left-margin{
+    display:block;
+    text-align:left;
+
+    padding-top: 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 0px;
+
+  }
+
+  .marginTop{
+      margin-top: 5px;
+  }
+
+}
 .container-c {
     position:relative;
-    width:100%;  
+    width:100%;
 }
+
+
 
 .login-header{
   text-align: center;
-  color: rgb(129, 129, 129);
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 24px;
-  font-style: normal;
   padding: 3%;
+
+  font-size: 22px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: 0.3px;
+  color:#616161;
 }
 .btn-login-c {
-    width: 99px;
-    height: 30px;
+    width: 100%;
+    height: 60px;
     cursor: pointer;
-    background-color: #efecec;
 
-    border: solid 1px #818181;
+    border:  solid 1px #979797;
     color: #4a4a4a;
     text-align: center;
     display: inline-block;
-    font-size: 14px;
+    font-size: 22px;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     padding-left: 0;
+    border-radius: 6px;
+    background-color: white;
+}
+
+.textbox-login-style {
+    float: left;
+    border-radius: 6px;
+    height: 60px;
+    border:  solid 1px #979797;
+  }
+
+.field-label-login {
+  text-align: left;
+  display: block;
+  font-size: 16px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #616161;
+  font-weight: 700;
+  padding: 0;
 }
 
 .checkbox-label{
@@ -52,7 +137,8 @@
 		display: inline-block;
 		width: 16px; height: 16px;
 		background: white;
-		border: 1px solid #00bb6d;
+		border:  solid 1px #979797;
+    border-radius: 2.4px;
     font-family: 'Glyphicons Halflings';
 	}
 .custom-check-Login::before {
@@ -64,6 +150,12 @@
 input[type=checkbox]:checked+.custom-check-Login::before {
   display: block;
 }
+
+.greenBtn{
+  background-color: #01bc69;
+  color: #ffffff;
+}
+
 
 .green-forgetPass{
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;

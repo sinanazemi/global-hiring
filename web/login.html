@@ -43,53 +43,61 @@
 
   <div class="container container-c">
 
-      <div class="row" style="margin-top:40px; text-align:center;">
-        <h2 class="login-header">Log in and make your profile better </h2>
+      <div class="row" style="margin-top:80px; text-align:center;">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+        <h2 class="login-header">Log In and make your profile better </h2>
+      </div>
+      <div class="col-sm-4">
         <h4 style="color:red; font-size:16px;" ng-show="notLoginMsg">We don't recognize this user ID or password, Please try again. </h4>
       </div>
-
-
-      <div class="row" style="padding:0;">
-        <div class="col-sm-4 "></div>
-        <div class="col-sm-4 ">
-          <input type="email" class="form-control input-style" placeholder="{{emailPlaceholder}}" ng-keydown="$event.which === 13 && login()"  ng-model="email" ng-style="requiedStyleEmail"  required autofocus/>
-        </div>
-        <div class="col-sm-4 "></div>
       </div>
+      <form class="form-horizontal" role="form" name="loginForm">
+      <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+          <div class="panel panel-default">
+          <div class="panel-body">
+
+            <div class="row div-right-left-margin bottomMargin marginTop" >
+              <label class="control-label col-sm-4 field-label-login" style="text-align:left;" >Email</label>
+            </div>
+            <div class="row div-right-left-margin">
+                <input type="email" id="email" name="email" class="form-control input-style textbox-login-style" placeholder="{{emailPlaceholder}}" ng-keydown="$event.which === 13 && login()"  ng-model="email" ng-style="requiedStyleEmail"  required autofocus/>
+            </div>
+
+            <div class="row div-right-left-margin bottomMargin marginTop" >
+              <label class="control-label col-sm-4 field-label-login" style="text-align:left;" >Password</label>
+            </div>
+            <div class="row div-right-left-margin ">
+                <input type="password" id="password" name="password" class="form-control input-style textbox-login-style"  placeholder="{{passwordPlaceholder}}" ng-minlength="6" ng-keydown="$event.which === 13 && login()" ng-model="password" ng-style="requiedStylePassword"  required/>
+            </div>
+
+            <div class="row div-right-left-margin marginTop" style="margin-top:20px;" >
+              <label class="control-label checkbox-label" style="text-align:center;"><input type="checkbox" ng-model="checkboxValue"><span class="custom-check-Login" style="margin:0; text-align:center;"></span>&nbsp; Remember me next time</label>
+            </div>
+
+            <div class=" row div-right-left-margin marginTop btn-div-c">
+              <button type="button" class="next-button btn-login-c"  ng-class="{'greenBtn': loginForm.email.$valid && loginForm.password.$valid}" ng-click="login()" >Log In</button>
+            </div>
 
 
-      <div class="row" style="margin-top:30px;padding:0;">
-        <div class="col-sm-4 "></div>
-        <div class="col-sm-4 ">
-          <input type="password" class="form-control input-style"  placeholder="{{passwordPlaceholder}}" ng-keydown="$event.which === 13 && login()" ng-model="password" ng-style="requiedStylePassword"  required/>
-        </div>
-        <div class="col-sm-4 "></div>
-      </div>
 
-<div class="row" style="margin-top:40px;padding:0;">
-  <div class="col-sm-4 "></div>
-  <div class="col-sm-4 ">
-    <div class="col-sm-4" style="float:left;padding-left:0;">
-      <button type="button" class="btn-login-c" ng-click="login()" >Login</button>
-    </div>
-    <div class="col-sm-8 checkbox checkbox-remember" style="padding-left:0; padding-right:0;">
-        <label class="control-label checkbox-label" style="text-align:center;padding-left:0;"><input type="checkbox" ng-model="checkboxValue"><span class="custom-check-Login" style="margin:0; text-align:center;"></span>&nbsp; Remember me next time</label>
-    </div >
-  </div>
-  <div class="col-sm-4 "></div>
-</div>
-
-<div class="row" style="margin-top:36px;">
-  <div class="col-sm-4 "></div>
-  <div class="col-sm-4 " style="padding-left:15px;">
-      <a href="/login.html" class="green-forgetPass">Forget password?</a>
-  </div>
-</div>
-
-</div>
+          <div class="row div-right-left-margin marginTop" style="margin-top:20px;">
+            <div class="col-sm-8 "></div>
+            <div class="col-sm-4 " style="padding:0;" >
+                <a href="/login.html" class="green-forgetPass">Forget password?</a>
+            </div>
+          </div>
+</div> <!-- panel-body finished-->
+</div><!-- panel finished-->
 
 
-    <div class="f-copyright-c">
+</div> <!--col-sm-4-->
+</div><!--main row-->
+</form>
+
+    <div class="f-copyright-c" style="position: fixed">
         <div class="container">
             <p>Copyright &copy; Hiring.global 2016</p>
         </div>
@@ -146,7 +154,10 @@ myAppLogin.controller('loginController',['$scope', '$resource', function($scope,
   }
 
 }// Check Account
-
+$scope.getColor=function()
+{
+  return "green";
+}
   // login with an account
     var login = $resource("/authenticate")
     $scope.login=function(){
