@@ -77,8 +77,14 @@
         overflow-y: auto;
         overflow-x: hidden;
     }
-    .skillPadding{
 
+    .step-form-small{
+        margin-top:169px;
+        height: 520px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    .skillPadding{
       padding-right: 40px;
     }
 
@@ -165,6 +171,12 @@
       .step-form{
           margin-top:169px;
           height: 600px;
+          overflow-y: auto;
+          overflow-x: hidden;
+      }
+      .step-form-small{
+          margin-top:169px;
+          height: 520px;
           overflow-y: auto;
           overflow-x: hidden;
       }
@@ -262,6 +274,13 @@
             overflow-x: hidden;
         }
 
+        .step-form-small{
+            margin-top:169px;
+            height: 635px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
         .rowWith2Cols{
           padding:0;
         }
@@ -280,7 +299,9 @@
           padding: 0px;
           padding-left: 15px;
         }
-
+        .marginTop{
+          margin-top: 20px;
+        }
         .footer {
             bottom: 0;
             text-align: center !important;
@@ -556,7 +577,7 @@ input[type=checkbox]:checked+.custom-check::before {
 
 
 .btn-add-new {
-    width: 260px;
+    width: 300px;
     height: 42px;
     cursor: pointer;
     background-color: #f9f9f9;

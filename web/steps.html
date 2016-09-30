@@ -129,18 +129,18 @@
   <div >
     <img ng-src="{{langBarImage}}" class="img-responsive bar-image" alt="Language Step">
   </div >
-    <form class="form-horizontal step-form" role="form" name="stepLangForm">
-        <div class="col-sm-12 field-div-right-left" style="margin-bottom:10px;margin-left: 5px;">
+    <form class="form-horizontal step-form-small" role="form" name="stepLangForm">
+        <div class="row field-div-right-left" style="margin-bottom:10px;">
           <label class="control-label field-Bold-label" style="text-align:left; padding:0;" >Language</label>
         </div>
-        <div class="col-sm-12 field-div" >
+        <div class="row field-div" >
           <input type="text" class="form-control textbox-style" ng-class="{ 'red-Placeholder' :  isRedLangPlacehoder }"  placeholder="{{langPlaceholder}}" rows="1" ng-model="langToAdd.name" ng-style="requiedStyleLang" >
         </div>
-        <div class="col-sm-12 field-div-right-left" style="margin-bottom:10px;margin-left: 5px;" >
+
+        <div class="row field-div-right-left marginTop" style="margin-bottom:10px;" >
           <label class="control-label  field-Bold-label" style="text-align:left; padding:0; " >Level of Profeciency</label>
         </div>
-
-        <div class="col-sm-12 field-div-right-left" style="margin-left: 5px;"  >
+        <div class="row field-div-right-left"   >
         <ul ng-repeat="langProf in LanguageProfeciencies" style="margin:0; padding:0; margin-bottom:10px;">
           <li style="padding:0;">
             <div class="row" style="margin:0;">
@@ -155,7 +155,7 @@
         </div>
         </div>
 
-      <div class="col-sm-12 field-div-right-left" style="margin-top:15px;">
+      <div class="row field-div-right-left" style="margin-top:15px;">
         <ul ng-repeat="lang in langs" class="list-inline" style="margin:0; padding:0; margin-bottom:10px;display: inline-block;">
           <li style="padding:0;">
             <span class="tag label tag-label">
