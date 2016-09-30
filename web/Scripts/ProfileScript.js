@@ -258,11 +258,15 @@ myapp.controller("controller",
             else return serviceSelect.unselectimageurl;
         }
 
+        var selSkillLabal;
         // Skill
-        $scope.skillClick = function (selectedSkill) {
+        $scope.skillClick = function ($event,selectedSkill) {
             selectedSkill.isselected = !selectedSkill.isselected;
-            if (selectedSkill.isselected) {
+            if (selectedSkill.isselected) {                
                 $scope.selSkill = selectedSkill;
+                selSkillLabal = angular.element($event.target);
+                selSkillLabal.context.style.backgroundColor = "#03ba6d";
+                selSkillLabal.context.style.color = "#ffffff";
                 $("#addSkillPrf").modal("show");
             }
             else
@@ -270,7 +274,17 @@ myapp.controller("controller",
                 selectedSkill.profeciency = "";
             }
         }
-
+        $("#addSkillPrf").on("hidden.bs.modal", function () {
+            if ($scope.selSkill.profeciency.value == "") {
+                $scope.selSkill.isselected = false;
+                //$scope.skillClick($scope.selSkill);
+                selSkillLabal.context.style.backgroundColor = "#d8d8d8";
+                selSkillLabal.context.style.color = "#625f5f";
+                //$scope.skillClick(selSkillLabal, $scope.selSkill);
+                
+                
+            }
+        });
 
         $scope.skillProfeciencies = [
            { text: "Student/Fresh Graduate", value: "S" },
@@ -296,49 +310,13 @@ myapp.controller("controller",
         } // $scope.saveSkill=function()
 
         /****************************/
-        //var saveSkillRes = $resource("/saveSkill")
-        //$scope.saveSkill = function () {
-        //    var saveSk = new saveSkillRes();
-        //    //setMyMsSkill();
-        //    //for (var i = 0; i < $scope.mainServices.length; i++)
-        //    //{
-        //    //    if($scope.mainServices[i].isselected)
-        //    //    {
-        //    //        for(var j=0; j<$scope.mainServices[i].skills.length;j++)
-        //    //        {
-        //    //            if ($scope.mainServices[i].skills[j].isselected) {
-        //    //                //saveSk.skillid = $scope.mainServices[i].skills[j].id;
-        //    //                //saveSk.profeciency = $scope.mainServices[i].skills[j].profeciency;
-        //    //                //saveSk.$save();
-        //    //                //$('#addSkill').modal('hide');
-        //    //                //$scope.account.skills
-        //    //            }
-        //    //        }
-        //    //    }
-
-        //    //}
-        //    saveSk.$save($scope.myMsSkill);
-        //    $('#addSkill').modal('hide');
-
-        //    // TO DO : Refresh the tags of skills
-        // //   accountRes.get(
-        // //function (data) {
-        // //    $scope.account = data;
-        //}
-
-        //var delSkillRes = $resource("/deleteSkill")
-        //$scope.removeSkill = function (skill) {
-        //    var delSkill = new delSkillRes();
-        //    delSkill.id = skill.id;
-        //    delSkill.$save(function (dsk) {
-        //        $scope.account.skills.splice($scope.account.skills.indexOf(dsk), 1);
-        //        //cleanHistoryInputs();
-        //    });
-        //}
+        
 
         $scope.getSkills = function () {
             $scope.skills = $scope.selectedService.skills;
         }; // function()
+
+        
 
         //******************************
         // Overview

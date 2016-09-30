@@ -264,7 +264,7 @@
                                                                     </div>
                                                                     <div>
                                                                         <div ng-repeat="skillOfSRV in service.skills" style="display:inline;">
-                                                                            <label class="ms-skills-lbl-c" ng-click="skillClick(skillOfSRV)" ng-class="{ selected: skillOfSRV.isselected }" data-toggle="modal">{{skillOfSRV.name}}</label>
+                                                                            <label id="lblSkill" class="ms-skills-lbl-c" ng-click="skillClick($event,skillOfSRV)" ng-class="{ selected: skillOfSRV.isselected }" data-toggle="modal">{{skillOfSRV.name}}</label>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -300,7 +300,7 @@
                                                                             <!--<li>
                                                                                 <div class="row">-->
                                                                                     <div class="radio" style="margin:0;">
-                                                                                        <label class="fg-lbl-c"><input type="radio" name="level" ng-value="SkillProf" ng-click="selSkill.profeciency = SkillProf; close()" data-dismiss="modal" style="border-color:#03ba6d"><span class="radio-button-text-lang">&nbsp;{{ SkillProf.text }}</span></label>
+                                                                                        <label class="fg-lbl-c"><input type="radio" name="level" ng-value="SkillProf" ng-click="selSkill.profeciency = SkillProf; " data-dismiss="modal" style="border-color:#03ba6d"><span class="radio-button-text-lang">&nbsp;{{ SkillProf.text }}</span></label>
                                                                                     </div>
                                                                                 <!--</div>
                                                                             </li>-->
