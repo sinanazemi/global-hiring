@@ -54,13 +54,13 @@
             <input type="text" class="form-control textbox-style" ng-class="{ 'red-Placeholder' :  isRedFNPlacehoder }"  placeholder="{{fullnamePlaceholder}}" rows="1" ng-model="fullname" ng-style="requiedStyleFullname" ng-change="fullNameChange()" ng-blur="captalizeFullName()"   required>
           </div>
         </div>
-        <div class="row field-div" >
+        <div class="row field-div marginTopBetweenRows" >
           <label class="control-label col-sm-4 field-label" style="text-align:left;" >Email</label>
           <div class="col-sm-8">
             <input type="email" class="form-control textbox-style" ng-class="{ 'red-Placeholder' :  isRedEmailPlacehoder }" placeholder="{{emailPlaceholder}}"    ng-model="email" ng-style="requiedStyleEmail" ng-change="emailChange()"  required/>
           </div>
         </div>
-        <div class="row field-div" >
+        <div class="row field-div marginTopBetweenRows" >
           <label class="control-label col-sm-4 field-label" style="text-align:left;" >Select City<img src="images/location.png" class="location-image" alt="Location"></label>
           <div class="col-sm-8" style="text-align:center;">
 <!--            <select id="citySelect" name="citySelect" class="form-control  select-style" style="text-align:center;" ng-model="selectedCity" ng-style="requiedSelectedCity" ng-change="cityChange()" ng-options="city as city.name for city in cities" required>
@@ -72,7 +72,7 @@
 
 
         </div>
-        <div class="row field-div" >
+        <div class="row field-div marginTopBetweenRows" >
           <label class="control-label col-sm-4 field-label" style="text-align:left;" >Phone <span style="font-weight: 500;"> (optional) </span></label>
           <div class="col-sm-8 ">
             <input id="phoneInput" name="phoneInput" type="text" class="form-control textbox-style" placeholder="0912 1234567" ng-pattern="phoneRegex" ng-model="phone" />
@@ -85,13 +85,13 @@
             </div>
           </div>
         </div>
-        <div class="row field-div" style="margin-bottom: 30px;">
+        <div class="row field-div marginTopBetweenRows" style="margin-bottom: 30px;">
           <label class="control-label col-sm-4 field-label" style="text-align:left;" >Password</label>
           <div class="col-sm-8 ">
             <input type="password" name="password" class="form-control textbox-style" ng-class="{ 'red-Placeholder' :  isRedPWPlacehoder }"  placeholder="{{passwordPlaceholder}}"   ng-model="password" ng-style="requiedStylePassword" ng-change="passwordChange()" required/>
           </div>
         </div>
-        <div class="row field-div" style="margin-bottom: 32px;" >
+        <div class="row field-div marginTopBetweenRows" style="margin-bottom: 20px;" >
           <label class="control-label col-sm-8 field-label" style="text-align:left;" >Have you attended a college or university?</label>
           <div class="col-sm-4 " style="padding:0;padding-top:7px;">
           <div class="col-sm-4 chkboxPadding">
@@ -376,15 +376,14 @@
                 <div class="col-sm-2" style="padding:0;padding-left:12px;">
                   <img ng-src="{{service.unselectimageurl}}" class="img-responsive srv-image-skill" alt="Service image"  >
                 </div>
-                <div class="col-sm-10" style="padding:0; margin-top:20px;">
+                <div class="col-sm-10 chkboxPadding" style=" margin-top:20px;">
                   <label class="field-Bold-label" style="font-weight:normal; ">What type of <span style="font-weight:bold;">{{service.name}}</span> <span style="font-weight:normal;">do you do?</span></label>
-                  <div class="col-sm-12" style="padding:0;">
+                  <div class="col-sm-12 chkboxPadding" >
                     <label id="{{service.id + '-error-id'}}" class="error-label" ng-show="{{'errorshow' + service.id }}" style="font-size:15px;margin:0;">Please at least select one</label>
                   </div>
                 </div>
-
                </div>
-               <div>
+               <div class="row skillList-Div">
               <li ng-repeat="skillOfSRV in service.skills " style="list-style-type:none;margin:0; margin-right:10px;padding:0;" >
                 <label class="black-border-label"  ng-click="skillClick(skillOfSRV)" ng-class="{ selected: skillOfSRV.isselected }" >{{skillOfSRV.name}}</label>
               </li>

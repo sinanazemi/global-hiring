@@ -107,6 +107,19 @@
          width:100%;
       }
 
+      .field-div-MainSrv {
+
+          display:block;
+          text-align:left;
+
+          padding-top: 0px;
+          padding-left: 35px;
+          padding-right: 21px;
+          margin-bottom: 0px;
+
+      }
+
+
   }
 
   @media only screen and (min-width: 600px) and (max-width: 767px) {
@@ -202,6 +215,19 @@
            width:100%;
         }
 
+        .field-div-MainSrv {
+
+            display:block;
+            text-align:left;
+
+            padding-top: 0px;
+            padding-left: 35px;
+            padding-right: 21px;
+            margin-bottom: 0px;
+
+        }
+
+
     }
     @media only screen and (max-width: 599px) {
       /* For phones: */
@@ -248,6 +274,14 @@
             padding-right: 15px;
             margin-bottom: 5px;
 
+        }
+
+        .skillList-Div {
+            display:block;
+            text-align:left;
+
+            padding-top: 0px;
+            padding-left: 15px;
         }
 
         .row{
@@ -319,6 +353,19 @@
           }
 
 
+          .field-div-MainSrv {
+
+              display:block;
+              text-align:left;
+
+              padding-top: 0px;
+              padding-left: 15px;
+              padding-right: 15px;
+              margin-bottom: 0px;
+
+          }
+
+
       }
 
 /* The  styles */
@@ -386,17 +433,6 @@
 }
 
 
-.field-div-MainSrv {
-
-    display:block;
-    text-align:left;
-
-    padding-top: 0px;
-    padding-left: 35px;
-    padding-right: 21px;
-    margin-bottom: 0px;
-
-}
 
 
 
@@ -712,6 +748,9 @@ input[type=checkbox]:checked+.custom-check::before {
   color:red;
 }
 
+.selectize-input+ .items + .ng-touched +.ng-invalid{
+    background: #f9f9f9 url('../images/combo-red.png') no-repeat 97% 50%;
+}
 
 .red-Placeholder::-webkit-input-placeholder {
     /* WebKit, Blink, Edge */
