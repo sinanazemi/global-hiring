@@ -249,6 +249,9 @@
             <input type="text" class="form-control textbox-style"  ng-model="educationToAdd.grade" >
           </div>
         </div>
+        <div class="row field-div-right-left marginTopBetweenRows">
+          <label class="control-label field-label" style="text-align:left;padding:0; color:#03ba6d; font-weight:normal;" ng-if="educationIsAdded" >{{educations.length}} education(s) is/are added</label>
+        </div>
     </form> <!--form finish -->
     <!-- NonStudent Education Form -->
     <form class="form-horizontal step-form" role="form" name="stepEduForm" ng-hide="isStudent">
