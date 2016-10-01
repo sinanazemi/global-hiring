@@ -126,6 +126,8 @@ $scope.init = function () {
 
   $scope.skillsBTNLabel="";
   $scope.eduBTNLabel="";
+  $scope.educationIsAdded=false;
+
 //Changes for proper style
 $scope.fullNameChange= function(){
   if($scope.fullname=='' )
@@ -658,21 +660,13 @@ $scope.removeLanguage=function(lang){
 
   //Add Education
   $scope.educations = [];
-  $scope.educationToAdd = {
-    school: '',
-    fromdate: '',
-    todate: '',
-    degree:'',
-    field:'',
-    grade:''
-  };
-
   var indexEdu =0;
   $scope.addMoreEduClick=function(educationToAdd){
     if($scope.educationToAdd.school!='' && !$scope.checkIfHasEdu())
     {
       educationToAdd.school=educationToAdd.school.toLowerCase();
       $scope.educations.push(angular.copy(educationToAdd));
+      $scope.educationIsAdded=true;
       $scope.educationToAdd.school='';
       $scope.educationToAdd.fromdate='';
       $scope.educationToAdd.todate='';

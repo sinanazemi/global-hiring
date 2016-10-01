@@ -73,7 +73,7 @@
     }
     .step-form{
         margin-top:169px;
-        height: 600px;
+        height: 590px;
         overflow-y: auto;
         overflow-x: hidden;
     }
@@ -183,7 +183,7 @@
       }
       .step-form{
           margin-top:169px;
-          height: 600px;
+          height: 590px;
           overflow-y: auto;
           overflow-x: hidden;
       }
@@ -303,7 +303,7 @@
         }
         .step-form{
             margin-top:169px;
-            height: 710px;
+            height: 700px;
             overflow-y: auto;
             overflow-x: hidden;
         }

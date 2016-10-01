@@ -252,18 +252,13 @@
     </form> <!--form finish -->
     <!-- NonStudent Education Form -->
     <form class="form-horizontal step-form" role="form" name="stepEduForm" ng-hide="isStudent">
-      <div class="row">
-        <div class="col-sm-12 field-div-right-left" style="margin-bottom:10px;margin-left: 5px;">
-          <label class="control-label field-Bold-label" style="text-align:left; padding:0;" >School Most Recently Attended</label>
-        </div>
+      <div class="row field-div-right-left">
+          <label class="control-label col-sm-12 field-Bold-label" style="text-align:left;margin-bottom:10px;" >School Most Recently Attended</label>
       </div>
-      <div class="row">
-        <div class="col-sm-12 field-div-Edu" >
+      <div class="row field-div-Edu" >
           <input type="text" class="form-control textbox-style" ng-model="educationToAdd.school">
-        </div>
       </div>
-
-      <div class="row marginTopBetweenRows">
+      <div class="row marginTopBetweenRows ">
         <div class="col-sm-12 field-div-right-left" >
           <label class="control-label field-Bold-label" style="text-align:left;padding:0;" >Dates Attended</label>
         </div>
@@ -274,13 +269,12 @@
               <option value="" selected="selected">From</option>
             </select>
           </div>
-          <div class="col-sm-6 rowWith2Cols" style="padding-right:0;" >
-            <select id="toDate2" name="toDate2" class="form-control  select-style between2Cols"  ng-model="educationToAdd.todate" placeholder="To(or expected graduation year)" upper-than="{{educationToAdd.fromdate}}"  ng-options="opt as opt for opt in dates" >
+          <div class="col-sm-6 rowWith2Cols " style="padding-right:0;" >
+            <select id="toDate1" name="toDate1"  class="form-control  select-style between2Cols"  ng-model="educationToAdd.todate" placeholder="To(or expected graduation year)" upper-than="{{educationToAdd.fromdate}}"   ng-options="opt as opt for opt in dates" >
               <option value="" selected="selected">To (or expected graduation year)</option>
             </select>
           </div>
         </div>
-
         <div class="row marginTopBetweenRows">
         <div class="col-sm-12 field-div-right-left" >
           <label class="control-label field-Bold-label" style="text-align:left;padding:0;" >More Info (optional)</label>
@@ -290,6 +284,10 @@
         <div class="col-sm-12 field-div-Edu" style="margin-top:10px;">
           <textarea type="text" class="form-control textbox-style" style="min-height:126px;"  ng-model="educationToAdd.moreInfo" placeholder="Tell us about your grades, degrees and field of study if applicable"></textarea>
         </div>
+      </div>
+
+      <div class="row field-div-right-left marginTopBetweenRows">
+        <label class="control-label field-label" style="text-align:left;padding:0; color:#03ba6d; font-weight:normal;" ng-if="educationIsAdded" >{{educations.length}} education(s) is/are added</label>
       </div>
     </form> <!--form finish -->
 
