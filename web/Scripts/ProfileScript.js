@@ -384,11 +384,13 @@ myapp.controller("controller",
                             $scope.account.languages.push(lg);
                         setPrfStrength();
                     });
-                    
+
                     return true;
                 }
-                else
+                else {
                     $scope.lgInvalid = true;
+                    return false;
+                }
                 return true;
             }
             else
@@ -445,6 +447,7 @@ myapp.controller("controller",
             $scope.lgName = '';
             $scope.lgProfeciency = '';
             $scope.lblLgName = false;
+            $scope.lgInvalid = false;
         }
 
         function checkLgExist() {
@@ -458,6 +461,7 @@ myapp.controller("controller",
         }
 
         $scope.lgNameChg = function () {
+            //$scope.lgName = $scope.lgName.charAt(0).toUpperCase() + this.slice(1);
             if ($scope.lgName != "")
                 $scope.vlgNameShow = false;
             if (checkLgExist())

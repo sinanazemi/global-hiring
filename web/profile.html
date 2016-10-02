@@ -43,7 +43,8 @@
             <div class="container nav-container-c max-fram-c">
                 <div class="navbar-header">
                     <a class="navbar-brand" href="/HomePage.html">
-                        <img class="logo-img-c" src="images/logo.png" />
+                        <!--<img class="logo-img-c" src="images/logo.png" />-->
+                        <img class="logo-img-c" src="images/hiring_dot_global@5x.png" />
                     </a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
@@ -1162,7 +1163,7 @@
                                 &nbsp;<a class="btn-add-c add-language-c" data-toggle="modal" data-target="#addLanguage" ng-click="addLanguage()"><img src="images/plus@5x.png" class="img-icon-c2" /></a>
                             </h3>
                             <div class="repeat-c" ng-repeat="x in account.languages" ng-mouseleave="lgMouseLeave(this)" ng-mouseover="lgMouseOver(this)">
-                                <p class="item-rp-c" style="display:inline;">
+                                <p class="item-rp-c" style="display:inline;text-transform:capitalize;">
                                     {{x.name}}: <span>{{x.profeciency.name}}</span>
                                 </p>
                                 <a href="#" class="a-btn-c " data-toggle="modal" data-target="#addLanguage" ng-click="editLanguage(x)" ng-show="popoverRemove" ng-style="lgHoverStyle">
@@ -1170,7 +1171,7 @@
                                     <img src="images/edit.png" class="img-icon-c2" />
                                 </a>
                                 &nbsp;
-                                <a href="#" class="a-btn-c " ng-click="deleteLanguage(x)" ng-show="popoverRemove && (x.name!='English')" ng-style="lgHoverStyle">
+                                <a href="#" class="a-btn-c " ng-click="deleteLanguage(x)" ng-show="popoverRemove && (x.name!='english')" ng-style="lgHoverStyle">
                                     <!--<span class="glyphicon glyphicon-trash"></span>-->
                                     <img src="images/delete.png" class="img-icon-c2" />
                                 </a>
@@ -1190,8 +1191,8 @@
                                             <input ng-model="lgId" ng-hide="true">
                                             <div class="form-group fg-c">
                                                 <label class="control-label fg-lbl-c">Language</label>                                                
-                                                    <input type="text" class="form-control fg-in-c" ng-model="lgName" ng-show="!lblLgName" ng-change="lgNameChg()" required>
-                                                    <br/><label class="fg-lbl-c" ng-model="lgName" ng-show="lblLgName" style="font-weight: normal;">{{lgName}}</label>
+                                                    <input type="text" class="form-control fg-in-c lgName-c" ng-model="lgName" ng-show="!lblLgName" ng-change="lgNameChg()" required>
+                                                    <br/><label class="fg-lbl-c" ng-model="lgName" ng-show="lblLgName" style="font-weight: normal;text-transform:capitalize ">{{lgName}}</label>
                                                     <div ng-messages="lgForm.lgName" ng-if=" vlgNameShow || (lgForm.lgName.$touched && lgForm.lgName.$invalid)">
                                                         <p ng-message="required" style="color:red;">Language is required.</p>
                                                     </div>
@@ -1231,7 +1232,7 @@
                                                     </div>
                                                 </div>
                                             
-                                            <p ng-show="lgInvalid" style="color:red;">This language is currently exist!</p>
+                                            <p ng-show="lgInvalid && !lblLgName" style="color:red;">This language is currently exist!</p>
                                             <p ng-show="lgPrfInvalid" style="color:red">You must select the profeciency!</p>
                                         </form>
                                     </div>

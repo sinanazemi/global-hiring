@@ -88,6 +88,9 @@
     line-height: 2.1;
     color: #818181;
 }
+.lgName-c{
+    text-transform: capitalize;
+}
 /*-----------------------
     navbar
 -----------------------*/
@@ -97,9 +100,10 @@
     /*opacity: 0.88;*/
 }
 .logo-img-c{
-    margin-top:10px;
-    width:305px;
-    height:33.6px;
+    /*margin-top:5px;*/
+    /*width:305px;*/
+    width:290px;
+    /*height:33.6px;*/
 }
 .nav-right-c{
     margin-right:-60px;
