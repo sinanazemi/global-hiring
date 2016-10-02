@@ -972,7 +972,7 @@ input[type=checkbox]:checked:before {
         }
         .acc_name-c{
             position:absolute;
-            top:8px;
+            top:-4px;
             /*right:0px;*/
             left:50px;
             font-size: 10px;
