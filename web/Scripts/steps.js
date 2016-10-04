@@ -660,6 +660,15 @@ $scope.removeLanguage=function(lang){
 
   //Add Education
   $scope.educations = [];
+  $scope.educationToAdd = {
+    school: '',
+    fromdate: '',
+    todate: '',
+    degree:'',
+    field:'',
+    grade:''
+  };
+
   var indexEdu =0;
   $scope.addMoreEduClick=function(educationToAdd){
     if($scope.educationToAdd.school!='' && !$scope.checkIfHasEdu())

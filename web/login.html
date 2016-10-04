@@ -16,8 +16,7 @@
     <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular-resource.min.js"></script>
 
     <link href="css/steps_style.css" rel="stylesheet">
-      <link href="css/login_style.css" rel="stylesheet">
-
+    <link href="css/login_style.css" rel="stylesheet">
     <link href="Styles/CustomStyle.css" rel="stylesheet" />
 
     <title>Login</title>
@@ -79,8 +78,6 @@
             <div class=" row div-right-left-margin marginTop btn-div-c">
               <button type="button" class="next-button btn-login-c"  ng-class="{'greenBtn': loginForm.email.$valid && loginForm.password.$valid}" ng-click="login()" >Log In</button>
             </div>
-
-
 
           <div class="row div-right-left-margin marginTop" style="margin-top:10px;">
             <div class="col-sm-8 "></div>
@@ -153,10 +150,7 @@ myAppLogin.controller('loginController',['$scope', '$resource', function($scope,
   }
 
 }// Check Account
-$scope.getColor=function()
-{
-  return "green";
-}
+
   // login with an account
     var login = $resource("/authenticate")
     $scope.login=function(){
