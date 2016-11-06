@@ -1,4 +1,4 @@
-﻿body {
+body {
     font-family: Helvetica;
 }
 .cropArea {
@@ -520,6 +520,7 @@ li { padding: 2px 0; }
 .panel-language-c h3:hover .add-language-c{
     color:#b8e986;
     display:inline;
+    
 }
 input[type='radio']:hover {
   box-shadow:0 0 5px 0px green inset;
@@ -537,9 +538,21 @@ input[type='radio']:before {
 input[type='radio']:checked:before {
   background:rgb(3, 186, 109);
 }
+
+/*--------------*/
+.show-panel-c{
+    color: red;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
 /*-------------------------------
     History
     ------------------------------*/
+.panel-history-c {
+    position: relative;
+}
 .panel-history-c h4:hover .add-history-c{
     color:#b8e986;
     display:inline;
@@ -551,6 +564,9 @@ input[type='radio']:checked:before {
 /*-------------------------------
     Education
     ------------------------------*/
+.panel-education-c {
+    position: relative;
+}
 .panel-education-c h4:hover .add-education-c{
     color:#b8e986;
     display:inline;
@@ -559,6 +575,9 @@ input[type='radio']:checked:before {
 /*-------------------------------
     Volunteering
     ------------------------------*/
+.panel-volunteering-c{
+    position: relative;
+}
 .panel-volunteering-c h4:hover .add-volunteering-c{
     color:#b8e986;
     display:inline;
@@ -568,6 +587,9 @@ input[type='radio']:checked:before {
 /*-------------------------------
     Certifications
     ------------------------------*/
+.panel-certifications-c{
+    position: relative;
+}
 .panel-certifications-c h4:hover .add-certifications-c{
     color:#b8e986;
     display:inline;
@@ -577,6 +599,9 @@ input[type='radio']:checked:before {
 /*-------------------------------
     Test Scores
     ------------------------------*/
+.panel-scores-c{
+    position: relative;
+}
 .panel-scores-c h4:hover .add-scores-c{
     color:#b8e986;
     display:inline;
@@ -586,6 +611,9 @@ input[type='radio']:checked:before {
 /*-------------------------------
     Projects
     ------------------------------*/
+.panel-projects-c{
+    position: relative;
+}
 .panel-projects-c h4:hover .add-projects-c{
     color:#b8e986;
     display:inline;
@@ -614,6 +642,9 @@ input[type='radio']:checked:before {
 /*-------------------------------
     Honors & Awards
     ------------------------------*/
+.panel-awards-c{
+    position: relative;
+}
 .panel-awards-c h4:hover .add-awards-c{
     color:#b8e986;
     display:inline;
@@ -623,6 +654,9 @@ input[type='radio']:checked:before {
 /*-------------------------------
     Courses
     ------------------------------*/
+.panel-courses-c{
+    position: relative;
+}
 .panel-courses-c h4:hover .add-courses-c{
     color:#b8e986;
     display:inline;

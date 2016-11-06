@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -165,7 +165,8 @@ myAppLogin.controller('loginController',['$scope', '$resource', function($scope,
           function(data){
             if(data.iscompleted)
             {
-              window.location = "/profile.html"; // Login and move to profile page
+//              window.location = "/profile.html"; // Login and move to profile page
+                window.location = "HomePage.html#/Profile";
             }
             else {
               window.location = "/steps.html?id";

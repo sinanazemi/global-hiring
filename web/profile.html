@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>My Profile</title>
@@ -33,45 +33,13 @@
     
 
     <link href="Styles/Profile.css" rel="stylesheet" />
-    <script src="Scripts/ProfileScript.js"></script>
+<!--    <script src="Scripts/ProfileScript.js"></script>-->
+    <script src="Scripts/HomeScript.js"></script>
     
 </head>
 <body >
     <div class="main-cnt-c" ng-app="app" ng-controller="controller">
-        <!-- navigation bar -->
-        <nav class="navbar navbar-fixed-top prf-nav-c ">
-            <div class="container nav-container-c max-fram-c">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="/HomePage.html">
-                        <!--<img class="logo-img-c" src="images/logo.png" />-->
-                        <img class="logo-img-c" src="images/hiring_dot_global@5x.png" />
-                    </a>
-                </div>
-                <div class="collapse navbar-collapse" id="myNavbar">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <img class="small-profile-img-c img-circle" ng-src="{{userImage}}" />
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{account.name}} <span class="glyphicon glyphicon-menu-down pf_icon-c"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#" ng-click="btnLogout()" class="logout-txt-c"><span class="glyphicon glyphicon-log-out logout-btn-c"></span>   Logout   <span class="logout-email-c pull-right"> {{account.email}}</span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                <div class="menu-mo-c">
-                    <img class="small-profile-img-c img-circle" ng-src="{{userImage}}" />
-                    <div class="dropdown acc_name-c ">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" >{{account.name}} <span class="glyphicon glyphicon-menu-down pf_icon-c"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#" ng-click="btnLogout()" class="logout-txt-c"><span class="glyphicon glyphicon-log-out logout-btn-c"></span>   Logout   <span class="logout-email-c pull-right"> {{account.email}}</span></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </nav>
-
+        
         <!-- Main Container -->
         <div class="container-fluid main-cn-c">
             <div>
@@ -128,7 +96,7 @@
                                             <h5>
                                                 {{account.jobtitle}}
                                                 &nbsp;
-                                                <a href="#" class="a-btn-c " data-toggle="modal" data-target="#addJobtitle" ng-click="editJobtitle()" ng-show="jtPopoverRemove" ng-style="jtHoverStyle">
+                                                <a href="" class="a-btn-c " data-toggle="modal" data-target="#addJobtitle" ng-click="editJobtitle()" ng-show="jtPopoverRemove" ng-style="jtHoverStyle">
                                                     <!--<span class="glyphicon glyphicon-pencil" style="color:black;"></span>-->
                                                     <img src="images/edit.png" class="img-icon-c" />
                                                 </a>
@@ -193,7 +161,7 @@
                                                     </span>
                                                 </li>                                                    
                                                 </ul>
-                                                <a href="#addMS" data-toggle="modal" ng-click="getMainServices()">Edit Skills</a>
+                                                <a href="" data-target="#addMS" data-toggle="modal" ng-click="getMainServices()">Edit Skills</a>
                                             </div>
                                             
                                             <!-- Modal Add Main Service -->
@@ -331,7 +299,7 @@
                                             </a>
                                         </h5>
                                         &nbsp;
-                                        <a href="#" class="a-btn-c " data-toggle="modal" data-target="#addOverview" ng-click="editOverview()" ng-show="ovPopoverRemove" ng-style="ovHoverStyle">
+                                        <a href="" class="a-btn-c " data-toggle="modal" data-target="#addOverview" ng-click="editOverview()" ng-show="ovPopoverRemove" ng-style="ovHoverStyle">
                                             <!--<span class="glyphicon glyphicon-pencil" style="color:black;"></span>-->
                                             <img src="images/edit.png" class="img-icon-c" />
                                         </a>
@@ -377,11 +345,14 @@
                         
 
                         <!-- Work History -->
-                        <div class="panel panel-default">
-                            <div class="panel-body panel-history-c">
+                        <div class="panel panel-default" ng-style="whPanelStyle">
+                            <div class="panel-body panel-history-c" >
+                                <a class="show-panel-c" ng-show="IsAdmin && !whHidePanel" ng-click="whHidePanelClick()"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                <a class="show-panel-c" ng-show="IsAdmin && whHidePanel" ng-click="whHidePanelClick()"><span class="glyphicon glyphicon-eye-close"></span></a>
+                            
                                 <h4 class="subject-c">
                                     Work History
-                                    &nbsp;<a href="#" class="btn-add-c add-history-c" data-toggle="modal" data-target="#addHistory" ng-click="addWorkHistory()">
+                                    &nbsp;<a href="" class="btn-add-c add-history-c" data-toggle="modal" data-target="#addHistory" ng-click="addWorkHistory()">
                                               <img src="images/plus@5x.png" class="img-icon-c"/></a>
                                 </h4>
                                 <br/>
@@ -392,8 +363,8 @@
                                         <h5 class="item-rp-c" ng-style="whHoverStyle" style="display:inline;">
                                             {{x.title}} | {{x.location}}
                                         </h5>
-                                        <a href="#" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addHistory" ng-click="editWorkHistory(x)" ng-show="popoverRemove" ng-style="whHoverStyle"><img src="images/edit.png" class="img-icon-c"/></a>                                       
-                                        <a href="#" class="a-btn-c item-rp-c" ng-click="deleteWorkHistory(x)" ng-show="popoverRemove" ng-style="whHoverStyle"><img src="images/delete.png" class="img-icon-c" /></a>                                        
+                                        <a href="" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addHistory" ng-click="editWorkHistory(x)" ng-show="popoverRemove" ng-style="whHoverStyle"><img src="images/edit.png" class="img-icon-c"/></a>                                       
+                                        <a href="" class="a-btn-c item-rp-c" ng-click="deleteWorkHistory(x)" ng-show="popoverRemove" ng-style="whHoverStyle"><img src="images/delete.png" class="img-icon-c" /></a>                                        
                                     </div>
                                     <div>
                                         <span class="item-rp-c" ng-style="whHoverStyle" style="display:inline-block;">
@@ -520,8 +491,10 @@
                         </div>
 
                         <!-- Education -->
-                        <div class="panel panel-default panel-education-c">
+                        <div class="panel panel-default panel-education-c" ng-style="eduPanelStyle">
                             <div class="panel-body">
+                                <a class="show-panel-c" ng-show="IsAdmin && !eduHidePanel" ng-click="eduHidePanelClick()"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                <a class="show-panel-c" ng-show="IsAdmin && eduHidePanel" ng-click="eduHidePanelClick()"><span class="glyphicon glyphicon-eye-close"></span></a>
                                 <h4 class="subject-c">
                                     Education
                                     &nbsp;<a class="btn-add-c add-education-c" data-toggle="modal" data-target="#addEducation" ng-click="addEducation()"><img src="images/plus@5x.png" class="img-icon-c" /></a>
@@ -532,8 +505,8 @@
                                     <h5 class="item-rp-c" ng-style="eduHoverStyle" style="display:inline;">
                                         {{x.degree.name}}, {{x.field}} | {{x.school}}
                                     </h5>
-                                    <a href="#" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addEducation" ng-click="editEducation(x)" ng-show="popoverRemove" ng-style="eduHoverStyle"><img src="images/edit.png" class="img-icon-c" /></a>                                    
-                                    <a href="#" class="a-btn-c item-rp-c" ng-click="deleteEducation(x)" ng-show="popoverRemove" ng-style="eduHoverStyle"><img src="images/delete.png" class="img-icon-c" /></a>
+                                    <a href="" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addEducation" ng-click="editEducation(x)" ng-show="popoverRemove" ng-style="eduHoverStyle"><img src="images/edit.png" class="img-icon-c" /></a>                                    
+                                    <a href="" class="a-btn-c item-rp-c" ng-click="deleteEducation(x)" ng-show="popoverRemove" ng-style="eduHoverStyle"><img src="images/delete.png" class="img-icon-c" /></a>
                                     <div>
                                         <span class="item-rp-c" ng-style="eduHoverStyle" style="display:inline-block;">
                                             {{x.fromdate}} - {{x.todate}}
@@ -614,8 +587,10 @@
                         </div>
 
                         <!-- Projects -->
-                        <div class="panel panel-default panel-projects-c">
+                        <div class="panel panel-default panel-projects-c" ng-style="prjPanelStyle">
                             <div class="panel-body">
+                                <a class="show-panel-c" ng-show="IsAdmin && !prjHidePanel" ng-click="prjHidePanelClick()"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                <a class="show-panel-c" ng-show="IsAdmin && prjHidePanel" ng-click="prjHidePanelClick()"><span class="glyphicon glyphicon-eye-close"></span></a>
                                 <h4 class="subject-c">
                                     Projects
                                     &nbsp;<a class="btn-add-c add-projects-c" data-toggle="modal" data-target="#addProjects" ng-click="cleanPrjInputs()"><img src="images/plus@5x.png" class="img-icon-c" /></a>
@@ -626,8 +601,8 @@
                                     <h5 class="item-rp-c" ng-style="prjHoverStyle" style="display:inline;">
                                         {{x.name}}
                                     </h5>
-                                    <a href="#" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addProjects" ng-click="editProject(x)" ng-show="popoverRemove" ng-style="prjHoverStyle"><img src="images/edit.png" class="img-icon-c" /></a>
-                                    <a href="#" class=" a-btn-c item-rp-c" ng-click="deleteProject(x)" ng-show="popoverRemove" ng-style="prjHoverStyle"><img src="images/delete.png" class="img-icon-c" /></a>
+                                    <a href="" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addProjects" ng-click="editProject(x)" ng-show="popoverRemove" ng-style="prjHoverStyle"><img src="images/edit.png" class="img-icon-c" /></a>
+                                    <a href="" class=" a-btn-c item-rp-c" ng-click="deleteProject(x)" ng-show="popoverRemove" ng-style="prjHoverStyle"><img src="images/delete.png" class="img-icon-c" /></a>
                                     
                                     <div>
                                         <span class="item-rp-c" ng-style="prjHoverStyle" style="display:inline-block;">
@@ -714,8 +689,10 @@
                         </div>
 
                         <!-- Volunteering Experience -->
-                        <div class="panel panel-default panel-volunteering-c">
+                        <div class="panel panel-default panel-volunteering-c" ng-style="volPanelStyle">
                             <div class="panel-body">
+                                <a class="show-panel-c" ng-show="IsAdmin && !volHidePanel" ng-click="volHidePanelClick()"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                <a class="show-panel-c" ng-show="IsAdmin && volHidePanel" ng-click="volHidePanelClick()"><span class="glyphicon glyphicon-eye-close"></span></a>
                                 <h4 class="subject-c">
                                     Volunteering Experience
                                     &nbsp;<a class="btn-add-c add-volunteering-c" data-toggle="modal" data-target="#addVolunteering" ng-click="cleanVolInputs()"><img src="images/plus@5x.png" class="img-icon-c" /></a>
@@ -726,8 +703,8 @@
                                     <h5 class="item-rp-c" ng-style="volHoverStyle" style="display:inline;">
                                         {{x.organization}} | {{x.role}} | {{x.cause.name}}
                                     </h5> 
-                                    <a href="#" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addVolunteering" ng-click="editVolunteering(x)" ng-show="popoverRemove" ng-style="volHoverStyle"><img src="images/edit.png" class="img-icon-c" /></a>
-                                    <a href="#" class=" a-btn-c delete-volunteering-c" ng-click="deleteVolunteering(x)" ng-show="popoverRemove" ng-style="volHoverStyle"><img src="images/delete.png" class="img-icon-c" /></a>
+                                    <a href="" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addVolunteering" ng-click="editVolunteering(x)" ng-show="popoverRemove" ng-style="volHoverStyle"><img src="images/edit.png" class="img-icon-c" /></a>
+                                    <a href="" class=" a-btn-c delete-volunteering-c" ng-click="deleteVolunteering(x)" ng-show="popoverRemove" ng-style="volHoverStyle"><img src="images/delete.png" class="img-icon-c" /></a>
                                     
                                     <div>
                                         <span class="item-rp-c" ng-style="volHoverStyle" style="display:inline-block;">
@@ -835,8 +812,10 @@
                         </div>
 
                         <!-- Certifications -->
-                        <div class="panel panel-default panel-certifications-c">
+                        <div class="panel panel-default panel-certifications-c" ng-style="crfPanelStyle">
                             <div class="panel-body">
+                                <a class="show-panel-c" ng-show="IsAdmin && !crfHidePanel" ng-click="crfHidePanelClick()"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                <a class="show-panel-c" ng-show="IsAdmin && crfHidePanel" ng-click="crfHidePanelClick()"><span class="glyphicon glyphicon-eye-close"></span></a>
                                 <h4 class="subject-c">
                                     Certifications
                                     &nbsp;<a class="btn-add-c add-certifications-c" data-toggle="modal"><img src="images/plus@5x.png" class="img-icon-c" /></a>
@@ -871,8 +850,10 @@
                         </div>
 
                         <!-- Test Scores -->
-                        <div class="panel panel-default panel-scores-c">
+                        <div class="panel panel-default panel-scores-c" ng-style="tcPanelStyle">
                             <div class="panel-body">
+                                <a class="show-panel-c" ng-show="IsAdmin && !tcHidePanel" ng-click="tcHidePanelClick()"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                <a class="show-panel-c" ng-show="IsAdmin && tcHidePanel" ng-click="tcHidePanelClick()"><span class="glyphicon glyphicon-eye-close"></span></a>
                                 <h4 class="subject-c">
                                     Test Scores
                                     &nbsp;<a class="btn-add-c add-scores-c" data-toggle="modal" data-target="#addScores" ng-click="cleanTcInputs()"><img src="images/plus@5x.png" class="img-icon-c" /></a>
@@ -883,8 +864,8 @@
                                     <h5 class="item-rp-c" ng-style="tcHoverStyle" style="display:inline;">
                                         {{x.name}} | {{x.occupation.name}} | {{x.score}}
                                     </h5>
-                                    <a href="#" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addScores" ng-click="editTestScore(x)" ng-show="popoverRemove" ng-style="tcHoverStyle"><img src="images/edit.png" class="img-icon-c" /></a>
-                                    <a href="#" class=" a-btn-c item-rp-c" ng-click="deleteTestScore(x)" ng-show="popoverRemove" ng-style="tcHoverStyle"><img src="images/delete.png" class="img-icon-c" /></a>
+                                    <a href="" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addScores" ng-click="editTestScore(x)" ng-show="popoverRemove" ng-style="tcHoverStyle"><img src="images/edit.png" class="img-icon-c" /></a>
+                                    <a href="" class=" a-btn-c item-rp-c" ng-click="deleteTestScore(x)" ng-show="popoverRemove" ng-style="tcHoverStyle"><img src="images/delete.png" class="img-icon-c" /></a>
                                     
                                     <div>
                                         <span class="item-rp-c" ng-style="tcHoverStyle" style="display:inline-block;">
@@ -970,8 +951,10 @@
                         </div>
 
                         <!-- Honors & Awards -->
-                        <div class="panel panel-default panel-awards-c">
+                        <div class="panel panel-default panel-awards-c" ng-style="haPanelStyle">
                             <div class="panel-body">
+                                <a class="show-panel-c" ng-show="IsAdmin && !haHidePanel" ng-click="haHidePanelClick()"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                <a class="show-panel-c" ng-show="IsAdmin && haHidePanel" ng-click="haHidePanelClick()"><span class="glyphicon glyphicon-eye-close"></span></a>
                                 <h4 class="subject-c">
                                     Honors & Awards
                                     &nbsp;<a class="btn-add-c add-awards-c" data-toggle="modal" data-target="#addAwards" ng-click="cleanHaInputs()"><img src="images/plus@5x.png" class="img-icon-c" /></a>
@@ -982,8 +965,8 @@
                                     <h5 class="item-rp-c" ng-style="haHoverStyle" style="display:inline;">
                                         {{x.title}} | {{x.occupation.name}}
                                     </h5>   
-                                    <a href="#" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addAwards" ng-click="editAward(x)" ng-show="popoverRemove" ng-style="haHoverStyle"><img src="images/edit.png" class="img-icon-c" /></a>
-                                    <a href="#" class=" a-btn-c item-rp-c" ng-click="deleteAward(x)" ng-show="popoverRemove" ng-style="haHoverStyle"><img src="images/delete.png" class="img-icon-c" /></a>
+                                    <a href="" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addAwards" ng-click="editAward(x)" ng-show="popoverRemove" ng-style="haHoverStyle"><img src="images/edit.png" class="img-icon-c" /></a>
+                                    <a href="" class=" a-btn-c item-rp-c" ng-click="deleteAward(x)" ng-show="popoverRemove" ng-style="haHoverStyle"><img src="images/delete.png" class="img-icon-c" /></a>
                                     
                                     <div>
                                         <span class="item-rp-c" ng-style="haHoverStyle" style="display:inline-block;">
@@ -1061,8 +1044,10 @@
                         </div>
 
                         <!-- Courses -->
-                        <div class="panel panel-default panel-courses-c">
+                        <div class="panel panel-default panel-courses-c" ng-style="crPanelStyle">
                             <div class="panel-body">
+                                <a class="show-panel-c" ng-show="IsAdmin && !crHidePanel" ng-click="crHidePanelClick()"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                <a class="show-panel-c" ng-show="IsAdmin && crHidePanel" ng-click="crHidePanelClick()"><span class="glyphicon glyphicon-eye-close"></span></a>
                                 <h4 class="subject-c">
                                     Courses
                                     &nbsp;<a class="btn-add-c add-courses-c" data-toggle="modal" data-target="#addCourses" ng-click="cleanCrInputs()"><img src="images/plus@5x.png" class="img-icon-c" /></a>
@@ -1073,9 +1058,9 @@
                                     <h5 class="item-rp-c" ng-style="crHoverStyle" style="display:inline;">
                                         {{x.name}} | {{x.occupation.name}} | {{x.number}}
                                     </h5>
-                                    <a href="#" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addCourses" ng-click="editCourse(x)" ng-show="popoverRemove" ng-style="crHoverStyle">
+                                    <a href="" class="a-btn-c item-rp-c" data-toggle="modal" data-target="#addCourses" ng-click="editCourse(x)" ng-show="popoverRemove" ng-style="crHoverStyle">
                                         <img src="images/edit.png" class="img-icon-c" /></a>
-                                    <a href="#" class="a-btn-c item-rp-c" ng-click="deleteCourse(x)" ng-show="popoverRemove" ng-style="crHoverStyle">
+                                    <a href="" class="a-btn-c item-rp-c" ng-click="deleteCourse(x)" ng-show="popoverRemove" ng-style="crHoverStyle">
                                         <img src="images/delete.png" class="img-icon-c" /></a>
                                     
                                     <!--<p>
@@ -1152,7 +1137,7 @@
                         <br />
                         <br />
                         <br />
-                        <a href="#">View my profile as others see it</a>
+                        <a href="">View my profile as others see it</a>
                         <br />
                         <br />
                         <hr style="background-color: #d8d8d8;"/>
@@ -1166,12 +1151,12 @@
                                 <p class="item-rp-c" style="display:inline;text-transform:capitalize;">
                                     {{x.name}}: <span>{{x.profeciency.name}}</span>
                                 </p>
-                                <a href="#" class="a-btn-c " data-toggle="modal" data-target="#addLanguage" ng-click="editLanguage(x)" ng-show="popoverRemove" ng-style="lgHoverStyle">
+                                <a href="" class="a-btn-c " data-toggle="modal" data-target="#addLanguage" ng-click="editLanguage(x)" ng-show="popoverRemove" ng-style="lgHoverStyle">
                                     <!--<span class="glyphicon glyphicon-pencil"></span>-->
                                     <img src="images/edit.png" class="img-icon-c2" />
                                 </a>
                                 &nbsp;
-                                <a href="#" class="a-btn-c " ng-click="deleteLanguage(x)" ng-show="popoverRemove && (x.name!='english')" ng-style="lgHoverStyle">
+                                <a href="" class="a-btn-c " ng-click="deleteLanguage(x)" ng-show="popoverRemove && (x.name!='english')" ng-style="lgHoverStyle">
                                     <!--<span class="glyphicon glyphicon-trash"></span>-->
                                     <img src="images/delete.png" class="img-icon-c2" />
                                 </a>
@@ -1250,53 +1235,7 @@
             </div>
         </div>
 
-        <!-- Footer -->
-        <div class=" container-footer-c">
-            <div class="container-fluid container-footer-c max-fram-c">
-                <div class="row" style="max-width:100%;">
-                    <div class="col-sm-4">
-                        <!-- Candidates -->
-                        <h4>CANDIDATES</h4>
-                        <div class="f-section-c">
-                            <p>
-                                <br>HOW IT WORKS
-                            </p>
-                            <p>INVITE A FRIEND</p>
-                            <p>FAQ</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <!-- Employers -->
-                        <h4>EMPLOYERS</h4>
-                        <div class="f-section-c">
-                            <p>
-                                <br>FOR EMPLOYERS
-                            </p>
-                            <p><a class="f-items-c" href="/HomePage.html#/FAQ">FAQ</a></p>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <!-- Global Hiring -->
-                        <h4>GLOBAL HIRING</h4>
-                        <div class="f-section-c">
-                            <p>
-                                <br><a class="f-items-c" href="/HomePage.html#/About">ABOUT</a>
-                            </p>
-                            <p>BLOG</p>
-                            <p>CONTACT US</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Copyright etc -->
-            <div class="f-copyright-c">
-                <div class="container max-fram-c">
-                    <p>Copyright &copy; Hiring.global 2016</p>
-                </div>
-            </div>
-            <!--</footer>-->
-
-        </div>
+       
     </div>
 </body>
 </html>

@@ -1,4 +1,4 @@
-﻿// new dependency: ngResource is included just above
+// new dependency: ngResource is included just above
 var myapp = new angular.module("app", ['ngAnimate', 'ui.bootstrap', 'selectize', 'ngResource', 'ngFileUpload', 'ngImgCrop']);
 
 // inject the $resource dependency here
@@ -26,6 +26,9 @@ myapp.controller("controller",
           }
         );
 
+        $scope.IsAdmin = false;
+        $scope.IsUser = true;
+        $scope.IsEmployer = false;
 
         $scope.userImage = "/profilePicture"; //"images/Chrysanthemum.jpg";
         //if ($scope.userImage == null)
@@ -186,7 +189,7 @@ myapp.controller("controller",
 
         // ************* for highlight and show the edit and delete buttons
         $scope.jtMouseOver = function (context) {
-            context.jtPopoverRemove = true;
+            context.jtPopoverRemove = $scope.IsUser ;//true;
             context.jtHoverStyle = { 'background-color': '#b8e986'};
         }
 
@@ -340,7 +343,7 @@ myapp.controller("controller",
         // ************* for highlight and show the edit and delete buttons
         $scope.ovMouseOver = function (context) {
             if ($scope.account.description != "")
-                context.ovPopoverRemove = true;
+                context.ovPopoverRemove = $scope.IsUser ;//true;
             else
                 context.ovAddSign = true;
             context.ovHoverStyle = { 'background-color': '#b8e986' };
@@ -479,7 +482,7 @@ myapp.controller("controller",
         }
         // ************* for highlight and show the edit and delete buttons
         $scope.lgMouseOver = function (context) {
-            context.popoverRemove = true;
+            context.popoverRemove = $scope.IsUser ;//true;
             context.lgHoverStyle = { 'background-color': '#b8e986' };
         }
 
@@ -729,7 +732,7 @@ myapp.controller("controller",
 
         // *********** for highlight and show the edit and delete buttons
         $scope.whMouseOver = function (context) {
-            context.popoverRemove = true;
+            context.popoverRemove = $scope.IsUser ;//true;
             context.whHoverStyle = { 'background-color': '#b8e986' };
         }
 
@@ -905,7 +908,7 @@ myapp.controller("controller",
 
         // ************* for highlight and show the edit and delete buttons
         $scope.eduMouseOver = function (context) {
-            context.popoverRemove = true;
+            context.popoverRemove = $scope.IsUser ;//true;
             context.eduHoverStyle = { 'background-color': '#b8e986' };
         }
 
@@ -1038,7 +1041,7 @@ myapp.controller("controller",
 
         // *********** for highlight and show the edit and delete buttons
         $scope.prjMouseOver = function (context) {
-            context.popoverRemove = true;
+            context.popoverRemove = $scope.IsUser ;//true;
             context.prjHoverStyle = { 'background-color': '#b8e986' };
         }
 
@@ -1220,7 +1223,7 @@ myapp.controller("controller",
 
         // for highlight and show the edit and delete buttons
         $scope.volMouseOver = function (context) {
-            context.popoverRemove = true;
+            context.popoverRemove = $scope.IsUser ;//true;
             context.volHoverStyle = { 'background-color': '#b8e986' };
         }
 
@@ -1234,7 +1237,7 @@ myapp.controller("controller",
         //*************************
         // **************** for highlight and show the edit and delete buttons
         $scope.crfMouseOver = function (context) {
-            context.popoverRemove = true;
+            context.popoverRemove = $scope.IsUser ;//true;
             context.crfHoverStyle = { 'background-color': '#b8e986' };
         }
 
@@ -1394,7 +1397,7 @@ myapp.controller("controller",
 
         // *********** for highlight and show the edit and delete buttons
         $scope.tcMouseOver = function (context) {
-            context.popoverRemove = true;
+            context.popoverRemove = $scope.IsUser ;//true;
             context.tcHoverStyle = { 'background-color': '#b8e986' };
         }
 
@@ -1541,7 +1544,7 @@ myapp.controller("controller",
 
         // *********** for highlight and show the edit and delete buttons
         $scope.haMouseOver = function (context) {
-            context.popoverRemove = true;
+            context.popoverRemove = $scope.IsUser ;//true;
             context.haHoverStyle = { 'background-color': '#b8e986' };
         }
 
@@ -1669,7 +1672,7 @@ myapp.controller("controller",
 
         // *********** for highlight and show the edit and delete buttons
         $scope.crMouseOver = function (context) {
-            context.popoverRemove = true;
+            context.popoverRemove = $scope.IsUser ;//true;
             context.crHoverStyle = { 'background-color': '#b8e986' };
         }
 
